@@ -1,0 +1,13 @@
+{
+  "name": "stock-research-knowledge-base",
+  "version": "1.0.0",
+  "description": "Stock Research Dashboard with Supabase Sync",
+  "main": "dashboard.html",
+  "scripts": {
+    "seed": "node scripts/seed_supabase.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.43.4",
+    "dotenv": "^16.4.5"
+  }
+}

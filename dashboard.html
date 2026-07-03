@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="th">
   <head>
     <meta charset="UTF-8" />
@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <style>
       /* ====== DESIGN TOKENS ====== */
@@ -921,6 +922,20 @@
             <option value="gemini-1.5-pro">Gemini 1.5 Pro</option>
           </select>
         </div>
+        <hr style="border:0; border-top:1px solid var(--border-color); margin: 15px 0;" />
+        <h4 style="font-size: 13px; font-weight:600; color:var(--accent-cyan); margin-bottom: 10px;">Supabase Integration</h4>
+        <div class="setting-row">
+          <label>Supabase URL</label>
+          <input type="text" id="input-supabase-url" placeholder="https://xxxx.supabase.co" />
+        </div>
+        <div class="setting-row">
+          <label>Supabase Anon Key</label>
+          <input type="password" id="input-supabase-key" placeholder="ใส่ Anon Public Key ของ Supabase..." />
+        </div>
+        <div class="setting-row" style="display:flex; gap:8px; margin-top:10px;">
+          <button class="btn" id="btn-sync-push" style="flex:1; font-size:11px; padding: 6px; background: rgba(168, 85, 247, 0.2); border-color: rgba(168, 85, 247, 0.4); color: #fff;"><i data-lucide="upload-cloud" style="width:12px; height:12px; margin-right:4px;"></i> Push ไป Supabase</button>
+          <button class="btn" id="btn-sync-pull" style="flex:1; font-size:11px; padding: 6px; background: rgba(0, 230, 255, 0.1); border-color: rgba(0, 230, 255, 0.3); color: #fff;"><i data-lucide="download-cloud" style="width:12px; height:12px; margin-right:4px;"></i> Pull จาก Supabase</button>
+        </div>
         <div class="settings-actions">
           <button class="btn btn-primary" id="btn-save-settings">บันทึก</button>
           <button class="btn" id="btn-cancel-settings">ยกเลิก</button>
@@ -1654,8 +1669,152 @@
       let detailTab = 'memo'; // memo | edit | financials
       let config = {
         apiKey: S.get('gemini_api_key') || '',
-        model: S.get('gemini_model_name') || 'gemini-2.0-flash'
+        model: S.get('gemini_model_name') || 'gemini-2.0-flash',
+        supabaseUrl: S.get('supabase_url') || '',
+        supabaseKey: S.get('supabase_key') || ''
       };
+
+      let supabaseClient = null;
+      function initSupabase() {
+        if (config.supabaseUrl && config.supabaseKey) {
+          try {
+            supabaseClient = supabase.createClient(config.supabaseUrl, config.supabaseKey);
+            console.log('Supabase client initialized.');
+          } catch(e) {
+            console.error('Error initializing Supabase client:', e);
+            supabaseClient = null;
+          }
+        } else {
+          supabaseClient = null;
+        }
+      }
+
+      async function syncFromSupabase() {
+        if (!supabaseClient) return false;
+        try {
+          console.log('Fetching stocks from Supabase...');
+          const { data: dbStocks, error: stocksError } = await supabaseClient
+            .from('stocks')
+            .select('*');
+          
+          if (stocksError) throw stocksError;
+          
+          if (dbStocks && dbStocks.length > 0) {
+            STOCKS = dbStocks.map(s => ({
+              ticker: s.ticker,
+              name: s.name,
+              logoUrl: s.logo_url,
+              group: s.group,
+              style: s.style,
+              market: s.market,
+              targetPrice: s.target_price,
+              whatItDoes: s.what_it_does,
+              howItMakesMoney: s.how_it_makes_money,
+              deals: s.deals,
+              moat: s.moat,
+              risks: s.risks,
+              financials: s.financials || [],
+              imageUrl: s.image_url,
+              whyInterest: s.why_interest,
+              financialsSnapshot: s.financials_snapshot,
+              summary: s.summary
+            }));
+            saveStocks();
+          }
+
+          console.log('Fetching portfolio notes from Supabase...');
+          const { data: dbNotes, error: notesError } = await supabaseClient
+            .from('portfolio_notes')
+            .select('*');
+          
+          if (notesError) throw notesError;
+
+          if (dbNotes) {
+            dbNotes.forEach(row => {
+              S.set('portfolio_note_' + row.ticker, row.notes || '');
+              if (row.updated_at) {
+                const date = new Date(row.updated_at);
+                const dateStr = date.toLocaleDateString('th-TH', {
+                  year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'
+                });
+                S.set('portfolio_updated_' + row.ticker, dateStr);
+              }
+            });
+          }
+          return true;
+        } catch (e) {
+          console.error('Error syncing from Supabase:', e);
+          toast('Sync จาก Supabase ล้มเหลว: ' + e.message);
+          return false;
+        }
+      }
+
+      async function syncToSupabase() {
+        if (!supabaseClient) {
+          alert('กรุณาตั้งค่า Supabase และตรวจสอบการเชื่อมต่อก่อน');
+          return false;
+        }
+        
+        toast('กำลังเตรียมข้อมูล...');
+        try {
+          const records = STOCKS.map(s => ({
+            ticker: s.ticker,
+            name: s.name,
+            logo_url: s.logoUrl || null,
+            group: s.group || null,
+            style: s.style || null,
+            market: s.market || 'US',
+            target_price: s.targetPrice || null,
+            what_it_does: s.whatItDoes || null,
+            how_it_makes_money: s.howItMakesMoney || null,
+            deals: s.deals || null,
+            moat: s.moat || null,
+            risks: s.risks || null,
+            financials: s.financials || [],
+            image_url: s.imageUrl || null,
+            why_interest: s.whyInterest || null,
+            financials_snapshot: s.financialsSnapshot || null,
+            summary: s.summary || null
+          }));
+
+          toast('กำลังส่งข้อมูลหุ้นขึ้น Supabase...');
+          const { error: stocksError } = await supabaseClient
+            .from('stocks')
+            .upsert(records, { onConflict: 'ticker' });
+          
+          if (stocksError) throw stocksError;
+
+          const noteKeys = Object.keys(localStorage).filter(k => k.startsWith('portfolio_note_'));
+          const noteRecords = [];
+          
+          noteKeys.forEach(k => {
+            const ticker = k.replace('portfolio_note_', '');
+            const notes = localStorage.getItem(k);
+            if (notes) {
+              noteRecords.push({
+                ticker: ticker,
+                notes: notes
+              });
+            }
+          });
+
+          if (noteRecords.length > 0) {
+            toast('กำลังส่งข้อมูลบันทึกพอร์ตโฟลิโอ...');
+            const { error: notesError } = await supabaseClient
+              .from('portfolio_notes')
+              .upsert(noteRecords, { onConflict: 'ticker' });
+            
+            if (notesError) throw notesError;
+          }
+
+          toast('🎉 Sync ข้อมูลสำเร็จแล้ว!');
+          return true;
+        } catch (e) {
+          console.error('Error syncing to Supabase:', e);
+          toast('Sync ล้มเหลว: ' + e.message);
+          return false;
+        }
+      }
 
       // Portfolio state
       let portfolioTickersRaw = S.get('portfolio_tickers');
@@ -4856,6 +5015,17 @@ window.runPositionSizingCalc = function() {
             ind.style.opacity = 1;
             setTimeout(() => { if (ind) ind.style.opacity = 0; }, 1500);
           }
+
+          // Auto-save to Supabase if client is initialized
+          if (supabaseClient) {
+            supabaseClient
+              .from('portfolio_notes')
+              .upsert({ ticker: ticker, notes: notes }, { onConflict: 'ticker' })
+              .then(({ error }) => {
+                if (error) console.error('Supabase auto-save error:', error);
+                else console.log('Supabase auto-saved note for', ticker);
+              });
+          }
         }, 800);
       };
 
@@ -4945,23 +5115,64 @@ window.runPositionSizingCalc = function() {
       $('btn-settings').onclick = () => {
         $('input-api-key').value = config.apiKey;
         $('input-model').value = config.model;
+        $('input-supabase-url').value = config.supabaseUrl || '';
+        $('input-supabase-key').value = config.supabaseKey || '';
         $('settings-overlay').classList.add('open');
       };
       $('btn-cancel-settings').onclick = () => $('settings-overlay').classList.remove('open');
-      $('btn-save-settings').onclick = () => {
+      $('btn-save-settings').onclick = async () => {
         config.apiKey = $('input-api-key').value.trim();
         config.model = $('input-model').value;
+        config.supabaseUrl = $('input-supabase-url').value.trim();
+        config.supabaseKey = $('input-supabase-key').value.trim();
+
         S.set('gemini_api_key', config.apiKey);
         S.set('gemini_model_name', config.model);
+        S.set('supabase_url', config.supabaseUrl);
+        S.set('supabase_key', config.supabaseKey);
+
         updateApiDot();
+        initSupabase();
+
+        if (supabaseClient) {
+          toast('กำลังเชื่อมต่อ Supabase...');
+          const ok = await syncFromSupabase();
+          if (ok) {
+            toast('เชื่อมต่อ Supabase สำเร็จ!');
+            renderStockList();
+            renderPortfolio();
+          }
+        } else {
+          toast('บันทึกการตั้งค่าแล้ว');
+        }
         $('settings-overlay').classList.remove('open');
-        toast('บันทึกการตั้งค่าแล้ว');
+      };
+
+      $('btn-sync-push').onclick = () => {
+        syncToSupabase();
+      };
+      
+      $('btn-sync-pull').onclick = async () => {
+        const ok = await syncFromSupabase();
+        if (ok) {
+          toast('ดึงข้อมูลจาก Supabase สำเร็จ');
+          renderStockList();
+          renderPortfolio();
+        }
       };
 
       function updateApiDot() {
-        const on = config.apiKey && config.apiKey.trim() !== '';
-        $('api-dot').style.backgroundColor = on ? 'var(--accent-green)' : 'var(--accent-orange)';
-        $('api-text').textContent = on ? 'Connected' : 'Offline';
+        const geminiOn = config.apiKey && config.apiKey.trim() !== '';
+        const supabaseOn = config.supabaseUrl && config.supabaseKey;
+        
+        let statusText = '';
+        if (geminiOn && supabaseOn) statusText = 'Gemini + Supabase';
+        else if (geminiOn) statusText = 'Gemini Active';
+        else if (supabaseOn) statusText = 'Supabase Active';
+        else statusText = 'Offline';
+
+        $('api-dot').style.backgroundColor = (geminiOn || supabaseOn) ? 'var(--accent-green)' : 'var(--accent-orange)';
+        $('api-text').textContent = statusText;
       }
 
       // ====== IMPORT / EXPORT ======
@@ -5105,6 +5316,19 @@ window.runPositionSizingCalc = function() {
         renderSelectionPage();
         renderChat();
         lucide.createIcons();
+
+        // Async sync from Supabase if credentials exist
+        initSupabase();
+        if (supabaseClient) {
+          syncFromSupabase().then(ok => {
+            if (ok) {
+              console.log('Async sync from Supabase completed.');
+              buildGroupFilter();
+              renderStockList();
+              renderPortfolio();
+            }
+          });
+        }
       }
 
       init();
