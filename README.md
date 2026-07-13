@@ -1,3 +1,22 @@
+# Project stock
+
+เว็บคลังวิจัยหุ้นส่วนตัว + AI Chat + Supabase knowledge base สำหรับเพิ่มหุ้นใหม่ ปรับข้อมูลหุ้น จดโน้ตพอร์ต และคุยกับ AI โดยใช้ข้อมูลชุดเดียวกันจากฐานกลาง
+
+## เปิดใช้งานเว็บ
+
+👉 **[เปิด Project stock บนเว็บ](https://gunthampalo-pixel.github.io/Stockbook/)**
+
+ลิงก์สำรอง: [Sites deployment](https://stock-research-kan.commercial166737.chatgpt.site)
+
+## ใช้ทำอะไร
+
+- คุยกับ AI ในระบบ โดยให้ AI อ่านคลังความรู้และฐานข้อมูลหุ้นประกอบคำตอบ
+- เพิ่มหุ้นใหม่ แก้ข้อมูลหุ้น ปรับ thesis/notes/watchlist แล้ว sync กับ Supabase กลาง
+- อ่านและแก้คลังความรู้กลางจากแท็บ `คลังความรู้กลาง`
+- ตั้งค่า Gemini API key และเลือก/อัปเดตเวอร์ชัน AI model ได้เองในหน้า Settings
+
+---
+
 # 📖 สารบัญคลังวิเคราะห์หุ้นส่วนตัว (Investment Book Table of Contents)
 *ระบบจดบันทึกและวิเคราะห์หุ้นส่วนตัวสไตล์ Disruptive Compounder + Monthly Trend Confirmation ซิงค์ระหว่างคอมพิวเตอร์และ iPad ของพี่กัณฑ์*
 
