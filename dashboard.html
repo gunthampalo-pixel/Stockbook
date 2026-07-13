@@ -914,10 +914,14 @@
       <i data-lucide="message-circle"></i>
     </button>
 
-    <!-- ===== CHAT DRAWER ===== -->
+      <!-- ===== CHAT DRAWER ===== -->
     <div class="chat-drawer" id="chat-drawer">
       <div class="chat-header">
-        <h3><i data-lucide="sparkles" style="width:16px;height:16px;color:var(--accent-purple);"></i> AI Chat</h3>
+        <h3 style="display:flex;align-items:center;gap:8px;min-width:0;">
+          <i data-lucide="sparkles" style="width:16px;height:16px;color:var(--accent-purple);"></i>
+          <span>AI Chat</span>
+          <span id="chat-ai-version" style="font-size:10px;font-weight:600;color:var(--accent-cyan);border:1px solid rgba(0,230,255,0.24);background:rgba(0,230,255,0.08);border-radius:999px;padding:3px 7px;white-space:nowrap;max-width:150px;overflow:hidden;text-overflow:ellipsis;">AI Offline</span>
+        </h3>
         <div style="display:flex;gap:4px;">
           <button class="chat-close" id="btn-clear-chat" title="ล้างแชท"><i data-lucide="trash-2" style="width:14px;height:14px;"></i></button>
           <button class="chat-close" id="btn-close-chat"><i data-lucide="x" style="width:16px;height:16px;"></i></button>
@@ -946,10 +950,21 @@
         <div class="setting-row">
           <label>Model</label>
           <select id="input-model">
+            <option value="gemini-2.5-flash">Gemini 2.5 Flash</option>
+            <option value="gemini-2.5-pro">Gemini 2.5 Pro</option>
             <option value="gemini-2.0-flash">Gemini 2.0 Flash</option>
             <option value="gemini-1.5-flash">Gemini 1.5 Flash</option>
             <option value="gemini-1.5-pro">Gemini 1.5 Pro</option>
           </select>
+        </div>
+        <div class="setting-row">
+          <label>Custom AI Model Version</label>
+          <input type="text" id="input-custom-model" placeholder="เช่น gemini-2.5-flash หรือโมเดลใหม่ในอนาคต" />
+          <div style="font-size:10px;color:var(--text-muted);margin-top:5px;">ถ้าใส่ช่องนี้ ระบบจะใช้ชื่อนี้แทนตัวเลือกด้านบน</div>
+        </div>
+        <div class="setting-row">
+          <label>AI ที่ใช้อยู่</label>
+          <div id="settings-ai-status" style="font-size:12px;color:var(--text-secondary);border:1px solid var(--border-color);background:rgba(255,255,255,0.03);border-radius:8px;padding:8px 10px;">AI Offline</div>
         </div>
         <hr style="border:0; border-top:1px solid var(--border-color); margin: 15px 0;" />
         <h4 style="font-size: 13px; font-weight:600; color:var(--accent-cyan); margin-bottom: 10px;">Supabase Integration</h4>
@@ -5438,15 +5453,16 @@ window.runPositionSizingCalc = function() {
       // ====== SETTINGS ======
       $('btn-settings').onclick = () => {
         $('input-api-key').value = config.apiKey;
-        $('input-model').value = config.model;
+        syncModelSettingsControls();
         $('input-supabase-url').value = config.supabaseUrl || '';
         $('input-supabase-key').value = config.supabaseKey || '';
+        updateApiDot();
         $('settings-overlay').classList.add('open');
       };
       $('btn-cancel-settings').onclick = () => $('settings-overlay').classList.remove('open');
       $('btn-save-settings').onclick = async () => {
         config.apiKey = $('input-api-key').value.trim();
-        config.model = $('input-model').value;
+        config.model = getModelFromSettingsControls();
         config.supabaseUrl = $('input-supabase-url').value.trim();
         config.supabaseKey = $('input-supabase-key').value.trim();
 
@@ -5492,6 +5508,7 @@ window.runPositionSizingCalc = function() {
       function updateApiDot() {
         const geminiOn = config.apiKey && config.apiKey.trim() !== '';
         const supabaseOn = config.supabaseUrl && config.supabaseKey;
+        const modelName = config.model || 'gemini-2.0-flash';
         
         let statusText = '';
         if (geminiOn && supabaseOn) statusText = 'Gemini + Supabase';
@@ -5501,6 +5518,44 @@ window.runPositionSizingCalc = function() {
 
         $('api-dot').style.backgroundColor = (geminiOn || supabaseOn) ? 'var(--accent-green)' : 'var(--accent-orange)';
         $('api-text').textContent = statusText;
+        $('api-text').title = geminiOn ? `AI model: ${modelName}` : statusText;
+
+        const chatVersion = $('chat-ai-version');
+        if (chatVersion) {
+          chatVersion.textContent = geminiOn ? modelName : 'AI Offline';
+          chatVersion.title = geminiOn ? `กำลังใช้ ${modelName}` : 'ยังไม่ได้ใส่ Gemini API Key';
+          chatVersion.style.color = geminiOn ? 'var(--accent-cyan)' : 'var(--accent-orange)';
+          chatVersion.style.borderColor = geminiOn ? 'rgba(0,230,255,0.24)' : 'rgba(245,158,11,0.28)';
+          chatVersion.style.background = geminiOn ? 'rgba(0,230,255,0.08)' : 'rgba(245,158,11,0.10)';
+        }
+
+        const settingsStatus = $('settings-ai-status');
+        if (settingsStatus) {
+          settingsStatus.textContent = geminiOn
+            ? `เปิดใช้ AI แล้ว · Model: ${modelName}`
+            : `ยังไม่ได้เปิดใช้ AI · Model ที่ตั้งไว้: ${modelName}`;
+        }
+      }
+
+      function syncModelSettingsControls() {
+        const modelSelect = $('input-model');
+        const customInput = $('input-custom-model');
+        if (!modelSelect || !customInput) return;
+
+        const optionValues = Array.from(modelSelect.options).map(opt => opt.value);
+        if (optionValues.includes(config.model)) {
+          modelSelect.value = config.model;
+          customInput.value = '';
+        } else {
+          modelSelect.value = optionValues[0] || 'gemini-2.5-flash';
+          customInput.value = config.model || '';
+        }
+      }
+
+      function getModelFromSettingsControls() {
+        const custom = $('input-custom-model')?.value.trim();
+        if (custom) return custom;
+        return $('input-model')?.value || 'gemini-2.5-flash';
       }
 
       // ====== IMPORT / EXPORT ======
