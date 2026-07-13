@@ -876,6 +876,35 @@
         </div>
       </div>
 
+      <!-- PAGE 5: CENTRAL KNOWLEDGE BASE -->
+      <div class="page research-page" id="page-knowledge" style="padding: 12px; display:none; gap:12px; height:100%;">
+        <div class="stock-sidebar glass-panel" style="padding:12px; display:flex; flex-direction:column; gap:8px;">
+          <div style="font-size: 13px; font-weight: 700; color: var(--accent-cyan); display: flex; align-items: center; gap: 6px; padding: 4px;">
+            <i data-lucide="library" style="width:18px;height:18px;"></i>
+            <span>คลังความรู้กลาง</span>
+          </div>
+          <div style="font-size: 11px; color: var(--text-muted); padding: 0 4px 6px; border-bottom: 1px solid var(--border-color);">
+            อ่านและแก้ไฟล์ความรู้จาก Supabase โดยตรง
+          </div>
+          <div class="stock-search">
+            <input type="text" id="knowledge-search-input" placeholder="ค้นหาไฟล์ / หัวข้อ..." style="width:100%;" />
+          </div>
+          <button class="add-stock-btn" id="btn-refresh-knowledge" style="width:100%;">
+            <i data-lucide="refresh-cw" style="width:12px;height:12px;"></i> โหลดจาก Supabase
+          </button>
+          <div class="stock-list" id="knowledge-list" style="flex:1;"></div>
+        </div>
+
+        <div class="stock-detail glass-panel" id="knowledge-detail" style="padding:0; flex:1; display:flex; flex-direction:column; overflow:hidden;">
+          <div id="knowledge-detail-content" style="height:100%; overflow-y:auto; display:flex; flex-direction:column;">
+            <div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--text-muted);flex-direction:column;gap:10px;">
+              <i data-lucide="library" style="width:40px;height:40px;opacity:0.3;color:var(--accent-cyan);"></i>
+              <p>เลือกไฟล์ความรู้จากด้านซ้ายเพื่ออ่านหรือแก้ไข</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
       </div><!-- end page-container -->
 
     </div><!-- end app-shell -->
@@ -1669,6 +1698,10 @@
       let detailTab = 'memo'; // memo | edit | financials
       const DEFAULT_SUPABASE_URL = 'https://tymguuajdnkowvvuiijv.supabase.co';
       const DEFAULT_SUPABASE_KEY = 'sb_publishable_qkrO02JdfKfCNDaaspoYOQ_nqbI8bKC';
+      let isHydratingFromSupabase = false;
+      let stockSyncTimer = null;
+      let KNOWLEDGE_DOCS = [];
+      let selectedKnowledgePath = '';
 
       let config = {
         apiKey: S.get('gemini_api_key') || '',
@@ -1702,6 +1735,7 @@
 
       async function syncFromSupabase() {
         if (!supabaseClient) return false;
+        isHydratingFromSupabase = true;
         try {
           console.log('Fetching stocks from Supabase...');
           const { data: dbStocks, error: stocksError } = await supabaseClient
@@ -1757,16 +1791,19 @@
           console.error('Error syncing from Supabase:', e);
           toast('Sync จาก Supabase ล้มเหลว: ' + e.message);
           return false;
+        } finally {
+          isHydratingFromSupabase = false;
         }
       }
 
-      async function syncToSupabase() {
+      async function syncToSupabase(options = {}) {
+        const silent = Boolean(options.silent);
         if (!supabaseClient) {
-          alert('กรุณาตั้งค่า Supabase และตรวจสอบการเชื่อมต่อก่อน');
+          if (!silent) alert('กรุณาตั้งค่า Supabase และตรวจสอบการเชื่อมต่อก่อน');
           return false;
         }
         
-        toast('กำลังเตรียมข้อมูล...');
+        if (!silent) toast('กำลังเตรียมข้อมูล...');
         try {
           const records = STOCKS.map(s => ({
             ticker: s.ticker,
@@ -1788,7 +1825,7 @@
             summary: s.summary || null
           }));
 
-          toast('กำลังส่งข้อมูลหุ้นขึ้น Supabase...');
+          if (!silent) toast('กำลังส่งข้อมูลหุ้นขึ้น Supabase...');
           const { error: stocksError } = await supabaseClient
             .from('stocks')
             .upsert(records, { onConflict: 'ticker' });
@@ -1810,7 +1847,7 @@
           });
 
           if (noteRecords.length > 0) {
-            toast('กำลังส่งข้อมูลบันทึกพอร์ตโฟลิโอ...');
+            if (!silent) toast('กำลังส่งข้อมูลบันทึกพอร์ตโฟลิโอ...');
             const { error: notesError } = await supabaseClient
               .from('portfolio_notes')
               .upsert(noteRecords, { onConflict: 'ticker' });
@@ -1818,11 +1855,11 @@
             if (notesError) throw notesError;
           }
 
-          toast('🎉 Sync ข้อมูลสำเร็จแล้ว!');
+          if (!silent) toast('Sync ข้อมูลสำเร็จแล้ว!');
           return true;
         } catch (e) {
           console.error('Error syncing to Supabase:', e);
-          toast('Sync ล้มเหลว: ' + e.message);
+          if (!silent) toast('Sync ล้มเหลว: ' + e.message);
           return false;
         }
       }
@@ -2083,6 +2120,15 @@ ${question}`;
         setTimeout(() => $('toast').classList.remove('show'), 3000);
       }
 
+      function escapeHtml(value) {
+        return String(value || '')
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#039;');
+      }
+
       // ====== DYNAMIC TABS STATE ======
       let TABS = JSON.parse(S.get('app_tabs') || 'null');
       if (!TABS) {
@@ -2091,15 +2137,19 @@ ${question}`;
           { id: 'selection', title: 'วิธีหาหุ้น (คอขวด)', icon: 'search', type: 'book' },
           { id: 'research', title: 'Stock Research', icon: 'database', type: 'system' },
           { id: 'watchlist', title: 'Watchlist', icon: 'star', type: 'system' },
-          { id: 'portfolio', title: 'Portfolio', icon: 'briefcase', type: 'system' }
+          { id: 'portfolio', title: 'Portfolio', icon: 'briefcase', type: 'system' },
+          { id: 'knowledge', title: 'คลังความรู้กลาง', icon: 'library', type: 'system' }
         ];
         S.set('app_tabs', JSON.stringify(TABS));
       } else {
-        // Ensure portfolio is present in existing TABS
+        // Ensure system tabs are present in existing TABS
         if (!TABS.some(t => t.id === 'portfolio')) {
           TABS.push({ id: 'portfolio', title: 'Portfolio', icon: 'briefcase', type: 'system' });
-          S.set('app_tabs', JSON.stringify(TABS));
         }
+        if (!TABS.some(t => t.id === 'knowledge')) {
+          TABS.push({ id: 'knowledge', title: 'คลังความรู้กลาง', icon: 'library', type: 'system' });
+        }
+        S.set('app_tabs', JSON.stringify(TABS));
       }
       let activeBookTabId = 'thesis';
 
@@ -2161,6 +2211,12 @@ ${question}`;
           if (tabId === 'research') renderStockList();
           if (tabId === 'portfolio') {
             if (typeof renderPortfolio === 'function') renderPortfolio();
+          }
+          if (tabId === 'knowledge') {
+            if (supabaseClient && KNOWLEDGE_DOCS.length === 0) {
+              loadKnowledgeDocsFromSupabase().then(() => renderKnowledgeBase());
+            }
+            renderKnowledgeBase();
           }
         }
         
@@ -3757,12 +3813,26 @@ ${question}`;
           buildGroupFilter();
           renderStockList();
           renderChat();
+          initSupabase();
           
           // Initial rendering of tabs and opening default book tab
           renderTabBar();
           switchPage('thesis');
           initPortfolioPage();
           lucide.createIcons();
+
+          if (supabaseClient) {
+            syncFromSupabase().then(ok => {
+              if (ok) {
+                buildGroupFilter();
+                renderStockList();
+                renderPortfolio();
+              }
+            });
+            loadKnowledgeDocsFromSupabase().then(ok => {
+              if (ok && currentTab === 'knowledge') renderKnowledgeBase();
+            });
+          }
         });
       };
 window.runPositionSizingCalc = function() {
@@ -5122,6 +5192,171 @@ window.runPositionSizingCalc = function() {
 
       if ($('portfolio-search-input')) $('portfolio-search-input').addEventListener('input', renderPortfolio);
 
+      // ====== CENTRAL KNOWLEDGE BASE ======
+      async function loadKnowledgeDocsFromSupabase() {
+        if (!supabaseClient) {
+          toast('ยังไม่ได้เชื่อมต่อ Supabase');
+          return false;
+        }
+
+        try {
+          const { data, error } = await supabaseClient
+            .from('stock_research_knowledge_documents')
+            .select('path,title,category,content,updated_at')
+            .order('category', { ascending: true })
+            .order('path', { ascending: true });
+
+          if (error) throw error;
+          KNOWLEDGE_DOCS = data || [];
+          if (!selectedKnowledgePath && KNOWLEDGE_DOCS.length > 0) {
+            selectedKnowledgePath = KNOWLEDGE_DOCS[0].path;
+          }
+          return true;
+        } catch (e) {
+          console.error('Error loading knowledge docs:', e);
+          toast('โหลดคลังความรู้ล้มเหลว: ' + e.message);
+          return false;
+        }
+      }
+
+      function renderKnowledgeBase() {
+        renderKnowledgeList();
+        renderKnowledgeDetail();
+      }
+
+      function renderKnowledgeList() {
+        const el = $('knowledge-list');
+        if (!el) return;
+
+        const query = ($('knowledge-search-input')?.value || '').trim().toLowerCase();
+        const docs = KNOWLEDGE_DOCS.filter(doc => {
+          const haystack = `${doc.path || ''} ${doc.title || ''} ${doc.category || ''}`.toLowerCase();
+          return !query || haystack.includes(query);
+        });
+
+        if (!supabaseClient) {
+          el.innerHTML = '<div style="padding:12px;color:var(--text-muted);font-size:12px;">ยังไม่ได้เชื่อมต่อ Supabase</div>';
+          return;
+        }
+
+        if (docs.length === 0) {
+          el.innerHTML = '<div style="padding:12px;color:var(--text-muted);font-size:12px;">ไม่พบเอกสารความรู้</div>';
+          return;
+        }
+
+        el.innerHTML = docs.map(doc => {
+          const active = doc.path === selectedKnowledgePath;
+          return `
+            <div class="stock-item ${active ? 'active' : ''}" onclick="selectKnowledgeDoc('${escapeHtml(doc.path)}')" style="cursor:pointer;">
+              <div class="stock-info">
+                <div class="stock-name" style="font-size:12px;">${escapeHtml(doc.title || doc.path)}</div>
+                <div class="stock-meta" style="font-size:10px;">${escapeHtml(doc.category || 'knowledge')}</div>
+              </div>
+              <span class="ticker-badge" style="font-size:9px;">MD</span>
+            </div>
+          `;
+        }).join('');
+      }
+
+      function renderKnowledgeDetail() {
+        const el = $('knowledge-detail-content');
+        if (!el) return;
+
+        const doc = KNOWLEDGE_DOCS.find(item => item.path === selectedKnowledgePath);
+        if (!supabaseClient) {
+          el.innerHTML = `
+            <div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--text-muted);flex-direction:column;gap:10px;">
+              <i data-lucide="database-zap" style="width:40px;height:40px;opacity:0.3;color:var(--accent-orange);"></i>
+              <p>ยังไม่ได้เชื่อมต่อ Supabase</p>
+            </div>
+          `;
+          lucide.createIcons();
+          return;
+        }
+
+        if (!doc) {
+          el.innerHTML = `
+            <div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--text-muted);flex-direction:column;gap:10px;">
+              <i data-lucide="library" style="width:40px;height:40px;opacity:0.3;color:var(--accent-cyan);"></i>
+              <p>เลือกไฟล์ความรู้จากด้านซ้ายเพื่ออ่านหรือแก้ไข</p>
+            </div>
+          `;
+          lucide.createIcons();
+          return;
+        }
+
+        const updated = doc.updated_at ? new Date(doc.updated_at).toLocaleDateString('th-TH', {
+          year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'
+        }) : 'ยังไม่มีข้อมูลเวลา';
+
+        el.innerHTML = `
+          <div class="detail-header" style="justify-content:space-between; flex-shrink:0;">
+            <div class="detail-title">
+              <h2>คลังความรู้กลาง</h2>
+              <p style="font-size:11px;color:var(--text-muted);margin-top:4px;">${escapeHtml(doc.path)} · อัปเดตล่าสุด ${escapeHtml(updated)}</p>
+            </div>
+            <button class="btn btn-primary" onclick="saveKnowledgeDoc()" style="padding:8px 12px;">
+              <i data-lucide="save" style="width:13px;height:13px;"></i> บันทึกลง Supabase
+            </button>
+          </div>
+          <div style="padding:0 20px 20px; display:flex; flex-direction:column; gap:10px; flex:1; min-height:0;">
+            <div style="display:grid; grid-template-columns: 1fr 180px; gap:10px;">
+              <div>
+                <label style="font-size:11px;color:var(--text-muted);font-weight:600;">หัวข้อ</label>
+                <input id="knowledge-title-input" class="edit-field" style="width:100%;padding:9px;margin-top:4px;" value="${escapeHtml(doc.title || '')}" />
+              </div>
+              <div>
+                <label style="font-size:11px;color:var(--text-muted);font-weight:600;">หมวด</label>
+                <input id="knowledge-category-input" class="edit-field" style="width:100%;padding:9px;margin-top:4px;" value="${escapeHtml(doc.category || '')}" />
+              </div>
+            </div>
+            <textarea id="knowledge-content-input" class="edit-field" style="width:100%;flex:1;min-height:420px;padding:12px;border-radius:8px;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;font-size:12px;line-height:1.6;resize:none;color:#111827;background:#fff;">${escapeHtml(doc.content || '')}</textarea>
+          </div>
+        `;
+        lucide.createIcons();
+      }
+
+      window.selectKnowledgeDoc = function(path) {
+        selectedKnowledgePath = path;
+        renderKnowledgeBase();
+      };
+
+      window.saveKnowledgeDoc = async function() {
+        if (!supabaseClient || !selectedKnowledgePath) return;
+        const doc = KNOWLEDGE_DOCS.find(item => item.path === selectedKnowledgePath);
+        if (!doc) return;
+
+        const nextDoc = {
+          path: selectedKnowledgePath,
+          title: $('knowledge-title-input')?.value.trim() || doc.title || selectedKnowledgePath,
+          category: $('knowledge-category-input')?.value.trim() || doc.category || 'knowledge',
+          content: $('knowledge-content-input')?.value || ''
+        };
+
+        try {
+          const { error } = await supabaseClient
+            .from('stock_research_knowledge_documents')
+            .upsert(nextDoc, { onConflict: 'path' });
+
+          if (error) throw error;
+          Object.assign(doc, nextDoc, { updated_at: new Date().toISOString() });
+          renderKnowledgeBase();
+          toast('บันทึกคลังความรู้ลง Supabase แล้ว');
+        } catch (e) {
+          console.error('Error saving knowledge doc:', e);
+          toast('บันทึกคลังความรู้ล้มเหลว: ' + e.message);
+        }
+      };
+
+      if ($('knowledge-search-input')) $('knowledge-search-input').addEventListener('input', renderKnowledgeList);
+      if ($('btn-refresh-knowledge')) $('btn-refresh-knowledge').onclick = async () => {
+        const ok = await loadKnowledgeDocsFromSupabase();
+        if (ok) {
+          renderKnowledgeBase();
+          toast('โหลดคลังความรู้จาก Supabase แล้ว');
+        }
+      };
+
       // ====== CHAT ======
       let chatOpen = false;
       $('chat-fab').onclick = () => {
@@ -5227,9 +5462,11 @@ window.runPositionSizingCalc = function() {
           toast('กำลังเชื่อมต่อ Supabase...');
           const ok = await syncFromSupabase();
           if (ok) {
+            await loadKnowledgeDocsFromSupabase();
             toast('เชื่อมต่อ Supabase สำเร็จ!');
             renderStockList();
             renderPortfolio();
+            if (currentTab === 'knowledge') renderKnowledgeBase();
           }
         } else {
           toast('บันทึกการตั้งค่าแล้ว');
@@ -5244,9 +5481,11 @@ window.runPositionSizingCalc = function() {
       $('btn-sync-pull').onclick = async () => {
         const ok = await syncFromSupabase();
         if (ok) {
+          await loadKnowledgeDocsFromSupabase();
           toast('ดึงข้อมูลจาก Supabase สำเร็จ');
           renderStockList();
           renderPortfolio();
+          if (currentTab === 'knowledge') renderKnowledgeBase();
         }
       };
 
@@ -5364,6 +5603,15 @@ window.runPositionSizingCalc = function() {
       // ====== DATA PERSISTENCE ======
       function saveStocks() {
         S.set('cached_stocks', JSON.stringify(STOCKS));
+        queueStocksAutoSync();
+      }
+
+      function queueStocksAutoSync() {
+        if (!supabaseClient || isHydratingFromSupabase) return;
+        clearTimeout(stockSyncTimer);
+        stockSyncTimer = setTimeout(() => {
+          syncToSupabase({ silent: true });
+        }, 1200);
       }
 
       // ====== INIT ======
