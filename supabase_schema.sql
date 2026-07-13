@@ -1,85 +1,126 @@
--- Supabase Database Schema for Stock Research Dashboard
--- Copy and paste this script into the SQL Editor in your Supabase project (https://supabase.com)
+-- Supabase schema for the Stock Research Dashboard.
+-- Run in the SQL editor for the target Supabase project.
 
--- 1. Create the 'stocks' table to store general stock profiles
-CREATE TABLE IF NOT EXISTS public.stocks (
-    ticker TEXT PRIMARY KEY,
-    name TEXT NOT NULL,
-    logo_url TEXT,
-    "group" TEXT,
-    style TEXT,
-    market TEXT DEFAULT 'US',
-    target_price TEXT,
-    what_it_does TEXT,
-    how_it_makes_money TEXT,
-    deals TEXT,
-    moat TEXT,
-    risks TEXT,
-    financials JSONB DEFAULT '[]'::jsonb,
-    image_url TEXT,
-    why_interest TEXT,
-    financials_snapshot TEXT,
-    summary TEXT,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL,
-    updated_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+create table if not exists public.stocks (
+  ticker text primary key,
+  name text not null,
+  logo_url text,
+  "group" text,
+  style text,
+  market text default 'US',
+  target_price text,
+  what_it_does text,
+  how_it_makes_money text,
+  deals text,
+  moat text,
+  risks text,
+  financials jsonb default '[]'::jsonb,
+  image_url text,
+  why_interest text,
+  financials_snapshot text,
+  summary text,
+  created_at timestamptz default timezone('utc'::text, now()) not null,
+  updated_at timestamptz default timezone('utc'::text, now()) not null
 );
 
--- 2. Create the 'portfolio_notes' table to store user-written notes for each stock
-CREATE TABLE IF NOT EXISTS public.portfolio_notes (
-    ticker TEXT PRIMARY KEY REFERENCES public.stocks(ticker) ON DELETE CASCADE,
-    notes TEXT,
-    updated_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+create table if not exists public.portfolio_notes (
+  ticker text primary key references public.stocks(ticker) on delete cascade,
+  notes text,
+  updated_at timestamptz default timezone('utc'::text, now()) not null
 );
 
--- 3. Enable Row Level Security (RLS) on both tables
-ALTER TABLE public.stocks ENABLE ROW LEVEL SECURITY;
-ALTER TABLE public.portfolio_notes ENABLE ROW LEVEL SECURITY;
+create table if not exists public.stock_research_knowledge_documents (
+  path text primary key,
+  title text not null,
+  category text not null,
+  content text not null,
+  metadata jsonb default '{}'::jsonb,
+  created_at timestamptz default timezone('utc'::text, now()) not null,
+  updated_at timestamptz default timezone('utc'::text, now()) not null
+);
 
--- 4. Create Policies for Public Access (using Anon Key)
--- Since this dashboard is run locally (or hosted statically) and shared with iPad,
--- we allow full read/write access via the anon key for simplicity.
+create or replace function public.update_modified_column()
+returns trigger
+language plpgsql
+set search_path = public
+as $$
+begin
+  new.updated_at = timezone('utc'::text, now());
+  return new;
+end;
+$$;
 
--- Policies for 'stocks'
-CREATE POLICY "Allow public read for stocks" 
-    ON public.stocks FOR SELECT USING (true);
+drop trigger if exists update_stocks_modtime on public.stocks;
+create trigger update_stocks_modtime
+before update on public.stocks
+for each row execute function public.update_modified_column();
 
-CREATE POLICY "Allow public insert for stocks" 
-    ON public.stocks FOR INSERT WITH CHECK (true);
+drop trigger if exists update_portfolio_notes_modtime on public.portfolio_notes;
+create trigger update_portfolio_notes_modtime
+before update on public.portfolio_notes
+for each row execute function public.update_modified_column();
 
-CREATE POLICY "Allow public update for stocks" 
-    ON public.stocks FOR UPDATE USING (true);
+drop trigger if exists update_stock_research_knowledge_documents_modtime on public.stock_research_knowledge_documents;
+create trigger update_stock_research_knowledge_documents_modtime
+before update on public.stock_research_knowledge_documents
+for each row execute function public.update_modified_column();
 
-CREATE POLICY "Allow public delete for stocks" 
-    ON public.stocks FOR DELETE USING (true);
+alter table public.stocks enable row level security;
+alter table public.portfolio_notes enable row level security;
+alter table public.stock_research_knowledge_documents enable row level security;
 
--- Policies for 'portfolio_notes'
-CREATE POLICY "Allow public read for portfolio_notes" 
-    ON public.portfolio_notes FOR SELECT USING (true);
+drop policy if exists "stock research public read stocks" on public.stocks;
+drop policy if exists "stock research public insert stocks" on public.stocks;
+drop policy if exists "stock research public update stocks" on public.stocks;
+drop policy if exists "stock research public delete stocks" on public.stocks;
 
-CREATE POLICY "Allow public insert for portfolio_notes" 
-    ON public.portfolio_notes FOR INSERT WITH CHECK (true);
+create policy "stock research public read stocks"
+on public.stocks for select to anon, authenticated using (true);
 
-CREATE POLICY "Allow public update for portfolio_notes" 
-    ON public.portfolio_notes FOR UPDATE USING (true);
+create policy "stock research public insert stocks"
+on public.stocks for insert to anon, authenticated with check (true);
 
-CREATE POLICY "Allow public delete for portfolio_notes" 
-    ON public.portfolio_notes FOR DELETE USING (true);
+create policy "stock research public update stocks"
+on public.stocks for update to anon, authenticated using (true) with check (true);
 
--- 5. Create a function and trigger to automatically update the 'updated_at' column
-CREATE OR REPLACE FUNCTION update_modified_column()
-RETURNS TRIGGER AS $$
-BEGIN
-    NEW.updated_at = timezone('utc'::text, now());
-    RETURN NEW;
-END;
-$$ language 'plpgsql';
+create policy "stock research public delete stocks"
+on public.stocks for delete to anon, authenticated using (true);
 
-CREATE TRIGGER update_stocks_modtime
-    BEFORE UPDATE ON public.stocks
-    FOR EACH ROW
-    EXECUTE FUNCTION update_modified_column();
+drop policy if exists "stock research public read portfolio notes" on public.portfolio_notes;
+drop policy if exists "stock research public insert portfolio notes" on public.portfolio_notes;
+drop policy if exists "stock research public update portfolio notes" on public.portfolio_notes;
+drop policy if exists "stock research public delete portfolio notes" on public.portfolio_notes;
 
-CREATE TRIGGER update_portfolio_notes_modtime
-    BEFORE UPDATE ON public.portfolio_notes
-    FOR EACH ROW
-    EXECUTE FUNCTION update_modified_column();
+create policy "stock research public read portfolio notes"
+on public.portfolio_notes for select to anon, authenticated using (true);
+
+create policy "stock research public insert portfolio notes"
+on public.portfolio_notes for insert to anon, authenticated with check (true);
+
+create policy "stock research public update portfolio notes"
+on public.portfolio_notes for update to anon, authenticated using (true) with check (true);
+
+create policy "stock research public delete portfolio notes"
+on public.portfolio_notes for delete to anon, authenticated using (true);
+
+drop policy if exists "stock research public read knowledge docs" on public.stock_research_knowledge_documents;
+drop policy if exists "stock research public insert knowledge docs" on public.stock_research_knowledge_documents;
+drop policy if exists "stock research public update knowledge docs" on public.stock_research_knowledge_documents;
+drop policy if exists "stock research public delete knowledge docs" on public.stock_research_knowledge_documents;
+
+create policy "stock research public read knowledge docs"
+on public.stock_research_knowledge_documents for select to anon, authenticated using (true);
+
+create policy "stock research public insert knowledge docs"
+on public.stock_research_knowledge_documents for insert to anon, authenticated with check (true);
+
+create policy "stock research public update knowledge docs"
+on public.stock_research_knowledge_documents for update to anon, authenticated using (true) with check (true);
+
+create policy "stock research public delete knowledge docs"
+on public.stock_research_knowledge_documents for delete to anon, authenticated using (true);
+
+grant usage on schema public to anon, authenticated;
+grant select, insert, update, delete on public.stocks to anon, authenticated;
+grant select, insert, update, delete on public.portfolio_notes to anon, authenticated;
+grant select, insert, update, delete on public.stock_research_knowledge_documents to anon, authenticated;

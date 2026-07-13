@@ -1,0 +1,25 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  background: #080c14;
+}
+
+body {
+  overflow: hidden;
+}
+
+.dashboard-shell,
+.dashboard-frame {
+  width: 100vw;
+  height: 100vh;
+}
+
+.dashboard-shell {
+  background: #080c14;
+}
+
+.dashboard-frame {
+  display: block;
+  border: 0;
+}

@@ -2,6 +2,12 @@
 node_modules/
 jspm_packages/
 
+# Build output
+dist/
+.next/
+.vinext/
+.wrangler/
+
 # Logs
 logs
 *.log
