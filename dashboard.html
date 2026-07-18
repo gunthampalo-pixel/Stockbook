@@ -976,9 +976,9 @@
           <label>Supabase Anon Key</label>
           <input type="password" id="input-supabase-key" placeholder="ใส่ Anon Public Key ของ Supabase..." />
         </div>
-        <div class="setting-row" style="display:flex; gap:8px; margin-top:10px;">
-          <button class="btn" id="btn-sync-push" style="flex:1; font-size:11px; padding: 6px; background: rgba(168, 85, 247, 0.2); border-color: rgba(168, 85, 247, 0.4); color: #fff;"><i data-lucide="upload-cloud" style="width:12px; height:12px; margin-right:4px;"></i> Push ไป Supabase</button>
-          <button class="btn" id="btn-sync-pull" style="flex:1; font-size:11px; padding: 6px; background: rgba(0, 230, 255, 0.1); border-color: rgba(0, 230, 255, 0.3); color: #fff;"><i data-lucide="download-cloud" style="width:12px; height:12px; margin-right:4px;"></i> Pull จาก Supabase</button>
+        <div class="setting-row" style="margin-top:12px; padding: 8px 10px; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 6px; display:flex; align-items:center; gap:8px;">
+          <span style="display:inline-block; width:8px; height:8px; background:var(--accent-green); border-radius:50%; box-shadow: 0 0 8px var(--accent-green);"></span>
+          <span style="font-size:11px; color:#fff; font-weight:500;">ระบบซิงค์ข้อมูลกับ Supabase อัตโนมัติเรียบร้อยแล้ว</span>
         </div>
         <div class="settings-actions">
           <button class="btn btn-primary" id="btn-save-settings">บันทึก</button>
@@ -5490,20 +5490,6 @@ window.runPositionSizingCalc = function() {
         $('settings-overlay').classList.remove('open');
       };
 
-      $('btn-sync-push').onclick = () => {
-        syncToSupabase();
-      };
-      
-      $('btn-sync-pull').onclick = async () => {
-        const ok = await syncFromSupabase();
-        if (ok) {
-          await loadKnowledgeDocsFromSupabase();
-          toast('ดึงข้อมูลจาก Supabase สำเร็จ');
-          renderStockList();
-          renderPortfolio();
-          if (currentTab === 'knowledge') renderKnowledgeBase();
-        }
-      };
 
       function updateApiDot() {
         const geminiOn = config.apiKey && config.apiKey.trim() !== '';
