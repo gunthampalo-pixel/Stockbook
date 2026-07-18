@@ -204,7 +204,7 @@ AI ไม่ควร:
 ตารางหลักที่มีอยู่:
 
 - `stocks`  
-  เก็บข้อมูลหุ้น เช่น ticker, name, group, style, market, target price, business model, deals, moat, risks, financials, summary
+  เก็บข้อมูลหุ้นทั้งหมดบน Supabase (เป็น Single Source of Truth เพียงแห่งเดียว ไม่มีไฟล์ markdown ท้องถิ่นในเครื่องในโฟลเดอร์ 03_memos/ แล้วเพื่อป้องกันการทับซ้อนและหลงรุ่นระหว่างเครื่อง) เช่น ticker, name, group, style, market, target price, business model, deals, moat, risks, financials, summary
 
 - `portfolio_notes`  
   เก็บโน้ตพอร์ตแยกตาม ticker
