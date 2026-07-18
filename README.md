@@ -14,6 +14,15 @@
 - เพิ่มหุ้นใหม่ แก้ข้อมูลหุ้น ปรับ thesis/notes/watchlist แล้ว sync กับ Supabase กลาง
 - อ่านและแก้คลังความรู้กลางจากแท็บ `คลังความรู้กลาง`
 - ตั้งค่า Gemini API key และเลือก/อัปเดตเวอร์ชัน AI model ได้เองในหน้า Settings
+- ทดลอง payoff/options backtest เบื้องต้นจากแท็บ `Options Lab`
+
+## ส่งต่องานให้ AI/คนอื่น
+
+ก่อนทำงานต่อ ให้อ่านไฟล์นี้ก่อนทุกครั้ง:
+
+👉 **[PROJECT_HANDOFF.md](PROJECT_HANDOFF.md)**
+
+หลังแก้โปรเจกต์ ต้องอัปเดต `PROJECT_HANDOFF.md` ในส่วน `Update Log` ทุกครั้ง เพื่อให้คนถัดไปทำงานต่อได้ไม่หลงบริบท
 
 ---
 
