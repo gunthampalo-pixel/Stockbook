@@ -296,7 +296,16 @@ AI ไม่ควร:
 
 ## Update Log
 
-### 2026-07-19
+### 2026-07-19 (Antigravity Upgrades)
+
+- **ปรับโครงสร้างเป็น E-Book Dashboard 5 หน้าใหม่:** สไตล์หุ้น (Styles Guide), ค้นอ่านหุ้น (Searchable Reader), จัดกลุ่มหุ้น (Categorization Grid), Watchlist Targets และ Options Lab
+- **ฝังกราฟ TradingView สด:** ดึงกราฟเทคนิคัลโต้ตอบได้มาพล็อตเคียงข้างตาราง Watchlist รายหุ้นอัตโนมัติ
+- **บอทลอยตัวอัจฉริยะ (Floating AI Advisor):** ไอคอนวงกลมลอยมุมล่างขวาประเมินหน้าจอที่กำลังเปิด (Context-Aware) และสามารถพิมพ์แชทคุมหน้าจอเว็บได้ (UI Screen Controller)
+- **สร้างระบบแบคเทสออปชัน (Options LEAPs Backtester):** สร้างสคริปต์ [backtest_options.py](file:///Users/gunthampalo/Library/CloudStorage/OneDrive-CentralGroup/น้องกัณฑ์/ai/MY%20PROJECT/หุ้นๆๆๆ/stock-research-knowledge-base/scripts/backtest_options.py) เพื่อจำลองผลตอบแทนสัญญา LEAPs Call 1 ปี ตามเส้น EMA 10M รายเดือน (รันตรวจสอบหุ้นได้ทุกตัว)
+- **ปรับปรุง Database Schema:** เพิ่มคอลัมน์ `entry_price` และ `exit_price` ลงในตาราง `stocks` ในไฟล์ [supabase_schema.sql](file:///Users/gunthampalo/Library/CloudStorage/OneDrive-CentralGroup/น้องกัณฑ์/ai/MY%20PROJECT/หุ้นๆๆๆ/stock-research-knowledge-base/supabase_schema.sql)
+- **ทำความสะอาดสิทธิ์ Git:** ลบไฟล์ซ้ำ และกวาดต้อนประวัติขึ้น GitHub คลาวด์สำเร็จ
+
+### 2026-07-19 (Codex Updates)
 
 - เพิ่มแท็บ `Options Lab` ใน `dashboard.html`
 - เพิ่ม prototype payoff engine สำหรับ long call, long put, covered call และ cash-secured put
