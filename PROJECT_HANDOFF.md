@@ -23,6 +23,8 @@ Project stock คือเว็บคลังวิจัยหุ้นส่
 - จดโน้ตพอร์ตและ watchlist
 - คุยกับ AI ในระบบ โดยให้ AI ใช้ฐานข้อมูลหุ้นและคลังความรู้ประกอบคำตอบ
 - อ่านและแก้คลังความรู้กลางจาก Supabase ผ่านแท็บ `คลังความรู้กลาง`
+- คิดกรอบ fair value แบบ simple DCF ผ่านแท็บ `Fair Value` และบันทึกผลเป็นเอกสารความรู้
+- สกัดลิงก์/ข้อความจากคลิป โพสต์ หรือบทความผ่านแท็บ `Link to Knowledge` แล้วบันทึกเป็นเอกสารใน Supabase
 
 เป้าหมายระยะยาวคือทำให้เป็นผู้ช่วยลงทุนส่วนตัวที่ค่อย ๆ โตต่อได้ เช่น อ่านงบการเงิน, สรุปงบ, ช่วยเทียบหุ้น, ทำ backtest จากข้อมูลจริง และให้ AI อธิบายผล
 
@@ -44,10 +46,10 @@ Project stock คือเว็บคลังวิจัยหุ้นส่
 
 โปรเจกต์นี้มี 2 ไฟล์สำหรับส่งต่องาน:
 
-- `PROJECT_HANDOFF.md`  
+- `PROJECT_HANDOFF.md`
   ใช้เก็บภาพใหญ่ เป้าหมาย สถาปัตยกรรม สิ่งที่ระบบขาด และทิศทางระยะยาว
 
-- `AI_WORK_LOG.md`  
+- `AI_WORK_LOG.md`
   ใช้เก็บ log รายครั้งว่าใครทำอะไร แก้ไฟล์ไหน ทดสอบอะไร push/deploy หรือยัง และงานต่อคืออะไร
 
 กติกา:
@@ -201,38 +203,38 @@ AI ไม่ควร:
 
 ## ไฟล์สำคัญ
 
-- `dashboard.html`  
+- `dashboard.html`
   หน้าเว็บหลักของ Project stock สำหรับ GitHub Pages
 
-- `public/dashboard.html`  
+- `public/dashboard.html`
   สำเนาหน้าเว็บสำหรับ deployment ผ่าน Sites/Vinext ต้อง sync กับ `dashboard.html` เมื่อแก้หน้าเว็บหลัก
 
-- `index.html`  
+- `index.html`
   หน้า redirect/root entry สำหรับ GitHub Pages
 
-- `README.md`  
+- `README.md`
   หน้าแสดงผลบน GitHub repo มีลิงก์เปิดเว็บและคำอธิบายสั้น ๆ
 
-- `supabase_schema.sql`  
+- `supabase_schema.sql`
   schema ที่ใช้สร้างตาราง Supabase
 
-- `scripts/seed_supabase.js`  
+- `scripts/seed_supabase.js`
   script seed ข้อมูลหุ้นและคลังความรู้เข้า Supabase
 
-- `00_ai_context/`, `01_playbooks/`, `02_templates/`, `03_memos/`, `04_themes/`, `05_watchlists/`, `06_reviews/`  
+- `00_ai_context/`, `01_playbooks/`, `02_templates/`, `03_memos/`, `04_themes/`, `05_watchlists/`, `06_reviews/`
   คลังความรู้ markdown ที่ใช้เป็นฐานความรู้ของ AI และ seed เข้า Supabase
 
 ## Supabase
 
 ตารางหลักที่มีอยู่:
 
-- `stocks`  
+- `stocks`
   เก็บข้อมูลหุ้นทั้งหมดบน Supabase (เป็น Single Source of Truth เพียงแห่งเดียว ไม่มีไฟล์ markdown ท้องถิ่นในเครื่องในโฟลเดอร์ 03_memos/ แล้วเพื่อป้องกันการทับซ้อนและหลงรุ่นระหว่างเครื่อง) เช่น ticker, name, group, style, market, target price, business model, deals, moat, risks, financials, summary
 
-- `portfolio_notes`  
+- `portfolio_notes`
   เก็บโน้ตพอร์ตแยกตาม ticker
 
-- `stock_research_knowledge_documents`  
+- `stock_research_knowledge_documents`
   เก็บเอกสารคลังความรู้ markdown ให้เว็บอ่าน/แก้จากแท็บ `คลังความรู้กลาง` และให้ AI ใช้เป็น context
 
 หมายเหตุด้านความปลอดภัย:
@@ -271,6 +273,8 @@ AI ไม่ควร:
 - ข้อมูลหุ้นและคลังความรู้ใช้ Supabase เป็นฐานกลาง
 - เปิดหลายเครื่องจะเห็นข้อมูลจากฐานเดียวกัน
 - AI Chat มีในระบบแล้ว แต่ยังใช้ Gemini API key ที่ผู้ใช้ใส่เองใน Settings
+- มีแท็บ `Fair Value` เป็น simple DCF calculator ฝั่ง browser และบันทึกผลลง `stock_research_knowledge_documents`
+- มีแท็บ `Link to Knowledge` สำหรับวางลิงก์/ข้อความแล้วให้ Gemini สกัดเป็น knowledge note ลง `stock_research_knowledge_documents`
 - ยังไม่มี server-side AI proxy เพราะไม่ควรฝัง API secret ลงเว็บสาธารณะ
 - ยังไม่มีระบบ login/auth จริง ถ้าใช้ส่วนตัวและไม่แชร์ลิงก์ ความเสี่ยงต่ำกว่า แต่เว็บ GitHub Pages ยังเป็น public
 
