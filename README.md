@@ -31,6 +31,7 @@
 
 ก่อนทำงานต่อให้อ่าน:
 
+- `PROJECT_BLUEPRINT.md`
 - `PROJECT_HANDOFF.md`
 - `AI_WORK_LOG.md`
 
