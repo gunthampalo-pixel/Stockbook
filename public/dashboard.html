@@ -1233,17 +1233,17 @@
     <script>
       // ====== SAFE STORAGE ======
       const S = {
-        get(k) { try { return localStorage.getItem(k); } catch(e) { return this._f[k]||null; } },
-        set(k,v) { try { localStorage.setItem(k,v); } catch(e) { this._f[k]=String(v); } },
-        del(k) { try { localStorage.removeItem(k); } catch(e) { delete this._f[k]; } },
+        get(k) { try { return sessionStorage.getItem(k); } catch(e) { return this._f[k]||null; } },
+        set(k,v) { try { sessionStorage.setItem(k,v); } catch(e) { this._f[k]=String(v); } },
+        del(k) { try { sessionStorage.removeItem(k); } catch(e) { delete this._f[k]; } },
         remove(k) { this.del(k); },
+        keys() {
+          try { return Object.keys(sessionStorage); } catch(e) { return Object.keys(this._f); }
+        },
         _f: {}
       };
 
-      const DEVICE_CACHE_RESET_VERSION = '2026-07-19-clean-repo-v1';
-      function clearProjectDeviceCacheOnce() {
-        if (S.get('project_stock_cache_reset_version') === DEVICE_CACHE_RESET_VERSION) return;
-
+      function clearLegacyProjectDeviceCache() {
         const exactKeys = new Set([
           'cached_stocks',
           'app_tabs',
@@ -1253,6 +1253,7 @@
           'gemini_model_name',
           'supabase_url',
           'supabase_key',
+          'project_stock_cache_reset_version',
           'options_lab_config',
           'fair_value_lab_config',
           'investing_playbook',
@@ -1275,12 +1276,17 @@
               localStorage.removeItem(key);
             }
           });
-          localStorage.setItem('project_stock_cache_reset_version', DEVICE_CACHE_RESET_VERSION);
         } catch (e) {
-          console.warn('Could not clear Project stock device cache:', e);
+          console.warn('Could not clear Project stock legacy localStorage:', e);
+        }
+
+        try {
+          if (window.indexedDB) indexedDB.deleteDatabase('StockDashboardDB');
+        } catch (e) {
+          console.warn('Could not clear Project stock image cache:', e);
         }
       }
-      clearProjectDeviceCacheOnce();
+      clearLegacyProjectDeviceCache();
 
       // ====== STOCKS DATA (will be injected) ======
       let STOCKS = [
@@ -2123,12 +2129,12 @@
 
           if (stocksError) throw stocksError;
 
-          const noteKeys = Object.keys(localStorage).filter(k => k.startsWith('portfolio_note_'));
+          const noteKeys = S.keys().filter(k => k.startsWith('portfolio_note_'));
           const noteRecords = [];
 
           noteKeys.forEach(k => {
             const ticker = k.replace('portfolio_note_', '');
-            const notes = localStorage.getItem(k);
+            const notes = S.get(k);
             if (notes) {
               noteRecords.push({
                 ticker: ticker,
