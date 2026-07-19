@@ -9,11 +9,17 @@
 
 ## ใช้ทำอะไร
 
+- หน้า `Home` สรุปภาพรวมระบบ แหล่งข้อมูล และสถานะ Supabase/Gemini
 - เพิ่ม/แก้ข้อมูลหุ้น แล้ว sync กับ Supabase
 - คุยกับ AI โดยให้ AI อ่านฐานข้อมูลหุ้นและคลังความรู้
+- อ่านคู่มือหุ้นจาก `Styles Guide`
+- ค้นและอ่านข้อมูลหุ้นจาก `Stock Reader`
+- จัดกลุ่มหุ้นจาก `Categorization`
+- ดู watchlist พร้อมกราฟ TradingView จาก `Watchlist`
 - คิด fair value จากแท็บ `Fair Value`
 - วางลิงก์/ข้อความจากคลิป โพสต์ หรือบทความใน `Link to Knowledge`
 - ทดลอง payoff หุ้น option จาก `Options Lab`
+- เช็กหลังบ้านและล้าง cache เครื่องจาก `Admin`
 
 ## โครง repo
 
