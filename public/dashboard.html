@@ -2490,15 +2490,39 @@ ${question}`;
       };
 
       async function loadLocalMarkdown(path) {
+        const cleanPath = path.replace(/^\.\//, '');
+        // 1. Look up in cached KNOWLEDGE_DOCS from Supabase
+        const found = KNOWLEDGE_DOCS.find(d => d.path === cleanPath || d.path === path);
+        if (found) {
+          return marked.parse(found.content);
+        }
+
+        // 2. Fetch directly from Supabase if not in memory
+        if (supabaseClient) {
+          try {
+            const { data, error } = await supabaseClient
+              .from('stock_research_knowledge_documents')
+              .select('content')
+              .eq('path', cleanPath)
+              .single();
+            if (data && !error) {
+              return marked.parse(data.content);
+            }
+          } catch (e) {
+            console.error('Supabase path lookup failed:', e);
+          }
+        }
+
+        // 3. Fallback to local HTTP fetch (for local dev mode)
         try {
           const res = await fetch(path);
           if (res.ok) {
             const md = await res.text();
             return marked.parse(md);
           }
-          return `<p style="color:var(--accent-red);">ไม่พบไฟล์เอกสาร: ${path}</p>`;
+          return `<p style="color:var(--accent-red);">ไม่พบไฟล์เอกสารในระบบคลาวด์หรือโลคอล: ${cleanPath}</p>`;
         } catch (e) {
-          return `<p style="color:var(--accent-red);">เกิดข้อผิดพลาดในการดึงไฟล์: ${e.message}</p>`;
+          return `<p style="color:var(--accent-red);">เกิดข้อผิดพลาดในการโหลด: ${e.message}</p>`;
         }
       }
 
@@ -6789,10 +6813,15 @@ ${truncateForPrompt(input.sourceText, 14000)}
         // Initialize Supabase and auto-sync
         initSupabase();
         if (supabaseClient) {
+          // Load playbooks/knowledge docs from Supabase first
+          loadKnowledgeDocsFromSupabase().then(() => {
+            renderStylesGuide();
+          });
+
+          // Sync stocks in parallel
           syncFromSupabase().then(ok => {
             if (ok) {
               console.log('Async sync from Supabase completed.');
-              renderStylesGuide();
               renderStockReaderList();
               renderCategorizationBoard();
               renderWatchlistTargets();
