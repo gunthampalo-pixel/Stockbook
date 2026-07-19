@@ -869,11 +869,18 @@
           คลังวิจัยหุ้นส่วนตัว
         </h1>
         <div class="header-right">
+          <button class="header-btn" id="btn-import" title="อิมพอร์ตไฟล์ .md">
+            <i data-lucide="upload" style="width:14px;height:14px;"></i> <span>อิมพอร์ต</span>
+          </button>
+          <button class="header-btn" id="btn-export" title="ดาวน์โหลดไฟล์ .md">
+            <i data-lucide="download" style="width:14px;height:14px;"></i> <span>ดาวน์โหลด</span>
+          </button>
           <div class="api-badge" id="btn-settings" title="ตั้งค่า API Key">
             <span class="api-dot" id="api-dot"></span>
             <span id="api-text" style="font-size:12px;">Gemini</span>
             <i data-lucide="settings" style="width:13px;height:13px;"></i>
           </div>
+          <input type="file" id="file-input" style="display:none;" accept=".md" />
         </div>
       </header>
 
@@ -886,32 +893,8 @@
       <!-- ===== PAGES ===== -->
       <div class="page-container">
 
-        <!-- PAGE 0: PROJECT COMMAND CENTER -->
-        <div class="page active" id="page-home" style="padding: 16px; display:flex; flex-direction:column; gap:14px; height:100%; overflow:auto;">
-          <div class="glass-panel" style="padding:18px; display:flex; justify-content:space-between; gap:14px; align-items:flex-start; flex-wrap:wrap;">
-            <div>
-              <div style="display:flex;align-items:center;gap:8px;color:var(--accent-cyan);font-weight:800;font-size:18px;">
-                <i data-lucide="layout-dashboard" style="width:22px;height:22px;"></i>
-                <span>Project stock Command Center</span>
-              </div>
-              <p style="margin:8px 0 0;color:var(--text-muted);font-size:12px;line-height:1.7;max-width:760px;">
-                เว็บวิจัยหุ้นส่วนตัวที่เปิดจากเครื่องไหนก็เห็นข้อมูลเดียวกัน โดยให้ Supabase เป็นฐานกลาง, GitHub เก็บโค้ด, TradingView แสดงกราฟ และ Gemini เป็น AI คู่คิดในระบบ
-              </p>
-            </div>
-            <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;">
-              <button class="btn btn-primary" onclick="switchPage('stock-reader')" style="padding:9px 12px;"><i data-lucide="search" style="width:13px;height:13px;"></i> อ่านหุ้น</button>
-              <button class="btn btn-primary" onclick="switchPage('fair-value')" style="padding:9px 12px;"><i data-lucide="calculator" style="width:13px;height:13px;"></i> Fair Value</button>
-              <button class="btn btn-primary" onclick="switchPage('admin')" style="padding:9px 12px;"><i data-lucide="settings" style="width:13px;height:13px;"></i> หลังบ้าน</button>
-            </div>
-          </div>
-
-          <div id="home-status-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;"></div>
-          <div id="home-feature-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;"></div>
-          <div id="home-data-map" class="glass-panel" style="padding:16px;"></div>
-        </div>
-
         <!-- PAGE 1: STOCK STYLES GUIDE -->
-        <div class="page research-page" id="page-styles-guide" style="padding: 12px; display:none; gap:12px; height:100%;">
+        <div class="page active research-page" id="page-styles-guide" style="padding: 12px; display:flex; gap:12px; height:100%;">
           <div class="stock-sidebar glass-panel" style="padding:12px; display:flex; flex-direction:column; gap:8px;">
             <div style="font-size: 13px; font-weight: 700; color: var(--accent-cyan); display: flex; align-items: center; gap: 6px; padding: 4px;">
               <i data-lucide="book-open" style="width:18px;height:18px;"></i>
@@ -1152,51 +1135,6 @@
 
         <div class="stock-detail glass-panel" id="options-detail" style="padding:0; flex:1; display:flex; flex-direction:column; overflow:hidden;">
           <div id="options-detail-content" style="height:100%; overflow-y:auto; display:flex; flex-direction:column;"></div>
-        </div>
-      </div>
-
-      <!-- PAGE 9: ADMIN / SETTINGS -->
-      <div class="page" id="page-admin" style="padding: 16px; display:none; flex-direction:column; gap:14px; height:100%; overflow:auto;">
-        <div class="glass-panel" style="padding:18px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;">
-          <div>
-            <div style="display:flex;align-items:center;gap:8px;color:var(--accent-cyan);font-weight:800;font-size:17px;">
-              <i data-lucide="settings" style="width:20px;height:20px;"></i>
-              <span>หลังบ้าน / Settings</span>
-            </div>
-            <p style="margin:8px 0 0;color:var(--text-muted);font-size:12px;line-height:1.7;max-width:760px;">
-              จุดนี้เอาไว้เช็กว่าข้อมูลกลางต่ออยู่ไหม, AI ใช้ model อะไร, reload ข้อมูลจาก Supabase และล้าง cache ชั่วคราวในเครื่องนี้
-            </p>
-          </div>
-          <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;">
-            <button class="btn btn-primary" onclick="reloadAdminData()" style="padding:9px 12px;"><i data-lucide="refresh-cw" style="width:13px;height:13px;"></i> Reload Supabase</button>
-            <button class="btn btn-primary" onclick="openSettingsModal()" style="padding:9px 12px;"><i data-lucide="key-round" style="width:13px;height:13px;"></i> API Keys</button>
-          </div>
-        </div>
-
-        <div id="admin-status-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;"></div>
-
-        <div class="glass-panel" style="padding:16px;">
-          <div style="font-size:14px;font-weight:800;color:var(--accent-cyan);display:flex;align-items:center;gap:8px;margin-bottom:12px;">
-            <i data-lucide="database" style="width:17px;height:17px;"></i>
-            <span>แผนที่ข้อมูลและ API</span>
-          </div>
-          <div id="admin-data-map"></div>
-        </div>
-
-        <div class="glass-panel" style="padding:16px;">
-          <div style="font-size:14px;font-weight:800;color:var(--accent-cyan);display:flex;align-items:center;gap:8px;margin-bottom:12px;">
-            <i data-lucide="sliders-horizontal" style="width:17px;height:17px;"></i>
-            <span>เครื่องมือหลังบ้าน</span>
-          </div>
-          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;">
-            <button class="btn btn-primary" onclick="testSupabaseConnection()" style="padding:10px 12px;justify-content:center;"><i data-lucide="database-zap" style="width:14px;height:14px;"></i> Test Supabase</button>
-            <button class="btn btn-primary" onclick="testGeminiConnection()" style="padding:10px 12px;justify-content:center;"><i data-lucide="sparkles" style="width:14px;height:14px;"></i> Test Gemini</button>
-            <button class="btn btn-primary" onclick="clearProjectDeviceCacheNow()" style="padding:10px 12px;justify-content:center;"><i data-lucide="eraser" style="width:14px;height:14px;"></i> Clear Device Cache</button>
-            <button class="btn btn-primary" onclick="switchPage('knowledge-extractor')" style="padding:10px 12px;justify-content:center;"><i data-lucide="file-text" style="width:14px;height:14px;"></i> Link to Knowledge</button>
-          </div>
-          <p style="margin:12px 0 0;color:var(--text-muted);font-size:11px;line-height:1.7;">
-            การล้าง cache ตรงนี้ล้างเฉพาะค่าชั่วคราวใน browser เครื่องนี้ ไม่ลบข้อมูลจริงใน Supabase
-          </p>
         </div>
       </div>
 
@@ -2053,7 +1991,7 @@
       let chatHistory = JSON.parse(S.get('chat_history') || '[]');
       let editMode = false;
       let isAddingNewStock = false;
-      let currentTab = 'home';
+      let currentTab = 'thesis';
       let detailTab = 'memo'; // memo | edit | financials
       const DEFAULT_SUPABASE_URL = 'https://tymguuajdnkowvvuiijv.supabase.co';
       const DEFAULT_SUPABASE_KEY = 'sb_publishable_qkrO02JdfKfCNDaaspoYOQ_nqbI8bKC';
@@ -2490,15 +2428,13 @@ ${question}`;
 
       // ====== DYNAMIC TABS STATE ======
       let TABS = [
-        { id: 'home', title: 'Home', icon: 'layout-dashboard', group: 'Command', type: 'system' },
-        { id: 'styles-guide', title: 'Styles Guide', icon: 'book-open', group: 'Stocks', type: 'system' },
-        { id: 'stock-reader', title: 'Stock Reader', icon: 'search', group: 'Stocks', type: 'system' },
-        { id: 'categorization-board', title: 'Categorization', icon: 'layout-grid', group: 'Stocks', type: 'system' },
-        { id: 'watchlist-targets', title: 'Watchlist', icon: 'star', group: 'Stocks', type: 'system' },
-        { id: 'fair-value', title: 'Fair Value', icon: 'calculator', group: 'Valuation', type: 'system' },
-        { id: 'options', title: 'Options Lab', icon: 'activity', group: 'Valuation', type: 'system' },
-        { id: 'knowledge-extractor', title: 'Link to Knowledge', icon: 'file-text', group: 'Knowledge', type: 'system' },
-        { id: 'admin', title: 'Admin', icon: 'settings', group: 'System', type: 'system' }
+        { id: 'styles-guide', title: 'สไตล์หุ้น', icon: 'book-open', type: 'system' },
+        { id: 'stock-reader', title: 'เสิร์ชอ่านข้อมูลหุ้น', icon: 'search', type: 'system' },
+        { id: 'categorization-board', title: 'จัดกลุ่มหุ้น', icon: 'layout-grid', type: 'system' },
+        { id: 'watchlist-targets', title: 'Watchlist Targets', icon: 'star', type: 'system' },
+        { id: 'fair-value', title: 'Fair Value', icon: 'calculator', type: 'system' },
+        { id: 'knowledge-extractor', title: 'Link to Knowledge', icon: 'file-text', type: 'system' },
+        { id: 'options', title: 'Options Lab', icon: 'activity', type: 'system' }
       ];
       S.set('app_tabs', JSON.stringify(TABS));
       let activeBookTabId = 'thesis';
@@ -2539,10 +2475,7 @@ ${question}`;
         }
 
         // Update context & trigger specific renders
-        if (tabId === 'home') {
-          currentActiveContext = 'หน้า Home / Command Center ภาพรวมระบบ Project stock';
-          renderHomeDashboard();
-        } else if (tabId === 'styles-guide') {
+        if (tabId === 'styles-guide') {
           currentActiveContext = 'หน้าสไตล์หุ้น (Investment Playbooks & Guides)';
           renderStylesGuide();
         } else if (tabId === 'stock-reader') {
@@ -2563,223 +2496,10 @@ ${question}`;
         } else if (tabId === 'options') {
           currentActiveContext = 'หน้า Options Lab สำหรับคำนวณ payoff หุ้น option';
           renderOptionsBacktest();
-        } else if (tabId === 'admin') {
-          currentActiveContext = 'หน้า Admin / Settings สำหรับเช็ก Supabase, Gemini, cache และแหล่งข้อมูล';
-          renderAdminDashboard();
         }
 
         lucide.createIcons();
       }
-
-      function statusBadge(label, ok, detail = '') {
-        const color = ok ? 'var(--accent-green)' : 'var(--accent-orange)';
-        const bg = ok ? 'rgba(34,197,94,0.10)' : 'rgba(245,158,11,0.10)';
-        return `<span title="${escapeHtml(detail || label)}" style="display:inline-flex;align-items:center;gap:6px;border:1px solid ${color};background:${bg};color:${color};border-radius:999px;padding:4px 8px;font-size:10px;font-weight:800;white-space:nowrap;"><span style="width:6px;height:6px;border-radius:999px;background:${color};"></span>${escapeHtml(label)}</span>`;
-      }
-
-      function metricCard(title, value, subtitle, icon, ok = true) {
-        return `
-          <div class="glass-panel" style="padding:14px;min-height:104px;">
-            <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;">
-              <span style="font-size:11px;color:var(--text-muted);font-weight:700;">${escapeHtml(title)}</span>
-              <i data-lucide="${icon}" style="width:17px;height:17px;color:${ok ? 'var(--accent-cyan)' : 'var(--accent-orange)'};"></i>
-            </div>
-            <div style="font-size:24px;font-weight:900;color:#fff;margin-top:10px;">${escapeHtml(value)}</div>
-            <div style="font-size:11px;color:var(--text-muted);line-height:1.5;margin-top:4px;">${escapeHtml(subtitle)}</div>
-          </div>
-        `;
-      }
-
-      function getDataSourceRows() {
-        return [
-          ['หุ้น / profile / moat / risks', 'Supabase', 'stocks', 'อ่านและแก้จากเว็บ แล้ว sync กลับฐานกลาง'],
-          ['โน้ตหุ้น', 'Supabase', 'portfolio_notes', 'บันทึกโน้ตตาม ticker ให้ AI เอาไปอ่านต่อ'],
-          ['Styles Guide / E-Book', 'Supabase', 'stock_research_knowledge_documents', 'คู่มือและเกณฑ์เลือกหุ้น'],
-          ['Fair Value Notes', 'Supabase', 'category: 09_valuation_notes', 'ผลประเมินและสมมติฐานที่บันทึกจาก Fair Value Lab'],
-          ['สรุปลิงก์ / คลิป / โพสต์', 'Supabase + Gemini', 'category: 08_extracted_knowledge', 'AI ช่วยสรุปจากข้อความที่วาง แล้วเก็บเป็นความรู้'],
-          ['กราฟราคา', 'TradingView Widget', 'ticker symbol', 'ดูกราฟแบบ interactive ในหน้า Watchlist'],
-          ['AI Advisor', 'Gemini API + Supabase context', config.model || 'gemini-2.0-flash', 'คุยได้ทุกหน้า รู้ว่ากำลังอยู่หน้าไหน และสั่งเปลี่ยนหน้าได้'],
-          ['ราคาหุ้น/งบการเงินจริง', 'ยังเป็นงานต่อ API', 'ต้องเลือก provider', 'ตอนนี้อ่านจากข้อมูลที่อยู่ใน Supabase ก่อน ยังไม่ควรถือว่า realtime']
-        ];
-      }
-
-      function renderDataSourceTable(targetId) {
-        const el = $(targetId);
-        if (!el) return;
-        el.innerHTML = `
-          <div style="overflow:auto;">
-            <table style="width:100%;border-collapse:collapse;font-size:12px;">
-              <thead>
-                <tr style="border-bottom:1px solid var(--border-color);text-align:left;color:var(--text-muted);">
-                  <th style="padding:9px;">ข้อมูล</th>
-                  <th style="padding:9px;">ดึง/ใช้จาก</th>
-                  <th style="padding:9px;">ที่เก็บ/ตัวเชื่อม</th>
-                  <th style="padding:9px;">หน้าที่</th>
-                </tr>
-              </thead>
-              <tbody>
-                ${getDataSourceRows().map(row => `
-                  <tr style="border-bottom:1px solid rgba(148,163,184,0.10);">
-                    <td style="padding:10px 9px;color:#fff;font-weight:700;">${escapeHtml(row[0])}</td>
-                    <td style="padding:10px 9px;color:var(--accent-cyan);">${escapeHtml(row[1])}</td>
-                    <td style="padding:10px 9px;color:var(--text-secondary);">${escapeHtml(row[2])}</td>
-                    <td style="padding:10px 9px;color:var(--text-muted);line-height:1.55;">${escapeHtml(row[3])}</td>
-                  </tr>
-                `).join('')}
-              </tbody>
-            </table>
-          </div>
-        `;
-      }
-
-      function renderHomeDashboard() {
-        const supabaseOn = Boolean(config.supabaseUrl && config.supabaseKey && supabaseClient);
-        const geminiOn = Boolean(config.apiKey);
-        const notesCount = S.keys().filter(k => k.startsWith('portfolio_note_') && S.get(k)).length;
-        const groupsCount = new Set(STOCKS.map(s => s.group).filter(Boolean)).size;
-        const statusGrid = $('home-status-grid');
-        if (statusGrid) {
-          statusGrid.innerHTML = [
-            metricCard('Stocks', String(STOCKS.length), `${groupsCount} groups/styles พร้อมอ่าน`, 'briefcase-business'),
-            metricCard('Knowledge', String(KNOWLEDGE_DOCS.length), 'เอกสารจาก Supabase/fallback ที่ AI ใช้อ้างอิง', 'library'),
-            metricCard('Supabase', supabaseOn ? 'Online' : 'Offline', supabaseOn ? 'ฐานกลางพร้อมใช้' : 'ต้องเช็ก key หรือ network', 'database-zap', supabaseOn),
-            metricCard('Gemini', geminiOn ? 'Ready' : 'No Key', geminiOn ? `Model: ${config.model}` : 'ใส่ API key ที่ Settings', 'sparkles', geminiOn)
-          ].join('');
-        }
-
-        const features = [
-          ['Styles Guide / E-Book', 'อ่านคัมภีร์หาไอเดียลงทุนและเกณฑ์หุ้น 6 สไตล์จากคลังความรู้', 'styles-guide', 'book-open'],
-          ['Stock Reader', 'ค้นหุ้น อ่านธุรกิจ รายได้ moat risks งบ และ thesis/notes', 'stock-reader', 'search'],
-          ['Categorization Grid', 'จัดกลุ่มหุ้นตาม style หรือ theme เพื่อสแกนเทียบกันในหมวดเดียว', 'categorization-board', 'layout-grid'],
-          ['Watchlist + TradingView', 'ดู target price, จุดเข้า, จุดออก/stop และกราฟสดของหุ้นที่คลิก', 'watchlist-targets', 'star'],
-          ['Fair Value Lab', 'คำนวณราคาเหมาะสมแบบ simple DCF ก่อน และบันทึกสมมติฐานลง Supabase', 'fair-value', 'calculator'],
-          ['Link to Knowledge', 'วางลิงก์หรือ transcript ให้ Gemini สรุป แล้วเก็บเป็นความรู้กลาง', 'knowledge-extractor', 'file-text'],
-          ['Options Lab', 'คำนวณ payoff, breakeven, P/L, risk สำหรับ stock options', 'options', 'activity'],
-          ['Admin / Settings', 'เช็ก Supabase, Gemini, cache, แหล่งข้อมูล และ reload ระบบ', 'admin', 'settings']
-        ];
-        const featureGrid = $('home-feature-grid');
-        if (featureGrid) {
-          featureGrid.innerHTML = features.map(item => `
-            <button onclick="switchPage('${item[2]}')" class="glass-panel" style="padding:14px;text-align:left;border:1px solid var(--border-color);cursor:pointer;background:rgba(15,23,42,0.55);">
-              <div style="display:flex;align-items:center;gap:8px;color:var(--accent-cyan);font-weight:800;font-size:13px;">
-                <i data-lucide="${item[3]}" style="width:17px;height:17px;"></i>
-                <span>${escapeHtml(item[0])}</span>
-              </div>
-              <div style="font-size:11px;color:var(--text-muted);line-height:1.6;margin-top:8px;">${escapeHtml(item[1])}</div>
-            </button>
-          `).join('');
-        }
-
-        const dataMap = $('home-data-map');
-        if (dataMap) {
-          dataMap.innerHTML = `
-            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;flex-wrap:wrap;">
-              <div style="font-size:14px;font-weight:800;color:var(--accent-cyan);display:flex;align-items:center;gap:8px;">
-                <i data-lucide="route" style="width:17px;height:17px;"></i>
-                <span>ข้อมูลไหลจากไหน</span>
-              </div>
-              <div style="display:flex;gap:8px;flex-wrap:wrap;">
-                ${statusBadge('Supabase source of truth', supabaseOn)}
-                ${statusBadge(geminiOn ? config.model : 'Gemini not set', geminiOn)}
-              </div>
-            </div>
-            <div id="home-data-map-table"></div>
-          `;
-          renderDataSourceTable('home-data-map-table');
-        }
-      }
-
-      function renderAdminDashboard() {
-        const supabaseConfigured = Boolean(config.supabaseUrl && config.supabaseKey);
-        const supabaseOn = Boolean(supabaseConfigured && supabaseClient);
-        const geminiOn = Boolean(config.apiKey);
-        const notesCount = S.keys().filter(k => k.startsWith('portfolio_note_') && S.get(k)).length;
-        const grid = $('admin-status-grid');
-        if (grid) {
-          grid.innerHTML = [
-            metricCard('Supabase', supabaseOn ? 'Client Ready' : (supabaseConfigured ? 'Configured' : 'Missing'), config.supabaseUrl || 'ยังไม่ได้ตั้งค่า URL', 'database-zap', supabaseConfigured),
-            metricCard('Gemini', geminiOn ? 'Ready' : 'No Key', geminiOn ? `Model: ${config.model}` : 'ยังไม่ได้ใส่ API key', 'sparkles', geminiOn),
-            metricCard('Stocks Loaded', String(STOCKS.length), 'ข้อมูลหุ้นในหน้าปัจจุบัน', 'briefcase-business'),
-            metricCard('Notes / Knowledge', `${notesCount} / ${KNOWLEDGE_DOCS.length}`, 'notes ใน session / docs จาก Supabase', 'library')
-          ].join('');
-        }
-        renderDataSourceTable('admin-data-map');
-      }
-
-      window.reloadAdminData = async function() {
-        initSupabase();
-        if (!supabaseClient) {
-          toast('ยังไม่ได้ตั้งค่า Supabase');
-          renderAdminDashboard();
-          return;
-        }
-        toast('กำลัง reload จาก Supabase...');
-        const stockOk = await syncFromSupabase();
-        const knowledgeOk = await loadKnowledgeDocsFromSupabase();
-        renderHomeDashboard();
-        renderAdminDashboard();
-        if (currentTab === 'stock-reader') renderStockReaderList();
-        if (currentTab === 'categorization-board') renderCategorizationBoard();
-        if (currentTab === 'watchlist-targets') renderWatchlistTargets();
-        toast(stockOk && knowledgeOk ? 'Reload Supabase สำเร็จ' : 'Reload บางส่วนไม่สำเร็จ ดูข้อความ error ก่อนหน้า');
-      };
-
-      window.testSupabaseConnection = async function() {
-        initSupabase();
-        if (!supabaseClient) {
-          toast('ยังไม่ได้ตั้งค่า Supabase');
-          renderAdminDashboard();
-          return;
-        }
-        try {
-          const { error } = await supabaseClient.from('stocks').select('ticker').limit(1);
-          if (error) throw error;
-          toast('Supabase ใช้งานได้');
-        } catch (e) {
-          toast('Supabase error: ' + e.message);
-        }
-        renderAdminDashboard();
-      };
-
-      window.testGeminiConnection = async function() {
-        if (!config.apiKey) {
-          toast('ยังไม่ได้ใส่ Gemini API key');
-          renderAdminDashboard();
-          return;
-        }
-        try {
-          const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${config.model}:generateContent?key=${config.apiKey}`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ contents: [{ parts: [{ text: 'ตอบคำเดียวว่า OK' }] }] })
-          });
-          const data = await res.json();
-          if (!res.ok) throw new Error(data?.error?.message || 'Gemini request failed');
-          toast('Gemini ใช้งานได้');
-        } catch (e) {
-          toast('Gemini error: ' + e.message);
-        }
-        renderAdminDashboard();
-      };
-
-      window.clearProjectDeviceCacheNow = function() {
-        S.keys().forEach(key => S.del(key));
-        clearLegacyProjectDeviceCache();
-        starred = new Set();
-        chatHistory = [];
-        config = {
-          apiKey: '',
-          model: 'gemini-2.0-flash',
-          supabaseUrl: DEFAULT_SUPABASE_URL,
-          supabaseKey: DEFAULT_SUPABASE_KEY
-        };
-        initSupabase();
-        updateApiDot();
-        renderChat();
-        renderHomeDashboard();
-        renderAdminDashboard();
-        toast('ล้าง cache เครื่องนี้แล้ว ข้อมูลจริงใน Supabase ไม่ถูกลบ');
-      };
 
       // 1. PAGE 1: RENDER STOCK STYLES GUIDE
       const LOCAL_KNOWLEDGE_PATHS = {
@@ -3204,18 +2924,9 @@ ${question}`;
         if (!tabBar) return;
 
         tabBar.innerHTML = '';
-        let lastGroup = '';
         TABS.forEach(tab => {
           const isActive = currentTab === tab.id;
           const isBook = tab.type === 'book';
-
-          if (tab.group && tab.group !== lastGroup) {
-            const label = document.createElement('div');
-            label.style.cssText = 'font-size:10px;color:var(--text-muted);font-weight:800;text-transform:uppercase;letter-spacing:0;margin:0 4px 0 10px;align-self:center;white-space:nowrap;';
-            label.textContent = tab.group;
-            tabBar.appendChild(label);
-            lastGroup = tab.group;
-          }
 
           const btn = document.createElement('div');
           btn.className = 'tab-btn' + (isActive ? ' active' : '');
@@ -3225,13 +2936,12 @@ ${question}`;
           btn.style.cursor = 'pointer';
           btn.setAttribute('data-tab', tab.id);
 
-          if (isBook) {
-            btn.draggable = true;
-            btn.addEventListener('dragstart', (e) => handleTabDragStart(e, tab.id));
-            btn.addEventListener('dragover', (e) => handleTabDragOver(e));
-            btn.addEventListener('drop', (e) => handleTabDrop(e, tab.id));
-            btn.addEventListener('dragend', (e) => handleTabDragEnd(e));
-          }
+          // Make tab buttons draggable
+          btn.draggable = true;
+          btn.addEventListener('dragstart', (e) => handleTabDragStart(e, tab.id));
+          btn.addEventListener('dragover', (e) => handleTabDragOver(e));
+          btn.addEventListener('drop', (e) => handleTabDrop(e, tab.id));
+          btn.addEventListener('dragend', (e) => handleTabDragEnd(e));
 
           btn.innerHTML = `
             <div onclick="switchPage('${tab.id}')" style="display:flex; align-items:center; gap:7px; flex:1;">
@@ -3249,6 +2959,19 @@ ${question}`;
           `;
           tabBar.appendChild(btn);
         });
+
+        // Add "+" button at the end
+        const addBtn = document.createElement('button');
+        addBtn.className = 'tab-btn';
+        addBtn.id = 'btn-add-tab';
+        addBtn.style.border = '1px dashed var(--border-color)';
+        addBtn.style.marginLeft = '8px';
+        addBtn.style.padding = '6px 12px';
+        addBtn.style.cursor = 'pointer';
+        addBtn.title = 'เพิ่มหน้าใหม่ (สมุดบันทึก)';
+        addBtn.innerHTML = `<i data-lucide="plus" style="width:14px;height:14px;margin-right:4px;"></i> <span>เพิ่มหน้าใหม่</span>`;
+        addBtn.onclick = () => addBookTab();
+        tabBar.appendChild(addBtn);
 
         lucide.createIcons();
       }
@@ -6910,7 +6633,7 @@ ${truncateForPrompt(input.sourceText, 14000)}
       $('chat-input').addEventListener('keydown', e => { if (e.key === 'Enter') sendChat(); });
 
       // ====== SETTINGS ======
-      window.openSettingsModal = function() {
+      $('btn-settings').onclick = () => {
         $('input-api-key').value = config.apiKey;
         syncModelSettingsControls();
         $('input-supabase-url').value = config.supabaseUrl || '';
@@ -6918,7 +6641,6 @@ ${truncateForPrompt(input.sourceText, 14000)}
         updateApiDot();
         $('settings-overlay').classList.add('open');
       };
-      $('btn-settings').onclick = () => openSettingsModal();
       $('btn-cancel-settings').onclick = () => $('settings-overlay').classList.remove('open');
       $('btn-save-settings').onclick = async () => {
         config.apiKey = $('input-api-key').value.trim();
@@ -6933,8 +6655,6 @@ ${truncateForPrompt(input.sourceText, 14000)}
 
         updateApiDot();
         initSupabase();
-        renderHomeDashboard();
-        if (currentTab === 'admin') renderAdminDashboard();
 
         if (supabaseClient) {
           toast('กำลังเชื่อมต่อ Supabase...');
@@ -6945,8 +6665,6 @@ ${truncateForPrompt(input.sourceText, 14000)}
             renderStockList();
             renderPortfolio();
             if (currentTab === 'knowledge') renderKnowledgeBase();
-            renderHomeDashboard();
-            if (currentTab === 'admin') renderAdminDashboard();
           }
         } else {
           toast('บันทึกการตั้งค่าแล้ว');
@@ -7009,8 +6727,8 @@ ${truncateForPrompt(input.sourceText, 14000)}
       }
 
       // ====== IMPORT / EXPORT ======
-      if ($('btn-import')) $('btn-import').onclick = () => $('file-input')?.click();
-      if ($('file-input')) $('file-input').onchange = e => {
+      $('btn-import').onclick = () => $('file-input').click();
+      $('file-input').onchange = e => {
         const file = e.target.files[0];
         if (!file) return;
         const reader = new FileReader();
@@ -7025,7 +6743,7 @@ ${truncateForPrompt(input.sourceText, 14000)}
         reader.readAsText(file, 'UTF-8');
       };
 
-      if ($('btn-export')) $('btn-export').onclick = () => {
+      $('btn-export').onclick = () => {
         let md = '';
         STOCKS.forEach(s => {
           md += `# ${s.name} (${s.ticker})\n`;
@@ -7152,28 +6870,24 @@ ${truncateForPrompt(input.sourceText, 14000)}
         }
 
         updateApiDot();
-        initSupabase();
         renderTabBar();
-        switchPage('home');
+        switchPage('styles-guide');
 
         // Initialize Supabase and auto-sync
+        initSupabase();
         if (supabaseClient) {
           // Load playbooks/knowledge docs from Supabase first
           loadKnowledgeDocsFromSupabase().then(() => {
             renderStylesGuide();
-            renderHomeDashboard();
-            if (currentTab === 'admin') renderAdminDashboard();
           });
 
           // Sync stocks in parallel
           syncFromSupabase().then(ok => {
             if (ok) {
               console.log('Async sync from Supabase completed.');
-              renderHomeDashboard();
               renderStockReaderList();
               renderCategorizationBoard();
               renderWatchlistTargets();
-              if (currentTab === 'admin') renderAdminDashboard();
             }
           });
         }
