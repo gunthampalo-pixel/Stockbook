@@ -9,8 +9,6 @@ create table if not exists public.stocks (
   style text,
   market text default 'US',
   target_price text,
-  entry_price text,
-  exit_price text,
   what_it_does text,
   how_it_makes_money text,
   deals text,

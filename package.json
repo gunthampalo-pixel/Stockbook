@@ -12,7 +12,7 @@
     "start": "WRANGLER_LOG_PATH=.wrangler/wrangler.log vinext start",
     "seed": "node scripts/seed_supabase.js",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
-    "db:generate": "drizzle-kit generate --config supabase/drizzle.config.ts"
+    "db:generate": "drizzle-kit generate"
   },
   "dependencies": {
     "@supabase/supabase-js": "2.43.4",

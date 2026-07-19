@@ -26,8 +26,8 @@ YYYY-QX_quarterly_review.md
 
 ## Templates
 
-- weekly: `docs/knowledge/02_templates/weekly_review.md`
-- quarterly: `docs/knowledge/02_templates/quarterly_review.md`
+- weekly: `02_templates/weekly_review.md`
+- quarterly: `02_templates/quarterly_review.md`
 
 ## Review Questions
 

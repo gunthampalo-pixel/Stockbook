@@ -1,44 +1,56 @@
 # Project stock
 
-เว็บคลังวิจัยหุ้นส่วนตัว + AI Chat + Supabase knowledge base
+เว็บคลังวิจัยหุ้นส่วนตัว + AI Chat + Supabase knowledge base สำหรับเพิ่มหุ้นใหม่ ปรับข้อมูลหุ้น จดโน้ตพอร์ต และคุยกับ AI โดยใช้ข้อมูลชุดเดียวกันจากฐานกลาง
 
-## เปิดเว็บ
+## เปิดใช้งานเว็บ
 
-- GitHub Pages: https://gunthampalo-pixel.github.io/Stockbook/
-- Sites สำรอง: https://stock-research-kan.commercial166737.chatgpt.site
+👉 **[เปิด Project stock บนเว็บ](https://gunthampalo-pixel.github.io/Stockbook/)**
+
+ลิงก์สำรอง: [Sites deployment](https://stock-research-kan.commercial166737.chatgpt.site)
 
 ## ใช้ทำอะไร
 
-- เพิ่ม/แก้ข้อมูลหุ้น แล้ว sync กับ Supabase
-- คุยกับ AI โดยให้ AI อ่านฐานข้อมูลหุ้นและคลังความรู้
-- คิด fair value จากแท็บ `Fair Value`
-- วางลิงก์/ข้อความจากคลิป โพสต์ หรือบทความใน `Link to Knowledge`
-- ทดลอง payoff หุ้น option จาก `Options Lab`
+- คุยกับ AI ในระบบ โดยให้ AI อ่านคลังความรู้และฐานข้อมูลหุ้นประกอบคำตอบ
+- เพิ่มหุ้นใหม่ แก้ข้อมูลหุ้น ปรับ thesis/notes/watchlist แล้ว sync กับ Supabase กลาง
+- อ่านและแก้คลังความรู้กลางจากแท็บ `คลังความรู้กลาง`
+- ตั้งค่า Gemini API key และเลือก/อัปเดตเวอร์ชัน AI model ได้เองในหน้า Settings
 
-## โครง repo
+---
 
-- `dashboard.html` - เว็บหลักสำหรับ GitHub Pages
-- `public/dashboard.html` - สำเนาเว็บหลักสำหรับ Sites deployment
-- `index.html` - หน้าเปิดเว็บและ redirect เข้า dashboard
-- `docs/knowledge/` - คลัง markdown สำหรับ seed/fallback local
-- `supabase/` - schema และ db config
-- `scripts/` - เครื่องมือ seed, fetch financials, backtest, monitor
-- `app/`, `worker/`, `build/` - wrapper สำหรับ Sites/Vinext hosting
-- `images/` - รูปที่ GitHub Pages ใช้
-- `public/images/` - รูปที่ Sites ใช้
+# 📖 สารบัญคลังวิเคราะห์หุ้นส่วนตัว (Investment Book Table of Contents)
+*ระบบจดบันทึกและวิเคราะห์หุ้นส่วนตัวสไตล์ Disruptive Compounder + Monthly Trend Confirmation ซิงค์ระหว่างคอมพิวเตอร์และ iPad ของพี่กัณฑ์*
 
-## กติกาส่งต่องาน
+---
 
-ก่อนทำงานต่อให้อ่าน:
+## 🧭 ปกหน้าและแนวคิดแกนกลาง (Book Philosophy)
+> [!NOTE]
+> *"กราฟเดือนเริ่มมาแล้ว (ยืนเหนือ EMA 10M / Break Base) แต่ข่าวยังไม่ Mainstream"*
+> 
+> เริ่มต้นวิเคราะห์จาก **Pain Point ➔ Value Chain ➔ คอขวด ➔ ใครจ่ายเงิน** เสมอ ก่อนจะสรุปที่ตัวหุ้น
 
-- `PROJECT_BLUEPRINT.md`
-- `PROJECT_HANDOFF.md`
-- `AI_WORK_LOG.md`
+---
 
-หลังแก้งานต้องอัปเดต `AI_WORK_LOG.md` ทุกครั้ง
+## 📂 สารบัญหนังสือ (Live Chapters Index)
 
-## หมายเหตุเรื่องข้อมูล
+### 🛠️ บทนำ: กติกาและการตั้งค่าระบบหลังบ้าน
+*   [👤 ประวัตินักลงทุนและสไตล์ส่วนตัว (Investor Profile)](file:///c:/Users/gun.th/OneDrive%20-%20Central%20Group/%E0%B8%99%E0%B9%89%E0%B8%AD%E0%B8%87%E0%B8%81%E0%B8%B1%E0%B8%93%E0%B8%91%E0%B9%8C/ai/%E0%B8%AB%E0%B8%B8%E0%B9%89%E0%B8%99%E0%B9%86%E0%B9%86%E0%B9%86/stock-research-knowledge-base/00_ai_context/INVESTOR_PROFILE.md) - สไตล์และคำศัพท์ของระบบ
+*   [🤖 กฎการทำงานของ AI (Response Rules for AI)](file:///c:/Users/gun.th/OneDrive%20-%20Central%20Group/%E0%B8%99%E0%B9%89%E0%B8%AD%E0%B8%87%E0%B8%81%E0%B8%B1%E0%B8%93%E0%B8%91%E0%B9%8C/ai/%E0%B8%AB%E0%B8%B8%E0%B9%89%E0%B8%99%E0%B9%86%E0%B9%86%E0%B9%86/stock-research-knowledge-base/00_ai_context/RESPONSE_RULES.md) - กฎเหล็กบล็อก AI อวยหุ้น obvious
+*   [📱 คู่มือการใช้ร่วมกับ AI ค่ายอื่นบน iPad (How to Use With AI)](file:///c:/Users/gun.th/OneDrive%20-%20Central%20Group/%E0%B8%99%E0%B9%89%E0%B8%AD%E0%B8%87%E0%B8%81%E0%B8%B1%E0%B8%93%E0%B8%91%E0%B9%8C/ai/%E0%B8%AB%E0%B8%B8%E0%B9%89%E0%B8%99%E0%B9%86%E0%B9%86%E0%B9%86/stock-research-knowledge-base/00_ai_context/HOW_TO_USE_WITH_AI.md) - วิธีเอา Prompt ไปคุยใน Gemini บน iPad
 
-- ข้อมูลหลักอยู่ Supabase
-- Safari/เครื่องผู้ใช้ไม่ควรเป็น source of truth
-- เว็บเวอร์ชันนี้มี one-time cache reset เพื่อล้างค่าเก่าที่เคยค้างใน Safari ของ Project stock
+### 🛡️ บทที่ 1: คัมภีร์และแนวทางการเลือกหุ้น
+*   [📈 คัมภีร์และกฎเทคนิคอลหลักของพี่กัณฑ์ (My Core Strategy)](file:///c:/Users/gun.th/OneDrive%20-%20Central%20Group/%E0%B8%99%E0%B9%89%E0%B8%AD%E0%B8%87%E0%B8%81%E0%B8%B1%E0%B8%93%E0%B8%91%E0%B9%8C/ai/%E0%B8%AB%E0%B8%B8%E0%B9%89%E0%B8%99%E0%B9%86%E0%B9%86%E0%B9%86/stock-research-knowledge-base/01_playbooks/01_my_core_strategy.md) - กฎคัดเกณฑ์กราฟเดือน EMA 10M, MACD, RSI และเกณฑ์งบ 20% ย้อนหลัง 5 ปี รวมถึงสรุป Stage ต่าง ๆ
+*   [💡 คัมภีร์จุดกระแสหาไอเดียกรณีคิดไม่ออก (Idea Generation Bible)](file:///c:/Users/gun.th/OneDrive%20-%20Central%20Group/%E0%B8%99%E0%B9%89%E0%B8%AD%E0%B8%87%E0%B8%81%E0%B8%B1%E0%B8%93%E0%B8%91%E0%B9%8C/ai/%E0%B8%AB%E0%B8%B8%E0%B9%89%E0%B8%99%E0%B9%86%E0%B9%86%E0%B9%86/stock-research-knowledge-base/01_playbooks/00_idea_generation_bible.md) - วิธีตามหาไอเดียจากงบ Capex และคอขวดต่าง ๆ
+
+### 🌐 บทที่ 2: แผนผังธีมการลงทุน (Themes Overview)
+*   [📂 แผนผังธีมทั้งหมด (Themes Master Directory)](file:///c:/Users/gun.th/OneDrive%20-%20Central%20Group/%E0%B8%99%E0%B9%89%E0%B8%AD%E0%B8%87%E0%B8%81%E0%B8%B1%E0%B8%93%E0%B8%91%E0%B9%8C/ai/%E0%B8%AB%E0%B8%B8%E0%B9%89%E0%B8%99%E0%B9%86%E0%B9%86%E0%B9%86/stock-research-knowledge-base/04_themes/README.md) - สารบัญสรุปและขอบข่ายของทุกธีมวิจัย
+    *   [🔌 โครงสร้างพื้นฐาน AI (AI Infrastructure)](file:///c:/Users/gun.th/OneDrive%20-%20Central%20Group/%E0%B8%99%E0%B9%89%E0%B8%AD%E0%B8%87%E0%B8%81%E0%B8%B1%E0%B8%93%E0%B8%91%E0%B9%8C/ai/%E0%B8%AB%E0%B8%B8%E0%B9%89%E0%B8%99%E0%B9%86%E0%B9%86%E0%B9%86/stock-research-knowledge-base/04_themes/ai_infrastructure.md) - แผนผังคอขวดและ Value Chain ของ AI Compute, Power, Cooling
+
+### 📖 บทที่ 3: คลังประวัติและโมเดลธุรกิจของหุ้น
+*   [📕 สรุปโมเดลธุรกิจ & SWOT ของหุ้นทั้ง 33 ตัว (All Stock Profiles)](file:///c:/Users/gun.th/OneDrive%20-%20Central%20Group/%E0%B8%99%E0%B9%89%E0%B8%AD%E0%B8%87%E0%B8%81%E0%B8%B1%E0%B8%93%E0%B8%91%E0%B9%8C/ai/%E0%B8%AB%E0%B8%B8%E0%B9%89%E0%B8%99%E0%B9%86%E0%B9%86%E0%B9%86/stock-research-knowledge-base/03_memos/ALL_STOCK_PROFILES.md) - **(พรีเมียม!)** ข้อมูลวิจัยวิเคราะห์จุดแข็ง จุดอ่อน ลูกค้าและดีลสัญญาจริงแยกตามการ์ดสีสวยงามของทุกตัว
+*   [📊 แดชบอร์ดโมเดลการหาเงินของหุ้นกลาง (Business Models Book)](file:///c:/Users/gun.th/OneDrive%20-%20Central%20Group/%E0%B8%99%E0%B9%89%E0%B8%AD%E0%B8%87%E0%B8%81%E0%B8%B1%E0%B8%93%E0%B8%91%E0%B9%8C/ai/%E0%B8%AB%E0%B8%B8%E0%B9%89%E0%B8%99%E0%B9%86%E0%B9%86%E0%B9%86/stock-research-knowledge-base/03_memos/BUSINESS_MODELS_BOOK.md) - ตารางแสดงผลสรุปว่าใครจ่ายเงิน ท่าการรับรายได้ และความคงทนระยะยาว
+*   [💻 เปิดใช้งานแดชบอร์ดวิจัยหุ้นทันที (dashboard.html)](file:///c:/Users/gun.th/OneDrive%20-%20Central%20Group/%E0%B8%99%E0%B9%89%E0%B8%AD%E0%B8%87%E0%B8%81%E0%B8%B1%E0%B8%93%E0%B8%91%E0%B9%8C/ai/%E0%B8%AB%E0%B8%B8%E0%B9%89%E0%B8%99%E0%B9%86%E0%B9%86%E0%B9%86/stock-research-knowledge-base/dashboard.html) - **ดับเบิ้ลคลิกเพื่อเปิดแดชบอร์ดได้ทันที** (ไม่ต้องใช้ Node.js/Python, รองรับ iPad และหน้าจอมือถือ)
+
+
+### 🔍 บทที่ 4: รายการเฝ้าดูความแอคทีฟ (Active Watchlists)
+*   [🆕 รายการหุ้นไอเดียใหม่ (New Ideas Watchlist)](file:///c:/Users/gun.th/OneDrive%20-%20Central%20Group/%E0%B8%99%E0%B9%89%E0%B8%AD%E0%B8%87%E0%B8%81%E0%B8%B1%E0%B8%93%E0%B8%91%E0%B9%8C/ai/%E0%B8%AB%E0%B8%B8%E0%B9%89%E0%B8%99%E0%B9%86%E0%B9%86%E0%B9%86/stock-research-knowledge-base/05_watchlists/new_ideas.md) - รายการหุ้นที่เพิ่งเพิ่มเข้าไปเพื่อรอการประเมิน
+*   [🔄 รายการเฝ้าดูหุ้นเด่นรอซื้อใหม่ (Old Winners/Re-entry)](file:///c:/Users/gun.th/OneDrive%20-%20Central%20Group/%E0%B8%99%E0%B9%89%E0%B8%AD%E0%B8%87%E0%B8%81%E0%B8%B1%E0%B8%93%E0%B8%91%E0%B9%8C/ai/%E0%B8%AB%E0%B8%B8%E0%B9%89%E0%B8%99%E0%B9%86%E0%B9%86%E0%B9%86/stock-research-knowledge-base/05_watchlists/old_winners.md) - หุ้นดังในอดีตที่รอ Valuation Reset และกราฟรายเดือนกลับมายืนยัน

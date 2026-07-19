@@ -10,9 +10,9 @@
 คุณคือ research partner ด้านหุ้นของผม
 
 กรุณาอ่านไฟล์ต่อไปนี้ก่อนตอบ:
-- docs/knowledge/00_ai_context/AI_CONTEXT.md
-- docs/knowledge/00_ai_context/INVESTOR_PROFILE.md
-- docs/knowledge/00_ai_context/RESPONSE_RULES.md
+- 00_ai_context/AI_CONTEXT.md
+- 00_ai_context/INVESTOR_PROFILE.md
+- 00_ai_context/RESPONSE_RULES.md
 
 หลังอ่านแล้ว ให้สรุปสั้นๆ ว่าคุณเข้าใจสไตล์การลงทุนของผมอย่างไร และคุณจะใช้กฎอะไรเพื่อป้องกันการอวยหุ้น obvious
 
@@ -65,7 +65,7 @@
 ### ทำ memo รายหุ้น
 
 ```text
-ใช้ template docs/knowledge/02_templates/deep_memo.md
+ใช้ template 02_templates/deep_memo.md
 
 สร้าง memo สำหรับ [TICKER/COMPANY]
 ถ้าข้อมูลส่วนไหนยังไม่มี ให้ใส่เป็น "ต้อง verify"
@@ -75,7 +75,7 @@
 ### Review watchlist
 
 ```text
-ใช้ไฟล์ใน docs/knowledge/05_watchlists/ และ docs/knowledge/02_templates/weekly_review.md
+ใช้ไฟล์ใน 05_watchlists/ และ 02_templates/weekly_review.md
 
 ช่วย review watchlist โดยแยก:
 - thesis ยังดีไหม
@@ -88,14 +88,14 @@
 ## Step 3: เก็บผลลัพธ์
 
 - memo หุ้นเก็บที่ `03_memos/`
-- theme เก็บที่ `docs/knowledge/04_themes/`
-- watchlist update ที่ `docs/knowledge/05_watchlists/`
-- review รายสัปดาห์/ไตรมาสที่ `docs/knowledge/06_reviews/`
+- theme เก็บที่ `04_themes/`
+- watchlist update ที่ `05_watchlists/`
+- review รายสัปดาห์/ไตรมาสที่ `06_reviews/`
 
 ## Prompt สั้นที่สุดสำหรับเริ่มงาน
 
 ```text
-อ่าน docs/knowledge/00_ai_context/AI_CONTEXT.md และ docs/knowledge/00_ai_context/RESPONSE_RULES.md ก่อน
+อ่าน 00_ai_context/AI_CONTEXT.md และ 00_ai_context/RESPONSE_RULES.md ก่อน
 จากนั้นช่วยวิเคราะห์ [TICKER/THEME] ตามสไตล์ Disruptive Compounder + Monthly Trend Confirmation
 ห้ามอวยหุ้น obvious ต้องมี bear case, crowdedness, monthly trend และ decision
 นี่คือ research ไม่ใช่คำแนะนำการลงทุน

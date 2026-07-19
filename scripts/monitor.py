@@ -77,8 +77,8 @@ def check_ticker_signals(ticker):
         return None
 
 def write_alerts_markdown(alerts):
-    """Write the detected alerts to docs/knowledge/05_watchlists/alerts.md."""
-    output_path = "docs/knowledge/05_watchlists/alerts.md"
+    """Write the detected alerts to 05_watchlists/alerts.md."""
+    output_path = "05_watchlists/alerts.md"
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
     
     with open(output_path, "w", encoding="utf-8") as f:

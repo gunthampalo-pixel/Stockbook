@@ -689,173 +689,6 @@
         .tab-btn span { display: none; }
         .header-btn span { display: none; }
       }
-
-    /* --- NEW E-BOOK & PREMIUM STYLING --- */
-    .book-reader {
-      font-family: 'Georgia', 'Merriweather', serif;
-      line-height: 1.8;
-      font-size: 16px;
-      color: #e2e8f0;
-      padding: 30px;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    .book-reader h1, .book-reader h2, .book-reader h3 {
-      font-family: 'Outfit', 'Inter', sans-serif;
-      color: var(--accent-cyan);
-      margin-top: 1.5em;
-      margin-bottom: 0.5em;
-    }
-    .book-reader p {
-      margin-bottom: 1.5em;
-    }
-    .book-reader ul, .book-reader ol {
-      margin-bottom: 1.5em;
-      padding-left: 20px;
-    }
-    .book-reader li {
-      margin-bottom: 0.5em;
-    }
-    .book-reader table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 20px 0;
-      font-family: 'Inter', sans-serif;
-      font-size: 14px;
-    }
-    .book-reader th, .book-reader td {
-      border: 1px solid var(--border-color);
-      padding: 10px;
-      text-align: left;
-    }
-    .book-reader th {
-      background: rgba(0, 240, 255, 0.1);
-      color: var(--accent-cyan);
-    }
-
-    /* Style filter chips */
-    .filter-chips {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 15px;
-    }
-    .chip {
-      padding: 6px 12px;
-      border-radius: 20px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid var(--border-color);
-      color: var(--text-secondary);
-      font-size: 12px;
-      cursor: pointer;
-      transition: all 0.2s;
-      font-weight: 500;
-    }
-    .chip.active {
-      background: var(--accent-cyan);
-      border-color: var(--accent-cyan);
-      color: #000;
-      box-shadow: 0 0 10px rgba(0,240,255,0.3);
-    }
-
-    /* Watchlist Target fields styling */
-    .target-badge {
-      font-family: monospace;
-      font-weight: bold;
-      padding: 2px 6px;
-      border-radius: 4px;
-    }
-    .target-entry { background: rgba(16, 185, 129, 0.15); color: var(--accent-green); }
-    .target-exit { background: rgba(239, 68, 68, 0.15); color: var(--accent-red); }
-    .target-sell { background: rgba(168, 85, 247, 0.15); color: #c084fc; }
-
-    /* Floating Bot Styles */
-    #floating-bot-trigger {
-      position: fixed;
-      bottom: 25px;
-      right: 25px;
-      width: 55px;
-      height: 55px;
-      background: var(--accent-cyan);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      box-shadow: 0 4px 20px rgba(0, 240, 255, 0.4);
-      z-index: 9999;
-      transition: transform 0.2s, background 0.2s;
-    }
-    #floating-bot-trigger:hover {
-      transform: scale(1.1);
-      background: #00e6ff;
-    }
-    #floating-bot-chat {
-      position: fixed;
-      bottom: 95px;
-      right: 25px;
-      width: 380px;
-      height: 520px;
-      display: none;
-      flex-direction: column;
-      z-index: 9999;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid var(--border-color);
-    }
-    .floating-chat-header {
-      background: rgba(15, 23, 42, 0.95);
-      padding: 12px 16px;
-      border-bottom: 1px solid var(--border-color);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .floating-chat-body {
-      flex: 1;
-      overflow-y: auto;
-      padding: 16px;
-      background: rgba(15, 23, 42, 0.85);
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-    .floating-chat-footer {
-      padding: 12px;
-      background: rgba(15, 23, 42, 0.95);
-      border-top: 1px solid var(--border-color);
-      display: flex;
-      gap: 8px;
-    }
-    .floating-chat-footer input {
-      flex: 1;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid var(--border-color);
-      border-radius: 6px;
-      padding: 8px 12px;
-      color: #fff;
-      font-size: 13px;
-    }
-    .floating-chat-footer input:focus {
-      outline: none;
-      border-color: var(--accent-cyan);
-    }
-    .floating-chat-footer button {
-      background: var(--accent-cyan);
-      color: #000;
-      border: none;
-      border-radius: 6px;
-      padding: 8px 14px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    .floating-chat-footer button:hover {
-      background: #00e6ff;
-    }
-    </style>
-
     </style>
   </head>
 
@@ -889,257 +722,190 @@
         <!-- Dynamically rendered via JS -->
       </nav>
 
-
       <!-- ===== PAGES ===== -->
       <div class="page-container">
 
-        <!-- PAGE 1: STOCK STYLES GUIDE -->
-        <div class="page active research-page" id="page-styles-guide" style="padding: 12px; display:flex; gap:12px; height:100%;">
+        <!-- DYNAMIC KNOWLEDGE BOOK PAGE -->
+        <div class="page active research-page" id="page-book" style="padding: 12px; display:flex; gap:12px; height:100%;">
+          <!-- Book Sidebar -->
           <div class="stock-sidebar glass-panel" style="padding:12px; display:flex; flex-direction:column; gap:8px;">
             <div style="font-size: 13px; font-weight: 700; color: var(--accent-cyan); display: flex; align-items: center; gap: 6px; padding: 4px;">
-              <i data-lucide="book-open" style="width:18px;height:18px;"></i>
-              <span>สารบัญสไตล์หุ้น</span>
+              <i id="book-sidebar-icon" data-lucide="book-open" style="width:18px;height:18px;"></i>
+              <span id="book-sidebar-title">Investing Playbook</span>
             </div>
-            <div style="font-size: 11px; color: var(--text-muted); padding: 0 4px 6px; border-bottom: 1px solid var(--border-color);">
-              เกณฑ์ โโลจิก และคัมภีร์วิเคราะห์
+            <div id="book-sidebar-desc" style="font-size: 11px; color: var(--text-muted); padding: 0 4px 6px; border-bottom: 1px solid var(--border-color);">
+              แนวทางและกฎการลงทุนส่วนตัว
             </div>
-            <div class="stock-list" id="styles-guide-list" style="flex:1; overflow-y:auto;">
-              <!-- Dynamically populated in JS -->
+            <div class="stock-list" id="book-list" style="flex:1;">
+              <!-- Topics will be dynamically rendered here as list items -->
             </div>
           </div>
-          <div class="stock-detail glass-panel" style="padding:0; flex:1; display:flex; flex-direction:column; overflow:hidden;">
-            <div id="styles-guide-content" class="book-reader" style="height:100%; overflow-y:auto;">
-              <div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--text-muted);flex-direction:column;gap:10px;">
-                <i data-lucide="book-open" style="width:40px;height:40px;opacity:0.3;color:var(--accent-cyan);"></i>
-                <p>เลือกสไตล์หุ้นจากด้านซ้ายเพื่อเปิดอ่านคู่มือวิจัย</p>
-              </div>
+          
+          <!-- Book Detail Panel -->
+          <div class="stock-detail glass-panel" id="book-detail" style="padding:0; flex:1; display:flex; flex-direction:column; overflow:hidden;">
+            <div id="book-detail-content" style="height:100%; overflow-y:auto; display:flex; flex-direction:column;">
+              <!-- Selected topic content will be rendered here -->
             </div>
           </div>
         </div>
 
-        <!-- PAGE 2: SEARCHABLE STOCK READER -->
-        <div class="page research-page" id="page-stock-reader" style="padding: 12px; display:none; gap:12px; height:100%;">
+        <!-- PAGE 2: STOCK RESEARCH -->
+        <div class="page research-page" id="page-research">
+          <!-- Sidebar -->
           <div class="stock-sidebar glass-panel" style="padding:12px; display:flex; flex-direction:column; gap:8px;">
-            <div style="font-size: 13px; font-weight: 700; color: var(--accent-cyan); display: flex; align-items: center; gap: 6px; padding: 4px;">
-              <i data-lucide="search" style="width:18px;height:18px;"></i>
-              <span>ค้นข้อมูลหุ้น</span>
+            <!-- Market Filter Droplist -->
+            <div style="display: flex; flex-direction: column; gap: 4px; margin-bottom: 2px;">
+              <span style="font-size: 11px; color: var(--text-muted); font-weight: 600; padding-left: 2px;">ตลาด / ประเทศ</span>
+              <select id="research-market-select" class="edit-select" style="width: 100%; font-size:12px; padding: 6px 10px;" onchange="setResearchMarket(this.value)">
+                <option value="ALL">🌎 ทุกตลาด (ทั้งหมด)</option>
+                <option value="US">🇺🇸 สหรัฐฯ (US)</option>
+                <option value="TH">🇹🇭 ไทย (TH)</option>
+                <option value="CN">🇨🇳 จีน (CN)</option>
+                <option value="JP">🇯🇵 ญี่ปุ่น (JP)</option>
+                <option value="EU">🇪🇺 ยุโรป (EU)</option>
+              </select>
             </div>
             <div class="stock-search">
-              <input type="text" id="reader-search-input" placeholder="พิมพ์ชื่อหุ้น หรือ Ticker..." style="width:100%;" />
+              <input type="text" id="search-input" placeholder="ค้นหา ticker / ชื่อ..." style="width:100%;" />
             </div>
-            <div class="stock-list" id="reader-stock-list" style="flex:1; overflow-y:auto;">
-              <!-- Stocks populated in JS -->
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <select id="group-filter" style="width:100%; padding: 7px 10px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-secondary); color: var(--text-secondary); font-family: inherit; font-size: 12px; outline: none; cursor: pointer;">
+                <option value="ALL">-- ทุกกลุ่ม --</option>
+              </select>
+              <select id="style-filter" style="width:100%; padding: 7px 10px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-secondary); color: var(--text-secondary); font-family: inherit; font-size: 12px; outline: none; cursor: pointer;">
+                <option value="ALL">-- ทุกสไตล์ --</option>
+                <option value="เติบโต (Growth)">เติบโต (Growth)</option>
+                <option value="Defensive (ปลอดภัย)">Defensive (ปลอดภัย)</option>
+                <option value="ม้ามืด (Dark Horse)">ม้ามืด (Dark Horse)</option>
+                <option value="ถือยาว (Core Hold)">ถือยาว (Core Hold)</option>
+                <option value="หุ้นซิ่ง (Momentum / Trading)">หุ้นซิ่ง (Momentum / Trading)</option>
+              </select>
+            </div>
+            <div class="stock-list" id="stock-list" style="flex:1;"></div>
+            <div style="display:flex; gap:6px;">
+              <button class="add-stock-btn" id="btn-add-stock" style="flex:1;">
+                <i data-lucide="plus" style="width:12px;height:12px;"></i> เพิ่มเอง
+              </button>
+              <button class="add-stock-btn" id="btn-add-stock-ai" style="flex:1; border-color: rgba(168, 85, 247, 0.3); color: var(--accent-purple);" onclick="addStockWithAI()">
+                <i data-lucide="sparkles" style="width:12px;height:12px;color:var(--accent-purple);"></i> ดึงด้วย AI
+              </button>
             </div>
           </div>
-          <div class="stock-detail glass-panel" style="padding:0; flex:1; display:flex; flex-direction:column; overflow:hidden;">
-            <div id="reader-content" style="height:100%; overflow-y:auto; padding:20px;">
+          <!-- Detail -->
+          <div class="stock-detail glass-panel" id="stock-detail" style="padding:0;">
+            <div id="stock-detail-content" style="height:100%;overflow-y:auto;">
               <div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--text-muted);flex-direction:column;gap:10px;">
-                <i data-lucide="search" style="width:40px;height:40px;opacity:0.3;color:var(--accent-cyan);"></i>
-                <p>ค้นหาหุ้นหรือคลิกเลือกจากรายการด้านซ้ายเพื่อเปิดอ่านรายละเอียดเชิงลึก</p>
+                <i data-lucide="mouse-pointer-click" style="width:40px;height:40px;opacity:0.3;"></i>
+                <p>เลือกหุ้นจากรายการด้านซ้ายเพื่อดูข้อมูล</p>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- PAGE 3: CATEGORIZATION BOARD -->
-        <div class="page" id="page-categorization-board" style="padding: 12px; display:none; flex-direction:column; gap:12px; height:100%; overflow:hidden;">
-          <div style="display:flex; justify-content:space-between; align-items:center; padding:4px;">
-            <div style="font-size: 15px; font-weight: 700; color: var(--accent-cyan); display: flex; align-items: center; gap: 6px;">
-              <i data-lucide="layout-grid" style="width:20px;height:20px;"></i>
-              <span>จัดกลุ่มแยกตามสไตล์หุ้น</span>
+        <!-- PAGE 3: WATCHLIST -->
+        <div class="page research-page" id="page-watchlist" style="padding: 12px; display:flex; gap:12px; height:100%;">
+          <!-- Watchlist Sidebar -->
+          <div class="stock-sidebar glass-panel" style="padding:12px; display:flex; flex-direction:column; gap:8px;">
+            <!-- Market Filter Droplist -->
+            <div style="display: flex; flex-direction: column; gap: 4px; margin-bottom: 2px;">
+              <span style="font-size: 11px; color: var(--text-muted); font-weight: 600; padding-left: 2px;">ตลาด / ประเทศ</span>
+              <select id="watchlist-market-select" class="edit-select" style="width: 100%; font-size:12px; padding: 6px 10px;" onchange="setWatchlistMarket(this.value)">
+                <option value="ALL">🌎 ทุกตลาด (ทั้งหมด)</option>
+                <option value="US">🇺🇸 สหรัฐฯ (US)</option>
+                <option value="TH">🇹🇭 ไทย (TH)</option>
+                <option value="CN">🇨🇳 จีน (CN)</option>
+                <option value="JP">🇯🇵 ญี่ปุ่น (JP)</option>
+                <option value="EU">🇪🇺 ยุโรป (EU)</option>
+              </select>
             </div>
-          </div>
-
-          <!-- Category Chips -->
-          <div class="filter-chips" id="board-style-chips">
-            <!-- Populated dynamically -->
-          </div>
-
-          <!-- Cards Grid -->
-          <div class="stock-grid" id="board-cards-grid" style="flex:1; overflow-y:auto; padding-bottom:20px;">
-            <!-- Classified stock cards will render here -->
-          </div>
-        </div>
-
-        <!-- PAGE 4: WATCHLIST TARGETS & TRADINGVIEW -->
-        <div class="page research-page" id="page-watchlist-targets" style="padding: 12px; display:none; gap:12px; height:100%;">
-          <!-- Watchlist Table Section -->
-          <div class="glass-panel" style="flex: 1.2; padding:15px; display:flex; flex-direction:column; gap:10px; overflow:hidden;">
-            <div style="font-size: 15px; font-weight: 700; color: var(--accent-cyan); display: flex; align-items: center; gap: 6px; border-bottom:1px solid var(--border-color); padding-bottom:8px;">
-              <i data-lucide="star" style="width:18px;height:18px;color:var(--accent-orange);"></i>
-              <span>รายการหุ้นเฝ้าระวัง (Watchlist Targets)</span>
+            <div class="stock-search">
+              <input type="text" id="watchlist-search-input" placeholder="ค้นหา watchlist..." style="width:100%;" />
             </div>
-            <div style="overflow-x:auto; flex:1;">
-              <table style="width:100%; border-collapse:collapse; font-size:13px;" id="watchlist-targets-table">
-                <thead>
-                  <tr style="border-bottom: 1px solid var(--border-color); text-align:left;">
-                    <th style="padding:10px 8px; color:var(--text-muted);">หุ้น</th>
-                    <th style="padding:10px 8px; color:var(--text-muted);">ราคาล่าสุด</th>
-                    <th style="padding:10px 8px; color:var(--accent-green);">จุดเข้าซื้อ</th>
-                    <th style="padding:10px 8px; color:var(--accent-red);">จุดคัทออก</th>
-                    <th style="padding:10px 8px; color: #c084fc;">จุดขายทำกำไร</th>
-                    <th style="padding:10px 8px; color:var(--text-muted); text-align:center;">การกระทำ</th>
-                  </tr>
-                </thead>
-                <tbody id="watchlist-targets-tbody">
-                  <!-- Watchlist stocks will render here -->
-                </tbody>
-              </table>
+            <div style="font-size: 11px; color:var(--text-muted); font-weight: 500; padding: 2px 4px; display:flex; justify-content:space-between; align-items:center;">
+              <span>รายการติดดาว ⭐</span>
+              <span id="watchlist-count" style="color:var(--accent-cyan); font-weight:700;">0 หุ้น</span>
             </div>
+            <div class="stock-list" id="watchlist-stock-list" style="flex:1;"></div>
           </div>
-
-          <!-- TradingView Live Chart Widget Section -->
-          <div class="glass-panel" style="flex: 1; display:flex; flex-direction:column; overflow:hidden; padding: 10px;">
-            <div style="font-size: 12px; font-weight: 600; color: var(--text-secondary); margin-bottom: 8px; display:flex; align-items:center; gap:6px;">
-              <i data-lucide="line-chart" style="width:14px;height:14px;color:var(--accent-cyan);"></i>
-              <span id="tv-chart-title">TradingView Chart (เลือกหุ้นเพื่อเปิดดูกราฟ)</span>
-            </div>
-            <div id="tv-chart-container" style="flex:1; background: rgba(0,0,0,0.2); border-radius: 6px; overflow:hidden; display:flex; align-items:center; justify-content:center; color:var(--text-muted);">
-              <div style="text-align:center; padding:20px;">
-                <i data-lucide="line-chart" style="width:36px;height:36px;opacity:0.2;margin-bottom:8px;"></i>
-                <p style="font-size:11px;">คลิกเลือกหุ้นจากตาราง Watchlist ด้านซ้าย เพื่อโหลดกราฟสดที่นี่</p>
+          
+          <!-- Watchlist Detail/Dashboard -->
+          <div class="stock-detail glass-panel" id="watchlist-detail" style="padding:0; flex:1; display:flex; flex-direction:column; overflow:hidden;">
+            <div id="watchlist-detail-content" style="height:100%; overflow-y:auto; display:flex; flex-direction:column;">
+              <div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--text-muted);flex-direction:column;gap:10px;">
+                <i data-lucide="star" style="width:40px;height:40px;opacity:0.3;color:var(--accent-orange);"></i>
+                <p>เลือกหุ้นจากรายการติดดาวด้านซ้ายเพื่อเปิดกราฟและแผนการเทรด</p>
               </div>
             </div>
           </div>
         </div>
 
-      <!-- PAGE 6: FAIR VALUE LAB -->
-      <div class="page research-page" id="page-fair-value" style="padding: 12px; display:none; gap:12px; height:100%;">
-        <div class="stock-sidebar glass-panel" style="padding:12px; display:flex; flex-direction:column; gap:10px; overflow-y:auto;">
-          <div style="font-size: 13px; font-weight: 700; color: var(--accent-cyan); display: flex; align-items: center; gap: 6px; padding: 4px;">
-            <i data-lucide="calculator" style="width:18px;height:18px;"></i>
-            <span>Fair Value Lab</span>
+      <!-- PAGE 4: PORTFOLIO -->
+      <div class="page research-page" id="page-portfolio" style="padding: 12px; display:none; gap:12px; height:100%;">
+        <!-- Portfolio Sidebar -->
+        <div class="stock-sidebar glass-panel" style="padding:12px; display:flex; flex-direction:column; gap:8px;">
+          <!-- Market Filter Droplist -->
+          <div style="display: flex; flex-direction: column; gap: 4px; margin-bottom: 2px;">
+            <span style="font-size: 11px; color: var(--text-muted); font-weight: 600; padding-left: 2px;">ตลาด / ประเทศ</span>
+            <select id="portfolio-market-select" class="edit-select" style="width: 100%; font-size:12px; padding: 6px 10px;" onchange="setPortfolioMarket(this.value)">
+              <option value="ALL">🌎 ทุกตลาด (ทั้งหมด)</option>
+              <option value="US">🇺🇸 สหรัฐฯ (US)</option>
+              <option value="TH">🇹🇭 ไทย (TH)</option>
+              <option value="CN">🇨🇳 จีน (CN)</option>
+              <option value="JP">🇯🇵 ญี่ปุ่น (JP)</option>
+              <option value="EU">🇪🇺 ยุโรป (EU)</option>
+            </select>
           </div>
-          <div style="font-size: 11px; color: var(--text-muted); padding: 0 4px 6px; border-bottom: 1px solid var(--border-color);">
-            Simple DCF สำหรับคิดกรอบมูลค่า แล้วบันทึกเป็นโน้ตเข้าคลังความรู้
+          <div class="stock-search">
+            <input type="text" id="portfolio-search-input" placeholder="ค้นหาพอร์ต..." style="width:100%;" />
           </div>
-          <label style="font-size:11px;color:var(--text-muted);font-weight:600;">Ticker</label>
-          <input id="fv-ticker" class="edit-field" value="NVDA" style="width:100%;padding:8px;" />
-          <label style="font-size:11px;color:var(--text-muted);font-weight:600;">Current Price</label>
-          <input id="fv-current-price" class="edit-field" type="number" value="120" step="0.01" style="width:100%;padding:8px;" />
-          <label style="font-size:11px;color:var(--text-muted);font-weight:600;">Revenue ปีล่าสุด</label>
-          <input id="fv-revenue" class="edit-field" type="number" value="100000" step="1" style="width:100%;padding:8px;" />
-          <label style="font-size:11px;color:var(--text-muted);font-weight:600;">Revenue Growth % ต่อปี</label>
-          <input id="fv-growth" class="edit-field" type="number" value="15" step="0.1" style="width:100%;padding:8px;" />
-          <label style="font-size:11px;color:var(--text-muted);font-weight:600;">Operating Margin %</label>
-          <input id="fv-margin" class="edit-field" type="number" value="25" step="0.1" style="width:100%;padding:8px;" />
-          <label style="font-size:11px;color:var(--text-muted);font-weight:600;">Tax Rate %</label>
-          <input id="fv-tax" class="edit-field" type="number" value="18" step="0.1" style="width:100%;padding:8px;" />
-          <label style="font-size:11px;color:var(--text-muted);font-weight:600;">Discount Rate %</label>
-          <input id="fv-discount" class="edit-field" type="number" value="10" step="0.1" style="width:100%;padding:8px;" />
-          <label style="font-size:11px;color:var(--text-muted);font-weight:600;">Terminal Growth %</label>
-          <input id="fv-terminal" class="edit-field" type="number" value="3" step="0.1" style="width:100%;padding:8px;" />
-          <label style="font-size:11px;color:var(--text-muted);font-weight:600;">Shares Outstanding</label>
-          <input id="fv-shares" class="edit-field" type="number" value="25000" step="1" style="width:100%;padding:8px;" />
-          <label style="font-size:11px;color:var(--text-muted);font-weight:600;">Net Cash / Debt</label>
-          <input id="fv-net-cash" class="edit-field" type="number" value="0" step="1" style="width:100%;padding:8px;" />
-          <label style="font-size:11px;color:var(--text-muted);font-weight:600;">Margin of Safety %</label>
-          <input id="fv-mos" class="edit-field" type="number" value="25" step="1" style="width:100%;padding:8px;" />
-          <button class="add-stock-btn" id="btn-run-fair-value" style="width:100%;">
-            <i data-lucide="calculator" style="width:12px;height:12px;"></i> Calculate
-          </button>
-          <button class="btn btn-primary" id="btn-save-fair-value" style="width:100%;padding:9px 10px;">
-            <i data-lucide="save" style="width:12px;height:12px;"></i> บันทึกเข้าคลัง
-          </button>
+          <div style="font-size: 11px; color:var(--text-muted); font-weight: 500; padding: 2px 4px; display:flex; justify-content:space-between; align-items:center;">
+            <span>รายการในพอร์ต 💼</span>
+            <span id="portfolio-count" style="color:var(--accent-cyan); font-weight:700;">0 หุ้น</span>
+          </div>
+          <div class="stock-list" id="portfolio-stock-list" style="flex:1;"></div>
         </div>
-
-        <div class="stock-detail glass-panel" id="fair-value-detail" style="padding:0; flex:1; display:flex; flex-direction:column; overflow:hidden;">
-          <div id="fair-value-detail-content" style="height:100%; overflow-y:auto; display:flex; flex-direction:column;"></div>
-        </div>
-      </div>
-
-      <!-- PAGE 7: LINK TO KNOWLEDGE -->
-      <div class="page research-page" id="page-knowledge-extractor" style="padding: 12px; display:none; gap:12px; height:100%;">
-        <div class="stock-sidebar glass-panel" style="padding:12px; display:flex; flex-direction:column; gap:10px; overflow-y:auto;">
-          <div style="font-size: 13px; font-weight: 700; color: var(--accent-cyan); display: flex; align-items: center; gap: 6px; padding: 4px;">
-            <i data-lucide="file-text" style="width:18px;height:18px;"></i>
-            <span>Link to Knowledge</span>
-          </div>
-          <div style="font-size: 11px; color: var(--text-muted); padding: 0 4px 6px; border-bottom: 1px solid var(--border-color);">
-            วางลิงก์/ข้อความจากคลิปหรือโพสต์ แล้วให้ AI กลั่นเป็นโน้ตเก็บในคลัง
-          </div>
-          <label style="font-size:11px;color:var(--text-muted);font-weight:600;">Source Type</label>
-          <select id="kx-source-type" class="edit-select" style="width:100%;font-size:12px;padding:7px 10px;">
-            <option value="YouTube">YouTube / Clip</option>
-            <option value="Facebook">Facebook Post</option>
-            <option value="Article">Article</option>
-            <option value="Other">Other</option>
-          </select>
-          <label style="font-size:11px;color:var(--text-muted);font-weight:600;">Source URL</label>
-          <input id="kx-url" class="edit-field" placeholder="https://..." style="width:100%;padding:8px;" />
-          <label style="font-size:11px;color:var(--text-muted);font-weight:600;">Title</label>
-          <input id="kx-title" class="edit-field" placeholder="หัวข้อที่จะเก็บในคลัง" style="width:100%;padding:8px;" />
-          <label style="font-size:11px;color:var(--text-muted);font-weight:600;">Related Tickers / Theme</label>
-          <input id="kx-tags" class="edit-field" placeholder="NVDA, AI Infra, Options" style="width:100%;padding:8px;" />
-          <button class="add-stock-btn" id="btn-extract-knowledge" style="width:100%;">
-            <i data-lucide="sparkles" style="width:12px;height:12px;"></i> AI สกัดความรู้
-          </button>
-          <button class="btn btn-primary" id="btn-save-extracted-knowledge" style="width:100%;padding:9px 10px;">
-            <i data-lucide="save" style="width:12px;height:12px;"></i> บันทึกเข้าคลัง
-          </button>
-        </div>
-
-        <div class="stock-detail glass-panel" style="padding:0; flex:1; display:flex; flex-direction:column; overflow:hidden;">
-          <div class="detail-header" style="justify-content:space-between; flex-shrink:0;">
-            <div class="detail-title">
-              <h2>สกัดโพสต์/คลิปเป็นความรู้</h2>
-              <p style="font-size:11px;color:var(--text-muted);margin-top:4px;">เก็บ source link ไว้ด้วย เพื่อย้อนกลับไปตรวจสอบทีหลัง</p>
-            </div>
-          </div>
-          <div style="padding:0 20px 20px; display:grid; grid-template-columns: minmax(260px, 0.95fr) minmax(320px, 1.05fr); gap:12px; flex:1; min-height:0;">
-            <div style="display:flex;flex-direction:column;gap:8px;min-height:0;">
-              <label style="font-size:11px;color:var(--text-muted);font-weight:600;">Paste Text / Transcript</label>
-              <textarea id="kx-source-text" class="edit-field" style="width:100%;flex:1;min-height:420px;padding:12px;border-radius:8px;font-size:12px;line-height:1.55;resize:none;color:#111827;background:#fff;" placeholder="วางข้อความจากโพสต์, transcript คลิป, หรือโน้ตดิบที่เจอมา..."></textarea>
-            </div>
-            <div style="display:flex;flex-direction:column;gap:8px;min-height:0;">
-              <label style="font-size:11px;color:var(--text-muted);font-weight:600;">Knowledge Note Preview</label>
-              <textarea id="kx-output" class="edit-field" style="width:100%;flex:1;min-height:420px;padding:12px;border-radius:8px;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;font-size:12px;line-height:1.6;resize:none;color:#111827;background:#fff;" placeholder="ผลสรุปจาก AI จะมาอยู่ตรงนี้ และสามารถแก้ก่อนบันทึกได้"></textarea>
+        
+        <!-- Portfolio Detail/Dashboard -->
+        <div class="stock-detail glass-panel" id="portfolio-detail" style="padding:0; flex:1; display:flex; flex-direction:column; overflow:hidden;">
+          <div id="portfolio-detail-content" style="height:100%; overflow-y:auto; display:flex; flex-direction:column;">
+            <div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--text-muted);flex-direction:column;gap:10px;">
+              <i data-lucide="briefcase" style="width:40px;height:40px;opacity:0.3;color:var(--accent-orange);"></i>
+              <p>เลือกหุ้นจากรายการพอร์ตโฟลิโอด้านซ้ายเพื่อเปิดรายละเอียดและการวิเคราะห์เจาะลึก</p>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- PAGE 8: OPTIONS BACKTEST LAB -->
-      <div class="page research-page" id="page-options" style="padding: 12px; display:none; gap:12px; height:100%;">
-        <div class="stock-sidebar glass-panel" style="padding:12px; display:flex; flex-direction:column; gap:10px;">
+      <!-- PAGE 5: CENTRAL KNOWLEDGE BASE -->
+      <div class="page research-page" id="page-knowledge" style="padding: 12px; display:none; gap:12px; height:100%;">
+        <div class="stock-sidebar glass-panel" style="padding:12px; display:flex; flex-direction:column; gap:8px;">
           <div style="font-size: 13px; font-weight: 700; color: var(--accent-cyan); display: flex; align-items: center; gap: 6px; padding: 4px;">
-            <i data-lucide="activity" style="width:18px;height:18px;"></i>
-            <span>Options Lab</span>
+            <i data-lucide="library" style="width:18px;height:18px;"></i>
+            <span>คลังความรู้กลาง</span>
           </div>
           <div style="font-size: 11px; color: var(--text-muted); padding: 0 4px 6px; border-bottom: 1px solid var(--border-color);">
-            Prototype สำหรับคำนวณ payoff ก่อนต่อข้อมูล option chain จริง
+            อ่านและแก้ไฟล์ความรู้จาก Supabase โดยตรง
           </div>
-          <label style="font-size:11px;color:var(--text-muted);font-weight:600;">Strategy</label>
-          <select id="opt-strategy" class="edit-select" style="width:100%;font-size:12px;padding:7px 10px;">
-            <option value="long_call">Long Call</option>
-            <option value="long_put">Long Put</option>
-            <option value="covered_call">Covered Call</option>
-            <option value="cash_secured_put">Cash-Secured Put</option>
-          </select>
-          <label style="font-size:11px;color:var(--text-muted);font-weight:600;">Ticker</label>
-          <input id="opt-ticker" class="edit-field" value="NVDA" style="width:100%;padding:8px;" />
-          <label style="font-size:11px;color:var(--text-muted);font-weight:600;">Entry Stock Price</label>
-          <input id="opt-entry-price" class="edit-field" type="number" value="120" step="0.01" style="width:100%;padding:8px;" />
-          <label style="font-size:11px;color:var(--text-muted);font-weight:600;">Strike</label>
-          <input id="opt-strike" class="edit-field" type="number" value="125" step="0.01" style="width:100%;padding:8px;" />
-          <label style="font-size:11px;color:var(--text-muted);font-weight:600;">Premium</label>
-          <input id="opt-premium" class="edit-field" type="number" value="5" step="0.01" style="width:100%;padding:8px;" />
-          <label style="font-size:11px;color:var(--text-muted);font-weight:600;">Contracts</label>
-          <input id="opt-contracts" class="edit-field" type="number" value="1" step="1" min="1" style="width:100%;padding:8px;" />
-          <label style="font-size:11px;color:var(--text-muted);font-weight:600;">Expiry Stock Price</label>
-          <input id="opt-exit-price" class="edit-field" type="number" value="140" step="0.01" style="width:100%;padding:8px;" />
-          <button class="add-stock-btn" id="btn-run-options" style="width:100%;">
-            <i data-lucide="calculator" style="width:12px;height:12px;"></i> Calculate
+          <div class="stock-search">
+            <input type="text" id="knowledge-search-input" placeholder="ค้นหาไฟล์ / หัวข้อ..." style="width:100%;" />
+          </div>
+          <button class="add-stock-btn" id="btn-refresh-knowledge" style="width:100%;">
+            <i data-lucide="refresh-cw" style="width:12px;height:12px;"></i> โหลดจาก Supabase
           </button>
+          <div class="stock-list" id="knowledge-list" style="flex:1;"></div>
         </div>
 
-        <div class="stock-detail glass-panel" id="options-detail" style="padding:0; flex:1; display:flex; flex-direction:column; overflow:hidden;">
-          <div id="options-detail-content" style="height:100%; overflow-y:auto; display:flex; flex-direction:column;"></div>
+        <div class="stock-detail glass-panel" id="knowledge-detail" style="padding:0; flex:1; display:flex; flex-direction:column; overflow:hidden;">
+          <div id="knowledge-detail-content" style="height:100%; overflow-y:auto; display:flex; flex-direction:column;">
+            <div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--text-muted);flex-direction:column;gap:10px;">
+              <i data-lucide="library" style="width:40px;height:40px;opacity:0.3;color:var(--accent-cyan);"></i>
+              <p>เลือกไฟล์ความรู้จากด้านซ้ายเพื่ออ่านหรือแก้ไข</p>
+            </div>
+          </div>
         </div>
       </div>
 
       </div><!-- end page-container -->
-
 
     </div><!-- end app-shell -->
 
@@ -1233,60 +999,12 @@
     <script>
       // ====== SAFE STORAGE ======
       const S = {
-        get(k) { try { return sessionStorage.getItem(k); } catch(e) { return this._f[k]||null; } },
-        set(k,v) { try { sessionStorage.setItem(k,v); } catch(e) { this._f[k]=String(v); } },
-        del(k) { try { sessionStorage.removeItem(k); } catch(e) { delete this._f[k]; } },
+        get(k) { try { return localStorage.getItem(k); } catch(e) { return this._f[k]||null; } },
+        set(k,v) { try { localStorage.setItem(k,v); } catch(e) { this._f[k]=String(v); } },
+        del(k) { try { localStorage.removeItem(k); } catch(e) { delete this._f[k]; } },
         remove(k) { this.del(k); },
-        keys() {
-          try { return Object.keys(sessionStorage); } catch(e) { return Object.keys(this._f); }
-        },
         _f: {}
       };
-
-      function clearLegacyProjectDeviceCache() {
-        const exactKeys = new Set([
-          'cached_stocks',
-          'app_tabs',
-          'chat_history',
-          'starred_tickers',
-          'gemini_api_key',
-          'gemini_model_name',
-          'supabase_url',
-          'supabase_key',
-          'project_stock_cache_reset_version',
-          'options_lab_config',
-          'fair_value_lab_config',
-          'investing_playbook',
-          'selection_playbook',
-          'playbook_keys_order',
-          'selection_keys_order'
-        ]);
-        const prefixes = [
-          'portfolio_note_',
-          'portfolio_updated_',
-          'custom_book_',
-          'selected_custom_book_',
-          'playbook_',
-          'selection_'
-        ];
-
-        try {
-          Object.keys(localStorage).forEach(key => {
-            if (exactKeys.has(key) || prefixes.some(prefix => key.startsWith(prefix))) {
-              localStorage.removeItem(key);
-            }
-          });
-        } catch (e) {
-          console.warn('Could not clear Project stock legacy localStorage:', e);
-        }
-
-        try {
-          if (window.indexedDB) indexedDB.deleteDatabase('StockDashboardDB');
-        } catch (e) {
-          console.warn('Could not clear Project stock image cache:', e);
-        }
-      }
-      clearLegacyProjectDeviceCache();
 
       // ====== STOCKS DATA (will be injected) ======
       let STOCKS = [
@@ -2038,9 +1756,9 @@
           const { data: dbStocks, error: stocksError } = await supabaseClient
             .from('stocks')
             .select('*');
-
+          
           if (stocksError) throw stocksError;
-
+          
           if (dbStocks && dbStocks.length > 0) {
             STOCKS = dbStocks.map(s => ({
               ticker: s.ticker,
@@ -2068,7 +1786,7 @@
           const { data: dbNotes, error: notesError } = await supabaseClient
             .from('portfolio_notes')
             .select('*');
-
+          
           if (notesError) throw notesError;
 
           if (dbNotes) {
@@ -2099,7 +1817,7 @@
           if (!silent) alert('กรุณาตั้งค่า Supabase และตรวจสอบการเชื่อมต่อก่อน');
           return false;
         }
-
+        
         if (!silent) toast('กำลังเตรียมข้อมูล...');
         try {
           const records = STOCKS.map(s => ({
@@ -2126,15 +1844,15 @@
           const { error: stocksError } = await supabaseClient
             .from('stocks')
             .upsert(records, { onConflict: 'ticker' });
-
+          
           if (stocksError) throw stocksError;
 
-          const noteKeys = S.keys().filter(k => k.startsWith('portfolio_note_'));
+          const noteKeys = Object.keys(localStorage).filter(k => k.startsWith('portfolio_note_'));
           const noteRecords = [];
-
+          
           noteKeys.forEach(k => {
             const ticker = k.replace('portfolio_note_', '');
-            const notes = S.get(k);
+            const notes = localStorage.getItem(k);
             if (notes) {
               noteRecords.push({
                 ticker: ticker,
@@ -2148,7 +1866,7 @@
             const { error: notesError } = await supabaseClient
               .from('portfolio_notes')
               .upsert(noteRecords, { onConflict: 'ticker' });
-
+            
             if (notesError) throw notesError;
           }
 
@@ -2396,7 +2114,7 @@ ${question}`;
         };
 
         overlay.onclick = closeLightbox;
-
+        
         const escHandler = (e) => {
           if (e.key === 'Escape') {
             closeLightbox();
@@ -2427,16 +2145,27 @@ ${question}`;
       }
 
       // ====== DYNAMIC TABS STATE ======
-      let TABS = [
-        { id: 'styles-guide', title: 'สไตล์หุ้น', icon: 'book-open', type: 'system' },
-        { id: 'stock-reader', title: 'เสิร์ชอ่านข้อมูลหุ้น', icon: 'search', type: 'system' },
-        { id: 'categorization-board', title: 'จัดกลุ่มหุ้น', icon: 'layout-grid', type: 'system' },
-        { id: 'watchlist-targets', title: 'Watchlist Targets', icon: 'star', type: 'system' },
-        { id: 'fair-value', title: 'Fair Value', icon: 'calculator', type: 'system' },
-        { id: 'knowledge-extractor', title: 'Link to Knowledge', icon: 'file-text', type: 'system' },
-        { id: 'options', title: 'Options Lab', icon: 'activity', type: 'system' }
-      ];
-      S.set('app_tabs', JSON.stringify(TABS));
+      let TABS = JSON.parse(S.get('app_tabs') || 'null');
+      if (!TABS) {
+        TABS = [
+          { id: 'thesis', title: 'My Playbook', icon: 'book-open', type: 'book' },
+          { id: 'selection', title: 'วิธีหาหุ้น (คอขวด)', icon: 'search', type: 'book' },
+          { id: 'research', title: 'Stock Research', icon: 'database', type: 'system' },
+          { id: 'watchlist', title: 'Watchlist', icon: 'star', type: 'system' },
+          { id: 'portfolio', title: 'Portfolio', icon: 'briefcase', type: 'system' },
+          { id: 'knowledge', title: 'คลังความรู้กลาง', icon: 'library', type: 'system' }
+        ];
+        S.set('app_tabs', JSON.stringify(TABS));
+      } else {
+        // Ensure system tabs are present in existing TABS
+        if (!TABS.some(t => t.id === 'portfolio')) {
+          TABS.push({ id: 'portfolio', title: 'Portfolio', icon: 'briefcase', type: 'system' });
+        }
+        if (!TABS.some(t => t.id === 'knowledge')) {
+          TABS.push({ id: 'knowledge', title: 'คลังความรู้กลาง', icon: 'library', type: 'system' });
+        }
+        S.set('app_tabs', JSON.stringify(TABS));
+      }
       let activeBookTabId = 'thesis';
 
       // Memory caches for custom books
@@ -2446,13 +2175,10 @@ ${question}`;
       let selectedCustomBookKeys = {};
 
       // ====== NAVIGATION ======
-
-      // ====== NEW WEB APP NAVIGATION & RENDERS ======
-      let currentActiveContext = 'Home';
-
       function switchPage(tabId) {
         currentTab = tabId;
-
+        const tabInfo = TABS.find(t => t.id === tabId) || TABS[0];
+        
         // Update tab buttons active state
         document.querySelectorAll('.tab-bar .tab-btn').forEach(b => {
           if (b.getAttribute('data-tab') === tabId) {
@@ -2461,473 +2187,67 @@ ${question}`;
             b.classList.remove('active');
           }
         });
-
+        
         // Hide all pages
-        document.querySelectorAll('.page-container .page').forEach(p => {
+        pages.forEach(p => {
           p.classList.remove('active');
           p.style.display = 'none';
         });
-
-        const page = $('page-' + tabId);
-        if (page) {
-          page.classList.add('active');
-          page.style.display = 'flex';
-        }
-
-        // Update context & trigger specific renders
-        if (tabId === 'styles-guide') {
-          currentActiveContext = 'หน้าสไตล์หุ้น (Investment Playbooks & Guides)';
-          renderStylesGuide();
-        } else if (tabId === 'stock-reader') {
-          currentActiveContext = 'หน้าค้นอ่านข้อมูลหุ้นเจาะลึก (Searchable Stock Reader)';
-          renderStockReaderList();
-        } else if (tabId === 'categorization-board') {
-          currentActiveContext = 'หน้าบอร์ดจัดกลุ่มประเภทสไตล์หุ้น (Categorization Grid)';
-          renderCategorizationBoard();
-        } else if (tabId === 'watchlist-targets') {
-          currentActiveContext = 'หน้าจอรายการเฝ้าสังเกตการณ์เป้าหมาย (Watchlist Targets)';
-          renderWatchlistTargets();
-        } else if (tabId === 'fair-value') {
-          currentActiveContext = 'หน้า Fair Value Lab สำหรับคิดกรอบมูลค่าหุ้น';
-          renderFairValueLab();
-        } else if (tabId === 'knowledge-extractor') {
-          currentActiveContext = 'หน้า Link to Knowledge สำหรับสกัดโพสต์/คลิปเป็นโน้ตเข้าคลังความรู้';
-          renderKnowledgeExtractor();
-        } else if (tabId === 'options') {
-          currentActiveContext = 'หน้า Options Lab สำหรับคำนวณ payoff หุ้น option';
-          renderOptionsBacktest();
-        }
-
-        lucide.createIcons();
-      }
-
-      // 1. PAGE 1: RENDER STOCK STYLES GUIDE
-      const LOCAL_KNOWLEDGE_PATHS = {
-        '00_ai_context/AI_CONTEXT.md': './docs/knowledge/00_ai_context/AI_CONTEXT.md',
-        '00_ai_context/INVESTOR_PROFILE.md': './docs/knowledge/00_ai_context/INVESTOR_PROFILE.md',
-        '00_ai_context/RESPONSE_RULES.md': './docs/knowledge/00_ai_context/RESPONSE_RULES.md',
-        '01_playbooks/00_idea_generation_bible.md': './docs/knowledge/01_playbooks/00_idea_generation_bible.md',
-        '01_playbooks/01_my_core_strategy.md': './docs/knowledge/01_playbooks/01_my_core_strategy.md',
-        '01_playbooks/01_disruptive_compounder.md': './docs/knowledge/01_playbooks/01_disruptive_compounder.md',
-        '01_playbooks/02_old_winners_reentry.md': './docs/knowledge/01_playbooks/02_old_winners_reentry.md',
-        '01_playbooks/03_second_order_beneficiaries.md': './docs/knowledge/01_playbooks/03_second_order_beneficiaries.md',
-        '01_playbooks/04_infrastructure_bottleneck.md': './docs/knowledge/01_playbooks/04_infrastructure_bottleneck.md',
-        '01_playbooks/05_earnings_inflection.md': './docs/knowledge/01_playbooks/05_earnings_inflection.md',
-        '01_playbooks/06_turnaround_monthly_trend.md': './docs/knowledge/01_playbooks/06_turnaround_monthly_trend.md'
-      };
-      const STYLE_DOCS = [
-        { id: 'bible', title: '💡 วิธีการหาไอเดียลงทุน (Idea Generation)', path: './01_playbooks/00_idea_generation_bible.md' },
-        { id: 'growth', title: '📈 1. หุ้นเติบโต (Disruptive Compounder)', path: './01_playbooks/01_disruptive_compounder.md' },
-        { id: 'reentry', title: '🔄 2. หุ้นผู้ชนะเดิมรอซื้อใหม่ (Old Winners Re-entry)', path: './01_playbooks/02_old_winners_reentry.md' },
-        { id: 'indirect', title: '🧱 3. หุ้นผู้ช่วยพระเอก (Second-Order Beneficiaries)', path: './01_playbooks/03_second_order_beneficiaries.md' },
-        { id: 'bottleneck', title: '🔌 4. หุ้นคอขวดที่ห้ามขาด (Infrastructure Bottleneck)', path: './01_playbooks/04_infrastructure_bottleneck.md' },
-        { id: 'inflection', title: '💥 5. หุ้นกำไรระเบิด (Earnings Inflection)', path: './01_playbooks/05_earnings_inflection.md' },
-        { id: 'turnaround', title: '🧬 6. หุ้นฟื้นไข้ตามเทรนด์เดือน (Turnaround Monthly)', path: './01_playbooks/06_turnaround_monthly_trend.md' }
-      ];
-      let selectedStyleDocId = 'bible';
-
-      async function renderStylesGuide() {
-        const listDiv = $('styles-guide-list');
-        if (!listDiv) return;
-
-        listDiv.innerHTML = STYLE_DOCS.map(doc => `
-          <div class="stock-item ${doc.id === selectedStyleDocId ? 'active' : ''}" onclick="selectStyleDoc('${doc.id}')">
-            <div style="font-weight: 500; font-size: 12px;">${doc.title}</div>
-          </div>
-        `).join('');
-
-        const activeDoc = STYLE_DOCS.find(d => d.id === selectedStyleDocId);
-        const contentDiv = $('styles-guide-content');
-        if (activeDoc && contentDiv) {
-          contentDiv.innerHTML = '<p style="color:var(--text-muted); padding:20px;">กำลังเปิดสมุดคู่มือ...</p>';
-          const html = await loadLocalMarkdown(activeDoc.path);
-          contentDiv.innerHTML = html;
-        }
-      }
-
-      window.selectStyleDoc = function(docId) {
-        selectedStyleDocId = docId;
-        renderStylesGuide();
-      };
-
-      async function loadLocalMarkdown(path) {
-        const cleanPath = path.replace(/^\.\//, '');
-        // 1. Look up in cached KNOWLEDGE_DOCS from Supabase
-        const found = KNOWLEDGE_DOCS.find(d => d.path === cleanPath || d.path === path);
-        if (found) {
-          return marked.parse(found.content);
-        }
-
-        // 2. Fetch directly from Supabase if not in memory
-        if (supabaseClient) {
-          try {
-            const { data, error } = await supabaseClient
-              .from('stock_research_knowledge_documents')
-              .select('content')
-              .eq('path', cleanPath)
-              .single();
-            if (data && !error) {
-              return marked.parse(data.content);
+        
+        if (tabInfo.type === 'book') {
+          activeBookTabId = tabId;
+          const pageBook = $('page-book');
+          if (pageBook) {
+            pageBook.classList.add('active');
+            pageBook.style.display = 'flex';
+            
+            // Update labels
+            const state = getPlaybookState();
+            const sidebarTitle = $('book-sidebar-title');
+            const sidebarDesc = $('book-sidebar-desc');
+            const sidebarIcon = $('book-sidebar-icon');
+            
+            if (sidebarTitle) sidebarTitle.innerText = state.title;
+            if (sidebarDesc) sidebarDesc.innerText = state.desc;
+            if (sidebarIcon) {
+              sidebarIcon.className = '';
+              sidebarIcon.setAttribute('data-lucide', tabInfo.icon || 'book-open');
             }
-          } catch (e) {
-            console.error('Supabase path lookup failed:', e);
+            
+            renderUnifiedPlaybook();
           }
-        }
-
-        // 3. Fallback to local HTTP fetch (for local dev mode)
-        try {
-          const localPath = LOCAL_KNOWLEDGE_PATHS[cleanPath] || path;
-          const res = await fetch(localPath);
-          if (res.ok) {
-            const md = await res.text();
-            return marked.parse(md);
-          }
-          return `<p style="color:var(--accent-red);">ไม่พบไฟล์เอกสารในระบบคลาวด์หรือโลคอล: ${cleanPath}</p>`;
-        } catch (e) {
-          return `<p style="color:var(--accent-red);">เกิดข้อผิดพลาดในการโหลด: ${e.message}</p>`;
-        }
-      }
-
-      // 2. PAGE 2: RENDER SEARCHABLE STOCK READER
-      let selectedReaderTicker = '';
-      function renderStockReaderList() {
-        const listDiv = $('reader-stock-list');
-        const query = ($('reader-search-input')?.value || '').toLowerCase().trim();
-        if (!listDiv) return;
-
-        const filtered = STOCKS.filter(s =>
-          s.ticker.toLowerCase().includes(query) ||
-          s.name.toLowerCase().includes(query)
-        );
-
-        listDiv.innerHTML = filtered.map(s => `
-          <div class="stock-item ${s.ticker === selectedReaderTicker ? 'active' : ''}" onclick="selectReaderStock('${s.ticker}')">
-            <div style="display:flex; justify-content:space-between; align-items:center;">
-              <span style="font-weight:700; color:var(--accent-cyan);">${s.ticker}</span>
-              <span style="font-size:10px; color:var(--text-muted);">${s.style || 'ทั่วไป'}</span>
-            </div>
-            <div style="font-size:11px; color:var(--text-secondary); margin-top:2px;">${s.name}</div>
-          </div>
-        `).join('');
-      }
-
-      window.selectReaderStock = function(ticker) {
-        selectedReaderTicker = ticker;
-        currentActiveContext = `หน้าข้อมูลวิจัยหุ้นเดี่ยว: ${ticker}`;
-        renderStockReaderList();
-        renderStockReaderContent(ticker);
-      };
-
-      function renderStockReaderContent(ticker) {
-        const contentDiv = $('reader-content');
-        if (!contentDiv) return;
-        const s = STOCKS.find(x => x.ticker === ticker);
-        if (!s) return;
-
-        // Render financial statement table
-        let finTable = '<p style="color:var(--text-muted); font-size:12px;">ไม่มีข้อมูลตารางงบการเงินสะสม (สามารถสั่งรัน fetch_financials.py ได้)</p>';
-        if (s.financials && s.financials.length > 0) {
-          finTable = `
-            <table class="edit-table">
-              <thead>
-                <tr>
-                  <th>ปี (Year)</th>
-                  <th>รายได้ (Total Revenue)</th>
-                  <th>กำไรสุทธิ (Net Income)</th>
-                  <th>YoY Growth</th>
-                </tr>
-              </thead>
-              <tbody>
-                ${s.financials.map(f => `
-                  <tr>
-                    <td><b>${f.year}</b></td>
-                    <td>$${(f.revenue/1e6).toFixed(1)}M</td>
-                    <td>$${(f.profit/1e6).toFixed(1)}M</td>
-                    <td style="color:${parseFloat(f.growth) >= 15 ? 'var(--accent-green)' : 'inherit'}">${f.growth}</td>
-                  </tr>
-                `).join('')}
-              </tbody>
-            </table>
-          `;
-        }
-
-        contentDiv.innerHTML = `
-          <div class="book-reader" style="max-width:100%; padding: 10px;">
-            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border-color); padding-bottom:15px; margin-bottom:20px;">
-              <div>
-                <h1 style="margin:0; font-size:28px; color:var(--accent-cyan); font-family:'Outfit';">${s.name} (${s.ticker})</h1>
-                <div style="display:flex; gap:10px; margin-top:6px;">
-                  <span class="badge" style="background:rgba(0,240,255,0.15); color:var(--accent-cyan); font-size:11px;">${s.style || 'ทั่วไป'}</span>
-                  <span class="badge" style="background:rgba(168,85,247,0.15); color:#c084fc; font-size:11px;">${s.group || 'ไม่มีกลุ่ม'}</span>
-                </div>
-              </div>
-              ${s.logoUrl ? `<img src="${s.logoUrl}" style="width:50px; height:50px; border-radius:8px; border:1px solid var(--border-color);" />` : ''}
-            </div>
-
-            <h2>💰 1. โมเดลการหาเงินหลัก (Revenue Model)</h2>
-            <p><b>ลักษณะธุรกิจ:</b> ${s.whatItDoes || '-'}</p>
-            <p><b>กลไกสร้างรายได้:</b> ${s.howItMakesMoney || '-'}</p>
-
-            <h2>🧱 2. ความแข็งแกร่งและคอขวดธุรกิจ (Moat & Advantage)</h2>
-            <p>${s.moat ? marked.parse(s.moat) : '-'}</p>
-
-            <h2>⚠️ 3. ข้อเสียและความเสี่ยงสำคัญ (Risks & Bear Case)</h2>
-            <p>${s.risks ? marked.parse(s.risks) : '-'}</p>
-
-            <h2>🤝 4. ดีลและตัวเร่งสำคัญ (Deals & Catalysts)</h2>
-            <p>${s.deals ? marked.parse(s.deals) : '-'}</p>
-
-            <h2>📊 5. งบการเงินย้อนหลัง (Financial Statements)</h2>
-            ${finTable}
-          </div>
-        `;
-      }
-
-      if ($('reader-search-input')) $('reader-search-input').addEventListener('input', renderStockReaderList);
-
-      // 3. PAGE 3: RENDER CATEGORIZATION BOARD
-      let selectedFilterStyle = 'ALL';
-      const AVAILABLE_STYLES = ['ALL', 'Growth', 'Dividend', 'Core', 'Cyclical', 'ETF', 'Defensive', 'Dark Horse'];
-
-      function renderCategorizationBoard() {
-        const chipsDiv = $('board-style-chips');
-        const gridDiv = $('board-cards-grid');
-        if (!chipsDiv || !gridDiv) return;
-
-        // Render filter chips
-        chipsDiv.innerHTML = AVAILABLE_STYLES.map(style => `
-          <div class="chip ${style === selectedFilterStyle ? 'active' : ''}" onclick="filterBoardStyle('${style}')">${style === 'ALL' ? '🌎 ทั้งหมด' : style}</div>
-        `).join('');
-
-        // Filter stocks
-        const filtered = STOCKS.filter(s => {
-          if (selectedFilterStyle === 'ALL') return true;
-          return (s.style || '').toLowerCase().includes(selectedFilterStyle.toLowerCase());
-        });
-
-        if (filtered.length === 0) {
-          gridDiv.innerHTML = `<p style="color:var(--text-muted); text-align:center; padding:40px; grid-column: 1/-1;">ไม่มีหุ้นในสไตล์ "${selectedFilterStyle}"</p>`;
-          return;
-        }
-
-        gridDiv.innerHTML = filtered.map(s => `
-          <div class="stock-card glass-panel" onclick="selectReaderStockAndSwitch('${s.ticker}')">
-            <div class="card-header">
-              <div>
-                <h3 class="card-title">${s.name}</h3>
-                <span class="card-ticker">${s.ticker}</span>
-              </div>
-              ${s.logoUrl ? `<img src="${s.logoUrl}" class="card-logo" />` : '<div class="card-logo" style="background:rgba(255,255,255,0.05); display:flex; align-items:center; justify-content:center; font-size:10px;">No Logo</div>'}
-            </div>
-            <div class="card-body">
-              <div class="card-meta">
-                <span class="badge" style="background:rgba(0,240,255,0.1); color:var(--accent-cyan); font-size:10px;">${s.style || 'ทั่วไป'}</span>
-                <span class="badge" style="background:rgba(255,165,0,0.1); color:var(--accent-orange); font-size:10px;">${s.market || 'US'}</span>
-              </div>
-              <p style="font-size:11px; line-height:1.4; color:var(--text-secondary); margin-top:8px;">${s.whatItDoes || '-'}</p>
-            </div>
-          </div>
-        `).join('');
-      }
-
-      window.filterBoardStyle = function(style) {
-        selectedFilterStyle = style;
-        renderCategorizationBoard();
-      };
-
-      window.selectReaderStockAndSwitch = function(ticker) {
-        switchPage('stock-reader');
-        selectReaderStock(ticker);
-      };
-
-      // 4. PAGE 4: RENDER WATCHLIST TARGETS & TRADINGVIEW
-      let selectedWatchlistTicker = '';
-
-      function renderWatchlistTargets() {
-        const tbody = $('watchlist-targets-tbody');
-        if (!tbody) return;
-
-        // Get watchlisted stocks (e.g. from watchlists files or just the ones tagged as Watchlist)
-        // Let's render all stocks in our database that have target/entry prices or let the user watchlist any
-        tbody.innerHTML = STOCKS.map(s => {
-          const isSelected = s.ticker === selectedWatchlistTicker;
-          return `
-            <tr style="border-bottom:1px solid var(--border-color); cursor:pointer; background:${isSelected ? 'rgba(0,240,255,0.05)' : 'none'};" onclick="selectWatchlistStock('${s.ticker}')">
-              <td style="padding:10px 8px;">
-                <div style="font-weight:700; color:var(--accent-cyan);">${s.ticker}</div>
-                <div style="font-size:11px; color:var(--text-muted);">${s.name}</div>
-              </td>
-              <td style="padding:10px 8px; font-weight:500;" id="price-${s.ticker}">-</td>
-              <td style="padding:10px 8px;"><span class="target-badge target-entry">${s.entry_price || s.entryPrice || '-'}</span></td>
-              <td style="padding:10px 8px;"><span class="target-badge target-exit">${s.exit_price || s.exitPrice || '-'}</span></td>
-              <td style="padding:10px 8px;"><span class="target-badge target-sell">${s.targetPrice || s.target_price || '-'}</span></td>
-              <td style="padding:10px 8px; text-align:center;">
-                <button class="tab-action-btn" onclick="event.stopPropagation(); editWatchlistTargets('${s.ticker}')" style="font-size:11px; padding:3px 8px;">✏️ ตั้งเป้า</button>
-              </td>
-            </tr>
-          `;
-        }).join('');
-
-        // Load prices
-        const tickers = STOCKS.map(s => s.ticker);
-        updateWatchlistPrices(tickers);
-      }
-
-      window.selectWatchlistStock = function(ticker) {
-        selectedWatchlistTicker = ticker;
-        currentActiveContext = `หน้า Watchlist: กำลังดูหุ้น ${ticker}`;
-
-        // Re-render table row highlights
-        renderWatchlistTargets();
-
-        // Render TradingView Chart
-        const chartTitle = $('tv-chart-title');
-        const container = $('tv-chart-container');
-        if (chartTitle) chartTitle.innerText = `กราฟสด TradingView: ${ticker}`;
-        if (container) {
-          container.innerHTML = getTradingViewIFrame(ticker);
-        }
-      };
-
-      function getTradingViewIFrame(symbol) {
-        let cleanSymbol = symbol.trim().toUpperCase();
-        if (cleanSymbol.includes(':')) {
-          cleanSymbol = cleanSymbol.split(':')[1];
-        }
-        // Embed interactive chart widget
-        return `<iframe
-          style="width: 100%; height: 100%; border: none;"
-          src="https://s.tradingview.com/widgetembed/?symbol=${cleanSymbol}&interval=D&theme=dark&style=1&timezone=Asia%2FBangkok&locale=th"
-          allowfullscreen>
-        </iframe>`;
-      }
-
-      window.editWatchlistTargets = function(ticker) {
-        const s = STOCKS.find(x => x.ticker === ticker);
-        if (!s) return;
-
-        const entry = prompt(`ตั้งเป้าหมายจุดเข้าซื้อ (Entry) ของ ${ticker}:`, s.entry_price || s.entryPrice || '');
-        const exit = prompt(`ตั้งเป้าหมายจุดคัทขาดทุน (Exit/Cut) ของ ${ticker}:`, s.exit_price || s.exitPrice || '');
-        const target = prompt(`ตั้งเป้าหมายราคาขาย (Target/Sell) ของ ${ticker}:`, s.targetPrice || '');
-
-        if (entry !== null) s.entry_price = entry;
-        if (exit !== null) s.exit_price = exit;
-        if (target !== null) s.targetPrice = target;
-
-        saveStocks();
-        renderWatchlistTargets();
-      };
-
-      // 5. FLOATING AI ADVISOR BOT LOGIC
-      window.toggleFloatingBot = function() {
-        const chat = $('floating-bot-chat');
-        if (!chat) return;
-        if (chat.style.display === 'flex') {
-          chat.style.display = 'none';
         } else {
-          chat.style.display = 'flex';
-          // Auto-scroll chat body
-          const body = $('floating-chat-messages');
-          if (body) body.scrollTop = body.scrollHeight;
-        }
-      };
-
-      window.sendFloatingChat = async function() {
-        const input = $('floating-chat-input');
-        const body = $('floating-chat-messages');
-        if (!input || !body) return;
-
-        const text = input.value.trim();
-        if (!text) return;
-
-        // Add user message
-        body.innerHTML += `<div class="chat-msg user">${text}</div>`;
-        input.value = '';
-        body.scrollTop = body.scrollHeight;
-
-        // Display typing state
-        const typingId = 'typing-' + Date.now();
-        body.innerHTML += `<div class="chat-msg ai" id="${typingId}">กำลังประมวลผลคำปรึกษา...</div>`;
-        body.scrollTop = body.scrollHeight;
-
-        try {
-          // Prepare context-aware prompt
-          const systemContext = `บริบทหน้าจอที่ผู้ใช้กำลังเปิดดูในปัจจุบัน: ${currentActiveContext}\n\n`;
-          const finalPrompt = systemContext + text;
-
-          // Call API (Gemini Client in dashboard.html)
-          let responseText = '';
-          if (config.apiKey) {
-            const apiModel = config.model || 'gemini-2.0-flash';
-            const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${apiModel}:generateContent?key=${config.apiKey}`;
-
-            const payload = {
-              contents: [{ parts: [{ text: finalPrompt }] }],
-              generationConfig: { maxOutputTokens: 1200 }
-            };
-
-            const res = await fetch(endpoint, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(payload)
-            });
-
-            if (res.ok) {
-              const data = await res.json();
-              responseText = data.candidates?.[0]?.content?.parts?.[0]?.text || 'ไม่สามารถดึงคำตอบได้';
-            } else {
-              responseText = `เกิดข้อผิดพลาดในการโทรหา API: ${res.statusText}`;
+          const page = $('page-' + tabId);
+          if (page) {
+            page.classList.add('active');
+            page.style.display = 'flex';
+          }
+          if (tabId === 'watchlist') renderWatchlist();
+          if (tabId === 'research') renderStockList();
+          if (tabId === 'portfolio') {
+            if (typeof renderPortfolio === 'function') renderPortfolio();
+          }
+          if (tabId === 'knowledge') {
+            if (supabaseClient && KNOWLEDGE_DOCS.length === 0) {
+              loadKnowledgeDocsFromSupabase().then(() => renderKnowledgeBase());
             }
-          } else {
-            responseText = '⚠️ บอทยังไม่ได้รับการเชื่อมต่อ API Key กรุณาเปิดไปที่รูปฟันเฟืองมุมบนขวาเพื่อกรอก API Key ก่อนคุยครับ';
+            renderKnowledgeBase();
           }
-
-          // Replace typing with response
-          const typingDiv = $(typingId);
-          if (typingDiv) {
-            typingDiv.innerHTML = marked.parse(responseText);
-          }
-
-          // Check for Screen Control commands in AI response
-          // e.g. [ACTION: switch_tab(watchlist-targets)] or [ACTION: show_chart(VRT)]
-          if (responseText.includes('[ACTION:')) {
-            const match = responseText.match(/\[ACTION:\s*(\w+)\(([^)]*)\)\s*\]/);
-            if (match) {
-              const action = match[1];
-              const arg = match[2].replace(/['"]/g, '').trim();
-              executeUIAction(action, arg);
-            }
-          }
-        } catch(e) {
-          const typingDiv = $(typingId);
-          if (typingDiv) typingDiv.innerText = `Error: ${e.message}`;
         }
-        body.scrollTop = body.scrollHeight;
-      };
-
-      function executeUIAction(action, arg) {
-        console.log('Bot UI Control Triggered:', action, arg);
-        if (action === 'switch_tab') {
-          switchPage(arg);
-        } else if (action === 'show_chart') {
-          switchPage('watchlist-targets');
-          selectWatchlistStock(arg);
-        } else if (action === 'filter_style') {
-          switchPage('categorization-board');
-          filterBoardStyle(arg);
-        }
+        
+        lucide.createIcons();
       }
 
       // ====== TAB BAR CRUD ======
       function renderTabBar() {
         const tabBar = document.querySelector('.tab-bar');
         if (!tabBar) return;
-
+        
         tabBar.innerHTML = '';
         TABS.forEach(tab => {
           const isActive = currentTab === tab.id;
           const isBook = tab.type === 'book';
-
+          
           const btn = document.createElement('div');
           btn.className = 'tab-btn' + (isActive ? ' active' : '');
           btn.style.display = 'flex';
@@ -2935,14 +2255,14 @@ ${question}`;
           btn.style.gap = '6px';
           btn.style.cursor = 'pointer';
           btn.setAttribute('data-tab', tab.id);
-
+          
           // Make tab buttons draggable
           btn.draggable = true;
           btn.addEventListener('dragstart', (e) => handleTabDragStart(e, tab.id));
           btn.addEventListener('dragover', (e) => handleTabDragOver(e));
           btn.addEventListener('drop', (e) => handleTabDrop(e, tab.id));
           btn.addEventListener('dragend', (e) => handleTabDragEnd(e));
-
+          
           btn.innerHTML = `
             <div onclick="switchPage('${tab.id}')" style="display:flex; align-items:center; gap:7px; flex:1;">
               <i data-lucide="${tab.icon || 'book-open'}"></i>
@@ -2959,7 +2279,7 @@ ${question}`;
           `;
           tabBar.appendChild(btn);
         });
-
+        
         // Add "+" button at the end
         const addBtn = document.createElement('button');
         addBtn.className = 'tab-btn';
@@ -2972,7 +2292,7 @@ ${question}`;
         addBtn.innerHTML = `<i data-lucide="plus" style="width:14px;height:14px;margin-right:4px;"></i> <span>เพิ่มหน้าใหม่</span>`;
         addBtn.onclick = () => addBookTab();
         tabBar.appendChild(addBtn);
-
+        
         lucide.createIcons();
       }
 
@@ -2981,18 +2301,18 @@ ${question}`;
         if (!title) return;
         const cleanTitle = title.trim();
         if (!cleanTitle) return;
-
+        
         const tabId = 'custom_tab_' + Date.now();
-
+        
         TABS.push({
           id: tabId,
           title: cleanTitle,
           icon: 'book-open',
           type: 'book'
         });
-
+        
         S.set('app_tabs', JSON.stringify(TABS));
-
+        
         // Initialize default empty playbook keys and content
         customBookKeys[tabId] = [
           { id: 'chapter_1', title: 'บทที่ 1: แนะนำ', icon: 'file-text' }
@@ -3003,10 +2323,10 @@ ${question}`;
           ]
         };
         selectedCustomBookKeys[tabId] = 'chapter_1';
-
+        
         S.set(`book_keys_order_${tabId}`, JSON.stringify(customBookKeys[tabId]));
         S.set(`book_content_${tabId}`, JSON.stringify(customBookPlaybooks[tabId]));
-
+        
         renderTabBar();
         switchPage(tabId);
         toast('เพิ่มหน้าใหม่เรียบร้อย!');
@@ -3015,15 +2335,15 @@ ${question}`;
       window.renameBookTab = function(tabId) {
         const tab = TABS.find(t => t.id === tabId);
         if (!tab) return;
-
+        
         const newTitle = prompt('แก้ไขชื่อหน้า:', tab.title);
         if (!newTitle) return;
         const cleanTitle = newTitle.trim();
         if (!cleanTitle) return;
-
+        
         tab.title = cleanTitle;
         S.set('app_tabs', JSON.stringify(TABS));
-
+        
         renderTabBar();
         if (currentTab === tabId) {
           switchPage(tabId);
@@ -3034,19 +2354,19 @@ ${question}`;
       window.deleteBookTab = function(tabId) {
         const tab = TABS.find(t => t.id === tabId);
         if (!tab) return;
-
+        
         if (confirm(`คุณต้องการลบหน้า "${tab.title}" ใช่หรือไม่? (ข้อมูลทั้งหมดภายในหน้านี้จะถูกลบถาวร)`)) {
           TABS = TABS.filter(t => t.id !== tabId);
           S.set('app_tabs', JSON.stringify(TABS));
-
+          
           S.del(`book_keys_order_${tabId}`);
           S.del(`book_content_${tabId}`);
-
+          
           delete customBookKeys[tabId];
           delete customBookPlaybooks[tabId];
           delete customBookEditing[tabId];
           delete selectedCustomBookKeys[tabId];
-
+          
           renderTabBar();
           if (currentTab === tabId) {
             switchPage(TABS[0].id);
@@ -3226,7 +2546,7 @@ ${question}`;
           if (typeof str !== 'string') return false;
           return str.includes('เธ');
         };
-
+        
         let cachedTabs = JSON.parse(S.get('app_tabs') || 'null');
         if (cachedTabs && cachedTabs.some(t => isGarbled(t.title))) {
           S.del('app_tabs');
@@ -3237,7 +2557,7 @@ ${question}`;
           S.del('playbook_keys_order');
           S.del('investing_playbook');
         }
-
+        
         let sKeys = JSON.parse(S.get('selection_keys_order') || 'null');
         if (sKeys && sKeys.some(k => isGarbled(k.title))) {
           S.del('selection_keys_order');
@@ -3263,7 +2583,7 @@ ${question}`;
           toast('💼 ' + ticker + ' เพิ่มใน Portfolio สำเร็จ');
         }
         S.set('portfolio_tickers', JSON.stringify([...portfolioTickers]));
-
+        
         // Re-render components
         if (typeof renderStockList === 'function') renderStockList();
         if (typeof renderWatchlist === 'function') renderWatchlist();
@@ -3406,7 +2726,7 @@ ${question}`;
         selectionPlaybookKeys = [...DEFAULT_SELECTION_KEYS];
         S.set('selection_keys_order', JSON.stringify(selectionPlaybookKeys));
       }
-
+      
       if (!selectionPlaybook) {
         selectionPlaybook = JSON.parse(JSON.stringify(DEFAULT_SELECTION_PLAYBOOK));
         S.set('selection_playbook', JSON.stringify(selectionPlaybook));
@@ -3432,7 +2752,7 @@ ${question}`;
       function getPlaybookState() {
         const tabId = activeBookTabId;
         const tabInfo = TABS.find(t => t.id === tabId);
-
+        
         if (tabId === 'thesis') {
           return {
             keys: playbookKeys,
@@ -3447,7 +2767,7 @@ ${question}`;
             desc: 'แนวทางและกฎการลงทุนส่วนตัว'
           };
         }
-
+        
         if (tabId === 'selection') {
           return {
             keys: selectionPlaybookKeys,
@@ -3462,7 +2782,7 @@ ${question}`;
             desc: 'แนวทางคัดสรรซัพพลายเชนคอขวด'
           };
         }
-
+        
         // Custom book tabs
         if (!customBookKeys[tabId]) {
           customBookKeys[tabId] = JSON.parse(S.get(`book_keys_order_${tabId}`) || '[]');
@@ -3476,7 +2796,7 @@ ${question}`;
         if (!selectedCustomBookKeys[tabId]) {
           selectedCustomBookKeys[tabId] = customBookKeys[tabId][0] ? customBookKeys[tabId][0].id : '';
         }
-
+        
         return {
           keys: customBookKeys[tabId],
           playbook: customBookPlaybooks[tabId],
@@ -3531,12 +2851,12 @@ ${question}`;
           div.style.alignItems = 'center';
           div.style.paddingRight = '8px';
           div.draggable = true;
-
+          
           div.addEventListener('dragstart', (e) => handlePlaybookDragStart(e, key));
           div.addEventListener('dragover', (e) => handlePlaybookDragOver(e));
           div.addEventListener('drop', (e) => handlePlaybookDrop(e, key));
           div.addEventListener('dragend', (e) => handlePlaybookDragEnd(e));
-
+          
           div.innerHTML = `
             <div class="stock-item-left" style="padding: 10px 4px; display:flex; align-items:center; flex:1; min-width:0; cursor:pointer;" onclick="selectPlaybookTopic('${key}')">
               <i data-lucide="grip-vertical" style="width:14px;height:14px;color:var(--text-muted);cursor:grab;margin-right:6px;flex-shrink:0;" title="ลากเพื่อจัดตำแหน่ง"></i>
@@ -3572,10 +2892,10 @@ ${question}`;
           lucide.createIcons();
           return;
         }
-
+        
         const key = item.id;
         const isEdit = state.editing[key];
-
+        
         if (!state.playbook[key]) {
           state.playbook[key] = [];
         }
@@ -3590,7 +2910,7 @@ ${question}`;
                 <label style="font-size:11px; color:var(--text-muted); font-weight: 600;">ชื่อหัวข้อใหญ่</label>
                 <input type="text" id="book-title-edit-${key}" value="${item.title}" style="background:rgba(255,255,255,0.03); border:1px solid var(--border-color); border-radius:8px; padding:10px 14px; color:var(--text-primary); font-family:inherit; font-size:14px; font-weight:600;" placeholder="ชื่อหัวข้อ..." />
               </div>
-
+              
               <div style="font-size:12px; font-weight:700; color:var(--accent-cyan); display:flex; align-items:center; gap:6px;">
                 <i data-lucide="layers" style="width:14px;height:14px;"></i>
                 <span>ขั้นตอนย่อย/เนื้อหาข้อย่อย (${subItems.length} ข้อ)</span>
@@ -3602,14 +2922,14 @@ ${question}`;
                     ยังไม่มีขั้นตอนย่อย กดปุ่ม "เพิ่มขั้นตอนย่อย" ด้านล่างเพื่อเริ่มเขียนเนื้อหา
                   </div>
                 ` : subItems.map((sub, idx) => `
-                  <div class="glass-panel playbook-subitem-card"
+                  <div class="glass-panel playbook-subitem-card" 
                        style="padding:14px; border-radius:12px; border:1px solid var(--border-color); display:flex; flex-direction:column; gap:10px; background:rgba(255,255,255,0.015); transition: border-color 0.2s;"
                        draggable="true"
                        ondragstart="handleSubItemDragStart(event, '${key}', '${sub.id}')"
                        ondragover="handleSubItemDragOver(event)"
                        ondrop="handleSubItemDrop(event, '${key}', '${sub.id}')"
                        ondragend="handleSubItemDragEnd(event)">
-
+                    
                     <div style="display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid rgba(255,255,255,0.04); padding-bottom:8px;">
                       <div style="display:flex; align-items:center; gap:6px; cursor:grab;" class="subitem-drag-handle">
                         <i data-lucide="grip-vertical" style="width:14px;height:14px;color:var(--text-muted);" title="ลากเพื่อสลับลำดับ"></i>
@@ -3622,10 +2942,10 @@ ${question}`;
 
                     <div style="display:flex; flex-direction:column; gap:4px;">
                       <label style="font-size:11px; color:var(--text-muted); font-weight: 600;">หัวข้อย่อย</label>
-                      <input type="text"
-                             id="book-subitem-title-edit-${sub.id}"
-                             value="${sub.title || ''}"
-                             style="background:rgba(255,255,255,0.03); border:1px solid var(--border-color); border-radius:6px; padding:8px 12px; color:var(--text-primary); font-family:inherit; font-size:13px; font-weight:600;"
+                      <input type="text" 
+                             id="book-subitem-title-edit-${sub.id}" 
+                             value="${sub.title || ''}" 
+                             style="background:rgba(255,255,255,0.03); border:1px solid var(--border-color); border-radius:6px; padding:8px 12px; color:var(--text-primary); font-family:inherit; font-size:13px; font-weight:600;" 
                              placeholder="หัวข้อย่อย..."
                              oninput="onSubItemTitleInput('${key}', '${sub.id}', this.value)" />
                     </div>
@@ -3642,14 +2962,14 @@ ${question}`;
 
                     <div style="display:flex; gap:16px; min-height:160px; height:200px;">
                       <div style="flex:1; display:flex; flex-direction:column; gap:4px;">
-                        <textarea id="book-subitem-edit-${sub.id}"
-                                  style="flex:1; background:rgba(0,0,0,0.2); border:1px solid var(--border-color); border-radius:8px; padding:12px; color:var(--text-primary); font-family:var(--font-mono); font-size:12px; line-height:1.5; resize:none;"
+                        <textarea id="book-subitem-edit-${sub.id}" 
+                                  style="flex:1; background:rgba(0,0,0,0.2); border:1px solid var(--border-color); border-radius:8px; padding:12px; color:var(--text-primary); font-family:var(--font-mono); font-size:12px; line-height:1.5; resize:none;" 
                                   placeholder="เขียนรายละเอียดขั้นตอนนี้ (รองรับ Markdown และการกด Ctrl+V เพื่อวางรูปภาพ)..."
                                   oninput="onSubItemInput('${key}', '${sub.id}')"
                                   onpaste="handleSubItemPaste(event, '${key}', '${sub.id}')">${sub.content}</textarea>
                         <div id="book-subitem-char-count-${sub.id}" style="font-size:10px; color:var(--text-muted); text-align:right;">${sub.content.length} ตัวอักษร</div>
                       </div>
-
+                      
                       <div style="flex:1; background:rgba(255,255,255,0.01); border:1px solid var(--border-color); border-radius:8px; padding:12px; overflow-y:auto;" id="book-subitem-live-preview-${sub.id}">
                         <!-- Live preview loaded dynamically -->
                       </div>
@@ -3683,16 +3003,16 @@ ${question}`;
                     }
                     return `<img src="${cleanSrc}" class="playbook-embedded-img" style="max-width:280px; max-height:180px; object-fit:cover; border-radius:8px; border:1px solid var(--border-color); margin:12px auto; display:block; cursor:zoom-in; box-shadow:0 4px 15px rgba(0,0,0,0.3); transition:transform 0.2s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'" onclick="window.openImageLightbox(this.src)" ${p1} ${p2}>`;
                   });
-
+                  
                   // Render interactive checklists
                   let checkboxIdx = 0;
                   parsed = parsed.replace(/<li>(<input[^>]*type="checkbox"[^>]*>|\[[ xX]\])\s*/g, (match) => {
                     const isChecked = match.includes('checked') || match.includes('[x]') || match.includes('[X]');
                     const replacement = `
                       <li style="list-style-type:none; margin-left:-20px; display:flex; align-items:flex-start; gap:8px; margin-bottom:6px;">
-                        <input type="checkbox"
-                                style="margin-top:4px; cursor:pointer;"
-                                ${isChecked ? 'checked' : ''}
+                        <input type="checkbox" 
+                                style="margin-top:4px; cursor:pointer;" 
+                                ${isChecked ? 'checked' : ''} 
                                 onclick="togglePlaybookCheckbox('${key}', '${sub.id}', ${checkboxIdx}, this.checked)" />
                       `;
                     checkboxIdx++;
@@ -3841,7 +3161,7 @@ ${question}`;
         const selected = text.substring(start, end);
         const replacement = before + selected + after;
         textarea.value = text.substring(0, start) + replacement + text.substring(end);
-
+        
         const state = getPlaybookState();
         const subItems = state.playbook[key] || [];
         const sub = subItems.find(x => x.id === subId);
@@ -3849,7 +3169,7 @@ ${question}`;
           sub.content = textarea.value;
           S.set(state.storagePlaybook, JSON.stringify(state.playbook));
         }
-
+        
         textarea.focus();
         textarea.setSelectionRange(start + before.length, start + before.length + selected.length);
         updateSubItemLivePreview(key, subId);
@@ -3967,7 +3287,7 @@ ${question}`;
       function insertSubItemImageMarkdown(key, subId, dataUrl) {
         const textarea = $('book-subitem-edit-' + subId);
         if (!textarea) return;
-
+        
         if (dataUrl.startsWith('data:image/')) {
           const imgId = 'img_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5);
           // Store in IndexedDB
@@ -4000,7 +3320,7 @@ ${question}`;
         const text = textarea.value;
         const imgMarkdown = `\n![image](${src})\n`;
         textarea.value = text.substring(0, start) + imgMarkdown + text.substring(end);
-
+        
         const state = getPlaybookState();
         const subItems = state.playbook[key] || [];
         const sub = subItems.find(x => x.id === subId);
@@ -4008,7 +3328,7 @@ ${question}`;
           sub.content = textarea.value;
           S.set(state.storagePlaybook, JSON.stringify(state.playbook));
         }
-
+        
         textarea.focus();
         textarea.setSelectionRange(start + imgMarkdown.length, start + imgMarkdown.length);
         updateSubItemLivePreview(key, subId);
@@ -4030,7 +3350,7 @@ ${question}`;
               }
               return `<img src="${cleanSrc}" class="playbook-embedded-img" style="max-width:100%; border-radius:8px; border:1px solid var(--border-color); margin:8px auto; display:block; box-shadow:0 2px 10px rgba(0,0,0,0.2);" ${p1} ${p2}>`;
             });
-
+            
             previewDiv.innerHTML = `
               ${titleVal ? `<h3 style="font-size:14px; font-weight:700; color:var(--accent-cyan); margin-top:0; margin-bottom:8px;">${titleVal}</h3>` : ''}
               <div class="detail-content">${parsed}</div>
@@ -4060,7 +3380,7 @@ ${question}`;
 
         const cnt = $('book-subitem-char-count-' + subId);
         if (cnt) cnt.innerText = val.length + ' ตัวอักษร';
-
+        
         const state = getPlaybookState();
         const subItems = state.playbook[key] || [];
         const sub = subItems.find(x => x.id === subId);
@@ -4176,7 +3496,7 @@ ${question}`;
         S.set(state.storagePlaybook, JSON.stringify(state.playbook));
         renderUnifiedPlaybook();
         toast('เพิ่มขั้นตอนย่อยแล้ว');
-
+        
         setTimeout(() => {
           const el = $('book-subitem-title-edit-' + subId);
           if (el) {
@@ -4203,7 +3523,7 @@ ${question}`;
         const state = getPlaybookState();
         const item = state.keys.find(x => x.id === key);
         if (!item) return;
-
+        
         if (confirm(`คุณต้องการลบหัวข้อ "${item.title}" ใช่หรือไม่? (เนื้อหาในหัวข้อนี้ทั้งหมดจะถูกลบถาวร)`)) {
           if (tabId === 'selection') {
             selectionPlaybookKeys = selectionPlaybookKeys.filter(x => x.id !== key);
@@ -4233,7 +3553,7 @@ ${question}`;
               selectedCustomBookKeys[tabId] = customBookKeys[tabId][0] ? customBookKeys[tabId][0].id : '';
             }
           }
-
+          
           renderUnifiedPlaybook();
           toast('ลบหัวข้อเรียบร้อยแล้ว');
         }
@@ -4247,7 +3567,7 @@ ${question}`;
           icon: 'file-text',
           isDefault: false
         };
-
+        
         const state = getPlaybookState();
         state.keys.push(newTopic);
         state.playbook[newId] = [
@@ -4257,10 +3577,10 @@ ${question}`;
             content: 'เขียนเนื้อหารายละเอียดขั้นตอนนี้...'
           }
         ];
-
+        
         S.set(state.storageKeys, JSON.stringify(state.keys));
         S.set(state.storagePlaybook, JSON.stringify(state.playbook));
-
+        
         const tabId = activeBookTabId;
         if (tabId === 'selection') {
           selectedSelectionKey = newId;
@@ -4272,10 +3592,10 @@ ${question}`;
           selectedCustomBookKeys[tabId] = newId;
           customBookEditing[tabId][newId] = true;
         }
-
+        
         renderUnifiedPlaybook();
         toast('เพิ่มหัวข้อใหม่แล้ว');
-
+        
         setTimeout(() => {
           const el = $('book-title-edit-' + newId);
           if (el) {
@@ -4288,7 +3608,7 @@ ${question}`;
       window.savePlaybookCard = function(key) {
         const state = getPlaybookState();
         const titleEl = $('book-title-edit-' + key);
-
+        
         if (titleEl) {
           const item = state.keys.find(x => x.id === key);
           if (item) {
@@ -4297,7 +3617,7 @@ ${question}`;
             S.set(state.storageKeys, JSON.stringify(state.keys));
           }
         }
-
+        
         const subItems = state.playbook[key] || [];
         subItems.forEach(sub => {
           const titleInput = $('book-subitem-title-edit-' + sub.id);
@@ -4310,9 +3630,9 @@ ${question}`;
           }
         });
         S.set(state.storagePlaybook, JSON.stringify(state.playbook));
-
+        
         cleanupPlaybookImagesUnified();
-
+        
         state.editing[key] = false;
         renderUnifiedPlaybook();
         toast('บันทึกข้อมูลเรียบร้อยแล้ว');
@@ -4322,7 +3642,7 @@ ${question}`;
         try {
           let playbookImages = JSON.parse(S.get('playbook_images') || '{}');
           const referencedIds = new Set();
-
+          
           const checkRefs = (subList) => {
             if (Array.isArray(subList)) {
               subList.forEach(sub => {
@@ -4335,13 +3655,13 @@ ${question}`;
               });
             }
           };
-
+          
           Object.values(playbook).forEach(checkRefs);
           Object.values(selectionPlaybook).forEach(checkRefs);
           Object.values(customBookPlaybooks).forEach(book => {
             Object.values(book).forEach(checkRefs);
           });
-
+          
           let updated = false;
           Object.keys(playbookImages).forEach(id => {
             if (!referencedIds.has(id)) {
@@ -4349,7 +3669,7 @@ ${question}`;
               updated = true;
             }
           });
-
+          
           if (updated) {
             S.set('playbook_images', JSON.stringify(playbookImages));
           }
@@ -4384,7 +3704,7 @@ ${question}`;
           const newTitle = val.trim() || 'ไม่มีชื่อ';
           item.title = newTitle;
           S.set(state.storageKeys, JSON.stringify(state.keys));
-
+          
           const listContainer = $('book-list');
           if (listContainer) {
             const items = listContainer.querySelectorAll('.stock-item');
@@ -4442,7 +3762,7 @@ ${question}`;
           toast('รีเซ็ตข้อมูลเรียบร้อย!');
         }
       };
-
+      
       const resetBtn = $('btn-book-reset');
       if (resetBtn) {
         resetBtn.onclick = () => resetBookTab();
@@ -4509,7 +3829,7 @@ ${question}`;
           renderStockList();
           renderChat();
           initSupabase();
-
+          
           // Initial rendering of tabs and opening default book tab
           renderTabBar();
           switchPage('thesis');
@@ -4535,7 +3855,7 @@ window.runPositionSizingCalc = function() {
         const riskPct = parseFloat($('ps-risk-pct')?.value) || 0;
         const entryPrice = parseFloat($('ps-entry-price')?.value) || 0;
         const stopPrice = parseFloat($('ps-stop-price')?.value) || 0;
-
+        
         if (portSize) S.set('calc_port_size', portSize);
         if (riskPct) S.set('calc_risk_pct', riskPct);
 
@@ -4582,18 +3902,18 @@ window.runPositionSizingCalc = function() {
           const proxyUrl = `https://api.allorigins.win/raw?url=${rssUrl}`;
           const res = await fetch(proxyUrl);
           const xmlText = await res.text();
-
+          
           const parser = new DOMParser();
           const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
           const items = xmlDoc.querySelectorAll('item');
-
+          
           const newsItems = [];
           for (let i = 0; i < Math.min(items.length, 5); i++) {
             const item = items[i];
             const rawTitle = item.querySelector('title')?.textContent || '';
             const link = item.querySelector('link')?.textContent || '';
             const pubDate = item.querySelector('pubDate')?.textContent || '';
-
+            
             let title = rawTitle;
             let source = 'News';
             const dashIdx = rawTitle.lastIndexOf(' - ');
@@ -4639,7 +3959,7 @@ window.runPositionSizingCalc = function() {
       window.translateNewsItem = async function(e, btn, idx) {
         e.stopPropagation();
         if (!cachedNews || !cachedNews[idx]) return;
-
+        
         if (!config.apiKey) {
           alert('⚠️ กรุณาตั้งค่า API Key ของ Gemini (คลิก ⚙️ ด้านขวาบน) เพื่อเปิดใช้ฟีเจอร์แปลภาษา');
           return;
@@ -4684,9 +4004,9 @@ window.runPositionSizingCalc = function() {
         if (ticker === 'SPCX') {
           return { price: 'Pre-IPO', change: 0, currency: 'USD' };
         }
-
+        
         let symbol = ticker;
-
+        
         try {
           const encSymbol = encodeURIComponent(symbol);
           const proxyUrl = `https://api.allorigins.win/raw?url=https://query1.finance.yahoo.com/v8/finance/chart/${encSymbol}`;
@@ -4709,10 +4029,10 @@ window.runPositionSizingCalc = function() {
       window.updateDetailPrice = async function(ticker) {
         const el = $('detail-realtime-price');
         if (!el) return;
-
+        
         const data = await fetchYahooPrice(ticker);
         if (!el) return;
-
+        
         if (data) {
           if (typeof data.price === 'number') {
             const changeColor = data.change >= 0 ? 'var(--accent-green)' : 'var(--accent-red)';
@@ -4729,7 +4049,7 @@ window.runPositionSizingCalc = function() {
       window.updateWatchlistPrices = async function(tickers) {
         const symbols = tickers.filter(t => t !== 'SPCX').join(',');
         if (!symbols) return {};
-
+        
         try {
           const encSymbols = encodeURIComponent(symbols);
           const proxyUrl = `https://api.allorigins.win/raw?url=https://query1.finance.yahoo.com/v7/finance/quote?symbols=${encSymbols}`;
@@ -4790,7 +4110,7 @@ window.runPositionSizingCalc = function() {
           const isPortfolio = portfolioTickers.has(stock.ticker);
           const isActive = selectedStock?.ticker === stock.ticker;
           const targetText = stock.targetPrice ? `<span class="stock-chat-target">🎯 ${stock.targetPrice}</span>` : '';
-
+          
           const div = document.createElement('div');
           div.className = 'stock-item' + (isActive ? ' active' : '');
           div.innerHTML = `
@@ -4841,7 +4161,7 @@ window.runPositionSizingCalc = function() {
         const stock = STOCKS.find(s => s.ticker === ticker);
         if (!stock) return;
         stock.notes = $('stock-notes-area').value;
-
+        
         clearTimeout(notesTimer);
         notesTimer = setTimeout(() => {
           saveStocks();
@@ -4856,7 +4176,7 @@ window.runPositionSizingCalc = function() {
 
       function renderStockDetail() {
         const el = $('stock-detail-content');
-
+        
         // Handle Add New Stock Pane
         if (typeof isAddingNewStock !== 'undefined' && isAddingNewStock) {
           el.innerHTML = `
@@ -4881,7 +4201,7 @@ window.runPositionSizingCalc = function() {
                   <input type="text" class="edit-field" id="new-name" placeholder="เช่น Palantir Technologies" style="min-height: auto; height: 38px;" />
                 </div>
               </div>
-
+              
               <div style="display: flex; gap: 12px; margin-bottom: 12px;">
                 <div style="flex: 1;">
                   <div class="detail-section-title">สไตล์การลงทุน</div>
@@ -4896,12 +4216,12 @@ window.runPositionSizingCalc = function() {
                   </select>
                 </div>
               </div>
-
+              
               <div class="detail-section">
                 <div class="detail-section-title">กลุ่มอุตสาหกรรม</div>
                 <input type="text" class="edit-field" id="new-group" placeholder="เช่น AI Software, Cloud Hyperscalers" style="min-height: auto; height: 38px;" />
               </div>
-
+              
               ${editField('1️⃣ ธุรกิจนี้ทำอะไรบ้าง?', 'new-what', '')}
               ${editField('📊 อัตราส่วนการทำเงินคิดเป็นกี่%ของรายได้', 'new-revenue-breakdown', '')}
               ${editField('2️⃣ หาเงินจากอะไร?', 'new-how', '')}
@@ -4909,12 +4229,12 @@ window.runPositionSizingCalc = function() {
               ${editField('🤝 ดีลสำคัญ', 'new-deals', '')}
               ${editField('🛡️ จุดแข็ง / Moat', 'new-moat', '')}
               ${editField('⚠️ จุดอ่อน / ความเสี่ยง', 'new-risks', '')}
-
+              
               <div class="detail-section">
                 <div class="detail-section-title">🎬 รูปภาพอินโฟกราฟิก URL / หรือกดวางภาพ (Ctrl+V)</div>
                 <input type="text" class="edit-field" id="new-image-url" style="min-height: auto; height: 38px;" onpaste="handleStockImagePaste(event, 'new-image-url')" placeholder="ใส่ที่อยู่รูปภาพ หรือคลิกที่นี่แล้วกด Ctrl+V เพื่อวางรูปภาพ..." />
               </div>
-
+              
               <div class="edit-actions">
                 <button class="btn btn-primary" onclick="saveNewStock()"><i data-lucide="plus-circle" style="width:14px;height:14px;"></i> บันทึกหุ้นใหม่</button>
                 <button class="btn" onclick="cancelAddStock()">ยกเลิก</button>
@@ -5008,10 +4328,10 @@ window.runPositionSizingCalc = function() {
             </div>
             <div class="detail-content" style="display:flex; flex-direction:column; gap:10px; height:calc(100% - 130px);">
               <div style="font-size:12px; color:var(--text-muted);">จดบันทึกแนวคิดการวิจัย แผนการซื้อขาย หรือเป้าหมายส่วนตัวของหุ้นตัวนี้ (ระบบบันทึกอัตโนมัติ)</div>
-              <textarea
-                id="stock-notes-area"
-                class="edit-field"
-                style="flex:1; min-height: 250px; font-family: 'Sarabun', sans-serif; font-size:14px; line-height:1.7;"
+              <textarea 
+                id="stock-notes-area" 
+                class="edit-field" 
+                style="flex:1; min-height: 250px; font-family: 'Sarabun', sans-serif; font-size:14px; line-height:1.7;" 
                 placeholder="เขียนโน้ตวิเคราะห์หุ้นตัวนี้ของคุณได้ที่นี่..."
                 oninput="saveStockNotes('${s.ticker}')">${s.notes || ''}</textarea>
               <div style="font-size:11px; color:var(--accent-green); display:flex; align-items:center; gap:4px; opacity:0; transition:opacity 0.3s;" id="notes-saved-indicator">
@@ -5029,7 +4349,7 @@ window.runPositionSizingCalc = function() {
           } else if (s.ticker.endsWith('.BK')) {
             tvSymbol = 'SET:' + s.ticker.replace('.BK', '');
           }
-
+          
           el.innerHTML = `
             <div class="detail-header">
               <img src="${s.logoUrl}" alt="" class="detail-logo" onerror="this.style.display='none'" />
@@ -5046,8 +4366,8 @@ window.runPositionSizingCalc = function() {
               <button class="detail-tab" onclick="setDetailTab('edit')">✏️ แก้ไข</button>
             </div>
             <div class="detail-content" style="height: calc(100% - 130px); padding: 12px 20px 20px;">
-              <iframe
-                src="https://s.tradingview.com/widgetembed/?frameElementId=tradingview_chart&symbol=${tvSymbol}&interval=D&hidesidetoolbar=0&symboledit=1&saveimage=1&toolbarbg=111827&theme=dark&style=1&timezone=Asia%2FBangkok&studies=%5B%5D&locale=th"
+              <iframe 
+                src="https://s.tradingview.com/widgetembed/?frameElementId=tradingview_chart&symbol=${tvSymbol}&interval=D&hidesidetoolbar=0&symboledit=1&saveimage=1&toolbarbg=111827&theme=dark&style=1&timezone=Asia%2FBangkok&studies=%5B%5D&locale=th" 
                 style="width: 100%; height: 100%; min-height: 380px; border: none; border-radius: 12px; background: #080c14;"
                 id="tradingview_iframe">
               </iframe>
@@ -5093,7 +4413,7 @@ window.runPositionSizingCalc = function() {
               ${editField('🤝 ดีลสำคัญ', 'edit-deals', s.deals)}
               ${editField('🛡️ จุดแข็ง / Moat', 'edit-moat', s.moat)}
               ${editField('⚠️ จุดอ่อน / ความเสี่ยง', 'edit-risks', s.risks)}
-
+              
               <div class="detail-section">
                 <div class="detail-section-title">🎬 รูปภาพอินโฟกราฟิก URL / หรือกดวางภาพ (Ctrl+V)</div>
                 <input type="text" class="edit-field" id="edit-image-url" value="${s.imageUrl || ''}" style="min-height: auto; height: 38px;" onpaste="handleStockImagePaste(event, 'edit-image-url')" placeholder="ใส่ที่อยู่รูปภาพ เช่น images/AMZN_infographic.png หรือคลิกที่นี่แล้วกด Ctrl+V เพื่อวางรูปภาพ..." />
@@ -5179,7 +4499,7 @@ window.runPositionSizingCalc = function() {
         selectedStock.moat = $('edit-moat').value;
         selectedStock.risks = $('edit-risks').value;
         selectedStock.imageUrl = $('edit-image-url').value.trim();
-
+        
         saveStocks();
         buildGroupFilter();
         detailTab = 'memo';
@@ -5256,7 +4576,7 @@ window.runPositionSizingCalc = function() {
           alert('⚠️ หุ้น ' + ticker + ' มีอยู่ในระบบแล้วครับ');
           return;
         }
-
+        
         const style = $('new-style').value;
         const market = $('new-market').value;
         const group = $('new-group').value.trim();
@@ -5268,7 +4588,7 @@ window.runPositionSizingCalc = function() {
         const moat = $('new-moat').value;
         const risks = $('new-risks').value;
         const imageUrl = $('new-image-url').value.trim();
-
+        
         const newStock = {
           ticker,
           name,
@@ -5287,7 +4607,7 @@ window.runPositionSizingCalc = function() {
           imageUrl,
           financials: []
         };
-
+        
         STOCKS.push(newStock);
         saveStocks();
         isAddingNewStock = false;
@@ -5322,7 +4642,7 @@ window.runPositionSizingCalc = function() {
         }
 
         toast('กำลังให้ AI วิเคราะห์และสรุปข้อมูลหุ้น ' + cleanTicker + '...');
-
+        
         try {
           const promptText = `คุณคือผู้เชี่ยวชาญด้านข้อมูลหุ้น ช่วยสรุปข้อมูลเชิงลึกของหุ้น ${cleanTicker} เป็นภาษาไทยตามโครงสร้าง JSON ต่อไปนี้เท่านั้น ห้ามเขียนข้อความเกริ่นนำหรือท้ายเรื่องใดๆ ทั้งสิ้น ห้ามใช้ markdown codeblock (เช่น \`\`\`json) ให้ส่งข้อความ JSON ดิบๆ มาเลย:\n{\n  "name": "ชื่อบริษัทสั้นๆ (ภาษาอังกฤษ)",\n  "group": "พิมพ์กลุ่มที่ตรงที่สุด เช่น AI Infrastructure, Semiconductor, Software, Space Tech, Defense Tech, หรืออื่นๆ",\n  "style": "พิมพ์เลือกสไตล์ที่ตรงที่สุดจาก: เติบโต (Growth), Defensive (ปลอดภัย), ม้ามืด (Dark Horse), ถือยาว (Core Hold), หุ้นซิ่ง (Momentum / Trading)",\n  "market": "พิมพ์เลือกตลาดที่ตรงที่สุดจาก: US, TH, CN, JP, EU",\n  "whatItDoes": "ธุรกิจนี้ทำอะไรบ้าง?: สรุปรายละเอียดการประกอบธุรกิจกระชับ 3-5 บรรทัด",\n  "revenueBreakdown": "อัตราส่วนการทำเงินคิดเป็นกี่%ของรายได้: สรุปสัดส่วนรายได้เป็นเปอร์เซ็นต์อย่างชัดเจน",\n  "howItMakesMoney": "หาเงินจากอะไร?: สรุปสั้นๆ 2-3 บรรทัด",\n  "targetCustomers": "กลุ่มลูกค้า เป็นใคร: สรุปกลุ่มลูกค้าเป้าหมายหลัก ภาพรวมส่วนมากคือใคร หากมีชื่อลูกค้าสำคัญที่ชัดเจนและสัดส่วนเปอร์เซ็นต์กลุ่มลูกค้าให้ระบุแยกแยะอย่างชัดเจนด้วย",\n  "deals": "ดีลสำคัญ: สรุปดีลและสัญญาสำคัญของบริษัทในช่วงนี้",\n  "moat": "จุดแข็ง / Moat: สรุปแต้มต่อทางธุรกิจที่คู่แข่งเลียนแบบได้ยาก",\n  "risks": "จุดอ่อน / ความเสี่ยง: สรุปความเสี่ยงหลักทางธุรกิจ"\n}`;
 
@@ -5333,14 +4653,14 @@ window.runPositionSizingCalc = function() {
           const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${config.model}:generateContent?key=${config.apiKey}`, {
             method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body)
           });
-
+          
           const data = await res.json();
           let reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
-
+          
           reply = reply.replace(/```json/g, '').replace(/```/g, '').trim();
-
+          
           const profile = JSON.parse(reply);
-
+          
           const newStock = {
             ticker: cleanTicker,
             name: profile.name || cleanTicker,
@@ -5359,7 +4679,7 @@ window.runPositionSizingCalc = function() {
             imageUrl: 'images/' + cleanTicker + '_infographic.png',
             financials: []
           };
-
+          
           STOCKS.push(newStock);
           saveStocks();
           buildGroupFilter();
@@ -5419,7 +4739,7 @@ window.runPositionSizingCalc = function() {
         if (!list) return;
         const search = $('watchlist-search-input').value.toLowerCase().trim();
         const starredStocks = STOCKS.filter(s => starred.has(s.ticker));
-
+        
         const filtered = starredStocks.filter(s => {
           const matchSearch = s.ticker.toLowerCase().includes(search) || s.name.toLowerCase().includes(search);
           const matchMarket = watchlistMarketFilter === 'ALL' || s.market === watchlistMarketFilter;
@@ -5439,7 +4759,7 @@ window.runPositionSizingCalc = function() {
           const isActive = selectedWatchlistStock?.ticker === stock.ticker;
           const isPortfolio = portfolioTickers.has(stock.ticker);
           const targetText = stock.targetPrice ? `<span class="stock-chat-target">🎯 ${stock.targetPrice}</span>` : '';
-
+          
           const div = document.createElement('div');
           div.className = 'stock-item' + (isActive ? ' active' : '');
           div.innerHTML = `
@@ -5467,9 +4787,9 @@ window.runPositionSizingCalc = function() {
           list.appendChild(div);
         });
         lucide.createIcons();
-
+        
         loadWatchlistSidebarPrices(filtered.map(s => s.ticker));
-
+        
         if (!selectedWatchlistStock && filtered.length > 0) {
           selectWatchlistStock(filtered[0].ticker);
         } else {
@@ -5515,7 +4835,7 @@ window.runPositionSizingCalc = function() {
       function renderWatchlistDetail() {
         const el = $('watchlist-detail-content');
         if (!el) return;
-
+        
         if (!selectedWatchlistStock) {
           el.innerHTML = `
             <div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--text-muted);flex-direction:column;gap:10px;">
@@ -5528,7 +4848,7 @@ window.runPositionSizingCalc = function() {
         }
 
         const s = selectedWatchlistStock;
-
+        
         let tvSymbol = s.ticker;
         let titleSuffix = '';
         if (s.ticker === 'SPCX') {
@@ -5551,23 +4871,23 @@ window.runPositionSizingCalc = function() {
               <span style="font-size:12px; color:var(--text-muted);">กำลังดึงราคา...</span>
             </div>
           </div>
-
+          
           <div style="flex:1; display:flex; flex-direction:column; padding:0 20px 20px; gap:12px; height:calc(100% - 70px);">
             <div style="flex:3; min-height: 280px; position:relative; background:#080c14; border-radius:12px; border:1px solid var(--border-color); overflow:hidden;">
-              <iframe
-                src="https://s.tradingview.com/widgetembed/?frameElementId=tradingview_chart&symbol=${tvSymbol}&interval=D&hidesidetoolbar=0&symboledit=1&saveimage=1&toolbarbg=111827&theme=dark&style=1&timezone=Asia%2FBangkok&studies=%5B%5D&locale=th"
+              <iframe 
+                src="https://s.tradingview.com/widgetembed/?frameElementId=tradingview_chart&symbol=${tvSymbol}&interval=D&hidesidetoolbar=0&symboledit=1&saveimage=1&toolbarbg=111827&theme=dark&style=1&timezone=Asia%2FBangkok&studies=%5B%5D&locale=th" 
                 style="width: 100%; height: 100%; border: none;"
                 id="w_tradingview_iframe">
               </iframe>
             </div>
-
+            
             <div style="flex:2; display:flex; gap:12px; min-height: 160px;">
               <div class="glass-panel" style="padding:12px; flex:1; display:flex; flex-direction:column; gap:8px;">
                 <div style="font-size:12px; font-weight:700; color:var(--accent-orange); display:flex; align-items:center; gap:4px;">
                   <i data-lucide="target" style="width:14px;height:14px;"></i> ราคาที่เล็งเป้าซื้อ (Target Price)
                 </div>
                 <div style="display:flex; align-items:center; gap:8px; margin-top:4px;">
-                  <input type="text" id="w-target-price" class="edit-field" style="flex:1; min-height:auto; height:38px; text-align:right; font-size:16px; font-weight:700; color:var(--accent-orange);"
+                  <input type="text" id="w-target-price" class="edit-field" style="flex:1; min-height:auto; height:38px; text-align:right; font-size:16px; font-weight:700; color:var(--accent-orange);" 
                     value="${s.targetPrice || ''}" placeholder="ระบุราคาที่เล็งเป้า..." oninput="saveWatchlistTarget('${s.ticker}')" />
                   <span style="font-size:14px; color:var(--text-muted);">บาท / USD</span>
                 </div>
@@ -5575,23 +4895,23 @@ window.runPositionSizingCalc = function() {
                   เมื่อกรอกราคาเล็งซื้อไว้ ป้ายราคาเป้าหมายจะแสดงที่แถบแชทหุ้นด้านซ้ายมือให้เห็นเด่นชัด
                 </div>
               </div>
-
+              
               <div class="glass-panel" style="padding:12px; flex:2; display:flex; flex-direction:column; gap:6px;">
                 <div style="font-size:12px; font-weight:700; color:var(--accent-cyan); display:flex; align-items:center; gap:4px; justify-content:space-between;">
                   <span style="display:flex; align-items:center; gap:4px;"><i data-lucide="file-text" style="width:14px;height:14px;"></i> แผนการเทรดหุ้นตัวนี้</span>
                   <span style="font-size:10px; color:var(--accent-green); opacity:0; transition:opacity 0.3s;" id="w-notes-saved-indicator"><i data-lucide="check" style="width:10px;height:10px;"></i> Auto-saved</span>
                 </div>
-                <textarea
-                  id="w-trading-plan"
-                  class="edit-field"
-                  style="flex:1; resize:none; font-family: 'Sarabun', sans-serif; font-size:13px; line-height:1.6; padding:8px 12px;"
+                <textarea 
+                  id="w-trading-plan" 
+                  class="edit-field" 
+                  style="flex:1; resize:none; font-family: 'Sarabun', sans-serif; font-size:13px; line-height:1.6; padding:8px 12px;" 
                   placeholder="เขียนสรุปแผนการเทรด... (เช่น 'รอไม้แรกที่ $130 คาดราคาจะย่อตัวเสร็จช่วงงบประกาศ')"
                   oninput="saveWatchlistPlan('${s.ticker}')">${s.notes || ''}</textarea>
               </div>
             </div>
           </div>
         `;
-
+        
         lucide.createIcons();
         updateWatchlistDetailPrice(s.ticker);
       }
@@ -5617,7 +4937,7 @@ window.runPositionSizingCalc = function() {
         const stock = STOCKS.find(s => s.ticker === ticker);
         if (!stock) return;
         stock.targetPrice = $('w-target-price').value.trim();
-
+        
         clearTimeout(wlTargetTimer);
         wlTargetTimer = setTimeout(() => {
           saveStocks();
@@ -5630,7 +4950,7 @@ window.runPositionSizingCalc = function() {
         const stock = STOCKS.find(s => s.ticker === ticker);
         if (!stock) return;
         stock.notes = $('w-trading-plan').value;
-
+        
         clearTimeout(wlPlanTimer);
         wlPlanTimer = setTimeout(() => {
           saveStocks();
@@ -5646,7 +4966,7 @@ window.runPositionSizingCalc = function() {
 
       // ====== PAGE 4: PORTFOLIO ======
       let portfolioMarketFilter = 'ALL';
-
+      
       window.setPortfolioMarket = function(market) {
         portfolioMarketFilter = market;
         const sel = $('portfolio-market-select');
@@ -5660,7 +4980,7 @@ window.runPositionSizingCalc = function() {
         const searchInput = $('portfolio-search-input');
         const search = searchInput ? searchInput.value.toLowerCase().trim() : '';
         const portfolioStocks = STOCKS.filter(s => portfolioTickers.has(s.ticker));
-
+        
         const filtered = portfolioStocks.filter(s => {
           const matchSearch = s.ticker.toLowerCase().includes(search) || s.name.toLowerCase().includes(search);
           const matchMarket = portfolioMarketFilter === 'ALL' || s.market === portfolioMarketFilter;
@@ -5681,7 +5001,7 @@ window.runPositionSizingCalc = function() {
           const isActive = selectedPortfolioStock?.ticker === stock.ticker;
           const isStarred = starred.has(stock.ticker);
           const targetText = stock.targetPrice ? `<span class="stock-chat-target">🎯 ${stock.targetPrice}</span>` : '';
-
+          
           const div = document.createElement('div');
           div.className = 'stock-item' + (isActive ? ' active' : '');
           div.innerHTML = `
@@ -5709,9 +5029,9 @@ window.runPositionSizingCalc = function() {
           list.appendChild(div);
         });
         lucide.createIcons();
-
+        
         loadPortfolioSidebarPrices(filtered.map(s => s.ticker));
-
+        
         if (!selectedPortfolioStock && filtered.length > 0) {
           selectPortfolioStock(filtered[0].ticker);
         } else {
@@ -5746,7 +5066,7 @@ window.runPositionSizingCalc = function() {
       window.renderPortfolioDetail = function() {
         const el = $('portfolio-detail-content');
         if (!el) return;
-
+        
         if (!selectedPortfolioStock) {
           el.innerHTML = `
             <div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--text-muted);flex-direction:column;gap:10px;">
@@ -5759,7 +5079,7 @@ window.runPositionSizingCalc = function() {
         }
 
         const s = selectedPortfolioStock;
-
+        
         let tvSymbol = s.ticker;
         let titleSuffix = '';
         if (s.ticker === 'SPCX') {
@@ -5791,38 +5111,38 @@ window.runPositionSizingCalc = function() {
               </div>
             </div>
           </div>
-
+          
           <div style="flex:1; display:flex; flex-direction:column; padding:0 20px 20px; gap:12px; height:calc(100% - 70px);">
             <div style="flex:3; min-height: 280px; position:relative; background:#080c14; border-radius:12px; border:1px solid var(--border-color); overflow:hidden;">
-              <iframe
-                src="https://s.tradingview.com/widgetembed/?frameElementId=tradingview_chart&symbol=${tvSymbol}&interval=D&hidesidetoolbar=0&symboledit=1&saveimage=1&toolbarbg=111827&theme=dark&style=1&timezone=Asia%2FBangkok&studies=%5B%5D&locale=th"
+              <iframe 
+                src="https://s.tradingview.com/widgetembed/?frameElementId=tradingview_chart&symbol=${tvSymbol}&interval=D&hidesidetoolbar=0&symboledit=1&saveimage=1&toolbarbg=111827&theme=dark&style=1&timezone=Asia%2FBangkok&studies=%5B%5D&locale=th" 
                 style="width: 100%; height: 100%; border: none;"
                 id="p_tradingview_iframe">
               </iframe>
             </div>
-
+            
             <div style="flex:2; display:flex; gap:12px; min-height: 180px;">
               <div class="glass-panel" style="padding:16px; flex:1; display:flex; flex-direction:column; gap:8px;">
                 <div style="font-size:13px; font-weight:700; color:var(--accent-orange); display:flex; align-items:center; gap:6px; justify-content:space-between;">
                   <span style="display:flex; align-items:center; gap:6px;">
-                    <i data-lucide="file-text" style="width:16px;height:16px;"></i>
+                    <i data-lucide="file-text" style="width:16px;height:16px;"></i> 
                     บันทึกข้อมูลเจาะลึก & รายละเอียดพอร์ต (เช่น รอบส่งพิเศษ, ข้อมูลเด่น)
                   </span>
                   <span style="font-size:11px; color:var(--accent-green); opacity:0; transition:opacity 0.3s;" id="p-notes-saved-indicator">
                     <i data-lucide="check" style="width:11px;height:11px;"></i> Auto-saved
                   </span>
                 </div>
-                <textarea
-                  id="p-portfolio-notes"
-                  class="edit-field"
-                  style="width:100%; flex:1; padding:12px; border-radius:8px; border:1px solid var(--border-color); font-family:inherit; font-size:13px; line-height:1.6; resize:none; outline:none; color: #111827; background:#fff;"
+                <textarea 
+                  id="p-portfolio-notes" 
+                  class="edit-field" 
+                  style="width:100%; flex:1; padding:12px; border-radius:8px; border:1px solid var(--border-color); font-family:inherit; font-size:13px; line-height:1.6; resize:none; outline:none; color: #111827; background:#fff;" 
                   placeholder="เขียนบันทึกมุมมองเชิงลึก เช่น ข้อได้เปรียบทางธุรกิจของหุ้นในพอร์ต, ดีลพิเศษ, หรือการจัดส่ง..."
                   oninput="savePortfolioNotesForStock('${s.ticker}')">${note}</textarea>
               </div>
             </div>
           </div>
         `;
-
+        
         lucide.createIcons();
         updatePortfolioDetailPrice(s.ticker);
       };
@@ -5848,7 +5168,7 @@ window.runPositionSizingCalc = function() {
         const noteArea = $('p-portfolio-notes');
         if (!noteArea) return;
         const notes = noteArea.value;
-
+        
         clearTimeout(pPlanTimer);
         pPlanTimer = setTimeout(() => {
           const now = new Date();
@@ -5859,13 +5179,13 @@ window.runPositionSizingCalc = function() {
             hour: '2-digit',
             minute: '2-digit'
           });
-
+          
           S.set('portfolio_note_' + ticker, notes);
           S.set('portfolio_updated_' + ticker, dateStr);
-
+          
           const updatedDate = $('p-updated-date');
           if (updatedDate) updatedDate.innerText = dateStr;
-
+          
           const ind = $('p-notes-saved-indicator');
           if (ind) {
             ind.style.opacity = 1;
@@ -6052,508 +5372,6 @@ window.runPositionSizingCalc = function() {
         }
       };
 
-      function compactSlug(value, fallback = 'note') {
-        return (value || fallback)
-          .toString()
-          .toLowerCase()
-          .replace(/[^a-z0-9ก-๙]+/gi, '-')
-          .replace(/^-+|-+$/g, '')
-          .slice(0, 70) || fallback;
-      }
-
-      async function upsertKnowledgeDocument(doc) {
-        if (!supabaseClient) {
-          toast('ยังไม่ได้เชื่อมต่อ Supabase');
-          return false;
-        }
-
-        const nextDoc = {
-          path: doc.path,
-          title: doc.title || doc.path,
-          category: doc.category || 'knowledge',
-          content: doc.content || ''
-        };
-
-        try {
-          const { error } = await supabaseClient
-            .from('stock_research_knowledge_documents')
-            .upsert(nextDoc, { onConflict: 'path' });
-
-          if (error) throw error;
-          const existingIndex = KNOWLEDGE_DOCS.findIndex(item => item.path === nextDoc.path);
-          if (existingIndex >= 0) KNOWLEDGE_DOCS[existingIndex] = { ...KNOWLEDGE_DOCS[existingIndex], ...nextDoc, updated_at: new Date().toISOString() };
-          else KNOWLEDGE_DOCS.push({ ...nextDoc, updated_at: new Date().toISOString() });
-          selectedKnowledgePath = nextDoc.path;
-          toast('บันทึกเข้าคลังความรู้แล้ว');
-          return true;
-        } catch (e) {
-          console.error('Error saving generated knowledge doc:', e);
-          toast('บันทึกเข้าคลังล้มเหลว: ' + e.message);
-          return false;
-        }
-      }
-
-      // ====== FAIR VALUE LAB ======
-      function getFairValueInputs() {
-        return {
-          ticker: ($('fv-ticker')?.value || 'TICKER').trim().toUpperCase(),
-          currentPrice: parseFloat($('fv-current-price')?.value) || 0,
-          revenue: parseFloat($('fv-revenue')?.value) || 0,
-          growth: (parseFloat($('fv-growth')?.value) || 0) / 100,
-          margin: (parseFloat($('fv-margin')?.value) || 0) / 100,
-          tax: (parseFloat($('fv-tax')?.value) || 0) / 100,
-          discount: (parseFloat($('fv-discount')?.value) || 0) / 100,
-          terminal: (parseFloat($('fv-terminal')?.value) || 0) / 100,
-          shares: parseFloat($('fv-shares')?.value) || 0,
-          netCash: parseFloat($('fv-net-cash')?.value) || 0,
-          mos: (parseFloat($('fv-mos')?.value) || 0) / 100
-        };
-      }
-
-      function calculateFairValue(input) {
-        const years = [];
-        let revenue = input.revenue;
-        let pvCashFlow = 0;
-
-        for (let year = 1; year <= 5; year += 1) {
-          revenue *= (1 + input.growth);
-          const nopat = revenue * input.margin * (1 - input.tax);
-          const discountFactor = Math.pow(1 + input.discount, year);
-          const pv = discountFactor > 0 ? nopat / discountFactor : 0;
-          pvCashFlow += pv;
-          years.push({ year, revenue, nopat, pv });
-        }
-
-        const lastNopat = years[years.length - 1]?.nopat || 0;
-        const terminalDenominator = input.discount - input.terminal;
-        const terminalValue = terminalDenominator > 0 ? (lastNopat * (1 + input.terminal)) / terminalDenominator : 0;
-        const pvTerminal = terminalValue / Math.pow(1 + input.discount, 5);
-        const enterpriseValue = pvCashFlow + pvTerminal;
-        const equityValue = enterpriseValue + input.netCash;
-        const fairValue = input.shares > 0 ? equityValue / input.shares : 0;
-        const buyPrice = fairValue * (1 - input.mos);
-        const upside = input.currentPrice > 0 ? ((fairValue / input.currentPrice) - 1) * 100 : 0;
-
-        return { years, pvCashFlow, terminalValue, pvTerminal, enterpriseValue, equityValue, fairValue, buyPrice, upside };
-      }
-
-      function formatMoney(value) {
-        return Number(value || 0).toLocaleString(undefined, { maximumFractionDigits: 2 });
-      }
-
-      function buildFairValueMarkdown(input, result) {
-        const today = new Date().toISOString().slice(0, 10);
-        return `# Fair Value Note: ${input.ticker}
-
-Date: ${today}
-Source: Project stock Fair Value Lab
-
-## Inputs
-
-- Current price: ${input.currentPrice}
-- Revenue latest year: ${input.revenue}
-- Revenue growth: ${(input.growth * 100).toFixed(1)}%
-- Operating margin: ${(input.margin * 100).toFixed(1)}%
-- Tax rate: ${(input.tax * 100).toFixed(1)}%
-- Discount rate: ${(input.discount * 100).toFixed(1)}%
-- Terminal growth: ${(input.terminal * 100).toFixed(1)}%
-- Shares outstanding: ${input.shares}
-- Net cash/debt: ${input.netCash}
-- Margin of safety: ${(input.mos * 100).toFixed(1)}%
-
-## Output
-
-- Fair value per share: ${result.fairValue.toFixed(2)}
-- Buy price with margin of safety: ${result.buyPrice.toFixed(2)}
-- Upside/downside vs current price: ${result.upside.toFixed(1)}%
-- Enterprise value: ${formatMoney(result.enterpriseValue)}
-- Equity value: ${formatMoney(result.equityValue)}
-
-## 5-Year Projection
-
-| Year | Revenue | NOPAT | Present Value |
-|---:|---:|---:|---:|
-${result.years.map(row => `| ${row.year} | ${formatMoney(row.revenue)} | ${formatMoney(row.nopat)} | ${formatMoney(row.pv)} |`).join('\n')}
-
-## Notes To Verify
-
-- ตัวเลขนี้เป็น model สมมติ ไม่ใช่ราคาที่ควรซื้อขายทันที
-- ต้องเช็กงบจริง, dilution, cyclicality, margin durability, debt, และ quality of earnings
-- ถ้าธุรกิจเปลี่ยน phase ต้องปรับ growth/margin/discount rate ใหม่
-`;
-      }
-
-      function renderFairValueLab() {
-        const el = $('fair-value-detail-content');
-        if (!el) return;
-
-        const input = getFairValueInputs();
-        S.set('fair_value_lab_config', JSON.stringify(input));
-
-        if (!input.revenue || !input.shares || input.discount <= input.terminal) {
-          el.innerHTML = `
-            <div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--text-muted);flex-direction:column;gap:10px;text-align:center;padding:20px;">
-              <i data-lucide="calculator" style="width:40px;height:40px;opacity:0.3;color:var(--accent-cyan);"></i>
-              <p>กรอก revenue, shares และให้ discount rate สูงกว่า terminal growth เพื่อคำนวณ fair value</p>
-            </div>
-          `;
-          lucide.createIcons();
-          return;
-        }
-
-        const result = calculateFairValue(input);
-        const fairColor = result.upside >= 0 ? 'var(--accent-green)' : 'var(--accent-red)';
-        el.innerHTML = `
-          <div class="detail-header" style="justify-content:space-between; flex-shrink:0;">
-            <div class="detail-title">
-              <h2>Fair Value: ${escapeHtml(input.ticker)}</h2>
-              <p style="font-size:11px;color:var(--text-muted);margin-top:4px;">Simple DCF · ใช้เพื่อคิดกรอบ ไม่ใช่คำแนะนำลงทุน</p>
-            </div>
-            <button class="btn" onclick="renderFairValueLab()" style="padding:8px 12px;">
-              <i data-lucide="refresh-cw" style="width:13px;height:13px;"></i> Refresh
-            </button>
-          </div>
-          <div style="padding:0 20px 20px; display:flex; flex-direction:column; gap:14px;">
-            <div style="display:grid; grid-template-columns: repeat(4, minmax(130px,1fr)); gap:10px;">
-              <div class="glass-panel" style="padding:14px;">
-                <div style="font-size:11px;color:var(--text-muted);font-weight:600;">Fair Value / Share</div>
-                <div style="font-size:24px;font-weight:800;color:${fairColor};margin-top:5px;">${result.fairValue.toFixed(2)}</div>
-              </div>
-              <div class="glass-panel" style="padding:14px;">
-                <div style="font-size:11px;color:var(--text-muted);font-weight:600;">MOS Buy Price</div>
-                <div style="font-size:24px;font-weight:800;color:var(--accent-cyan);margin-top:5px;">${result.buyPrice.toFixed(2)}</div>
-              </div>
-              <div class="glass-panel" style="padding:14px;">
-                <div style="font-size:11px;color:var(--text-muted);font-weight:600;">Upside / Downside</div>
-                <div style="font-size:24px;font-weight:800;color:${fairColor};margin-top:5px;">${result.upside.toFixed(1)}%</div>
-              </div>
-              <div class="glass-panel" style="padding:14px;">
-                <div style="font-size:11px;color:var(--text-muted);font-weight:600;">Equity Value</div>
-                <div style="font-size:24px;font-weight:800;color:var(--text-primary);margin-top:5px;">${formatMoney(result.equityValue)}</div>
-              </div>
-            </div>
-            <div class="glass-panel" style="padding:16px;">
-              <div style="font-size:13px;font-weight:700;color:var(--accent-cyan);display:flex;align-items:center;gap:6px;margin-bottom:10px;">
-                <i data-lucide="table" style="width:15px;height:15px;"></i> Projection
-              </div>
-              <table class="fin-table">
-                <thead><tr><th>Year</th><th>Revenue</th><th>NOPAT</th><th>Present Value</th></tr></thead>
-                <tbody>
-                  ${result.years.map(row => `<tr><td>${row.year}</td><td>${formatMoney(row.revenue)}</td><td>${formatMoney(row.nopat)}</td><td>${formatMoney(row.pv)}</td></tr>`).join('')}
-                </tbody>
-              </table>
-            </div>
-            <div style="font-size:11px;color:var(--text-muted);line-height:1.7;">
-              Formula: revenue growth 5 ปี, NOPAT = revenue x operating margin x (1-tax), terminal value แบบ Gordon Growth, แล้วหารด้วย shares outstanding
-            </div>
-          </div>
-        `;
-        lucide.createIcons();
-      }
-
-      window.saveFairValueToKnowledge = async function() {
-        const input = getFairValueInputs();
-        if (!input.revenue || !input.shares || input.discount <= input.terminal) {
-          toast('คำนวณ fair value ให้ครบก่อนบันทึก');
-          return;
-        }
-        const result = calculateFairValue(input);
-        const today = new Date().toISOString().slice(0, 10);
-        const path = `09_valuation_notes/${today}-${compactSlug(input.ticker, 'ticker')}-fair-value.md`;
-        await upsertKnowledgeDocument({
-          path,
-          title: `Fair Value: ${input.ticker}`,
-          category: '09_valuation_notes',
-          content: buildFairValueMarkdown(input, result)
-        });
-      };
-
-      ['fv-ticker','fv-current-price','fv-revenue','fv-growth','fv-margin','fv-tax','fv-discount','fv-terminal','fv-shares','fv-net-cash','fv-mos'].forEach(id => {
-        const node = $(id);
-        if (node) node.addEventListener('input', renderFairValueLab);
-      });
-      if ($('btn-run-fair-value')) $('btn-run-fair-value').onclick = renderFairValueLab;
-      if ($('btn-save-fair-value')) $('btn-save-fair-value').onclick = () => window.saveFairValueToKnowledge();
-
-      // ====== LINK TO KNOWLEDGE ======
-      function getKnowledgeExtractorInputs() {
-        return {
-          sourceType: $('kx-source-type')?.value || 'Other',
-          url: ($('kx-url')?.value || '').trim(),
-          title: ($('kx-title')?.value || '').trim(),
-          tags: ($('kx-tags')?.value || '').trim(),
-          sourceText: ($('kx-source-text')?.value || '').trim(),
-          output: ($('kx-output')?.value || '').trim()
-        };
-      }
-
-      function renderKnowledgeExtractor() {
-        if (!$('kx-output')) return;
-        lucide.createIcons();
-      }
-
-      function buildManualKnowledgeNote(input) {
-        const today = new Date().toISOString().slice(0, 10);
-        return `# ${input.title || 'Captured Knowledge'}
-
-Date: ${today}
-Source type: ${input.sourceType}
-Source URL: ${input.url || '-'}
-Related tickers/theme: ${input.tags || '-'}
-
-## Raw Takeaways
-
-${input.sourceText || '-'}
-
-## To Verify
-
-- แหล่งที่มาเชื่อถือได้แค่ไหน
-- ตัวเลข/claim สำคัญมีหลักฐานจากงบหรือ official source ไหม
-- หุ้นที่ได้ประโยชน์จริงเป็น direct beneficiary หรือ indirect beneficiary
-`;
-      }
-
-      function buildKnowledgeExtractionPrompt(input) {
-        return `คุณคือ AI research librarian ของ Project stock
-
-หน้าที่คือกลั่นโพสต์/คลิป/บทความให้เป็น knowledge note สำหรับคลังลงทุนส่วนตัว
-ตอบเป็น Markdown ภาษาไทย กระชับ แต่มีโครงสร้างและตรวจสอบย้อนหลังได้
-
-ห้ามแต่งข้อมูลเพิ่ม ถ้า claim ไหนไม่มีหลักฐานให้ใส่ว่า "ต้อง verify"
-ต้องแยกสิ่งที่เป็น fact, inference, risk และ follow-up
-
-Source type: ${input.sourceType}
-Source URL: ${input.url || '-'}
-Title: ${input.title || '-'}
-Related tickers/theme: ${input.tags || '-'}
-
-เนื้อหาดิบ:
-${truncateForPrompt(input.sourceText, 14000)}
-
-รูปแบบผลลัพธ์:
-# [ชื่อโน้ต]
-
-## One-Line Insight
-
-## Key Points
-
-## Related Stocks / Themes
-
-## Investment Thesis Angle
-
-## Evidence From Source
-
-## Risks / Counterpoints
-
-## Things To Verify
-
-## Follow-Up Questions
-
-## Source
-`;
-      }
-
-      async function runKnowledgeExtraction() {
-        const input = getKnowledgeExtractorInputs();
-        if (!input.sourceText && !input.url) {
-          toast('วางลิงก์หรือข้อความก่อน');
-          return;
-        }
-
-        if (!config.apiKey) {
-          $('kx-output').value = buildManualKnowledgeNote(input);
-          toast('ยังไม่มี Gemini API Key เลยสร้างโน้ตดิบให้ก่อน');
-          return;
-        }
-
-        $('kx-output').value = 'กำลังให้ AI สกัดความรู้...';
-        try {
-          const body = { contents: [{ parts: [{ text: buildKnowledgeExtractionPrompt(input) }] }] };
-          const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${config.model}:generateContent?key=${config.apiKey}`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(body)
-          });
-          const data = await res.json();
-          if (!res.ok) throw new Error(data?.error?.message || 'Gemini API error');
-          const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
-          $('kx-output').value = reply || buildManualKnowledgeNote(input);
-          toast('AI สกัดความรู้เสร็จแล้ว');
-        } catch (e) {
-          console.error('Knowledge extraction error:', e);
-          $('kx-output').value = buildManualKnowledgeNote(input);
-          toast('AI สกัดไม่สำเร็จ เลยสร้างโน้ตดิบให้ก่อน: ' + e.message);
-        }
-      }
-
-      async function saveExtractedKnowledge() {
-        const input = getKnowledgeExtractorInputs();
-        const content = input.output || buildManualKnowledgeNote(input);
-        const today = new Date().toISOString().slice(0, 10);
-        const title = input.title || `Knowledge Capture ${today}`;
-        const path = `08_extracted_knowledge/${today}-${compactSlug(title, 'knowledge')}.md`;
-        await upsertKnowledgeDocument({
-          path,
-          title,
-          category: '08_extracted_knowledge',
-          content
-        });
-      }
-
-      if ($('btn-extract-knowledge')) $('btn-extract-knowledge').onclick = runKnowledgeExtraction;
-      if ($('btn-save-extracted-knowledge')) $('btn-save-extracted-knowledge').onclick = saveExtractedKnowledge;
-
-      // ====== OPTIONS BACKTEST LAB ======
-      function getOptionsInputs() {
-        return {
-          strategy: $('opt-strategy')?.value || 'long_call',
-          ticker: ($('opt-ticker')?.value || 'NVDA').trim().toUpperCase(),
-          entryPrice: parseFloat($('opt-entry-price')?.value) || 0,
-          strike: parseFloat($('opt-strike')?.value) || 0,
-          premium: parseFloat($('opt-premium')?.value) || 0,
-          contracts: Math.max(1, parseInt($('opt-contracts')?.value || '1', 10)),
-          exitPrice: parseFloat($('opt-exit-price')?.value) || 0
-        };
-      }
-
-      function optionPayoff(strategy, stockPrice, entryPrice, strike, premium) {
-        if (strategy === 'long_call') return Math.max(stockPrice - strike, 0) - premium;
-        if (strategy === 'long_put') return Math.max(strike - stockPrice, 0) - premium;
-        if (strategy === 'covered_call') return (stockPrice - entryPrice) + premium - Math.max(stockPrice - strike, 0);
-        if (strategy === 'cash_secured_put') return premium - Math.max(strike - stockPrice, 0);
-        return 0;
-      }
-
-      function describeOptionsStrategy(strategy) {
-        const labels = {
-          long_call: 'Long Call',
-          long_put: 'Long Put',
-          covered_call: 'Covered Call',
-          cash_secured_put: 'Cash-Secured Put'
-        };
-        return labels[strategy] || strategy;
-      }
-
-      function getOptionsMetrics(input) {
-        const multiplier = 100;
-        const perShare = optionPayoff(input.strategy, input.exitPrice, input.entryPrice, input.strike, input.premium);
-        const totalPnL = perShare * multiplier * input.contracts;
-        let breakeven = input.strike + input.premium;
-        let maxLoss = input.premium * multiplier * input.contracts;
-        let capital = maxLoss;
-
-        if (input.strategy === 'long_put') breakeven = input.strike - input.premium;
-        if (input.strategy === 'covered_call') {
-          breakeven = input.entryPrice - input.premium;
-          maxLoss = Math.max(input.entryPrice - input.premium, 0) * multiplier * input.contracts;
-          capital = input.entryPrice * multiplier * input.contracts;
-        }
-        if (input.strategy === 'cash_secured_put') {
-          breakeven = input.strike - input.premium;
-          maxLoss = Math.max(input.strike - input.premium, 0) * multiplier * input.contracts;
-          capital = input.strike * multiplier * input.contracts;
-        }
-
-        return {
-          perShare,
-          totalPnL,
-          breakeven,
-          maxLoss,
-          capital,
-          returnOnCapital: capital > 0 ? totalPnL / capital * 100 : 0
-        };
-      }
-
-      function renderOptionsBacktest() {
-        const el = $('options-detail-content');
-        if (!el) return;
-
-        const input = getOptionsInputs();
-        S.set('options_lab_config', JSON.stringify(input));
-
-        if (!input.entryPrice || !input.strike || !input.premium || !input.exitPrice) {
-          el.innerHTML = `
-            <div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--text-muted);flex-direction:column;gap:10px;">
-              <i data-lucide="activity" style="width:40px;height:40px;opacity:0.3;color:var(--accent-cyan);"></i>
-              <p>กรอกตัวเลขฝั่งซ้ายเพื่อคำนวณ payoff</p>
-            </div>
-          `;
-          lucide.createIcons();
-          return;
-        }
-
-        const metrics = getOptionsMetrics(input);
-        const minPrice = Math.max(0, Math.min(input.entryPrice, input.strike, input.exitPrice) * 0.75);
-        const maxPrice = Math.max(input.entryPrice, input.strike, input.exitPrice) * 1.35;
-        const step = Math.max((maxPrice - minPrice) / 8, 1);
-        const rows = [];
-        for (let price = minPrice; price <= maxPrice + 0.01; price += step) {
-          const pnl = optionPayoff(input.strategy, price, input.entryPrice, input.strike, input.premium) * 100 * input.contracts;
-          rows.push({ price, pnl });
-        }
-
-        const pnlColor = metrics.totalPnL >= 0 ? 'var(--accent-green)' : 'var(--accent-red)';
-        const strategyLabel = describeOptionsStrategy(input.strategy);
-
-        el.innerHTML = `
-          <div class="detail-header" style="justify-content:space-between; flex-shrink:0;">
-            <div class="detail-title">
-              <h2>${strategyLabel}: ${escapeHtml(input.ticker)}</h2>
-              <p style="font-size:11px;color:var(--text-muted);margin-top:4px;">Prototype payoff engine · ต่อ option chain/price history ภายหลัง</p>
-            </div>
-            <button class="btn" onclick="renderOptionsBacktest()" style="padding:8px 12px;">
-              <i data-lucide="refresh-cw" style="width:13px;height:13px;"></i> Refresh
-            </button>
-          </div>
-          <div style="padding:0 20px 20px; display:flex; flex-direction:column; gap:14px;">
-            <div style="display:grid; grid-template-columns: repeat(4, minmax(130px,1fr)); gap:10px;">
-              <div class="glass-panel" style="padding:14px;">
-                <div style="font-size:11px;color:var(--text-muted);font-weight:600;">P/L at Expiry</div>
-                <div style="font-size:24px;font-weight:800;color:${pnlColor};margin-top:5px;">${metrics.totalPnL.toLocaleString(undefined,{maximumFractionDigits:0})}</div>
-              </div>
-              <div class="glass-panel" style="padding:14px;">
-                <div style="font-size:11px;color:var(--text-muted);font-weight:600;">Breakeven</div>
-                <div style="font-size:24px;font-weight:800;color:var(--text-primary);margin-top:5px;">${metrics.breakeven.toFixed(2)}</div>
-              </div>
-              <div class="glass-panel" style="padding:14px;">
-                <div style="font-size:11px;color:var(--text-muted);font-weight:600;">Max Loss</div>
-                <div style="font-size:24px;font-weight:800;color:var(--accent-red);margin-top:5px;">${metrics.maxLoss.toLocaleString(undefined,{maximumFractionDigits:0})}</div>
-              </div>
-              <div class="glass-panel" style="padding:14px;">
-                <div style="font-size:11px;color:var(--text-muted);font-weight:600;">Return on Capital</div>
-                <div style="font-size:24px;font-weight:800;color:${pnlColor};margin-top:5px;">${metrics.returnOnCapital.toFixed(1)}%</div>
-              </div>
-            </div>
-            <div class="glass-panel" style="padding:16px;">
-              <div style="font-size:13px;font-weight:700;color:var(--accent-cyan);display:flex;align-items:center;gap:6px;margin-bottom:10px;">
-                <i data-lucide="table" style="width:15px;height:15px;"></i> Payoff Table
-              </div>
-              <table class="fin-table">
-                <thead><tr><th>Stock Price</th><th>P/L</th><th>Return on Capital</th></tr></thead>
-                <tbody>
-                  ${rows.map(row => {
-                    const rowColor = row.pnl >= 0 ? 'var(--accent-green)' : 'var(--accent-red)';
-                    const roc = metrics.capital > 0 ? row.pnl / metrics.capital * 100 : 0;
-                    return `<tr><td>${row.price.toFixed(2)}</td><td style="color:${rowColor};font-weight:700;">${row.pnl.toLocaleString(undefined,{maximumFractionDigits:0})}</td><td>${roc.toFixed(1)}%</td></tr>`;
-                  }).join('')}
-                </tbody>
-              </table>
-            </div>
-            <div style="font-size:11px;color:var(--text-muted);line-height:1.7;">
-              Next data layer: option chain, implied volatility, expiry calendar, historical underlying price, and realized trade simulation.
-            </div>
-          </div>
-        `;
-        lucide.createIcons();
-      }
-
-      ['opt-strategy','opt-ticker','opt-entry-price','opt-strike','opt-premium','opt-contracts','opt-exit-price'].forEach(id => {
-        const node = $(id);
-        if (node) node.addEventListener('input', renderOptionsBacktest);
-        if (node && node.tagName === 'SELECT') node.addEventListener('change', renderOptionsBacktest);
-      });
-      if ($('btn-run-options')) $('btn-run-options').onclick = renderOptionsBacktest;
-
       // ====== CHAT ======
       let chatOpen = false;
       $('chat-fab').onclick = () => {
@@ -6677,7 +5495,7 @@ ${truncateForPrompt(input.sourceText, 14000)}
         const geminiOn = config.apiKey && config.apiKey.trim() !== '';
         const supabaseOn = config.supabaseUrl && config.supabaseKey;
         const modelName = config.model || 'gemini-2.0-flash';
-
+        
         let statusText = '';
         if (geminiOn && supabaseOn) statusText = 'Gemini + Supabase';
         else if (geminiOn) statusText = 'Gemini Active';
@@ -6783,7 +5601,7 @@ ${truncateForPrompt(input.sourceText, 14000)}
           if (!titleMatch) return;
           const stock = {
             name: titleMatch[1].trim(), ticker: titleMatch[2].trim(),
-            logoUrl: '', group: '', style: '', market: 'US', targetPrice: '',
+            logoUrl: '', group: '', style: '', market: 'US', targetPrice: '', 
             whatItDoes: '', revenueBreakdown: '', howItMakesMoney: '',
             targetCustomers: '', deals: '', moat: '', risks: '', financials: []
           };
@@ -6870,24 +5688,22 @@ ${truncateForPrompt(input.sourceText, 14000)}
         }
 
         updateApiDot();
-        renderTabBar();
-        switchPage('styles-guide');
+        buildGroupFilter();
+        renderStockList();
+        renderPlaybook();
+        renderSelectionPage();
+        renderChat();
+        lucide.createIcons();
 
-        // Initialize Supabase and auto-sync
+        // Async sync from Supabase if credentials exist
         initSupabase();
         if (supabaseClient) {
-          // Load playbooks/knowledge docs from Supabase first
-          loadKnowledgeDocsFromSupabase().then(() => {
-            renderStylesGuide();
-          });
-
-          // Sync stocks in parallel
           syncFromSupabase().then(ok => {
             if (ok) {
               console.log('Async sync from Supabase completed.');
-              renderStockReaderList();
-              renderCategorizationBoard();
-              renderWatchlistTargets();
+              buildGroupFilter();
+              renderStockList();
+              renderPortfolio();
             }
           });
         }
@@ -6895,29 +5711,5 @@ ${truncateForPrompt(input.sourceText, 14000)}
 
       init();
     </script>
-
-    <!-- ===== FLOATING AI ADVISOR BOT ===== -->
-    <div id="floating-bot-trigger" onclick="toggleFloatingBot()" title="คุยกับบอทคู่คิด">
-      <i data-lucide="message-square" style="width:24px;height:24px;color:#000;"></i>
-    </div>
-
-    <div id="floating-bot-chat" class="glass-panel">
-      <div class="floating-chat-header">
-        <div style="display:flex; align-items:center; gap:8px;">
-          <span style="display:inline-block; width:8px; height:8px; background:var(--accent-cyan); border-radius:50%; box-shadow:0 0 8px var(--accent-cyan);"></span>
-          <span style="font-weight:600; font-size:14px; color:#fff;">บอทที่ปรึกษา AI</span>
-        </div>
-        <i data-lucide="x" style="width:16px;height:16px;cursor:pointer;color:var(--text-muted);" onclick="toggleFloatingBot()"></i>
-      </div>
-      <div class="floating-chat-body" id="floating-chat-messages">
-        <div class="chat-msg ai">สวัสดีครับพี่กัณฑ์! ผมคือบอทคู่คิดวิเคราะห์หุ้น เปิดหน้าไหนผมจะดูข้อมูลหน้านั้นมารอเลย มีอะไรอยากปรึกษา หรืออยากให้ช่วยรัน Backtest พิมพ์บอกผมได้เลยครับ!</div>
-      </div>
-      <div class="floating-chat-footer">
-        <input type="text" id="floating-chat-input" placeholder="ถามคำถาม หรือสั่งควบคุมหน้าจอ..." onkeydown="if(event.key==='Enter') sendFloatingChat()" />
-        <button onclick="sendFloatingChat()">ส่ง</button>
-      </div>
-    </div>
-
-    </body>
-
+  </body>
 </html>

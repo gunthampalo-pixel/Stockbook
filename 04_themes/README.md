@@ -14,7 +14,7 @@
 
 ## Template
 
-ใช้ `docs/knowledge/02_templates/theme_map.md` เมื่อสร้าง theme ใหม่
+ใช้ `02_templates/theme_map.md` เมื่อสร้าง theme ใหม่
 
 ## Theme Status
 
