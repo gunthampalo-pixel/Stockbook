@@ -1240,6 +1240,48 @@
         _f: {}
       };
 
+      const DEVICE_CACHE_RESET_VERSION = '2026-07-19-clean-repo-v1';
+      function clearProjectDeviceCacheOnce() {
+        if (S.get('project_stock_cache_reset_version') === DEVICE_CACHE_RESET_VERSION) return;
+
+        const exactKeys = new Set([
+          'cached_stocks',
+          'app_tabs',
+          'chat_history',
+          'starred_tickers',
+          'gemini_api_key',
+          'gemini_model_name',
+          'supabase_url',
+          'supabase_key',
+          'options_lab_config',
+          'fair_value_lab_config',
+          'investing_playbook',
+          'selection_playbook',
+          'playbook_keys_order',
+          'selection_keys_order'
+        ]);
+        const prefixes = [
+          'portfolio_note_',
+          'portfolio_updated_',
+          'custom_book_',
+          'selected_custom_book_',
+          'playbook_',
+          'selection_'
+        ];
+
+        try {
+          Object.keys(localStorage).forEach(key => {
+            if (exactKeys.has(key) || prefixes.some(prefix => key.startsWith(prefix))) {
+              localStorage.removeItem(key);
+            }
+          });
+          localStorage.setItem('project_stock_cache_reset_version', DEVICE_CACHE_RESET_VERSION);
+        } catch (e) {
+          console.warn('Could not clear Project stock device cache:', e);
+        }
+      }
+      clearProjectDeviceCacheOnce();
+
       // ====== STOCKS DATA (will be injected) ======
       let STOCKS = [
     {
@@ -2454,6 +2496,19 @@ ${question}`;
       }
 
       // 1. PAGE 1: RENDER STOCK STYLES GUIDE
+      const LOCAL_KNOWLEDGE_PATHS = {
+        '00_ai_context/AI_CONTEXT.md': './docs/knowledge/00_ai_context/AI_CONTEXT.md',
+        '00_ai_context/INVESTOR_PROFILE.md': './docs/knowledge/00_ai_context/INVESTOR_PROFILE.md',
+        '00_ai_context/RESPONSE_RULES.md': './docs/knowledge/00_ai_context/RESPONSE_RULES.md',
+        '01_playbooks/00_idea_generation_bible.md': './docs/knowledge/01_playbooks/00_idea_generation_bible.md',
+        '01_playbooks/01_my_core_strategy.md': './docs/knowledge/01_playbooks/01_my_core_strategy.md',
+        '01_playbooks/01_disruptive_compounder.md': './docs/knowledge/01_playbooks/01_disruptive_compounder.md',
+        '01_playbooks/02_old_winners_reentry.md': './docs/knowledge/01_playbooks/02_old_winners_reentry.md',
+        '01_playbooks/03_second_order_beneficiaries.md': './docs/knowledge/01_playbooks/03_second_order_beneficiaries.md',
+        '01_playbooks/04_infrastructure_bottleneck.md': './docs/knowledge/01_playbooks/04_infrastructure_bottleneck.md',
+        '01_playbooks/05_earnings_inflection.md': './docs/knowledge/01_playbooks/05_earnings_inflection.md',
+        '01_playbooks/06_turnaround_monthly_trend.md': './docs/knowledge/01_playbooks/06_turnaround_monthly_trend.md'
+      };
       const STYLE_DOCS = [
         { id: 'bible', title: '💡 วิธีการหาไอเดียลงทุน (Idea Generation)', path: './01_playbooks/00_idea_generation_bible.md' },
         { id: 'growth', title: '📈 1. หุ้นเติบโต (Disruptive Compounder)', path: './01_playbooks/01_disruptive_compounder.md' },
@@ -2515,7 +2570,8 @@ ${question}`;
 
         // 3. Fallback to local HTTP fetch (for local dev mode)
         try {
-          const res = await fetch(path);
+          const localPath = LOCAL_KNOWLEDGE_PATHS[cleanPath] || path;
+          const res = await fetch(localPath);
           if (res.ok) {
             const md = await res.text();
             return marked.parse(md);

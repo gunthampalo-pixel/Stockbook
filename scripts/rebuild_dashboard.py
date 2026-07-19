@@ -433,13 +433,13 @@ def rebuild():
 
       // 1. PAGE 1: RENDER STOCK STYLES GUIDE
       const STYLE_DOCS = [
-        { id: 'bible', title: '💡 วิธีการหาไอเดียลงทุน (Idea Generation)', path: './01_playbooks/00_idea_generation_bible.md' },
-        { id: 'growth', title: '📈 1. หุ้นเติบโต (Disruptive Compounder)', path: './01_playbooks/01_disruptive_compounder.md' },
-        { id: 'reentry', title: '🔄 2. หุ้นผู้ชนะเดิมรอซื้อใหม่ (Old Winners Re-entry)', path: './01_playbooks/02_old_winners_reentry.md' },
-        { id: 'indirect', title: '🧱 3. หุ้นผู้ช่วยพระเอก (Second-Order Beneficiaries)', path: './01_playbooks/03_second_order_beneficiaries.md' },
-        { id: 'bottleneck', title: '🔌 4. หุ้นคอขวดที่ห้ามขาด (Infrastructure Bottleneck)', path: './01_playbooks/04_infrastructure_bottleneck.md' },
-        { id: 'inflection', title: '💥 5. หุ้นกำไรระเบิด (Earnings Inflection)', path: './01_playbooks/05_earnings_inflection.md' },
-        { id: 'turnaround', title: '🧬 6. หุ้นฟื้นไข้ตามเทรนด์เดือน (Turnaround Monthly)', path: './01_playbooks/06_turnaround_monthly_trend.md' }
+        { id: 'bible', title: '💡 วิธีการหาไอเดียลงทุน (Idea Generation)', path: './docs/knowledge/01_playbooks/00_idea_generation_bible.md' },
+        { id: 'growth', title: '📈 1. หุ้นเติบโต (Disruptive Compounder)', path: './docs/knowledge/01_playbooks/01_disruptive_compounder.md' },
+        { id: 'reentry', title: '🔄 2. หุ้นผู้ชนะเดิมรอซื้อใหม่ (Old Winners Re-entry)', path: './docs/knowledge/01_playbooks/02_old_winners_reentry.md' },
+        { id: 'indirect', title: '🧱 3. หุ้นผู้ช่วยพระเอก (Second-Order Beneficiaries)', path: './docs/knowledge/01_playbooks/03_second_order_beneficiaries.md' },
+        { id: 'bottleneck', title: '🔌 4. หุ้นคอขวดที่ห้ามขาด (Infrastructure Bottleneck)', path: './docs/knowledge/01_playbooks/04_infrastructure_bottleneck.md' },
+        { id: 'inflection', title: '💥 5. หุ้นกำไรระเบิด (Earnings Inflection)', path: './docs/knowledge/01_playbooks/05_earnings_inflection.md' },
+        { id: 'turnaround', title: '🧬 6. หุ้นฟื้นไข้ตามเทรนด์เดือน (Turnaround Monthly)', path: './docs/knowledge/01_playbooks/06_turnaround_monthly_trend.md' }
       ];
       let selectedStyleDocId = 'bible';
 

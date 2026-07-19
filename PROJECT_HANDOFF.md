@@ -215,13 +215,13 @@ AI ไม่ควร:
 - `README.md`
   หน้าแสดงผลบน GitHub repo มีลิงก์เปิดเว็บและคำอธิบายสั้น ๆ
 
-- `supabase_schema.sql`
+- `supabase/schema.sql`
   schema ที่ใช้สร้างตาราง Supabase
 
 - `scripts/seed_supabase.js`
   script seed ข้อมูลหุ้นและคลังความรู้เข้า Supabase
 
-- `00_ai_context/`, `01_playbooks/`, `02_templates/`, `03_memos/`, `04_themes/`, `05_watchlists/`, `06_reviews/`
+- `docs/knowledge/`
   คลังความรู้ markdown ที่ใช้เป็นฐานความรู้ของ AI และ seed เข้า Supabase
 
 ## Supabase
@@ -329,8 +329,8 @@ AI ไม่ควร:
 - **ปรับโครงสร้างเป็น E-Book Dashboard 5 หน้าใหม่:** สไตล์หุ้น (Styles Guide), ค้นอ่านหุ้น (Searchable Reader), จัดกลุ่มหุ้น (Categorization Grid), Watchlist Targets และ Options Lab
 - **ฝังกราฟ TradingView สด:** ดึงกราฟเทคนิคัลโต้ตอบได้มาพล็อตเคียงข้างตาราง Watchlist รายหุ้นอัตโนมัติ
 - **บอทลอยตัวอัจฉริยะ (Floating AI Advisor):** ไอคอนวงกลมลอยมุมล่างขวาประเมินหน้าจอที่กำลังเปิด (Context-Aware) และสามารถพิมพ์แชทคุมหน้าจอเว็บได้ (UI Screen Controller)
-- **สร้างระบบแบคเทสออปชัน (Options LEAPs Backtester):** สร้างสคริปต์ [backtest_options.py](file:///Users/gunthampalo/Library/CloudStorage/OneDrive-CentralGroup/น้องกัณฑ์/ai/MY%20PROJECT/หุ้นๆๆๆ/stock-research-knowledge-base/scripts/backtest_options.py) เพื่อจำลองผลตอบแทนสัญญา LEAPs Call 1 ปี ตามเส้น EMA 10M รายเดือน (รันตรวจสอบหุ้นได้ทุกตัว)
-- **ปรับปรุง Database Schema:** เพิ่มคอลัมน์ `entry_price` และ `exit_price` ลงในตาราง `stocks` ในไฟล์ [supabase_schema.sql](file:///Users/gunthampalo/Library/CloudStorage/OneDrive-CentralGroup/น้องกัณฑ์/ai/MY%20PROJECT/หุ้นๆๆๆ/stock-research-knowledge-base/supabase_schema.sql)
+- **สร้างระบบแบคเทสออปชัน (Options LEAPs Backtester):** สร้างสคริปต์ `scripts/backtest_options.py` เพื่อจำลองผลตอบแทนสัญญา LEAPs Call 1 ปี ตามเส้น EMA 10M รายเดือน (รันตรวจสอบหุ้นได้ทุกตัว)
+- **ปรับปรุง Database Schema:** เพิ่มคอลัมน์ `entry_price` และ `exit_price` ลงในตาราง `stocks` ในไฟล์ `supabase/schema.sql`
 - **ทำความสะอาดสิทธิ์ Git:** ลบไฟล์ซ้ำ และกวาดต้อนประวัติขึ้น GitHub คลาวด์สำเร็จ
 
 ### 2026-07-19 (Codex Updates)
