@@ -1138,6 +1138,17 @@
     <!-- ===== JAVASCRIPT ===== -->
     <!-- ============================================================ -->
     <script>
+      // ====== CDN & THIRD-PARTY SAFETY FALLBACKS ======
+      if (typeof window.lucide === 'undefined') {
+        window.lucide = { createIcons: () => console.warn('Lucide fallback activated') };
+      }
+      if (typeof window.marked === 'undefined') {
+        window.marked = { parse: (txt) => txt };
+      }
+      if (typeof window.supabase === 'undefined') {
+        window.supabase = { createClient: () => { console.warn('Supabase fallback activated'); return null; } };
+      }
+
       // ====== SAFE STORAGE ======
       const S = {
         get(k) { try { return localStorage.getItem(k); } catch(e) { return this._f[k]||null; } },
@@ -4540,7 +4551,11 @@ ${question}`;
 
           if (parsedCached && parsedCached.length > 0) {
             const cachedMap = {};
-            parsedCached.forEach(s => { cachedMap[s.ticker] = s; });
+            parsedCached.forEach(s => { 
+              if (s && s.ticker) {
+                cachedMap[s.ticker] = s;
+              }
+            });
 
             STOCKS.forEach(baked => {
               const cachedStock = cachedMap[baked.ticker];
@@ -4557,10 +4572,11 @@ ${question}`;
                 parsedCached.push(baked);
               }
             });
-            STOCKS = parsedCached;
+            STOCKS = parsedCached.filter(s => s !== null && s !== undefined);
           }
 
           STOCKS.forEach(s => {
+            if (!s) return;
             if (s.market === undefined) s.market = "US";
             if (s.targetPrice === undefined) s.targetPrice = "";
             if (s.entryPrice === undefined) s.entryPrice = "";
