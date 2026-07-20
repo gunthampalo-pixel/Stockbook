@@ -917,57 +917,63 @@
           </div>
         </div>
 
-        <!-- PAGE 2: SEARCHABLE STOCK READER -->
-        <div class="page research-page" id="page-stock-reader" style="padding: 12px; display:none; gap:12px; height:100%;">
-          <div class="stock-sidebar glass-panel" style="padding:12px; display:flex; flex-direction:column; gap:8px;">
+        <!-- PAGE 2: STOCK RESEARCH DATABASE -->
+        <div class="page research-page" id="page-stock-research" style="padding: 12px; display:none; gap:12px; height:100%;">
+          <div class="stock-sidebar glass-panel" style="padding:12px; display:flex; flex-direction:column; gap:8px; width: 280px; min-width: 280px;">
             <div style="font-size: 13px; font-weight: 700; color: var(--accent-cyan); display: flex; align-items: center; gap: 6px; padding: 4px;">
-              <i data-lucide="search" style="width:18px;height:18px;"></i>
-              <span>ค้นข้อมูลหุ้น</span>
+              <i data-lucide="database" style="width:18px;height:18px;"></i>
+              <span>คลังวิจัยหุ้น</span>
             </div>
-            <div class="stock-search">
-              <input type="text" id="reader-search-input" placeholder="พิมพ์ชื่อหุ้น หรือ Ticker..." style="width:100%;" />
+            
+            <!-- Filters -->
+            <div class="stock-search" style="display:flex; flex-direction:column; gap:6px;">
+              <input type="text" id="research-search-input" placeholder="ค้นหา ticker หรือชื่อหุ้น..." style="width:100%; height:36px; padding:6px 10px; font-size:13px;" />
+              
+              <!-- Style Filter Select -->
+              <select id="research-style-filter" style="width:100%; height:36px; padding:6px; background:rgba(0,0,0,0.3); border:1px solid var(--border-color); border-radius:6px; color:#fff; font-size:12px;">
+                <option value="ALL">-- ทุกสไตล์ (All Styles) --</option>
+                <option value="Growth">Growth (เติบโต)</option>
+                <option value="Bottleneck">Bottleneck (คอขวด)</option>
+                <option value="Core">Core Hold (แกนหลัก)</option>
+                <option value="Defensive">Defensive (ปลอดภัย)</option>
+                <option value="Dividend">Dividend (ปันผล)</option>
+                <option value="Dark Horse">Dark Horse (ม้ามืด)</option>
+              </select>
+
+              <!-- Group/Industry Filter Select -->
+              <select id="research-group-filter" style="width:100%; height:36px; padding:6px; background:rgba(0,0,0,0.3); border:1px solid var(--border-color); border-radius:6px; color:#fff; font-size:12px;">
+                <option value="ALL">-- ทุกกลุ่มอุตสาหกรรม --</option>
+              </select>
             </div>
-            <div class="stock-list" id="reader-stock-list" style="flex:1; overflow-y:auto;">
+            
+            <div class="stock-list" id="research-stock-list" style="flex:1; overflow-y:auto; display:flex; flex-direction:column; gap:4px; margin-top:8px;">
               <!-- Stocks populated in JS -->
             </div>
+            
+            <!-- Bottom Buttons -->
+            <div style="display:flex; gap:6px; margin-top:8px; border-top:1px solid var(--border-color); padding-top:8px;">
+              <button class="btn btn-sm btn-primary" onclick="addNewStockPane()" style="flex:1; font-size:11px; padding:6px;"><i data-lucide="plus" style="width:12px;height:12px;"></i> เพิ่มเอง</button>
+              <button class="btn btn-sm btn-accent" onclick="askAiToScan()" style="flex:1; font-size:11px; padding:6px; background:var(--accent-cyan); color:#000; border:none;"><i data-lucide="bot" style="width:12px;height:12px;"></i> ดึงด้วย AI</button>
+            </div>
           </div>
+          
           <div class="stock-detail glass-panel" style="padding:0; flex:1; display:flex; flex-direction:column; overflow:hidden;">
-            <div id="reader-content" style="height:100%; overflow-y:auto; padding:20px;">
+            <div id="stock-detail-content" style="height:100%; overflow-y:auto;">
               <div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--text-muted);flex-direction:column;gap:10px;">
-                <i data-lucide="search" style="width:40px;height:40px;opacity:0.3;color:var(--accent-cyan);"></i>
-                <p>ค้นหาหุ้นหรือคลิกเลือกจากรายการด้านซ้ายเพื่อเปิดอ่านรายละเอียดเชิงลึก</p>
+                <i data-lucide="database" style="width:40px;height:40px;opacity:0.3;color:var(--accent-cyan);"></i>
+                <p>เลือกหุ้นจากรายการด้านซ้ายเพื่อเปิดอ่านรายละเอียดงานวิจัยเชิงลึก</p>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- PAGE 3: CATEGORIZATION BOARD -->
-        <div class="page" id="page-categorization-board" style="padding: 12px; display:none; flex-direction:column; gap:12px; height:100%; overflow:hidden;">
-          <div style="display:flex; justify-content:space-between; align-items:center; padding:4px;">
-            <div style="font-size: 15px; font-weight: 700; color: var(--accent-cyan); display: flex; align-items: center; gap: 6px;">
-              <i data-lucide="layout-grid" style="width:20px;height:20px;"></i>
-              <span>จัดกลุ่มแยกตามสไตล์หุ้น</span>
-            </div>
-          </div>
-
-          <!-- Category Chips -->
-          <div class="filter-chips" id="board-style-chips">
-            <!-- Populated dynamically -->
-          </div>
-
-          <!-- Cards Grid -->
-          <div class="stock-grid" id="board-cards-grid" style="flex:1; overflow-y:auto; padding-bottom:20px;">
-            <!-- Classified stock cards will render here -->
-          </div>
-        </div>
-
-        <!-- PAGE 4: WATCHLIST TARGETS & TRADINGVIEW -->
+        <!-- PAGE 3: WATCHLIST TARGETS & TRADINGVIEW -->
         <div class="page research-page" id="page-watchlist-targets" style="padding: 12px; display:none; gap:12px; height:100%;">
           <!-- Watchlist Table Section -->
-          <div class="glass-panel" style="flex: 1.2; padding:15px; display:flex; flex-direction:column; gap:10px; overflow:hidden;">
+          <div class="glass-panel" style="flex: 1.3; padding:15px; display:flex; flex-direction:column; gap:10px; overflow:hidden;">
             <div style="font-size: 15px; font-weight: 700; color: var(--accent-cyan); display: flex; align-items: center; gap: 6px; border-bottom:1px solid var(--border-color); padding-bottom:8px;">
               <i data-lucide="star" style="width:18px;height:18px;color:var(--accent-orange);"></i>
-              <span>รายการหุ้นเฝ้าระวัง (Watchlist Targets)</span>
+              <span>รายการเฝ้าสังเกตการณ์ (Watchlist Targets)</span>
             </div>
             <div style="overflow-x:auto; flex:1;">
               <table style="width:100%; border-collapse:collapse; font-size:13px;" id="watchlist-targets-table">
@@ -975,10 +981,10 @@
                   <tr style="border-bottom: 1px solid var(--border-color); text-align:left;">
                     <th style="padding:10px 8px; color:var(--text-muted);">หุ้น</th>
                     <th style="padding:10px 8px; color:var(--text-muted);">ราคาล่าสุด</th>
-                    <th style="padding:10px 8px; color:var(--accent-green);">จุดเข้าซื้อ</th>
-                    <th style="padding:10px 8px; color:var(--accent-red);">จุดคัทออก</th>
-                    <th style="padding:10px 8px; color: #c084fc;">จุดขายทำกำไร</th>
-                    <th style="padding:10px 8px; color:var(--text-muted); text-align:center;">การกระทำ</th>
+                    <th style="padding:10px 8px; color:var(--accent-green);">จุดเข้าซื้อ (Entry)</th>
+                    <th style="padding:10px 8px; color:var(--accent-red);">จุดคัทออก (Cut)</th>
+                    <th style="padding:10px 8px; color:var(--text-muted);">ส่วนต่าง %</th>
+                    <th style="padding:10px 8px; color:var(--text-muted); text-align:center;">สถานะบอร์ด</th>
                   </tr>
                 </thead>
                 <tbody id="watchlist-targets-tbody">
@@ -1003,140 +1009,41 @@
           </div>
         </div>
 
-      <!-- PAGE 6: FAIR VALUE LAB -->
-      <div class="page research-page" id="page-fair-value" style="padding: 12px; display:none; gap:12px; height:100%;">
-        <div class="stock-sidebar glass-panel" style="padding:12px; display:flex; flex-direction:column; gap:10px; overflow-y:auto;">
-          <div style="font-size: 13px; font-weight: 700; color: var(--accent-cyan); display: flex; align-items: center; gap: 6px; padding: 4px;">
-            <i data-lucide="calculator" style="width:18px;height:18px;"></i>
-            <span>Fair Value Lab</span>
-          </div>
-          <div style="font-size: 11px; color: var(--text-muted); padding: 0 4px 6px; border-bottom: 1px solid var(--border-color);">
-            Simple DCF สำหรับคิดกรอบมูลค่า แล้วบันทึกเป็นโน้ตเข้าคลังความรู้
-          </div>
-          <label style="font-size:11px;color:var(--text-muted);font-weight:600;">Ticker</label>
-          <input id="fv-ticker" class="edit-field" value="NVDA" style="width:100%;padding:8px;" />
-          <label style="font-size:11px;color:var(--text-muted);font-weight:600;">Current Price</label>
-          <input id="fv-current-price" class="edit-field" type="number" value="120" step="0.01" style="width:100%;padding:8px;" />
-          <label style="font-size:11px;color:var(--text-muted);font-weight:600;">Revenue ปีล่าสุด</label>
-          <input id="fv-revenue" class="edit-field" type="number" value="100000" step="1" style="width:100%;padding:8px;" />
-          <label style="font-size:11px;color:var(--text-muted);font-weight:600;">Revenue Growth % ต่อปี</label>
-          <input id="fv-growth" class="edit-field" type="number" value="15" step="0.1" style="width:100%;padding:8px;" />
-          <label style="font-size:11px;color:var(--text-muted);font-weight:600;">Operating Margin %</label>
-          <input id="fv-margin" class="edit-field" type="number" value="25" step="0.1" style="width:100%;padding:8px;" />
-          <label style="font-size:11px;color:var(--text-muted);font-weight:600;">Tax Rate %</label>
-          <input id="fv-tax" class="edit-field" type="number" value="18" step="0.1" style="width:100%;padding:8px;" />
-          <label style="font-size:11px;color:var(--text-muted);font-weight:600;">Discount Rate %</label>
-          <input id="fv-discount" class="edit-field" type="number" value="10" step="0.1" style="width:100%;padding:8px;" />
-          <label style="font-size:11px;color:var(--text-muted);font-weight:600;">Terminal Growth %</label>
-          <input id="fv-terminal" class="edit-field" type="number" value="3" step="0.1" style="width:100%;padding:8px;" />
-          <label style="font-size:11px;color:var(--text-muted);font-weight:600;">Shares Outstanding</label>
-          <input id="fv-shares" class="edit-field" type="number" value="25000" step="1" style="width:100%;padding:8px;" />
-          <label style="font-size:11px;color:var(--text-muted);font-weight:600;">Net Cash / Debt</label>
-          <input id="fv-net-cash" class="edit-field" type="number" value="0" step="1" style="width:100%;padding:8px;" />
-          <label style="font-size:11px;color:var(--text-muted);font-weight:600;">Margin of Safety %</label>
-          <input id="fv-mos" class="edit-field" type="number" value="25" step="1" style="width:100%;padding:8px;" />
-          <button class="add-stock-btn" id="btn-run-fair-value" style="width:100%;">
-            <i data-lucide="calculator" style="width:12px;height:12px;"></i> Calculate
-          </button>
-          <button class="btn btn-primary" id="btn-save-fair-value" style="width:100%;padding:9px 10px;">
-            <i data-lucide="save" style="width:12px;height:12px;"></i> บันทึกเข้าคลัง
-          </button>
-        </div>
+        <!-- PAGE 4: INVESTMENT TRICKS & KNOWLEDGE BASE -->
+        <div class="page research-page" id="page-knowledge-tricks" style="padding: 12px; display:none; gap:12px; height:100%;">
+          <!-- Sidebar: Knowledge Docs List -->
+          <div class="stock-sidebar glass-panel" style="padding:12px; display:flex; flex-direction:column; gap:8px; width: 280px; min-width: 280px;">
+            <div style="font-size: 13px; font-weight: 700; color: var(--accent-cyan); display: flex; align-items: center; gap: 6px; padding: 4px;">
+              <i data-lucide="file-text" style="width:18px;height:18px;"></i>
+              <span>คลังความรู้ & สูตรคำนวณ</span>
+            </div>
+            
+            <div class="stock-search">
+              <input type="text" id="knowledge-search-input" placeholder="ค้นหาความรู้/สูตร..." style="width:100%; height:36px; padding:6px 10px; font-size:13px;" />
+            </div>
 
-        <div class="stock-detail glass-panel" id="fair-value-detail" style="padding:0; flex:1; display:flex; flex-direction:column; overflow:hidden;">
-          <div id="fair-value-detail-content" style="height:100%; overflow-y:auto; display:flex; flex-direction:column;"></div>
-        </div>
-      </div>
-
-      <!-- PAGE 7: LINK TO KNOWLEDGE -->
-      <div class="page research-page" id="page-knowledge-extractor" style="padding: 12px; display:none; gap:12px; height:100%;">
-        <div class="stock-sidebar glass-panel" style="padding:12px; display:flex; flex-direction:column; gap:10px; overflow-y:auto;">
-          <div style="font-size: 13px; font-weight: 700; color: var(--accent-cyan); display: flex; align-items: center; gap: 6px; padding: 4px;">
-            <i data-lucide="file-text" style="width:18px;height:18px;"></i>
-            <span>Link to Knowledge</span>
-          </div>
-          <div style="font-size: 11px; color: var(--text-muted); padding: 0 4px 6px; border-bottom: 1px solid var(--border-color);">
-            วางลิงก์/ข้อความจากคลิปหรือโพสต์ แล้วให้ AI กลั่นเป็นโน้ตเก็บในคลัง
-          </div>
-          <label style="font-size:11px;color:var(--text-muted);font-weight:600;">Source Type</label>
-          <select id="kx-source-type" class="edit-select" style="width:100%;font-size:12px;padding:7px 10px;">
-            <option value="YouTube">YouTube / Clip</option>
-            <option value="Facebook">Facebook Post</option>
-            <option value="Article">Article</option>
-            <option value="Other">Other</option>
-          </select>
-          <label style="font-size:11px;color:var(--text-muted);font-weight:600;">Source URL</label>
-          <input id="kx-url" class="edit-field" placeholder="https://..." style="width:100%;padding:8px;" />
-          <label style="font-size:11px;color:var(--text-muted);font-weight:600;">Title</label>
-          <input id="kx-title" class="edit-field" placeholder="หัวข้อที่จะเก็บในคลัง" style="width:100%;padding:8px;" />
-          <label style="font-size:11px;color:var(--text-muted);font-weight:600;">Related Tickers / Theme</label>
-          <input id="kx-tags" class="edit-field" placeholder="NVDA, AI Infra, Options" style="width:100%;padding:8px;" />
-          <button class="add-stock-btn" id="btn-extract-knowledge" style="width:100%;">
-            <i data-lucide="sparkles" style="width:12px;height:12px;"></i> AI สกัดความรู้
-          </button>
-          <button class="btn btn-primary" id="btn-save-extracted-knowledge" style="width:100%;padding:9px 10px;">
-            <i data-lucide="save" style="width:12px;height:12px;"></i> บันทึกเข้าคลัง
-          </button>
-        </div>
-
-        <div class="stock-detail glass-panel" style="padding:0; flex:1; display:flex; flex-direction:column; overflow:hidden;">
-          <div class="detail-header" style="justify-content:space-between; flex-shrink:0;">
-            <div class="detail-title">
-              <h2>สกัดโพสต์/คลิปเป็นความรู้</h2>
-              <p style="font-size:11px;color:var(--text-muted);margin-top:4px;">เก็บ source link ไว้ด้วย เพื่อย้อนกลับไปตรวจสอบทีหลัง</p>
+            <!-- List of Knowledge Docs -->
+            <div class="stock-list" id="knowledge-list" style="flex:1; overflow-y:auto; display:flex; flex-direction:column; gap:4px; margin-top:8px;">
+              <!-- Docs populated in JS -->
+            </div>
+            
+            <!-- Bottom Buttons -->
+            <div style="display:flex; flex-direction:column; gap:6px; margin-top:8px; border-top:1px solid var(--border-color); padding-top:8px;">
+              <button class="btn btn-sm btn-primary" onclick="createNewKnowledgeDoc()" style="font-size:11px; padding:8px;"><i data-lucide="plus" style="width:12px;height:12px;"></i> เขียนบันทึกใหม่</button>
+              <button class="btn btn-sm" onclick="showLinkExtractor()" style="font-size:11px; padding:8px; background:rgba(255,255,255,0.05); border:1px solid var(--border-color); color:#fff;"><i data-lucide="sparkles" style="width:12px;height:12px;color:var(--accent-cyan);"></i> สกัดความรู้จากลิงก์</button>
             </div>
           </div>
-          <div style="padding:0 20px 20px; display:grid; grid-template-columns: minmax(260px, 0.95fr) minmax(320px, 1.05fr); gap:12px; flex:1; min-height:0;">
-            <div style="display:flex;flex-direction:column;gap:8px;min-height:0;">
-              <label style="font-size:11px;color:var(--text-muted);font-weight:600;">Paste Text / Transcript</label>
-              <textarea id="kx-source-text" class="edit-field" style="width:100%;flex:1;min-height:420px;padding:12px;border-radius:8px;font-size:12px;line-height:1.55;resize:none;color:#111827;background:#fff;" placeholder="วางข้อความจากโพสต์, transcript คลิป, หรือโน้ตดิบที่เจอมา..."></textarea>
-            </div>
-            <div style="display:flex;flex-direction:column;gap:8px;min-height:0;">
-              <label style="font-size:11px;color:var(--text-muted);font-weight:600;">Knowledge Note Preview</label>
-              <textarea id="kx-output" class="edit-field" style="width:100%;flex:1;min-height:420px;padding:12px;border-radius:8px;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;font-size:12px;line-height:1.6;resize:none;color:#111827;background:#fff;" placeholder="ผลสรุปจาก AI จะมาอยู่ตรงนี้ และสามารถแก้ก่อนบันทึกได้"></textarea>
+
+          <!-- Detail Panel -->
+          <div class="stock-detail glass-panel" style="padding:0; flex:1; display:flex; flex-direction:column; overflow:hidden;">
+            <div id="knowledge-detail-content" style="height:100%; overflow-y:auto;">
+              <div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--text-muted);flex-direction:column;gap:10px;">
+                <i data-lucide="file-text" style="width:40px;height:40px;opacity:0.3;color:var(--accent-cyan);"></i>
+                <p>เลือกเอกสารความรู้ หรือเปิดเครื่องมือ/สูตรคำนวณด้านซ้าย</p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-
-      <!-- PAGE 8: OPTIONS BACKTEST LAB -->
-      <div class="page research-page" id="page-options" style="padding: 12px; display:none; gap:12px; height:100%;">
-        <div class="stock-sidebar glass-panel" style="padding:12px; display:flex; flex-direction:column; gap:10px;">
-          <div style="font-size: 13px; font-weight: 700; color: var(--accent-cyan); display: flex; align-items: center; gap: 6px; padding: 4px;">
-            <i data-lucide="activity" style="width:18px;height:18px;"></i>
-            <span>Options Lab</span>
-          </div>
-          <div style="font-size: 11px; color: var(--text-muted); padding: 0 4px 6px; border-bottom: 1px solid var(--border-color);">
-            Prototype สำหรับคำนวณ payoff ก่อนต่อข้อมูล option chain จริง
-          </div>
-          <label style="font-size:11px;color:var(--text-muted);font-weight:600;">Strategy</label>
-          <select id="opt-strategy" class="edit-select" style="width:100%;font-size:12px;padding:7px 10px;">
-            <option value="long_call">Long Call</option>
-            <option value="long_put">Long Put</option>
-            <option value="covered_call">Covered Call</option>
-            <option value="cash_secured_put">Cash-Secured Put</option>
-          </select>
-          <label style="font-size:11px;color:var(--text-muted);font-weight:600;">Ticker</label>
-          <input id="opt-ticker" class="edit-field" value="NVDA" style="width:100%;padding:8px;" />
-          <label style="font-size:11px;color:var(--text-muted);font-weight:600;">Entry Stock Price</label>
-          <input id="opt-entry-price" class="edit-field" type="number" value="120" step="0.01" style="width:100%;padding:8px;" />
-          <label style="font-size:11px;color:var(--text-muted);font-weight:600;">Strike</label>
-          <input id="opt-strike" class="edit-field" type="number" value="125" step="0.01" style="width:100%;padding:8px;" />
-          <label style="font-size:11px;color:var(--text-muted);font-weight:600;">Premium</label>
-          <input id="opt-premium" class="edit-field" type="number" value="5" step="0.01" style="width:100%;padding:8px;" />
-          <label style="font-size:11px;color:var(--text-muted);font-weight:600;">Contracts</label>
-          <input id="opt-contracts" class="edit-field" type="number" value="1" step="1" min="1" style="width:100%;padding:8px;" />
-          <label style="font-size:11px;color:var(--text-muted);font-weight:600;">Expiry Stock Price</label>
-          <input id="opt-exit-price" class="edit-field" type="number" value="140" step="0.01" style="width:100%;padding:8px;" />
-          <button class="add-stock-btn" id="btn-run-options" style="width:100%;">
-            <i data-lucide="calculator" style="width:12px;height:12px;"></i> Calculate
-          </button>
-        </div>
-
-        <div class="stock-detail glass-panel" id="options-detail" style="padding:0; flex:1; display:flex; flex-direction:column; overflow:hidden;">
-          <div id="options-detail-content" style="height:100%; overflow-y:auto; display:flex; flex-direction:column;"></div>
-        </div>
-      </div>
 
       </div><!-- end page-container -->
 
@@ -1994,25 +1901,44 @@
           if (stocksError) throw stocksError;
 
           if (dbStocks && dbStocks.length > 0) {
-            STOCKS = dbStocks.map(s => ({
-              ticker: s.ticker,
-              name: s.name,
-              logoUrl: s.logo_url,
-              group: s.group,
-              style: s.style,
-              market: s.market,
-              targetPrice: s.target_price,
-              whatItDoes: s.what_it_does,
-              howItMakesMoney: s.how_it_makes_money,
-              deals: s.deals,
-              moat: s.moat,
-              risks: s.risks,
-              financials: s.financials || [],
-              imageUrl: s.image_url,
-              whyInterest: s.why_interest,
-              financialsSnapshot: s.financials_snapshot,
-              summary: s.summary
-            }));
+            STOCKS = dbStocks.map(s => {
+              let expenses = "";
+              let customers = "";
+              let whyInterestClean = s.why_interest || "";
+              if (whyInterestClean.trim().startsWith('{')) {
+                try {
+                  const parsed = JSON.parse(whyInterestClean);
+                  expenses = parsed.expenses || "";
+                  customers = parsed.customers || "";
+                  whyInterestClean = parsed.whyInterest || "";
+                } catch(e) {
+                  // Fallback
+                }
+              }
+              return {
+                ticker: s.ticker,
+                name: s.name,
+                logoUrl: s.logo_url,
+                group: s.group,
+                style: s.style,
+                market: s.market,
+                targetPrice: s.target_price,
+                entryPrice: s.entry_price || "",
+                exitPrice: s.exit_price || "",
+                whatItDoes: s.what_it_does,
+                howItMakesMoney: s.how_it_makes_money,
+                deals: s.deals,
+                moat: s.moat,
+                risks: s.risks,
+                financials: s.financials || [],
+                imageUrl: s.image_url,
+                whyInterest: whyInterestClean,
+                expenses: expenses,
+                customers: customers,
+                financialsSnapshot: s.financials_snapshot,
+                summary: s.summary
+              };
+            });
             saveStocks();
           }
 
@@ -2054,25 +1980,37 @@
 
         if (!silent) toast('กำลังเตรียมข้อมูล...');
         try {
-          const records = STOCKS.map(s => ({
-            ticker: s.ticker,
-            name: s.name,
-            logo_url: s.logoUrl || null,
-            group: s.group || null,
-            style: s.style || null,
-            market: s.market || 'US',
-            target_price: s.targetPrice || null,
-            what_it_does: s.whatItDoes || null,
-            how_it_makes_money: s.howItMakesMoney || null,
-            deals: s.deals || null,
-            moat: s.moat || null,
-            risks: s.risks || null,
-            financials: s.financials || [],
-            image_url: s.imageUrl || null,
-            why_interest: s.whyInterest || null,
-            financials_snapshot: s.financialsSnapshot || null,
-            summary: s.summary || null
-          }));
+          const records = STOCKS.map(s => {
+            let whyInterestData = s.whyInterest || "";
+            if (s.expenses || s.customers) {
+              whyInterestData = JSON.stringify({
+                whyInterest: s.whyInterest || "",
+                expenses: s.expenses || "",
+                customers: s.customers || ""
+              });
+            }
+            return {
+              ticker: s.ticker,
+              name: s.name,
+              logo_url: s.logoUrl || null,
+              group: s.group || null,
+              style: s.style || null,
+              market: s.market || 'US',
+              target_price: s.targetPrice || null,
+              entry_price: s.entryPrice || null,
+              exit_price: s.exitPrice || null,
+              what_it_does: s.whatItDoes || null,
+              how_it_makes_money: s.howItMakesMoney || null,
+              deals: s.deals || null,
+              moat: s.moat || null,
+              risks: s.risks || null,
+              financials: s.financials || [],
+              image_url: s.imageUrl || null,
+              why_interest: whyInterestData || null,
+              financials_snapshot: s.financialsSnapshot || null,
+              summary: s.summary || null
+            };
+          });
 
           if (!silent) toast('กำลังส่งข้อมูลหุ้นขึ้น Supabase...');
           const { error: stocksError } = await supabaseClient
@@ -2380,13 +2318,10 @@ ${question}`;
 
       // ====== DYNAMIC TABS STATE ======
       let TABS = [
-        { id: 'styles-guide', title: 'สไตล์หุ้น', icon: 'book-open', type: 'system' },
-        { id: 'stock-reader', title: 'เสิร์ชอ่านข้อมูลหุ้น', icon: 'search', type: 'system' },
-        { id: 'categorization-board', title: 'จัดกลุ่มหุ้น', icon: 'layout-grid', type: 'system' },
+        { id: 'styles-guide', title: 'สไตล์หุ้น & เกณฑ์', icon: 'book-open', type: 'system' },
+        { id: 'stock-research', title: 'คลังวิจัยหุ้น', icon: 'database', type: 'system' },
         { id: 'watchlist-targets', title: 'Watchlist Targets', icon: 'star', type: 'system' },
-        { id: 'fair-value', title: 'Fair Value', icon: 'calculator', type: 'system' },
-        { id: 'knowledge-extractor', title: 'Link to Knowledge', icon: 'file-text', type: 'system' },
-        { id: 'options', title: 'Options Lab', icon: 'activity', type: 'system' }
+        { id: 'knowledge-tricks', title: 'คลังความรู้ & ทริค', icon: 'file-text', type: 'system' }
       ];
       S.set('app_tabs', JSON.stringify(TABS));
       let activeBookTabId = 'thesis';
@@ -2403,6 +2338,14 @@ ${question}`;
       let currentActiveContext = 'Home';
 
       function switchPage(tabId) {
+        // Redirect old tab IDs to the new ones if necessary
+        if (tabId === 'stock-reader' || tabId === 'categorization-board') {
+          tabId = 'stock-research';
+        }
+        if (tabId === 'fair-value' || tabId === 'knowledge-extractor' || tabId === 'options') {
+          tabId = 'knowledge-tricks';
+        }
+        
         currentTab = tabId;
 
         // Update tab buttons active state
@@ -2428,26 +2371,18 @@ ${question}`;
 
         // Update context & trigger specific renders
         if (tabId === 'styles-guide') {
-          currentActiveContext = 'หน้าสไตล์หุ้น (Investment Playbooks & Guides)';
+          currentActiveContext = 'หน้าสไตล์หุ้น & เกณฑ์ (Investment Playbooks & Guides)';
           renderStylesGuide();
-        } else if (tabId === 'stock-reader') {
-          currentActiveContext = 'หน้าค้นอ่านข้อมูลหุ้นเจาะลึก (Searchable Stock Reader)';
-          renderStockReaderList();
-        } else if (tabId === 'categorization-board') {
-          currentActiveContext = 'หน้าบอร์ดจัดกลุ่มประเภทสไตล์หุ้น (Categorization Grid)';
-          renderCategorizationBoard();
+        } else if (tabId === 'stock-research') {
+          currentActiveContext = 'หน้าคลังวิจัยหุ้น (Stock Research Database)';
+          buildResearchGroupFilter();
+          renderStockResearchList();
         } else if (tabId === 'watchlist-targets') {
           currentActiveContext = 'หน้าจอรายการเฝ้าสังเกตการณ์เป้าหมาย (Watchlist Targets)';
           renderWatchlistTargets();
-        } else if (tabId === 'fair-value') {
-          currentActiveContext = 'หน้า Fair Value Lab สำหรับคิดกรอบมูลค่าหุ้น';
-          renderFairValueLab();
-        } else if (tabId === 'knowledge-extractor') {
-          currentActiveContext = 'หน้า Link to Knowledge สำหรับสกัดโพสต์/คลิปเป็นโน้ตเข้าคลังความรู้';
-          renderKnowledgeExtractor();
-        } else if (tabId === 'options') {
-          currentActiveContext = 'หน้า Options Lab สำหรับคำนวณ payoff หุ้น option';
-          renderOptionsBacktest();
+        } else if (tabId === 'knowledge-tricks') {
+          currentActiveContext = 'หน้าคลังความรู้และสูตรคำนวณ (Knowledge Base & Tools)';
+          renderKnowledgeTricks();
         }
 
         lucide.createIcons();
@@ -2463,29 +2398,169 @@ ${question}`;
         { id: 'inflection', title: '💥 5. หุ้นกำไรระเบิด (Earnings Inflection)', path: './01_playbooks/05_earnings_inflection.md' },
         { id: 'turnaround', title: '🧬 6. หุ้นฟื้นไข้ตามเทรนด์เดือน (Turnaround Monthly)', path: './01_playbooks/06_turnaround_monthly_trend.md' }
       ];
-      let selectedStyleDocId = 'bible';
+      let selectedStyleId = 'Growth';
+
+      const STOCK_STYLES_INFO = {
+        'Growth': {
+          title: '📈 หุ้นเติบโต (Growth)',
+          desc: 'บริษัทที่รายได้และกำไรเติบโตอย่างรวดเร็วต่อเนื่อง จากการเจาะตลาดใหม่หรือความต้องการสินค้าที่เพิ่มสูงขึ้น',
+          criteria: [
+            'รายได้เติบโต (Revenue Growth) YoY > 20% ย้อนหลัง 3 ปี',
+            'อัตรากำไรขั้นต้น (Gross Profit Margin) คงที่หรือเพิ่มขึ้น',
+            'อยู่ในกระแสธีมเติบโตหลัก เช่น AI, Cloud Computing, SaaS',
+            'กราฟเทคนิคัลระดับเดือน (TF Month) เป็นขาขึ้น ยืนเหนือเส้น EMA 10 Month'
+          ],
+          playbookLink: '01_disruptive_compounder.md'
+        },
+        'Bottleneck': {
+          title: '🍾 หุ้นคอขวด (Bottleneck)',
+          desc: 'ผู้ให้บริการหรือผู้ผลิตชิ้นส่วน/ทรัพยากรที่เป็นจุดบังคับของห่วงโซ่อุปทาน (Supply Chain) ขาดไปจะทำให้ทั้งอุตสาหกรรมชะงัก มีอำนาจผูกขาดสูงและย้ายเจ้าออกยากมาก',
+          criteria: [
+            'มี Market Share ผูกขาดในส่วนประกอบสำคัญนั้นมากกว่า 60-80%',
+            'ลูกค้าไม่มีทางเลือกอื่น หรือการเปลี่ยนระบบ (Switching Cost) แพงมหาศาล',
+            'มีอำนาจต่อรองราคา (Pricing Power) สามารถผลักภาระต้นทุนให้ลูกค้าได้ง่าย',
+            'งบการเงินมีกระแสเงินสดจากการดำเนินงาน (Operating Cash Flow) มั่นคงและเป็นบวก'
+          ],
+          playbookLink: '04_infrastructure_bottleneck.md'
+        },
+        'Core': {
+          title: '👑 หุ้นแกนหลัก (Core Hold)',
+          desc: 'หุ้นบริษัทขนาดใหญ่ที่มีฐานธุรกิจแข็งแกร่ง มีแบรนด์และระบบนิเวศ (Ecosystem) ของลูกค้าเหนียวแน่น เติบโตล้อไปกับภาพรวมอุตสาหกรรมในระยะยาว',
+          criteria: [
+            'ครองตำแหน่งผู้นำอันดับ 1 หรือ 2 ของอุตสาหกรรมหลัก',
+            'มีโมเดลรายได้ประจำสม่ำเสมอ (Recurring Revenue) เช่น ค่าสมาชิก คลาวด์',
+            'ฐานะทางการเงินแข็งแกร่ง มีเงินสดล้นมือ หนี้สินต่ำ',
+            'เป็นหุ้นที่มีสถาบันการเงินถือครองในสัดส่วนสูง มั่นคงผันผวนต่ำ'
+          ],
+          playbookLink: '02_old_winners_reentry.md'
+        },
+        'Defensive': {
+          title: '🛡️ หุ้นปลอดภัย (Defensive)',
+          desc: 'หุ้นของธุรกิจที่ยอดขายและงบการเงินไม่ผันผวนตามสภาวะเศรษฐกิจ เนื่องจากขายสินค้า/บริการที่จำเป็นต่อการดำรงชีวิตประจำวัน',
+          criteria: [
+            'สินค้าเป็นสิ่งจำเป็นที่ผู้คนจำเป็นต้องจ่ายไม่ว่าเศรษฐกิจจะเป็นอย่างไร',
+            'รายได้และอัตรากำไรสุทธิคงที่สม่ำเสมอ (Revenue & Margin Stability)',
+            'มีกระแสเงินสดแข็งแกร่งต่อเนื่อง เบต้าต่ำ (Beta < 1.0)',
+            'มักได้สัญญาซื้อขายระยะยาวหรือผูกสัญญาบริการรายปีกับลูกค้า'
+          ],
+          playbookLink: '03_second_order_beneficiaries.md'
+        },
+        'Dividend': {
+          title: '💰 หุ้นปันผล (Dividend)',
+          desc: 'บริษัทที่พ้นช่วงลงทุนหนัก มีกำไรสะสมและกระแสเงินสดสม่ำเสมอ จนสามารถปันผลตอบแทนให้ผู้ถือหุ้นได้สูงในอัตราที่แน่นอน',
+          criteria: [
+            'อัตราการจ่ายเงินปันผล (Dividend Yield) > 4-6% ต่อปี',
+            'ประวัติการจ่ายปันผลสม่ำเสมอต่อเนื่อง ไม่เคยงดจ่าย แม้ในช่วงวิกฤต',
+            'Payout Ratio อยู่ในระดับปลอดภัย (มักอยู่ระหว่าง 40-70% ของกำไร)',
+            'กระแสเงินสดอิสระ (Free Cash Flow) เป็นบวกและเติบโตสอดคล้องกับปันผล'
+          ],
+          playbookLink: '02_old_winners_reentry.md'
+        },
+        'Dark Horse': {
+          title: '🦄 หุ้นม้ามืด (Dark Horse / Turnaround)',
+          desc: 'หุ้นที่อาจยังขาดทุนอยู่ หรือเป็นธุรกิจขนาดเล็กที่มีเทคโนโลยีล้ำหน้า แต่มีศักยภาพสร้างการเปลี่ยนแปลงแบบก้าวกระโดด (Disruptive) เมื่อดีลสำเร็จหรือเข้าสู่ตลาดมวลชน',
+          criteria: [
+            'มีเทคโนโลยีหรือสิทธิบัตรปฏิวัติวงการ (Disruptive Innovation)',
+            'เซ็นดีลพาร์ทเนอร์หรือดีลสัญญาทดลองใช้ล่วงหน้ากับบริษัทยักษ์ใหญ่ของโลก',
+            'มีตัวเร่ง (Catalysts) ชัดเจน เช่น การอนุมัติโครงการภาครัฐ หรือความคืบหน้าการก่อสร้างแคมปัส',
+            'จำกัดความเสี่ยงด้วยการควบคุมสัดส่วน Position Sizing ในพอร์ตให้ดี'
+          ],
+          playbookLink: '06_turnaround_monthly_trend.md'
+        }
+      };
 
       async function renderStylesGuide() {
         const listDiv = $('styles-guide-list');
         if (!listDiv) return;
 
-        listDiv.innerHTML = STYLE_DOCS.map(doc => `
-          <div class="stock-item ${doc.id === selectedStyleDocId ? 'active' : ''}" onclick="selectStyleDoc('${doc.id}')">
-            <div style="font-weight: 500; font-size: 12px;">${doc.title}</div>
+        let html = `
+          <div style="font-weight:700; font-size:11px; color:var(--accent-cyan); text-transform:uppercase; letter-spacing:0.5px; padding:6px 4px 2px;">เกณฑ์ 6 สไตล์หุ้น</div>
+          <div style="display:flex; flex-direction:column; gap:2px; margin-bottom:12px;">
+        `;
+        
+        const stylesList = ['Growth', 'Bottleneck', 'Core', 'Defensive', 'Dividend', 'Dark Horse'];
+        stylesList.forEach(st => {
+          const isActive = selectedStyleId === st;
+          html += `
+            <div class="stock-item ${isActive ? 'active' : ''}" onclick="selectStyle('${st}')" style="padding:8px; border-radius:6px; cursor:pointer;">
+              <div style="font-weight:600; font-size:12px;">${STOCK_STYLES_INFO[st].title}</div>
+            </div>
+          `;
+        });
+        
+        html += `
           </div>
-        `).join('');
+          <div style="font-weight:700; font-size:11px; color:var(--accent-cyan); text-transform:uppercase; letter-spacing:0.5px; padding:6px 4px 2px; border-top:1px solid var(--border-color); margin-top:8px;">คัมภีร์ตำรา (Playbooks)</div>
+          <div style="display:flex; flex-direction:column; gap:2px;">
+        `;
+        
+        STYLE_DOCS.forEach(doc => {
+          const isActive = selectedStyleId === doc.id;
+          html += `
+            <div class="stock-item ${isActive ? 'active' : ''}" onclick="selectStyle('${doc.id}')" style="padding:8px; border-radius:6px; cursor:pointer;">
+              <div style="font-weight:500; font-size:12px; line-height:1.4;">${doc.title}</div>
+            </div>
+          `;
+        });
+        
+        html += `</div>`;
+        listDiv.innerHTML = html;
 
-        const activeDoc = STYLE_DOCS.find(d => d.id === selectedStyleDocId);
+        // Render right content pane
         const contentDiv = $('styles-guide-content');
-        if (activeDoc && contentDiv) {
-          contentDiv.innerHTML = '<p style="color:var(--text-muted); padding:20px;">กำลังเปิดสมุดคู่มือ...</p>';
-          const html = await loadLocalMarkdown(activeDoc.path);
-          contentDiv.innerHTML = html;
+        if (!contentDiv) return;
+
+        if (STOCK_STYLES_INFO[selectedStyleId]) {
+          const info = STOCK_STYLES_INFO[selectedStyleId];
+          contentDiv.innerHTML = `
+            <div style="padding:24px; max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px;">
+              <div style="border-bottom: 1px solid var(--border-color); padding-bottom: 16px;">
+                <h1 style="font-size:26px; color:var(--accent-cyan); margin:0 0 8px 0; font-family:'Outfit';">${info.title}</h1>
+                <p style="font-size:14px; color:var(--text-secondary); line-height:1.6; margin:0;">${info.desc}</p>
+              </div>
+              
+              <div>
+                <h3 style="font-size:15px; color:var(--text-primary); margin:0 0 12px 0; display:flex; align-items:center; gap:6px;">
+                  <i data-lucide="check-square" style="width:18px;height:18px;color:var(--accent-green);"></i>
+                  <span>เกณฑ์และเช็คลิสต์ในการเลือกหุ้น (Selection Criteria)</span>
+                </h3>
+                <div style="display:flex; flex-direction:column; gap:10px;">
+                  ${info.criteria.map(c => `
+                    <div style="display:flex; align-items:start; gap:10px; background:rgba(255,255,255,0.02); border:1px solid var(--border-color); padding:12px; border-radius:8px;">
+                      <i data-lucide="check" style="width:16px;height:16px;color:var(--accent-green);flex-shrink:0;margin-top:2px;"></i>
+                      <span style="font-size:13px; line-height:1.5; color:var(--text-primary);">${c}</span>
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+              
+              <div style="background:rgba(0,230,255,0.05); border:1px dashed rgba(0,230,255,0.2); border-radius:10px; padding:16px; margin-top:10px; display:flex; justify-content:space-between; align-items:center;">
+                <div style="flex:1; padding-right:12px;">
+                  <div style="font-weight:700; font-size:12px; color:var(--accent-cyan); margin-bottom:4px; display:flex; align-items:center; gap:6px;">
+                    <i data-lucide="book-open" style="width:14px;height:14px;"></i> คู่มืออ่านเสริม
+                  </div>
+                  <p style="font-size:12px; color:var(--text-muted); line-height:1.5; margin:0;">มีคู่มืออธิบายตรรกะแบบละเอียดอยู่ในระบบคลาวด์ พี่กัณฑ์สามารถเปิดอ่านได้ทันที:</p>
+                </div>
+                <button class="btn btn-sm btn-primary" onclick="selectStyle('${STYLE_DOCS.find(d => d.path.includes(info.playbookLink))?.id || 'bible'}')" style="font-size:11px; padding:8px 14px; flex-shrink:0;">
+                  เปิดคู่มือวิจัยหลัก 📖
+                </button>
+              </div>
+            </div>
+          `;
+          lucide.createIcons();
+        } else {
+          const doc = STYLE_DOCS.find(d => d.id === selectedStyleId);
+          if (doc) {
+            contentDiv.innerHTML = '<p style="color:var(--text-muted); padding:20px;">กำลังเปิดสมุดคู่มือ...</p>';
+            const html = await loadLocalMarkdown(doc.path);
+            contentDiv.innerHTML = `<div style="padding:24px; max-width:800px; margin:0 auto;" class="markdown-body">${html}</div>`;
+            lucide.createIcons();
+          }
         }
       }
 
-      window.selectStyleDoc = function(docId) {
-        selectedStyleDocId = docId;
+      window.selectStyle = function(id) {
+        selectedStyleId = id;
         renderStylesGuide();
       };
 
@@ -2673,43 +2748,123 @@ ${question}`;
         renderCategorizationBoard();
       };
 
-      window.selectReaderStockAndSwitch = function(ticker) {
-        switchPage('stock-reader');
-        selectReaderStock(ticker);
+      window.selectResearchStockAndSwitch = function(ticker) {
+        switchPage('stock-research');
+        selectResearchStock(ticker);
       };
 
       // 4. PAGE 4: RENDER WATCHLIST TARGETS & TRADINGVIEW
       let selectedWatchlistTicker = '';
+      let WATCHLIST_PRICES = {};
 
       function renderWatchlistTargets() {
         const tbody = $('watchlist-targets-tbody');
         if (!tbody) return;
 
-        // Get watchlisted stocks (e.g. from watchlists files or just the ones tagged as Watchlist)
-        // Let's render all stocks in our database that have target/entry prices or let the user watchlist any
         tbody.innerHTML = STOCKS.map(s => {
           const isSelected = s.ticker === selectedWatchlistTicker;
+          const livePriceData = WATCHLIST_PRICES[s.ticker];
+          
+          let currentPrice = livePriceData ? livePriceData.price : null;
+          if (currentPrice === null && s.targetPrice) {
+            currentPrice = parseFloat(s.targetPrice);
+          }
+          if (currentPrice === null) currentPrice = 100.0;
+
+          const entryPrice = s.entryPrice || s.entry_price ? parseFloat(s.entryPrice || s.entry_price) : null;
+          const exitPrice = s.exitPrice || s.exit_price ? parseFloat(s.exitPrice || s.exit_price) : null;
+
+          // Calculations
+          let diffPctText = "-";
+          if (entryPrice) {
+            const diffPct = ((currentPrice - entryPrice) / entryPrice) * 100;
+            const sign = diffPct >= 0 ? "+" : "";
+            diffPctText = `${sign}${diffPct.toFixed(1)}%`;
+          }
+
+          // Status Badge
+          let statusBadge = `<span class="badge" style="background:rgba(255,255,255,0.05); color:var(--text-muted);">รอดู</span>`;
+          if (entryPrice !== null) {
+            if (currentPrice <= entryPrice) {
+              if (exitPrice !== null && currentPrice <= exitPrice) {
+                statusBadge = `<span class="badge" style="background:rgba(239,68,68,0.2); color:var(--accent-red); border:1px solid var(--accent-red);">🔴 คัท</span>`;
+              } else {
+                statusBadge = `<span class="badge" style="background:rgba(16,185,129,0.2); color:var(--accent-green); border:1px solid var(--accent-green);">🟢 เข้าซื้อ</span>`;
+              }
+            } else {
+              statusBadge = `<span class="badge" style="background:rgba(245,158,11,0.2); color:var(--accent-orange); border:1px solid var(--accent-orange);">🟡 รอดู</span>`;
+            }
+          }
+
           return `
             <tr style="border-bottom:1px solid var(--border-color); cursor:pointer; background:${isSelected ? 'rgba(0,240,255,0.05)' : 'none'};" onclick="selectWatchlistStock('${s.ticker}')">
               <td style="padding:10px 8px;">
                 <div style="font-weight:700; color:var(--accent-cyan);">${s.ticker}</div>
                 <div style="font-size:11px; color:var(--text-muted);">${s.name}</div>
               </td>
-              <td style="padding:10px 8px; font-weight:500;" id="price-${s.ticker}">-</td>
-              <td style="padding:10px 8px;"><span class="target-badge target-entry">${s.entry_price || s.entryPrice || '-'}</span></td>
-              <td style="padding:10px 8px;"><span class="target-badge target-exit">${s.exit_price || s.exitPrice || '-'}</span></td>
-              <td style="padding:10px 8px;"><span class="target-badge target-sell">${s.targetPrice || s.target_price || '-'}</span></td>
+              <td style="padding:10px 8px; font-weight:700; color:${livePriceData ? 'var(--text-primary)' : 'var(--text-muted)'};">
+                $${currentPrice.toFixed(2)}
+                ${livePriceData ? `<span style="font-size:10px; display:block; color:${livePriceData.change >= 0 ? 'var(--accent-green)' : 'var(--accent-red)'}">${livePriceData.change >= 0 ? '+' : ''}${livePriceData.change.toFixed(2)}%</span>` : ''}
+              </td>
+              <td style="padding:10px 8px;">
+                <input type="number" step="0.01" value="${s.entryPrice || s.entry_price || ''}" 
+                  onclick="event.stopPropagation();"
+                  onblur="saveWatchlistRow('${s.ticker}', 'entryPrice', this.value)" 
+                  placeholder="เป้าเข้า" 
+                  style="width: 80px; padding: 4px 6px; background: rgba(0,0,0,0.2); border: 1px solid var(--border-color); border-radius: 4px; color:#fff;" />
+              </td>
+              <td style="padding:10px 8px;">
+                <input type="number" step="0.01" value="${s.exitPrice || s.exit_price || ''}" 
+                  onclick="event.stopPropagation();"
+                  onblur="saveWatchlistRow('${s.ticker}', 'exitPrice', this.value)" 
+                  placeholder="จุดคัท"
+                  style="width: 80px; padding: 4px 6px; background: rgba(0,0,0,0.2); border: 1px solid var(--border-color); border-radius: 4px; color:#fff;" />
+              </td>
+              <td style="padding:10px 8px; font-weight:600; color:${diffPctText.startsWith('-') ? 'var(--accent-red)' : 'var(--accent-green)'};">
+                ${diffPctText}
+              </td>
               <td style="padding:10px 8px; text-align:center;">
-                <button class="tab-action-btn" onclick="event.stopPropagation(); editWatchlistTargets('${s.ticker}')" style="font-size:11px; padding:3px 8px;">✏️ ตั้งเป้า</button>
+                ${statusBadge}
               </td>
             </tr>
           `;
         }).join('');
 
-        // Load prices
+        // Load prices asynchronously once
         const tickers = STOCKS.map(s => s.ticker);
-        updateWatchlistPrices(tickers);
+        updateWatchlistPrices(tickers).then(prices => {
+          if (prices && Object.keys(prices).length > 0) {
+            WATCHLIST_PRICES = prices;
+            // Update prices dynamically without redrawing the table
+            STOCKS.forEach(s => {
+              const pData = prices[s.ticker];
+              if (pData) {
+                // Update elements if they are still on screen
+                const cell = $('price-' + s.ticker);
+                if (cell) {
+                  cell.innerHTML = `$${pData.price.toFixed(2)} <span style="font-size:10px; display:block; color:${pData.change >= 0 ? 'var(--accent-green)' : 'var(--accent-red)'}">${pData.change >= 0 ? '+' : ''}${pData.change.toFixed(2)}%</span>`;
+                }
+              }
+            });
+          }
+        });
       }
+
+      window.saveWatchlistRow = function(ticker, field, value) {
+        const s = STOCKS.find(x => x.ticker === ticker);
+        if (s) {
+          if (field === 'entryPrice') {
+            s.entryPrice = value.trim();
+            s.entry_price = value.trim();
+          } else if (field === 'exitPrice') {
+            s.exitPrice = value.trim();
+            s.exit_price = value.trim();
+          }
+          saveStocks();
+          syncToSupabase({ silent: true });
+          renderWatchlistTargets();
+        }
+      };
 
       window.selectWatchlistStock = function(ticker) {
         selectedWatchlistTicker = ticker;
@@ -2732,29 +2887,12 @@ ${question}`;
         if (cleanSymbol.includes(':')) {
           cleanSymbol = cleanSymbol.split(':')[1];
         }
-        // Embed interactive chart widget
         return `<iframe
           style="width: 100%; height: 100%; border: none;"
           src="https://s.tradingview.com/widgetembed/?symbol=${cleanSymbol}&interval=D&theme=dark&style=1&timezone=Asia%2FBangkok&locale=th"
           allowfullscreen>
         </iframe>`;
       }
-
-      window.editWatchlistTargets = function(ticker) {
-        const s = STOCKS.find(x => x.ticker === ticker);
-        if (!s) return;
-
-        const entry = prompt(`ตั้งเป้าหมายจุดเข้าซื้อ (Entry) ของ ${ticker}:`, s.entry_price || s.entryPrice || '');
-        const exit = prompt(`ตั้งเป้าหมายจุดคัทขาดทุน (Exit/Cut) ของ ${ticker}:`, s.exit_price || s.exitPrice || '');
-        const target = prompt(`ตั้งเป้าหมายราคาขาย (Target/Sell) ของ ${ticker}:`, s.targetPrice || '');
-
-        if (entry !== null) s.entry_price = entry;
-        if (exit !== null) s.exit_price = exit;
-        if (target !== null) s.targetPrice = target;
-
-        saveStocks();
-        renderWatchlistTargets();
-      };
 
       // 5. FLOATING AI ADVISOR BOT LOGIC
       window.toggleFloatingBot = function() {
@@ -2850,9 +2988,12 @@ ${question}`;
         } else if (action === 'show_chart') {
           switchPage('watchlist-targets');
           selectWatchlistStock(arg);
-        } else if (action === 'filter_style') {
-          switchPage('categorization-board');
-          filterBoardStyle(arg);
+        } else if (action === 'add_stock') {
+          addStockWithAI(arg);
+        } else if (action === 'add_knowledge') {
+          showLinkExtractor();
+          const titleInput = $('kx-title');
+          if (titleInput) titleInput.value = arg;
         }
       }
 
@@ -3203,8 +3344,8 @@ ${question}`;
         S.set('portfolio_tickers', JSON.stringify([...portfolioTickers]));
 
         // Re-render components
-        if (typeof renderStockList === 'function') renderStockList();
-        if (typeof renderWatchlist === 'function') renderWatchlist();
+        if (typeof renderStockResearchList === 'function') renderStockResearchList();
+        if (typeof renderWatchlistTargets === 'function') renderWatchlistTargets();
         if (typeof renderPortfolio === 'function') renderPortfolio();
       };
 
@@ -4422,6 +4563,10 @@ ${question}`;
           STOCKS.forEach(s => {
             if (s.market === undefined) s.market = "US";
             if (s.targetPrice === undefined) s.targetPrice = "";
+            if (s.entryPrice === undefined) s.entryPrice = "";
+            if (s.exitPrice === undefined) s.exitPrice = "";
+            if (s.expenses === undefined) s.expenses = "";
+            if (s.customers === undefined) s.customers = "";
             if (s.group === undefined || s.group === null) s.group = "";
             if (s.moat === undefined || s.moat === null) s.moat = "";
             if (s.style === undefined || s.style === null) s.style = "";
@@ -4436,6 +4581,16 @@ ${question}`;
             if (s.summary === undefined || s.summary === null) s.summary = "";
             if (s.imageUrl === undefined || s.imageUrl === null) s.imageUrl = "";
             if (s.financials === undefined || s.financials === null) s.financials = [];
+
+            // If whyInterest is serialized JSON, parse it
+            if (s.whyInterest && s.whyInterest.trim().startsWith('{')) {
+              try {
+                const parsed = JSON.parse(s.whyInterest);
+                s.expenses = parsed.expenses || s.expenses || "";
+                s.customers = parsed.customers || s.customers || "";
+                s.whyInterest = parsed.whyInterest || "";
+              } catch(e) {}
+            }
           });
 
           if (STOCKS.length > 0) {
@@ -4443,32 +4598,56 @@ ${question}`;
           }
 
           updateApiDot();
-          buildGroupFilter();
-          renderStockList();
+          buildResearchGroupFilter();
+          renderStockResearchList();
           renderChat();
           initSupabase();
 
-          // Initial rendering of tabs and opening default book tab
+          // Initial rendering of tabs and opening default styles guide tab
           renderTabBar();
-          switchPage('thesis');
+          switchPage('styles-guide');
           initPortfolioPage();
+
+          // Setup Page 2 Research Search & Filters listeners
+          const searchInp = $('research-search-input');
+          if (searchInp) searchInp.addEventListener('input', (e) => {
+            researchSearchQuery = e.target.value.toLowerCase().trim();
+            renderStockResearchList();
+          });
+
+          const styleSel = $('research-style-filter');
+          if (styleSel) styleSel.addEventListener('change', (e) => {
+            researchStyleFilter = e.target.value;
+            renderStockResearchList();
+          });
+
+          const groupSel = $('research-group-filter');
+          if (groupSel) groupSel.addEventListener('change', (e) => {
+            researchGroupFilter = e.target.value;
+            renderStockResearchList();
+          });
+
           lucide.createIcons();
 
           if (supabaseClient) {
+            // Load playbooks/knowledge docs from Supabase first
+            loadKnowledgeDocsFromSupabase().then(() => {
+              renderStylesGuide();
+            });
+
             syncFromSupabase().then(ok => {
               if (ok) {
-                buildGroupFilter();
-                renderStockList();
+                buildResearchGroupFilter();
+                renderStockResearchList();
                 renderPortfolio();
+                renderWatchlistTargets();
               }
-            });
-            loadKnowledgeDocsFromSupabase().then(ok => {
-              if (ok && currentTab === 'knowledge') renderKnowledgeBase();
             });
           }
         });
       };
-window.runPositionSizingCalc = function() {
+
+      window.runPositionSizingCalc = function() {
         const portSize = parseFloat($('ps-port-size')?.value) || 0;
         const riskPct = parseFloat($('ps-risk-pct')?.value) || 0;
         const entryPrice = parseFloat($('ps-entry-price')?.value) || 0;
@@ -4477,7 +4656,7 @@ window.runPositionSizingCalc = function() {
         if (portSize) S.set('calc_port_size', portSize);
         if (riskPct) S.set('calc_risk_pct', riskPct);
 
-        const resDiv = $('ps-calc-result');
+        const resDiv = $('ps-output-panel') || $('ps-calc-result');
         if (!resDiv) return;
 
         if (portSize <= 0 || riskPct <= 0 || entryPrice <= 0 || stopPrice <= 0) {
@@ -4497,10 +4676,28 @@ window.runPositionSizingCalc = function() {
         const portWeight = (positionSize / portSize) * 100;
 
         resDiv.innerHTML = `
-          เสี่ยงขาดทุนสูงสุด: <span style="color:var(--text-primary); font-weight:600;">${maxRiskVal.toLocaleString('th-TH', {maximumFractionDigits: 0})} บาท</span> (${riskPct}%)<br/>
-          ระยะตัดขาดทุน (SL %): <span style="color:var(--accent-orange); font-weight:600;">${stopLossPct.toFixed(2)}%</span><br/>
-          จำนวนที่ควรเข้าซื้อ: <span style="color:var(--accent-green); font-weight:700;">${Math.floor(shares).toLocaleString('th-TH')} หุ้น</span> (${shares.toFixed(1)} หุ้น)<br/>
-          เงินลงทุนรวม (Position Size): <span style="color:var(--accent-cyan); font-weight:600;">${positionSize.toLocaleString('th-TH', {maximumFractionDigits: 0})} บาท</span> (${portWeight.toFixed(1)}% ของพอร์ต)
+          <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap:16px;">
+            <div style="background:rgba(255,255,255,0.03); padding:10px; border-radius:6px; border:1px solid var(--border-color);">
+              <div style="font-size:11px; color:var(--text-muted);">ความเสี่ยงสูงสุดต่อไม้</div>
+              <div style="font-size:16px; font-weight:700; color:var(--accent-red); margin-top:4px;">$${maxRiskVal.toLocaleString('en-US', {maximumFractionDigits: 2})}</div>
+              <div style="font-size:10px; color:var(--text-muted); margin-top:2px;">(${riskPct}% ของพอร์ต)</div>
+            </div>
+            <div style="background:rgba(255,255,255,0.03); padding:10px; border-radius:6px; border:1px solid var(--border-color);">
+              <div style="font-size:11px; color:var(--text-muted);">ระยะตัดขาดทุน (SL %)</div>
+              <div style="font-size:16px; font-weight:700; color:var(--accent-orange); margin-top:4px;">${stopLossPct.toFixed(2)}%</div>
+              <div style="font-size:10px; color:var(--text-muted); margin-top:2px;">($${(entryPrice - stopPrice).toFixed(2)} ต่อหุ้น)</div>
+            </div>
+            <div style="background:rgba(255,255,255,0.03); padding:10px; border-radius:6px; border:1px solid var(--border-color);">
+              <div style="font-size:11px; color:var(--text-muted);">จำนวนที่ควรซื้อ (Shares)</div>
+              <div style="font-size:18px; font-weight:700; color:var(--accent-green); margin-top:4px;">${Math.floor(shares).toLocaleString('en-US')} หุ้น</div>
+              <div style="font-size:10px; color:var(--text-muted); margin-top:2px;">(หรือ ${shares.toFixed(2)} หุ้น)</div>
+            </div>
+            <div style="background:rgba(255,255,255,0.03); padding:10px; border-radius:6px; border:1px solid var(--border-color);">
+              <div style="font-size:11px; color:var(--text-muted);">ขนาดเงินลงทุน (Position Size)</div>
+              <div style="font-size:16px; font-weight:700; color:var(--accent-cyan); margin-top:4px;">$${positionSize.toLocaleString('en-US', {maximumFractionDigits: 2})}</div>
+              <div style="font-size:10px; color:var(--text-muted); margin-top:2px;">(${portWeight.toFixed(1)}% ของพอร์ต)</div>
+            </div>
+          </div>
         `;
       };
 
@@ -4691,88 +4888,100 @@ window.runPositionSizingCalc = function() {
 
 
       // ====== PAGE 2: STOCK RESEARCH ======
-      function buildGroupFilter() {
+      // ====== PAGE 2: STOCK RESEARCH ======
+      let researchSearchQuery = '';
+      let researchStyleFilter = 'ALL';
+      let researchGroupFilter = 'ALL';
+
+      function buildResearchGroupFilter() {
         const groups = new Set();
         STOCKS.forEach(s => { if (s.group) groups.add(s.group); });
-        const sel = $('group-filter');
+        const sel = $('research-group-filter');
+        if (!sel) return;
         sel.innerHTML = '<option value="ALL">-- ทุกกลุ่มอุตสาหกรรม --</option>';
         groups.forEach(g => {
           const o = document.createElement('option');
           o.value = g; o.textContent = g;
+          if (researchGroupFilter === g) o.selected = true;
           sel.appendChild(o);
         });
       }
 
-      function renderStockList() {
-        const list = $('stock-list');
-        const search = $('search-input').value.toLowerCase().trim();
-        const group = $('group-filter').value;
-        const styleFilter = $('style-filter').value;
+      function renderStockResearchList() {
+        const listDiv = $('research-stock-list');
+        if (!listDiv) return;
 
         const filtered = STOCKS.filter(s => {
-          const matchSearch = s.ticker.toLowerCase().includes(search) || s.name.toLowerCase().includes(search);
-          const matchGroup = group === 'ALL' || s.group === group;
-          const matchStyle = styleFilter === 'ALL' || s.style === styleFilter;
-          const matchMarket = researchMarketFilter === 'ALL' || (s.market || 'US') === researchMarketFilter;
-          return matchSearch && matchGroup && matchStyle && matchMarket;
+          const matchSearch = s.ticker.toLowerCase().includes(researchSearchQuery) || s.name.toLowerCase().includes(researchSearchQuery);
+          const matchStyle = researchStyleFilter === 'ALL' || (s.style || '').toLowerCase().includes(researchStyleFilter.toLowerCase());
+          const matchGroup = researchGroupFilter === 'ALL' || s.group === researchGroupFilter;
+          return matchSearch && matchStyle && matchGroup;
         });
 
-        list.innerHTML = '';
+        listDiv.innerHTML = '';
         if (filtered.length === 0) {
-          list.innerHTML = '<p style="text-align:center;color:var(--text-muted);padding:20px;font-size:13px;">ไม่พบหุ้น</p>';
+          listDiv.innerHTML = '<p style="text-align:center;color:var(--text-muted);padding:20px;font-size:13px;">ไม่พบหุ้น</p>';
           return;
         }
 
         filtered.forEach(stock => {
+          const isActive = selectedStock?.ticker === stock.ticker;
           const isStarred = starred.has(stock.ticker);
           const isPortfolio = portfolioTickers.has(stock.ticker);
-          const isActive = selectedStock?.ticker === stock.ticker;
-          const targetText = stock.targetPrice ? `<span class="stock-chat-target">🎯 ${stock.targetPrice}</span>` : '';
-
+          
           const div = document.createElement('div');
           div.className = 'stock-item' + (isActive ? ' active' : '');
+          div.style.display = 'flex';
+          div.style.justifyContent = 'space-between';
+          div.style.alignItems = 'center';
+          div.style.padding = '8px';
+          div.style.borderRadius = '6px';
+          div.style.cursor = 'pointer';
+          div.style.transition = 'background 0.2s';
+          
           div.innerHTML = `
-            <div class="stock-item-left" onclick="selectStock('${stock.ticker}')">
-              <img src="${stock.logoUrl}" alt="" class="stock-logo" onerror="this.style.display='none'" />
-              <div class="stock-info">
-                <span class="stock-ticker">${stock.ticker}</span>
-                <span class="stock-name">${stock.name}</span>
+            <div style="flex:1; display:flex; align-items:center; gap:8px;" onclick="selectResearchStock('${stock.ticker}')">
+              <div style="display:flex; flex-direction:column;">
+                <span style="font-weight:700; color:var(--accent-cyan); font-size:13px;">${stock.ticker}</span>
+                <span style="font-size:11px; color:var(--text-muted); max-width: 140px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${stock.name}</span>
               </div>
             </div>
-            <div class="stock-status-right" onclick="selectStock('${stock.ticker}')">
-              <div class="stock-chat-price" id="chat-price-${stock.ticker}">-</div>
-              <div class="stock-chat-change" id="chat-change-${stock.ticker}"></div>
-              ${targetText}
-            </div>
-            <div style="display:flex; align-items:center; gap:2px; flex-shrink:0;">
-              <button class="portfolio-btn ${isPortfolio ? 'active' : ''}" onclick="togglePortfolio(event,'${stock.ticker}')" title="${isPortfolio ? 'ถอนจากพอร์ต' : 'เพิ่มเข้าพอร์ต'}">
+            <div style="display:flex; align-items:center; gap:4px;">
+              <button class="portfolio-btn ${isPortfolio ? 'active' : ''}" onclick="togglePortfolio(event,'${stock.ticker}')" title="${isPortfolio ? 'ถอนจากพอร์ต' : 'เพิ่มเข้าพอร์ต'}" style="background:none; border:none; color:${isPortfolio ? 'var(--accent-cyan)' : 'var(--text-muted)'}; cursor:pointer; padding:2px;">
                 <i data-lucide="briefcase" style="width:13px;height:13px;${isPortfolio?'fill:currentColor;':''}"></i>
               </button>
-              <button class="star-btn ${isStarred ? 'starred' : ''}" onclick="toggleStar(event,'${stock.ticker}')" style="margin-left: 2px;">
+              <button class="star-btn ${isStarred ? 'starred' : ''}" onclick="toggleStar(event,'${stock.ticker}')" style="background:none; border:none; color:${isStarred ? 'var(--accent-orange)' : 'var(--text-muted)'}; cursor:pointer; padding:2px;">
                 <i data-lucide="star" style="width:13px;height:13px;${isStarred?'fill:currentColor;':''}"></i>
               </button>
             </div>
           `;
-          list.appendChild(div);
+          listDiv.appendChild(div);
         });
         lucide.createIcons();
-        loadStockListPrices(filtered.map(s => s.ticker));
       }
 
-      window.selectStock = function(ticker) {
-        selectedStock = STOCKS.find(s => s.ticker === ticker) || null;
-        detailTab = 'memo';
-        renderStockList();
-        renderStockDetail();
+      window.selectResearchStock = function(ticker) {
+        const s = STOCKS.find(x => x.ticker === ticker);
+        if (s) {
+          selectedStock = s;
+          isAddingNewStock = false;
+          renderStockResearchList();
+          renderStockDetail();
+        }
       };
 
       window.toggleStar = function(e, ticker) {
         e.stopPropagation();
-        if (starred.has(ticker)) { starred.delete(ticker); toast(ticker + ' ถอนดาวแล้ว'); }
-        else { starred.add(ticker); toast('⭐ ' + ticker + ' เพิ่มใน Watchlist'); }
+        if (starred.has(ticker)) {
+          starred.delete(ticker);
+          toast(ticker + ' ถอนดาวแล้ว');
+        } else {
+          starred.add(ticker);
+          toast('⭐ ' + ticker + ' เพิ่มใน Watchlist');
+        }
         S.set('starred_tickers', JSON.stringify([...starred]));
-        renderStockList();
-        if (typeof renderWatchlist === 'function') renderWatchlist();
+        renderStockResearchList();
+        if (typeof renderWatchlistTargets === 'function') renderWatchlistTargets();
       };
 
       window.saveStockNotes = function(ticker) {
@@ -4794,6 +5003,7 @@ window.runPositionSizingCalc = function() {
 
       function renderStockDetail() {
         const el = $('stock-detail-content');
+        if (!el) return;
 
         // Handle Add New Stock Pane
         if (typeof isAddingNewStock !== 'undefined' && isAddingNewStock) {
@@ -4824,7 +5034,7 @@ window.runPositionSizingCalc = function() {
                 <div style="flex: 1;">
                   <div class="detail-section-title">สไตล์การลงทุน</div>
                   <select class="edit-select" id="new-style" style="width:100%;">
-                    ${['เติบโต (Growth)','Defensive (ปลอดภัย)','ม้ามืด (Dark Horse)','ถือยาว (Core Hold)','หุ้นซิ่ง (Momentum / Trading)'].map(o => `<option value="${o}">${o}</option>`).join('')}
+                    ${['Growth','Defensive','Dark Horse','Core','Dividend'].map(o => `<option value="${o}">${o}</option>`).join('')}
                   </select>
                 </div>
                 <div style="flex: 1;">
@@ -4843,8 +5053,9 @@ window.runPositionSizingCalc = function() {
               ${editField('1️⃣ ธุรกิจนี้ทำอะไรบ้าง?', 'new-what', '')}
               ${editField('📊 อัตราส่วนการทำเงินคิดเป็นกี่%ของรายได้', 'new-revenue-breakdown', '')}
               ${editField('2️⃣ หาเงินจากอะไร?', 'new-how', '')}
-              ${editField('👥 กลุ่มลูกค้า เป็นใคร', 'new-target-customers', '')}
-              ${editField('🤝 ดีลสำคัญ', 'new-deals', '')}
+              ${editField('👥 กลุ่มลูกค้าหลัก เป็นใคร', 'new-customers', '')}
+              ${editField('💸 ค่าใช้จ่ายหลัก คืออะไร', 'new-expenses', '')}
+              ${editField('🤝 ดีลและตัวเร่งสำคัญ', 'new-deals', '')}
               ${editField('🛡️ จุดแข็ง / Moat', 'new-moat', '')}
               ${editField('⚠️ จุดอ่อน / ความเสี่ยง', 'new-risks', '')}
 
@@ -4864,11 +5075,12 @@ window.runPositionSizingCalc = function() {
         }
 
         if (!selectedStock) {
-          el.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--text-muted);flex-direction:column;gap:10px;"><i data-lucide="mouse-pointer-click" style="width:40px;height:40px;opacity:0.3;"></i><p>เลือกหุ้นจากรายการด้านซ้ายเพื่อดูข้อมูล</p></div>';
-          lucide.createIcons(); return;
+          el.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--text-muted);flex-direction:column;gap:10px;"><i data-lucide="database" style="width:40px;height:40px;opacity:0.3;color:var(--accent-cyan);"></i><p>เลือกหุ้นจากรายการด้านซ้ายเพื่อเปิดอ่านรายละเอียดงานวิจัยเชิงลึก</p></div>';
+          lucide.createIcons();
+          return;
         }
         const s = selectedStock;
-        const style = s.style || 'ถือยาว (Core Hold)';
+        const style = s.style || 'ทั่วไป';
 
         if (detailTab === 'memo') {
           // Check for infographic preview
@@ -4899,8 +5111,8 @@ window.runPositionSizingCalc = function() {
                 <div class="detail-title">
                   <h2>${s.name} (${s.ticker})</h2>
                   <div class="detail-badges">
-                    <span class="badge badge-group">${s.group || 'ทั่วไป'}</span>
-                    <span class="badge badge-style">${style}</span>
+                    <span class="badge badge-group" style="background:rgba(168,85,247,0.15); color:#c084fc;">${s.group || 'ทั่วไป'}</span>
+                    <span class="badge badge-style" style="background:rgba(0,240,255,0.15); color:var(--accent-cyan);">${style}</span>
                   </div>
                 </div>
               </div>
@@ -4909,25 +5121,26 @@ window.runPositionSizingCalc = function() {
               </div>
             </div>
             <div class="detail-tabs">
-              <button class="detail-tab active" onclick="setDetailTab('memo')">📋 สรุป</button>
+              <button class="detail-tab active" onclick="setDetailTab('memo')">📋 สรุป 6 ข้อ</button>
               <button class="detail-tab" onclick="setDetailTab('notes')">📝 โน้ตส่วนตัว</button>
-              <button class="detail-tab" onclick="setDetailTab('chart')">📈 ตีกราฟ TradingView</button>
-              <button class="detail-tab" onclick="setDetailTab('financials')">📊 งบการเงิน</button>
-              <button class="detail-tab" onclick="setDetailTab('edit')">✏️ แก้ไข</button>
+              <button class="detail-tab" onclick="setDetailTab('chart')">📈 กราฟ TradingView</button>
+              <button class="detail-tab" onclick="setDetailTab('financials')">📊 งบการเงิน & DCF</button>
+              <button class="detail-tab" onclick="setDetailTab('edit')">✏️ แก้ไขข้อมูล</button>
             </div>
             <div class="detail-content">
               ${infographicHtml}
               ${renderField('1️⃣ ธุรกิจนี้ทำอะไรบ้าง? & สัดส่วนรายได้', s.whatItDoes + (s.revenueBreakdown ? '\n\n📊 **อัตราส่วนการทำเงินของรายได้:**\n' + s.revenueBreakdown : ''), 'info')}
               ${renderField('2️⃣ หาเงินจากอะไร?', s.howItMakesMoney, 'info')}
-              ${renderField('3️⃣ กลุ่มลูกค้า เป็นใคร', s.targetCustomers, 'info')}
-              ${renderField('4️⃣ ดีลสำคัญ', s.deals, 'info')}
-              ${renderField('5️⃣ จุดแข็ง / Moat', s.moat, 'info')}
-              ${renderField('6️⃣ จุดอ่อน / ความเสี่ยง', s.risks, 'info')}
+              ${renderField('👥 กลุ่มลูกค้าหลัก', s.customers || s.targetCustomers || '', 'info')}
+              ${renderField('💸 ค่าใช้จ่ายหลัก', s.expenses || '', 'info')}
+              ${renderField('🤝 ดีลและตัวเร่งสำคัญ', s.deals, 'info')}
+              ${renderField('🛡️ Moat / จุดแข็ง', s.moat, 'info')}
+              ${renderField('⚠️ ความเสี่ยง / Bear Case', s.risks, 'info')}
               ${s.financials && s.financials.length > 0 ? renderFinTable(s.financials) : ''}
             </div>
           `;
           updateDetailPrice(s.ticker);
-          loadDbImages(); // Ensure pasted database images load
+          loadDbImages();
           lucide.createIcons();
         } else if (detailTab === 'notes') {
           el.innerHTML = `
@@ -4938,11 +5151,11 @@ window.runPositionSizingCalc = function() {
               </div>
             </div>
             <div class="detail-tabs">
-              <button class="detail-tab" onclick="setDetailTab('memo')">📋 สรุป</button>
+              <button class="detail-tab" onclick="setDetailTab('memo')">📋 สรุป 6 ข้อ</button>
               <button class="detail-tab active" onclick="setDetailTab('notes')">📝 โน้ตส่วนตัว</button>
-              <button class="detail-tab" onclick="setDetailTab('chart')">📈 ตีกราฟ TradingView</button>
-              <button class="detail-tab" onclick="setDetailTab('financials')">📊 งบการเงิน</button>
-              <button class="detail-tab" onclick="setDetailTab('edit')">✏️ แก้ไข</button>
+              <button class="detail-tab" onclick="setDetailTab('chart')">📈 กราฟ TradingView</button>
+              <button class="detail-tab" onclick="setDetailTab('financials')">📊 งบการเงิน & DCF</button>
+              <button class="detail-tab" onclick="setDetailTab('edit')">✏️ แก้ไขข้อมูล</button>
             </div>
             <div class="detail-content" style="display:flex; flex-direction:column; gap:10px; height:calc(100% - 130px);">
               <div style="font-size:12px; color:var(--text-muted);">จดบันทึกแนวคิดการวิจัย แผนการซื้อขาย หรือเป้าหมายส่วนตัวของหุ้นตัวนี้ (ระบบบันทึกอัตโนมัติ)</div>
@@ -4977,11 +5190,11 @@ window.runPositionSizingCalc = function() {
               </div>
             </div>
             <div class="detail-tabs">
-              <button class="detail-tab" onclick="setDetailTab('memo')">📋 สรุป</button>
+              <button class="detail-tab" onclick="setDetailTab('memo')">📋 สรุป 6 ข้อ</button>
               <button class="detail-tab" onclick="setDetailTab('notes')">📝 โน้ตส่วนตัว</button>
-              <button class="detail-tab active" onclick="setDetailTab('chart')">📈 ตีกราฟ TradingView</button>
-              <button class="detail-tab" onclick="setDetailTab('financials')">📊 งบการเงิน</button>
-              <button class="detail-tab" onclick="setDetailTab('edit')">✏️ แก้ไข</button>
+              <button class="detail-tab active" onclick="setDetailTab('chart')">📈 กราฟ TradingView</button>
+              <button class="detail-tab" onclick="setDetailTab('financials')">📊 งบการเงิน & DCF</button>
+              <button class="detail-tab" onclick="setDetailTab('edit')">✏️ แก้ไขข้อมูล</button>
             </div>
             <div class="detail-content" style="height: calc(100% - 130px); padding: 12px 20px 20px;">
               <iframe
@@ -5000,18 +5213,18 @@ window.runPositionSizingCalc = function() {
               </div>
             </div>
             <div class="detail-tabs">
-              <button class="detail-tab" onclick="setDetailTab('memo')">📋 สรุป</button>
+              <button class="detail-tab" onclick="setDetailTab('memo')">📋 สรุป 6 ข้อ</button>
               <button class="detail-tab" onclick="setDetailTab('notes')">📝 โน้ตส่วนตัว</button>
-              <button class="detail-tab" onclick="setDetailTab('chart')">📈 ตีกราฟ TradingView</button>
-              <button class="detail-tab" onclick="setDetailTab('financials')">📊 งบการเงิน</button>
-              <button class="detail-tab active" onclick="setDetailTab('edit')">✏️ แก้ไข</button>
+              <button class="detail-tab" onclick="setDetailTab('chart')">📈 กราฟ TradingView</button>
+              <button class="detail-tab" onclick="setDetailTab('financials')">📊 งบการเงิน & DCF</button>
+              <button class="detail-tab active" onclick="setDetailTab('edit')">✏️ แก้ไขข้อมูล</button>
             </div>
             <div class="detail-content">
               <div style="display: flex; gap: 12px; margin-bottom: 12px;">
                 <div style="flex: 1;">
                   <div class="detail-section-title">สไตล์การลงทุน</div>
                   <select class="edit-select" id="edit-style" style="width:100%;">
-                    ${['เติบโต (Growth)','Defensive (ปลอดภัย)','ม้ามืด (Dark Horse)','ถือยาว (Core Hold)','หุ้นซิ่ง (Momentum / Trading)'].map(o => `<option value="${o}" ${style===o?'selected':''}>${o}</option>`).join('')}
+                    ${['Growth','Defensive','Dark Horse','Core','Dividend'].map(o => `<option value="${o}" ${style===o?'selected':''}>${o}</option>`).join('')}
                   </select>
                 </div>
                 <div style="flex: 1;">
@@ -5027,7 +5240,8 @@ window.runPositionSizingCalc = function() {
               ${editField('1️⃣ ธุรกิจนี้ทำอะไรบ้าง?', 'edit-what', s.whatItDoes)}
               ${editField('📊 อัตราส่วนการทำเงินคิดเป็นกี่%ของรายได้', 'edit-revenue-breakdown', s.revenueBreakdown || '')}
               ${editField('2️⃣ หาเงินจากอะไร?', 'edit-how', s.howItMakesMoney)}
-              ${editField('👥 กลุ่มลูกค้า เป็นใคร', 'edit-target-customers', s.targetCustomers || '')}
+              ${editField('👥 กลุ่มลูกค้าหลัก เป็นใคร', 'edit-customers', s.customers || s.targetCustomers || '')}
+              ${editField('💸 ค่าใช้จ่ายหลัก คืออะไร', 'edit-expenses', s.expenses || '')}
               ${editField('🤝 ดีลสำคัญ', 'edit-deals', s.deals)}
               ${editField('🛡️ จุดแข็ง / Moat', 'edit-moat', s.moat)}
               ${editField('⚠️ จุดอ่อน / ความเสี่ยง', 'edit-risks', s.risks)}
@@ -5046,40 +5260,210 @@ window.runPositionSizingCalc = function() {
           lucide.createIcons();
         } else if (detailTab === 'financials') {
           const fins = s.financials || [];
+          const latestFin = fins.reduce((prev, current) => (prev.year > current.year) ? prev : current, fins[0] || {});
+          
           el.innerHTML = `
             <div class="detail-header">
               <img src="${s.logoUrl}" alt="" class="detail-logo" onerror="this.style.display='none'" />
-              <div class="detail-title"><h2>${s.name} (${s.ticker}) - งบการเงิน</h2></div>
+              <div class="detail-title"><h2>${s.name} (${s.ticker}) - งบการเงิน & DCF</h2></div>
             </div>
             <div class="detail-tabs">
-              <button class="detail-tab" onclick="setDetailTab('memo')">📋 สรุป</button>
+              <button class="detail-tab" onclick="setDetailTab('memo')">📋 สรุป 6 ข้อ</button>
               <button class="detail-tab" onclick="setDetailTab('notes')">📝 โน้ตส่วนตัว</button>
-              <button class="detail-tab" onclick="setDetailTab('chart')">📈 ตีกราฟ TradingView</button>
-              <button class="detail-tab active" onclick="setDetailTab('financials')">📊 งบการเงิน</button>
-              <button class="detail-tab" onclick="setDetailTab('edit')">✏️ แก้ไข</button>
+              <button class="detail-tab" onclick="setDetailTab('chart')">📈 กราฟ TradingView</button>
+              <button class="detail-tab active" onclick="setDetailTab('financials')">📊 งบการเงิน & DCF</button>
+              <button class="detail-tab" onclick="setDetailTab('edit')">✏️ แก้ไขข้อมูล</button>
             </div>
-            <div class="detail-content">
-              <table class="fin-table">
-                <thead><tr><th>ปี</th><th>รายได้</th><th>กำไรสุทธิ</th><th>Growth %</th><th></th></tr></thead>
-                <tbody id="fin-tbody">
-                  ${fins.map((f,i) => `<tr>
-                    <td><input value="${f.year||''}" data-i="${i}" data-f="year"/></td>
-                    <td><input value="${f.revenue||''}" data-i="${i}" data-f="revenue"/></td>
-                    <td><input value="${f.profit||''}" data-i="${i}" data-f="profit"/></td>
-                    <td><input value="${f.growth||''}" data-i="${i}" data-f="growth"/></td>
-                    <td><button class="btn btn-sm btn-danger" onclick="delFinRow(${i})">✕</button></td>
-                  </tr>`).join('')}
-                </tbody>
-              </table>
-              <div style="margin-top:12px;display:flex;gap:8px;">
-                <button class="btn btn-sm" onclick="addFinRow()"><i data-lucide="plus" style="width:12px;height:12px;"></i> เพิ่มแถว</button>
-                <button class="btn btn-sm btn-primary" onclick="saveFinancials()"><i data-lucide="save" style="width:12px;height:12px;"></i> บันทึกงบ</button>
+            <div class="detail-content" style="display:flex; flex-direction:column; gap:20px;">
+              <!-- 1. Historical Financials Table -->
+              <div class="glass-panel" style="padding:15px;">
+                <div style="font-weight:700; font-size:13px; color:var(--accent-cyan); margin-bottom:10px; display:flex; align-items:center; gap:6px;">
+                  <i data-lucide="table" style="width:16px;height:16px;"></i> ข้อมูลตารางงบการเงินสะสมย้อนหลัง
+                </div>
+                <table class="fin-table">
+                  <thead><tr><th>ปี</th><th>รายได้</th><th>กำไรสุทธิ</th><th>Growth %</th><th></th></tr></thead>
+                  <tbody id="fin-tbody">
+                    ${fins.map((f,i) => `<tr>
+                      <td><input value="${f.year||''}" data-i="${i}" data-f="year"/></td>
+                      <td><input value="${f.revenue||''}" data-i="${i}" data-f="revenue"/></td>
+                      <td><input value="${f.profit||''}" data-i="${i}" data-f="profit"/></td>
+                      <td><input value="${f.growth||''}" data-i="${i}" data-f="growth"/></td>
+                      <td><button class="btn btn-sm btn-danger" onclick="delFinRow(${i})">✕</button></td>
+                    </tr>`).join('')}
+                  </tbody>
+                </table>
+                <div style="margin-top:12px;display:flex;gap:8px;">
+                  <button class="btn btn-sm" onclick="addFinRow()"><i data-lucide="plus" style="width:12px;height:12px;"></i> เพิ่มแถว</button>
+                  <button class="btn btn-sm btn-primary" onclick="saveFinancials()"><i data-lucide="save" style="width:12px;height:12px;"></i> บันทึกงบ</button>
+                </div>
+              </div>
+
+              <!-- 2. Fair Value (DCF) Calculator -->
+              <div class="glass-panel" style="padding:15px;">
+                <div style="font-weight:700; font-size:13px; color:var(--accent-cyan); margin-bottom:10px; display:flex; align-items:center; gap:6px; justify-content:space-between;">
+                  <span style="display:flex; align-items:center; gap:6px;">
+                    <i data-lucide="calculator" style="width:16px;height:16px;"></i> เครื่องคำนวณราคายุติธรรม (Fair Value Calculator)
+                  </span>
+                  <span style="font-size:11px; color:var(--text-muted);">Simple Discounted Cash Flow</span>
+                </div>
+                
+                <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:12px; margin-bottom:15px;">
+                  <div>
+                    <label style="font-size:11px;color:var(--text-muted);display:block;margin-bottom:4px;">ราคาปัจจุบัน ($)</label>
+                    <input id="dcf-curr-price" class="edit-field" type="number" value="${s.targetPrice || s.target_price || 100}" oninput="runDcfCalculation()" style="width:100%; padding:6px;" />
+                  </div>
+                  <div>
+                    <label style="font-size:11px;color:var(--text-muted);display:block;margin-bottom:4px;">รายได้ปีล่าสุด ($)</label>
+                    <input id="dcf-revenue" class="edit-field" type="number" value="${latestFin.revenue || 100000000}" oninput="runDcfCalculation()" style="width:100%; padding:6px;" />
+                  </div>
+                  <div>
+                    <label style="font-size:11px;color:var(--text-muted);display:block;margin-bottom:4px;">รายได้เติบโต (% YoY)</label>
+                    <input id="dcf-growth" class="edit-field" type="number" value="15" oninput="runDcfCalculation()" style="width:100%; padding:6px;" />
+                  </div>
+                  <div>
+                    <label style="font-size:11px;color:var(--text-muted);display:block;margin-bottom:4px;">Operating Margin (%)</label>
+                    <input id="dcf-margin" class="edit-field" type="number" value="25" oninput="runDcfCalculation()" style="width:100%; padding:6px;" />
+                  </div>
+                  <div>
+                    <label style="font-size:11px;color:var(--text-muted);display:block;margin-bottom:4px;">Discount Rate (%)</label>
+                    <input id="dcf-discount" class="edit-field" type="number" value="10" oninput="runDcfCalculation()" style="width:100%; padding:6px;" />
+                  </div>
+                  <div>
+                    <label style="font-size:11px;color:var(--text-muted);display:block;margin-bottom:4px;">Terminal Growth (%)</label>
+                    <input id="dcf-terminal" class="edit-field" type="number" value="3" oninput="runDcfCalculation()" style="width:100%; padding:6px;" />
+                  </div>
+                  <div>
+                    <label style="font-size:11px;color:var(--text-muted);display:block;margin-bottom:4px;">Shares Outstanding (ล้านหุ้น)</label>
+                    <input id="dcf-shares" class="edit-field" type="number" value="100" oninput="runDcfCalculation()" style="width:100%; padding:6px;" />
+                  </div>
+                  <div>
+                    <label style="font-size:11px;color:var(--text-muted);display:block;margin-bottom:4px;">Net Cash / Debt ($)</label>
+                    <input id="dcf-net-cash" class="edit-field" type="number" value="0" oninput="runDcfCalculation()" style="width:100%; padding:6px;" />
+                  </div>
+                  <div>
+                    <label style="font-size:11px;color:var(--text-muted);display:block;margin-bottom:4px;">Margin of Safety (%)</label>
+                    <input id="dcf-mos" class="edit-field" type="number" value="20" oninput="runDcfCalculation()" style="width:100%; padding:6px;" />
+                  </div>
+                </div>
+
+                <!-- DCF Output Panel -->
+                <div id="dcf-output-panel" style="background:rgba(0,0,0,0.2); border:1px solid var(--border-color); border-radius:8px; padding:12px; margin-bottom:12px;">
+                  <!-- Dynamically computed -->
+                </div>
+                
+                <div style="display:flex; gap:10px;">
+                  <button class="btn btn-sm btn-primary" onclick="saveDcfTargetPrice('${s.ticker}')" style="font-size:11px; padding:8px 14px;">
+                    🎯 บันทึกเป็นเป้าหมายขาย (Save Target Price)
+                  </button>
+                  <button class="btn btn-sm btn-accent" onclick="saveDcfToNotes('${s.ticker}')" style="font-size:11px; padding:8px 14px; background:var(--accent-cyan); color:#000; border:none;">
+                    📝 บันทึกลงคลังความรู้
+                  </button>
+                </div>
               </div>
             </div>
           `;
           lucide.createIcons();
+          setTimeout(runDcfCalculation, 100);
         }
       }
+
+      window.runDcfCalculation = function() {
+        const currentPrice = parseFloat($('dcf-curr-price')?.value) || 0;
+        const revenue = parseFloat($('dcf-revenue')?.value) || 0;
+        const growth = (parseFloat($('dcf-growth')?.value) || 0) / 100;
+        const margin = (parseFloat($('dcf-margin')?.value) || 0) / 100;
+        const discount = (parseFloat($('dcf-discount')?.value) || 0) / 100;
+        const terminal = (parseFloat($('dcf-terminal')?.value) || 0) / 100;
+        const shares = (parseFloat($('dcf-shares')?.value) || 0) * 1e6; // standardise to millions
+        const netCash = parseFloat($('dcf-net-cash')?.value) || 0;
+        const mos = (parseFloat($('dcf-mos')?.value) || 0) / 100;
+        const tax = 0.18; // default tax rate
+
+        const panel = $('dcf-output-panel');
+        if (!panel) return;
+
+        if (!revenue || !shares || discount <= terminal) {
+          panel.innerHTML = `<span style="color:var(--text-muted); font-size:12px;">กรุณากรอก Revenue, Shares และให้ Discount Rate > Terminal Growth</span>`;
+          return;
+        }
+
+        const input = { currentPrice, revenue, growth, margin, tax, discount, terminal, shares, netCash, mos };
+        const result = calculateFairValue(input);
+        const fairColor = result.upside >= 0 ? 'var(--accent-green)' : 'var(--accent-red)';
+
+        panel.innerHTML = `
+          <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:10px; text-align:center;">
+            <div>
+              <div style="font-size:10px; color:var(--text-muted); font-weight:600;">Fair Value</div>
+              <div style="font-size:18px; font-weight:700; color:${fairColor}; margin-top:4px;">$${result.fairValue.toFixed(2)}</div>
+            </div>
+            <div>
+              <div style="font-size:10px; color:var(--text-muted); font-weight:600;">MOS Buy Price</div>
+              <div style="font-size:18px; font-weight:700; color:var(--accent-cyan); margin-top:4px;">$${result.buyPrice.toFixed(2)}</div>
+            </div>
+            <div>
+              <div style="font-size:10px; color:var(--text-muted); font-weight:600;">Upside</div>
+              <div style="font-size:18px; font-weight:700; color:${fairColor}; margin-top:4px;">${result.upside.toFixed(1)}%</div>
+            </div>
+            <div>
+              <div style="font-size:10px; color:var(--text-muted); font-weight:600;">Equity Value</div>
+              <div style="font-size:18px; font-weight:700; color:var(--text-primary); margin-top:4px;">$${(result.equityValue / 1e6).toFixed(1)}M</div>
+            </div>
+          </div>
+        `;
+      };
+
+      window.saveDcfTargetPrice = function(ticker) {
+        const val = parseFloat($('dcf-curr-price')?.value) || 0;
+        const growth = (parseFloat($('dcf-growth')?.value) || 0) / 100;
+        const margin = (parseFloat($('dcf-margin')?.value) || 0) / 100;
+        const discount = (parseFloat($('dcf-discount')?.value) || 0) / 100;
+        const terminal = (parseFloat($('dcf-terminal')?.value) || 0) / 100;
+        const shares = (parseFloat($('dcf-shares')?.value) || 0) * 1e6;
+        const netCash = parseFloat($('dcf-net-cash')?.value) || 0;
+        const mos = (parseFloat($('dcf-mos')?.value) || 0) / 100;
+        const revenue = parseFloat($('dcf-revenue')?.value) || 0;
+        const tax = 0.18;
+        
+        const input = { currentPrice: val, revenue, growth, margin, tax, discount, terminal, shares, netCash, mos };
+        const result = calculateFairValue(input);
+
+        const s = STOCKS.find(x => x.ticker === ticker);
+        if (s) {
+          s.targetPrice = result.fairValue.toFixed(2);
+          saveStocks();
+          syncToSupabase({ silent: true });
+          toast('บันทึก Fair Value เป็นเป้าหมายเรียบร้อยแล้ว: $' + s.targetPrice);
+          renderStockDetail();
+        }
+      };
+
+      window.saveDcfToNotes = async function(ticker) {
+        const val = parseFloat($('dcf-curr-price')?.value) || 0;
+        const growth = (parseFloat($('dcf-growth')?.value) || 0) / 100;
+        const margin = (parseFloat($('dcf-margin')?.value) || 0) / 100;
+        const discount = (parseFloat($('dcf-discount')?.value) || 0) / 100;
+        const terminal = (parseFloat($('dcf-terminal')?.value) || 0) / 100;
+        const shares = (parseFloat($('dcf-shares')?.value) || 0) * 1e6;
+        const netCash = parseFloat($('dcf-net-cash')?.value) || 0;
+        const mos = (parseFloat($('dcf-mos')?.value) || 0) / 100;
+        const revenue = parseFloat($('dcf-revenue')?.value) || 0;
+        const tax = 0.18;
+        
+        const input = { ticker, currentPrice: val, revenue, growth, margin, tax, discount, terminal, shares, netCash, mos };
+        const result = calculateFairValue(input);
+        
+        const today = new Date().toISOString().slice(0, 10);
+        const path = `09_valuation_notes/${today}-${ticker.replace(/\./g, '_')}-fair-value.md`;
+        
+        await upsertKnowledgeDocument({
+          path,
+          title: `Fair Value: ${ticker}`,
+          category: '09_valuation_notes',
+          content: buildFairValueMarkdown(input, result)
+        });
+        toast('บันทึกโน้ตมูลค่าล่วงหน้าเรียบร้อยแล้ว: ' + path);
+      };
 
       function renderField(title, value, type) {
         if (!value) return `<div class="detail-section"><div class="detail-section-title">${title}</div><div class="detail-section-body ${type}"><span style="color:var(--text-muted)">ยังไม่มีข้อมูล</span></div></div>`;
@@ -5096,7 +5480,7 @@ window.runPositionSizingCalc = function() {
       }
       function renderFinTable(fins) {
         if (!fins || fins.length === 0) return '';
-        let html = '<div class="detail-section"><div class="detail-section-title">📊 งบการเงิน</div><table class="fin-table"><thead><tr><th>ปี</th><th>รายได้</th><th>กำไร</th><th>Growth</th></tr></thead><tbody>';
+        let html = '<div class="detail-section"><div class="detail-section-title">📊 งบการเงินสะสมย้อนหลัง</div><table class="fin-table" style="max-width:400px;"><thead><tr><th>ปี</th><th>รายได้</th><th>กำไร</th><th>Growth</th></tr></thead><tbody>';
         fins.forEach(f => { html += `<tr><td>${f.year||''}</td><td>${f.revenue||''}</td><td>${f.profit||''}</td><td>${f.growth||''}</td></tr>`; });
         html += '</tbody></table></div>';
         return html;
@@ -5112,17 +5496,19 @@ window.runPositionSizingCalc = function() {
         selectedStock.whatItDoes = $('edit-what').value;
         selectedStock.revenueBreakdown = $('edit-revenue-breakdown').value;
         selectedStock.howItMakesMoney = $('edit-how').value;
-        selectedStock.targetCustomers = $('edit-target-customers').value;
+        selectedStock.customers = $('edit-customers').value;
+        selectedStock.expenses = $('edit-expenses').value;
         selectedStock.deals = $('edit-deals').value;
         selectedStock.moat = $('edit-moat').value;
         selectedStock.risks = $('edit-risks').value;
         selectedStock.imageUrl = $('edit-image-url').value.trim();
 
         saveStocks();
-        buildGroupFilter();
+        buildResearchGroupFilter();
         detailTab = 'memo';
         renderStockDetail();
-        renderStockList();
+        renderStockResearchList();
+        syncToSupabase({ silent: true });
         toast('บันทึกข้อมูล ' + selectedStock.ticker + ' เรียบร้อย!');
       };
 
@@ -5148,6 +5534,7 @@ window.runPositionSizingCalc = function() {
           if (selectedStock.financials[i]) selectedStock.financials[i][f] = inp.value;
         });
         saveStocks();
+        syncToSupabase({ silent: true });
         toast('บันทึกงบการเงิน ' + selectedStock.ticker + ' แล้ว!');
       };
 
@@ -5180,7 +5567,7 @@ window.runPositionSizingCalc = function() {
       window.cancelAddStock = function() {
         isAddingNewStock = false;
         renderStockDetail();
-        renderStockList();
+        renderStockResearchList();
       };
 
       window.saveNewStock = function() {
@@ -5201,7 +5588,8 @@ window.runPositionSizingCalc = function() {
         const whatItDoes = $('new-what').value;
         const revenueBreakdown = $('new-revenue-breakdown').value;
         const howItMakesMoney = $('new-how').value;
-        const targetCustomers = $('new-target-customers').value;
+        const customers = $('new-customers').value;
+        const expenses = $('new-expenses').value;
         const deals = $('new-deals').value;
         const moat = $('new-moat').value;
         const risks = $('new-risks').value;
@@ -5218,7 +5606,8 @@ window.runPositionSizingCalc = function() {
           whatItDoes,
           revenueBreakdown,
           howItMakesMoney,
-          targetCustomers,
+          customers,
+          expenses,
           deals,
           moat,
           risks,
@@ -5230,23 +5619,25 @@ window.runPositionSizingCalc = function() {
         saveStocks();
         isAddingNewStock = false;
         selectedStock = newStock;
-        buildGroupFilter();
-        renderStockList();
+        buildResearchGroupFilter();
+        renderStockResearchList();
         renderStockDetail();
-        toast('เพิ่มหุ้น ' + ticker + ' เรียบร้อยแล้ว!');
+        syncToSupabase();
+        toast('เพิ่มหุ้น ' + ticker + ' เข้าระบบและซิงก์เรียบร้อย!');
       };
 
       // Add Stock Manual
-      $('btn-add-stock').onclick = () => {
-        isAddingNewStock = true;
-        selectedStock = null;
-        renderStockList();
-        renderStockDetail();
-      };
+      const btnAddStock = $('btn-add-stock');
+      if (btnAddStock) {
+        btnAddStock.onclick = () => {
+          isAddingNewStock = true;
+          selectedStock = null;
+          renderStockDetail();
+        };
+      }
 
-      // Add Stock with AI
-      window.addStockWithAI = async function() {
-        const ticker = prompt('กรอก Ticker หุ้นที่ต้องการให้ AI ช่วยดึงข้อมูลเข้าคลัง (เช่น PLTR, MSFT, AAPL):');
+      window.addStockWithAI = async function(tickerVal) {
+        const ticker = tickerVal || prompt('กรอก Ticker หุ้นที่ต้องการให้ AI ช่วยดึงข้อมูลเข้าคลัง (เช่น PLTR, MSFT, AAPL):');
         if (!ticker) return;
         const cleanTicker = ticker.trim().toUpperCase();
         if (STOCKS.some(s => s.ticker === cleanTicker)) {
@@ -5262,7 +5653,7 @@ window.runPositionSizingCalc = function() {
         toast('กำลังให้ AI วิเคราะห์และสรุปข้อมูลหุ้น ' + cleanTicker + '...');
 
         try {
-          const promptText = `คุณคือผู้เชี่ยวชาญด้านข้อมูลหุ้น ช่วยสรุปข้อมูลเชิงลึกของหุ้น ${cleanTicker} เป็นภาษาไทยตามโครงสร้าง JSON ต่อไปนี้เท่านั้น ห้ามเขียนข้อความเกริ่นนำหรือท้ายเรื่องใดๆ ทั้งสิ้น ห้ามใช้ markdown codeblock (เช่น \`\`\`json) ให้ส่งข้อความ JSON ดิบๆ มาเลย:\n{\n  "name": "ชื่อบริษัทสั้นๆ (ภาษาอังกฤษ)",\n  "group": "พิมพ์กลุ่มที่ตรงที่สุด เช่น AI Infrastructure, Semiconductor, Software, Space Tech, Defense Tech, หรืออื่นๆ",\n  "style": "พิมพ์เลือกสไตล์ที่ตรงที่สุดจาก: เติบโต (Growth), Defensive (ปลอดภัย), ม้ามืด (Dark Horse), ถือยาว (Core Hold), หุ้นซิ่ง (Momentum / Trading)",\n  "market": "พิมพ์เลือกตลาดที่ตรงที่สุดจาก: US, TH, CN, JP, EU",\n  "whatItDoes": "ธุรกิจนี้ทำอะไรบ้าง?: สรุปรายละเอียดการประกอบธุรกิจกระชับ 3-5 บรรทัด",\n  "revenueBreakdown": "อัตราส่วนการทำเงินคิดเป็นกี่%ของรายได้: สรุปสัดส่วนรายได้เป็นเปอร์เซ็นต์อย่างชัดเจน",\n  "howItMakesMoney": "หาเงินจากอะไร?: สรุปสั้นๆ 2-3 บรรทัด",\n  "targetCustomers": "กลุ่มลูกค้า เป็นใคร: สรุปกลุ่มลูกค้าเป้าหมายหลัก ภาพรวมส่วนมากคือใคร หากมีชื่อลูกค้าสำคัญที่ชัดเจนและสัดส่วนเปอร์เซ็นต์กลุ่มลูกค้าให้ระบุแยกแยะอย่างชัดเจนด้วย",\n  "deals": "ดีลสำคัญ: สรุปดีลและสัญญาสำคัญของบริษัทในช่วงนี้",\n  "moat": "จุดแข็ง / Moat: สรุปแต้มต่อทางธุรกิจที่คู่แข่งเลียนแบบได้ยาก",\n  "risks": "จุดอ่อน / ความเสี่ยง: สรุปความเสี่ยงหลักทางธุรกิจ"\n}`;
+          const promptText = `คุณคือผู้เชี่ยวชาญด้านข้อมูลหุ้น ช่วยสรุปข้อมูลเชิงลึกของหุ้น ${cleanTicker} เป็นภาษาไทยตามโครงสร้าง JSON ต่อไปนี้เท่านั้น ห้ามเขียนข้อความเกริ่นนำหรือท้ายเรื่องใดๆ ทั้งสิ้น ห้ามใช้ markdown codeblock (เช่น \`\`\`json) ให้ส่งข้อความ JSON ดิบๆ มาเลย:\n{\n  "name": "ชื่อบริษัทสั้นๆ (ภาษาอังกฤษ)",\n  "group": "พิมพ์กลุ่มที่ตรงที่สุด เช่น AI Infrastructure, Semiconductor, Software, Space Tech, Defense Tech, หรืออื่นๆ",\n  "style": "พิมพ์เลือกสไตล์ที่ตรงที่สุดจาก: Growth, Defensive, Dark Horse, Core, Dividend",\n  "market": "พิมพ์เลือกตลาดที่ตรงที่สุดจาก: US, TH, CN, JP, EU",\n  "whatItDoes": "ธุรกิจนี้ทำอะไรบ้าง?: สรุปรายละเอียดการประกอบธุรกิจกระชับ 3-5 บรรทัด",\n  "revenueBreakdown": "อัตราส่วนการทำเงินคิดเป็นกี่%ของรายได้: สรุปสัดส่วนรายได้เป็นเปอร์เซ็นต์อย่างชัดเจน",\n  "howItMakesMoney": "หาเงินจากอะไร?: สรุปสั้นๆ 2-3 บรรทัด",\n  "customers": "กลุ่มลูกค้าหลัก เป็นใคร: สรุปกลุ่มลูกค้าเป้าหมายหลัก เช่น คลาวด์ไฮเปอร์สเกลเลอร์ ผู้พัฒนาแอปพลิเคชัน ธุรกิจเอ็นเตอร์ไพรส์",\n  "expenses": "ค่าใช้จ่ายหลัก มีอะไรบ้าง: สรุปหัวข้อและโครงสร้างค่าใช้จ่ายหลัก เช่น ค่าพัฒนาวิจัย (R&D) ค่าดูแลรักษาระบบคลาวด์ ค่าทำการตลาด",\n  "deals": "ดีลและสัญญาสำคัญ: สรุปดีลและสัญญาสำคัญของบริษัทในช่วงนี้",\n  "moat": "จุดแข็ง / Moat: สรุปแต้มต่อทางธุรกิจที่คู่แข่งเลียนแบบได้ยาก",\n  "risks": "จุดอ่อน / ความเสี่ยง: สรุปความเสี่ยงหลักทางธุรกิจ"\n}`;
 
           const body = {
             contents: [{ parts: [{ text: promptText }] }]
@@ -5284,13 +5675,14 @@ window.runPositionSizingCalc = function() {
             name: profile.name || cleanTicker,
             logoUrl: 'https://logo.clearbit.com/' + (profile.name || cleanTicker).toLowerCase().replace(/\s+/g,'') + '.com',
             group: profile.group || 'ทั่วไป',
-            style: profile.style || 'ถือยาว (Core Hold)',
+            style: profile.style || 'Core',
             market: (profile.market || 'US').trim().toUpperCase(),
             targetPrice: '',
             whatItDoes: profile.whatItDoes || '',
             revenueBreakdown: profile.revenueBreakdown || '',
             howItMakesMoney: profile.howItMakesMoney || '',
-            targetCustomers: profile.targetCustomers || '',
+            customers: profile.customers || '',
+            expenses: profile.expenses || '',
             deals: profile.deals || '',
             moat: profile.moat || '',
             risks: profile.risks || '',
@@ -5300,10 +5692,11 @@ window.runPositionSizingCalc = function() {
 
           STOCKS.push(newStock);
           saveStocks();
-          buildGroupFilter();
-          renderStockList();
-          switchPage('research');
-          selectStock(cleanTicker);
+          buildResearchGroupFilter();
+          renderStockResearchList();
+          switchPage('stock-research');
+          selectResearchStock(cleanTicker);
+          syncToSupabase();
           toast('ดึงข้อมูลหุ้น ' + cleanTicker + ' เข้าคลังสำเร็จ!');
         } catch(e) {
           alert('ไม่สามารถดึงข้อมูลหุ้นได้: ' + e.message);
@@ -5315,7 +5708,7 @@ window.runPositionSizingCalc = function() {
         researchMarketFilter = market;
         const sel = $('research-market-select');
         if (sel) sel.value = market;
-        renderStockList();
+        renderStockResearchList();
       };
 
       async function loadStockListPrices(tickers) {
@@ -5336,10 +5729,6 @@ window.runPositionSizingCalc = function() {
           }
         });
       }
-
-      $('search-input').addEventListener('input', renderStockList);
-      $('group-filter').addEventListener('change', renderStockList);
-      $('style-filter').addEventListener('change', renderStockList);
 
       // ====== PAGE 3: WATCHLIST ======
       let selectedWatchlistStock = null;
@@ -5852,7 +6241,7 @@ window.runPositionSizingCalc = function() {
         }
       }
 
-      function renderKnowledgeBase() {
+      function renderKnowledgeTricks() {
         renderKnowledgeList();
         renderKnowledgeDetail();
       }
@@ -5862,15 +6251,18 @@ window.runPositionSizingCalc = function() {
         if (!el) return;
 
         const query = ($('knowledge-search-input')?.value || '').trim().toLowerCase();
-        const docs = KNOWLEDGE_DOCS.filter(doc => {
+        
+        // Custom tools first
+        const customTools = [
+          { path: 'options-lab', title: '🧮 Options Lab (Payoff Calculator)', category: 'tools' },
+          { path: 'position-sizing', title: '📐 เครื่องมือ Position Sizing', category: 'tools' }
+        ];
+
+        const allItems = [...customTools, ...KNOWLEDGE_DOCS];
+        const docs = allItems.filter(doc => {
           const haystack = `${doc.path || ''} ${doc.title || ''} ${doc.category || ''}`.toLowerCase();
           return !query || haystack.includes(query);
         });
-
-        if (!supabaseClient) {
-          el.innerHTML = '<div style="padding:12px;color:var(--text-muted);font-size:12px;">ยังไม่ได้เชื่อมต่อ Supabase</div>';
-          return;
-        }
 
         if (docs.length === 0) {
           el.innerHTML = '<div style="padding:12px;color:var(--text-muted);font-size:12px;">ไม่พบเอกสารความรู้</div>';
@@ -5879,13 +6271,16 @@ window.runPositionSizingCalc = function() {
 
         el.innerHTML = docs.map(doc => {
           const active = doc.path === selectedKnowledgePath;
+          let badge = 'MD';
+          if (doc.category === 'tools') badge = 'TOOL';
+          
           return `
-            <div class="stock-item ${active ? 'active' : ''}" onclick="selectKnowledgeDoc('${escapeHtml(doc.path)}')" style="cursor:pointer;">
-              <div class="stock-info">
-                <div class="stock-name" style="font-size:12px;">${escapeHtml(doc.title || doc.path)}</div>
-                <div class="stock-meta" style="font-size:10px;">${escapeHtml(doc.category || 'knowledge')}</div>
+            <div class="stock-item ${active ? 'active' : ''}" onclick="selectKnowledgeDoc('${escapeHtml(doc.path)}')" style="cursor:pointer; display:flex; justify-content:space-between; align-items:center; padding:8px; border-radius:6px; margin-bottom:4px; background:${active ? 'rgba(0,240,255,0.08)' : 'none'};">
+              <div class="stock-info" style="display:flex; flex-direction:column; overflow:hidden;">
+                <div class="stock-name" style="font-size:12px; font-weight:600; color:${active ? 'var(--accent-cyan)' : 'var(--text-primary)'}; white-space:nowrap; text-overflow:ellipsis; overflow:hidden; max-width:180px;">${escapeHtml(doc.title || doc.path)}</div>
+                <div class="stock-meta" style="font-size:10px; color:var(--text-muted);">${escapeHtml(doc.category || 'knowledge')}</div>
               </div>
-              <span class="ticker-badge" style="font-size:9px;">MD</span>
+              <span class="badge" style="font-size:9px; background:${doc.category === 'tools' ? 'rgba(168,85,247,0.2)' : 'rgba(0,240,255,0.15)'}; color:${doc.category==='tools'?'#c084fc':'var(--accent-cyan)'}; flex-shrink:0;">${badge}</span>
             </div>
           `;
         }).join('');
@@ -5894,6 +6289,152 @@ window.runPositionSizingCalc = function() {
       function renderKnowledgeDetail() {
         const el = $('knowledge-detail-content');
         if (!el) return;
+
+        if (selectedKnowledgePath === 'options-lab') {
+          el.innerHTML = `
+            <div class="detail-header" style="justify-content:space-between; flex-shrink:0;">
+              <div class="detail-title">
+                <h2>🧮 Options Lab (Payoff Calculator)</h2>
+                <p style="font-size:11px;color:var(--text-muted);margin-top:4px;">จำลองกำไรขาดทุนของออปชัน (Options Payoff Simulation)</p>
+              </div>
+            </div>
+            <div style="padding:20px; display:flex; flex-direction:column; gap:20px; overflow-y:auto; height:calc(100% - 70px);">
+              <div class="glass-panel" style="padding:15px; display:grid; grid-template-columns:repeat(4, 1fr); gap:12px;">
+                <div>
+                  <label style="font-size:11px;color:var(--text-muted);display:block;margin-bottom:4px;">ราคาสินทรัพย์อ้างอิง ($)</label>
+                  <input id="opt-stock-price" class="edit-field" type="number" value="100" oninput="runOptionsLabCalc()" style="width:100%; padding:6px;" />
+                </div>
+                <div>
+                  <label style="font-size:11px;color:var(--text-muted);display:block;margin-bottom:4px;">ราคาใช้สิทธิ Strike Price ($)</label>
+                  <input id="opt-strike-price" class="edit-field" type="number" value="100" oninput="runOptionsLabCalc()" style="width:100%; padding:6px;" />
+                </div>
+                <div>
+                  <label style="font-size:11px;color:var(--text-muted);display:block;margin-bottom:4px;">ค่าพรีเมียม Premium ($)</label>
+                  <input id="opt-premium" class="edit-field" type="number" value="5" oninput="runOptionsLabCalc()" style="width:100%; padding:6px;" />
+                </div>
+                <div>
+                  <label style="font-size:11px;color:var(--text-muted);display:block;margin-bottom:4px;">ประเภทออปชัน</label>
+                  <select id="opt-type" class="edit-select" onchange="runOptionsLabCalc()" style="width:100%;">
+                    <option value="call-long">Long Call (ซื้อคอล)</option>
+                    <option value="call-short">Short Call (ขายคอล)</option>
+                    <option value="put-long">Long Put (ซื้อพุท)</option>
+                    <option value="put-short">Short Put (ขายพุท)</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Options Result Table -->
+              <div class="glass-panel" style="padding:15px;">
+                <div style="font-weight:700; font-size:13px; color:var(--accent-cyan); margin-bottom:12px;">📈 ตารางจำลองกำไรขาดทุนตามระดับราคา ณ วันหมดอายุ</div>
+                <table class="fin-table">
+                  <thead>
+                    <tr>
+                      <th>ราคาสินทรัพย์อ้างอิง (Underlying Price)</th>
+                      <th>ประเภทสิทธิ (Type)</th>
+                      <th>ราคาใช้สิทธิ (Strike)</th>
+                      <th>กำไร / ขาดทุนสุทธิ (Net Payoff)</th>
+                      <th>คิดเป็น % ของทุน</th>
+                    </tr>
+                  </thead>
+                  <tbody id="options-lab-tbody">
+                    <!-- Computed by JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          `;
+          runOptionsLabCalc();
+          return;
+        }
+
+        if (selectedKnowledgePath === 'position-sizing') {
+          el.innerHTML = `
+            <div class="detail-header" style="justify-content:space-between; flex-shrink:0;">
+              <div class="detail-title">
+                <h2>📐 เครื่องมือ Position Sizing & Risk Manager</h2>
+                <p style="font-size:11px;color:var(--text-muted);margin-top:4px;">คำนวณจำนวนหุ้นและขนาดเงินลงทุนที่เหมาะสมเพื่อควบคุมความเสี่ยงต่อไม้</p>
+              </div>
+            </div>
+            <div style="padding:20px; display:flex; flex-direction:column; gap:20px; overflow-y:auto; height:calc(100% - 70px);">
+              <div class="glass-panel" style="padding:15px; display:grid; grid-template-columns:repeat(2, 1fr); gap:15px;">
+                <div>
+                  <label style="font-size:11px;color:var(--text-muted);display:block;margin-bottom:4px;">ขนาดพอร์ตการลงทุนรวม ($ หรือ บาท)</label>
+                  <input id="ps-port-size" class="edit-field" type="number" value="100000" oninput="runPositionSizingCalc()" style="width:100%; padding:8px;" />
+                </div>
+                <div>
+                  <label style="font-size:11px;color:var(--text-muted);display:block;margin-bottom:4px;">ความเสี่ยงสูงสุดต่อไม้ (%)</label>
+                  <input id="ps-risk-pct" class="edit-field" type="number" value="1" oninput="runPositionSizingCalc()" style="width:100%; padding:8px;" />
+                </div>
+                <div>
+                  <label style="font-size:11px;color:var(--text-muted);display:block;margin-bottom:4px;">ราคาซื้อเข้า Entry Price ($ หรือ บาท)</label>
+                  <input id="ps-entry-price" class="edit-field" type="number" value="100" oninput="runPositionSizingCalc()" style="width:100%; padding:8px;" />
+                </div>
+                <div>
+                  <label style="font-size:11px;color:var(--text-muted);display:block;margin-bottom:4px;">ราคาหยุดขาดทุน Stop Loss / Cut Price ($ หรือ บาท)</label>
+                  <input id="ps-stop-price" class="edit-field" type="number" value="95" oninput="runPositionSizingCalc()" style="width:100%; padding:8px;" />
+                </div>
+              </div>
+
+              <!-- Position Sizing Output Panel -->
+              <div id="ps-output-panel" style="background:rgba(0,0,0,0.2); border:1px solid var(--border-color); border-radius:10px; padding:20px;">
+                <!-- Computed dynamically -->
+              </div>
+            </div>
+          `;
+          runPositionSizingCalc();
+          return;
+        }
+
+        if (selectedKnowledgePath === 'link-extractor') {
+          el.innerHTML = `
+            <div class="detail-header" style="justify-content:space-between; flex-shrink:0;">
+              <div class="detail-title">
+                <h2>🔮 AI Link & Document Extractor</h2>
+                <p style="font-size:11px;color:var(--text-muted);margin-top:4px;">สกัดความรู้เชิงลึกจากบทความ วิดีโอ หรือโพสต์ข่าวสารต่างๆ ด้วย AI</p>
+              </div>
+            </div>
+            <div style="padding:20px; display:flex; flex-direction:column; gap:16px; overflow-y:auto; height:calc(100% - 70px);">
+              <div class="glass-panel" style="padding:15px; display:flex; flex-direction:column; gap:12px;">
+                <div style="display:grid; grid-template-columns: 1fr 180px; gap:10px;">
+                  <div>
+                    <label style="font-size:11px;color:var(--text-muted);font-weight:600;">หัวข้อบทความ / โน้ตความรู้</label>
+                    <input id="kx-title" class="edit-field" style="width:100%;padding:8px;margin-top:4px;" placeholder="เช่น สรุป AI Chip จากเพจวิเคราะห์" />
+                  </div>
+                  <div>
+                    <label style="font-size:11px;color:var(--text-muted);font-weight:600;">แท็ก / หุ้นที่เกี่ยวข้อง</label>
+                    <input id="kx-tags" class="edit-field" style="width:100%;padding:8px;margin-top:4px;" placeholder="เช่น TSM, NVDA" />
+                  </div>
+                </div>
+                <div>
+                  <label style="font-size:11px;color:var(--text-muted);font-weight:600;">ลิงก์ต้นทาง (Source URL)</label>
+                  <input id="kx-url" class="edit-field" style="width:100%;padding:8px;margin-top:4px;" placeholder="https://..." />
+                </div>
+                <div>
+                  <label style="font-size:11px;color:var(--text-muted);font-weight:600;">เนื้อหาดิบ / โพสต์ข่าวสาร (วางเนื้อหาที่นี่เพื่อให้ AI ช่วยสกัด)</label>
+                  <textarea id="kx-source-text" class="edit-field" style="width:100%;height:150px;padding:8px;margin-top:4px;" placeholder="ก๊อปปี้เนื้อหาในข่าว หรือบทวิเคราะห์มาวางตรงนี้..."></textarea>
+                </div>
+                <div>
+                  <button class="btn btn-primary" onclick="runAiExtraction()" style="padding:10px 16px; font-weight:600; width:100%; display:flex; align-items:center; justify-content:center; gap:6px;">
+                    <i data-lucide="sparkles" style="width:16px;height:16px;"></i> เริ่มการวิเคราะห์สกัดเนื้อหาด้วย AI
+                  </button>
+                </div>
+              </div>
+
+              <!-- AI Output -->
+              <div class="glass-panel" style="padding:15px; display:flex; flex-direction:column; gap:10px;">
+                <div style="font-weight:700; font-size:13px; color:var(--accent-cyan); display:flex; justify-content:space-between; align-items:center;">
+                  <span>📝 ผลลัพธ์จากการสกัดความรู้ (Markdown)</span>
+                  <button class="btn btn-sm btn-primary" onclick="saveExtractedToKnowledge()" style="font-size:11px; padding:4px 10px;">
+                    💾 บันทึกลงคลังความรู้
+                  </button>
+                </div>
+                <textarea id="kx-output" class="edit-field" style="width:100%; height:250px; font-family:ui-monospace, monospace; font-size:12px; background:#fff; color:#000;" placeholder="ผลลัพธ์จะปรากฏตรงนี้หลังจากประมวลผลเสร็จ..."></textarea>
+              </div>
+            </div>
+          `;
+          lucide.createIcons();
+          return;
+        }
 
         const doc = KNOWLEDGE_DOCS.find(item => item.path === selectedKnowledgePath);
         if (!supabaseClient) {
@@ -5928,11 +6469,16 @@ window.runPositionSizingCalc = function() {
               <h2>คลังความรู้กลาง</h2>
               <p style="font-size:11px;color:var(--text-muted);margin-top:4px;">${escapeHtml(doc.path)} · อัปเดตล่าสุด ${escapeHtml(updated)}</p>
             </div>
-            <button class="btn btn-primary" onclick="saveKnowledgeDoc()" style="padding:8px 12px;">
-              <i data-lucide="save" style="width:13px;height:13px;"></i> บันทึกลง Supabase
-            </button>
+            <div style="display:flex; gap:8px;">
+              <button class="btn" onclick="deleteKnowledgeDoc('${escapeHtml(doc.path)}')" style="padding:8px 12px; background:rgba(239,68,68,0.15); color:var(--accent-red); border:1px solid rgba(239,68,68,0.3);">
+                <i data-lucide="trash-2" style="width:13px;height:13px;"></i> ลบเอกสาร
+              </button>
+              <button class="btn btn-primary" onclick="saveKnowledgeDoc()" style="padding:8px 12px;">
+                <i data-lucide="save" style="width:13px;height:13px;"></i> บันทึกลง Supabase
+              </button>
+            </div>
           </div>
-          <div style="padding:0 20px 20px; display:flex; flex-direction:column; gap:10px; flex:1; min-height:0;">
+          <div style="padding:0 20px 20px; display:flex; flex-direction:column; gap:10px; flex:1; min-height:0; overflow-y:auto;">
             <div style="display:grid; grid-template-columns: 1fr 180px; gap:10px;">
               <div>
                 <label style="font-size:11px;color:var(--text-muted);font-weight:600;">หัวข้อ</label>
@@ -5951,7 +6497,7 @@ window.runPositionSizingCalc = function() {
 
       window.selectKnowledgeDoc = function(path) {
         selectedKnowledgePath = path;
-        renderKnowledgeBase();
+        renderKnowledgeTricks();
       };
 
       window.saveKnowledgeDoc = async function() {
@@ -5973,7 +6519,7 @@ window.runPositionSizingCalc = function() {
 
           if (error) throw error;
           Object.assign(doc, nextDoc, { updated_at: new Date().toISOString() });
-          renderKnowledgeBase();
+          renderKnowledgeTricks();
           toast('บันทึกคลังความรู้ลง Supabase แล้ว');
         } catch (e) {
           console.error('Error saving knowledge doc:', e);
@@ -5981,11 +6527,200 @@ window.runPositionSizingCalc = function() {
         }
       };
 
-      if ($('knowledge-search-input')) $('knowledge-search-input').addEventListener('input', renderKnowledgeList);
+      window.createNewKnowledgeDoc = function() {
+        const title = prompt('กรอกหัวข้อบันทึกความรู้ใหม่:');
+        if (!title) return;
+        const filename = title.trim().toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9\-]/g, '') + '.md';
+        const path = `04_tricks_knowledge/${filename}`;
+
+        const newDoc = {
+          path,
+          title,
+          category: '04_tricks_knowledge',
+          content: `# ${title}\n\nเขียนสรุปความรู้หรือสไตล์การเทรดที่นี่...\n`
+        };
+
+        KNOWLEDGE_DOCS.push(newDoc);
+        selectedKnowledgePath = path;
+        renderKnowledgeTricks();
+        saveKnowledgeDoc();
+      };
+
+      window.deleteKnowledgeDoc = async function(path) {
+        if (!confirm(`ต้องการลบเอกสาร ${path} ใช่หรือไม่?`)) return;
+        if (!supabaseClient) return;
+
+        try {
+          const { error } = await supabaseClient
+            .from('stock_research_knowledge_documents')
+            .delete()
+            .eq('path', path);
+
+          if (error) throw error;
+          KNOWLEDGE_DOCS = KNOWLEDGE_DOCS.filter(d => d.path !== path);
+          if (selectedKnowledgePath === path) {
+            selectedKnowledgePath = KNOWLEDGE_DOCS.length > 0 ? KNOWLEDGE_DOCS[0].path : 'options-lab';
+          }
+          renderKnowledgeTricks();
+          toast('ลบเอกสารสำเร็จ!');
+        } catch (e) {
+          console.error('Error deleting doc:', e);
+          toast('ลบเอกสารล้มเหลว: ' + e.message);
+        }
+      };
+
+      window.showLinkExtractor = function() {
+        selectedKnowledgePath = 'link-extractor';
+        renderKnowledgeTricks();
+      };
+
+      window.runAiExtraction = async function() {
+        const title = $('kx-title')?.value.trim();
+        const tags = $('kx-tags')?.value.trim();
+        const url = $('kx-url')?.value.trim();
+        const sourceText = $('kx-source-text')?.value.trim();
+
+        if (!sourceText) {
+          alert('⚠️ กรุณากรอกเนื้อหาดิบหรือข่าวที่จะสกัดข้อมูล');
+          return;
+        }
+
+        if (!config.apiKey) {
+          alert('⚠️ กรุณาตั้งค่า API Key ของ Gemini ก่อนใช้ระบบสกัดเนื้อหา');
+          return;
+        }
+
+        toast('กำลังวิเคราะห์และสกัดข้อมูลด้วย Gemini...');
+
+        try {
+          const input = {
+            title: title || 'Captured Knowledge',
+            sourceType: url ? 'Article' : 'Notes',
+            url,
+            tags,
+            sourceText
+          };
+
+          const promptText = buildKnowledgeExtractionPrompt(input) + `\n\nเนื้อหาที่จะให้สกัด:\n${sourceText}`;
+
+          const body = {
+            contents: [{ parts: [{ text: promptText }] }]
+          };
+
+          const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${config.model}:generateContent?key=${config.apiKey}`, {
+            method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body)
+          });
+
+          const data = await res.json();
+          const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
+          
+          const outputArea = $('kx-output');
+          if (outputArea) {
+            outputArea.value = reply;
+          }
+          toast('สกัดข้อมูลสำเร็จ! อย่าลืมกดบันทึกความรู้ด้านบนขวาครับ');
+        } catch (e) {
+          alert('เกิดข้อผิดพลาดในการสกัดข้อมูล: ' + e.message);
+        }
+      };
+
+      window.saveExtractedToKnowledge = async function() {
+        const title = $('kx-title')?.value.trim() || 'สกัดความรู้';
+        const content = $('kx-output')?.value;
+
+        if (!content) {
+          alert('ไม่มีเนื้อหาที่จะบันทึก กรุณากดสกัดความรู้ก่อน');
+          return;
+        }
+
+        const filename = title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9\-]/g, '') + '.md';
+        const path = `04_tricks_knowledge/${filename}`;
+
+        const nextDoc = {
+          path,
+          title,
+          category: '04_tricks_knowledge',
+          content
+        };
+
+        if (supabaseClient) {
+          try {
+            const { error } = await supabaseClient
+              .from('stock_research_knowledge_documents')
+              .upsert(nextDoc, { onConflict: 'path' });
+
+            if (error) throw error;
+            toast('บันทึกบทความความรู้ลง Supabase สำเร็จ!');
+          } catch(e) {
+            toast('เซฟลง Supabase ไม่สำเร็จ กำลังเซฟเก็บใน Local Storage เท่านั้น: ' + e.message);
+          }
+        }
+
+        const existing = KNOWLEDGE_DOCS.find(d => d.path === path);
+        if (existing) {
+          Object.assign(existing, nextDoc);
+        } else {
+          KNOWLEDGE_DOCS.push(nextDoc);
+        }
+
+        selectedKnowledgePath = path;
+        renderKnowledgeTricks();
+      };
+
+      window.runOptionsLabCalc = function() {
+        const stockPrice = parseFloat($('opt-stock-price')?.value) || 0;
+        const strikePrice = parseFloat($('opt-strike-price')?.value) || 0;
+        const premium = parseFloat($('opt-premium')?.value) || 0;
+        const type = $('opt-type')?.value || 'call-long';
+
+        const tbody = $('options-lab-tbody');
+        if (!tbody) return;
+
+        if (stockPrice <= 0 || strikePrice <= 0 || premium <= 0) {
+          tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:var(--text-muted);">กรุณากรอกข้อมูลให้ครบถ้วน</td></tr>';
+          return;
+        }
+
+        const steps = [];
+        for (let pct = -20; pct <= 20; pct += 5) {
+          steps.push(strikePrice * (1 + pct / 100));
+        }
+
+        tbody.innerHTML = steps.map(price => {
+          let payoff = 0;
+          let cost = premium;
+          
+          if (type === 'call-long') {
+            payoff = Math.max(0, price - strikePrice) - premium;
+          } else if (type === 'call-short') {
+            payoff = premium - Math.max(0, price - strikePrice);
+          } else if (type === 'put-long') {
+            payoff = Math.max(0, strikePrice - price) - premium;
+          } else if (type === 'put-short') {
+            payoff = premium - Math.max(0, strikePrice - price);
+          }
+
+          const payoffPct = (payoff / cost) * 100;
+          const payoffColor = payoff >= 0 ? 'var(--accent-green)' : 'var(--accent-red)';
+          const boldStyle = Math.abs(price - strikePrice) < 0.01 ? 'font-weight:700; background:rgba(255,255,255,0.02);' : '';
+
+          return `
+            <tr style="${boldStyle}">
+              <td style="padding:8px;">$${price.toFixed(2)} ${Math.abs(price - strikePrice) < 0.01 ? '<span style="color:var(--accent-cyan); font-size:10px;">(Strike)</span>' : ''}</td>
+              <td style="padding:8px; text-transform:uppercase;">${type.split('-')[1]} ${type.split('-')[0]}</td>
+              <td style="padding:8px;">$${strikePrice.toFixed(2)}</td>
+              <td style="padding:8px; color:${payoffColor}; font-weight:700;">$${payoff.toFixed(2)}</td>
+              <td style="padding:8px; color:${payoffColor};">${payoffPct.toFixed(1)}%</td>
+            </tr>
+          `;
+        }).join('');
+      };
+
+      if ($('knowledge-search-input')) $('knowledge-search-input').addEventListener('input', renderKnowledgeTricks);
       if ($('btn-refresh-knowledge')) $('btn-refresh-knowledge').onclick = async () => {
         const ok = await loadKnowledgeDocsFromSupabase();
         if (ok) {
-          renderKnowledgeBase();
+          renderKnowledgeTricks();
           toast('โหลดคลังความรู้จาก Supabase แล้ว');
         }
       };
@@ -6600,9 +7335,10 @@ ${truncateForPrompt(input.sourceText, 14000)}
           if (ok) {
             await loadKnowledgeDocsFromSupabase();
             toast('เชื่อมต่อ Supabase สำเร็จ!');
-            renderStockList();
+            buildResearchGroupFilter();
+            renderStockResearchList();
             renderPortfolio();
-            if (currentTab === 'knowledge') renderKnowledgeBase();
+            renderWatchlistTargets();
           }
         } else {
           toast('บันทึกการตั้งค่าแล้ว');
@@ -6674,7 +7410,7 @@ ${truncateForPrompt(input.sourceText, 14000)}
           const parsed = parseProfilesMd(evt.target.result);
           if (parsed && parsed.length > 0) {
             STOCKS = parsed;
-            saveStocks(); buildGroupFilter(); renderStockList();
+            saveStocks(); buildResearchGroupFilter(); renderStockResearchList();
             toast('อิมพอร์ต ' + parsed.length + ' หุ้นเรียบร้อย!');
           } else { alert('ไม่สามารถอ่านไฟล์ได้'); }
         };
@@ -6776,61 +7512,7 @@ ${truncateForPrompt(input.sourceText, 14000)}
       }
 
       // ====== INIT ======
-      function init() {
-        // Try cache first
-        const cached = S.get('cached_stocks');
-        if (cached) {
-          try {
-            const parsed = JSON.parse(cached);
-            if (parsed && parsed.length > 0) STOCKS = parsed;
-          } catch(e) { S.del('cached_stocks'); }
-        }
-
-        // Migration loop to ensure all stocks have default values
-        STOCKS.forEach(s => {
-          if (s.market === undefined) s.market = "US";
-          if (s.targetPrice === undefined) s.targetPrice = "";
-          if (s.group === undefined || s.group === null) s.group = "";
-          if (s.moat === undefined || s.moat === null) s.moat = "";
-          if (s.style === undefined || s.style === null) s.style = "";
-          if (s.deals === undefined || s.deals === null) s.deals = "";
-          if (s.risks === undefined || s.risks === null) s.risks = "";
-          if (s.whatItDoes === undefined || s.whatItDoes === null) s.whatItDoes = "";
-          if (s.revenueBreakdown === undefined || s.revenueBreakdown === null) s.revenueBreakdown = "";
-          if (s.howItMakesMoney === undefined || s.howItMakesMoney === null) s.howItMakesMoney = "";
-          if (s.targetCustomers === undefined || s.targetCustomers === null) s.targetCustomers = "";
-          if (s.financials === undefined || s.financials === null) s.financials = [];
-        });
-
-        // If STOCKS still empty (from baked-in data), it will use baked-in
-        if (STOCKS.length > 0) {
-          saveStocks(); // persist baked-in data
-        }
-
-        updateApiDot();
-        switchPage('styles-guide');
-
-        // Initialize Supabase and auto-sync
-        initSupabase();
-        if (supabaseClient) {
-          // Load playbooks/knowledge docs from Supabase first
-          loadKnowledgeDocsFromSupabase().then(() => {
-            renderStylesGuide();
-          });
-
-          // Sync stocks in parallel
-          syncFromSupabase().then(ok => {
-            if (ok) {
-              console.log('Async sync from Supabase completed.');
-              renderStockReaderList();
-              renderCategorizationBoard();
-              renderWatchlistTargets();
-            }
-          });
-        }
-      }
-
-      init();
+      window.init();
     </script>
 
     <!-- ===== FLOATING AI ADVISOR BOT ===== -->
