@@ -6121,7 +6121,8 @@ ${question}`;
       function renderWatchlist() {
         const list = $('watchlist-stock-list');
         if (!list) return;
-        const search = $('watchlist-search-input').value.toLowerCase().trim();
+        const wlSearchInp = $('watchlist-search-input');
+        const search = wlSearchInp ? wlSearchInp.value.toLowerCase().trim() : '';
         const starredStocks = STOCKS.filter(s => starred.has(s.ticker));
 
         const filtered = starredStocks.filter(s => {
@@ -6346,7 +6347,8 @@ ${question}`;
         }, 800);
       };
 
-      $('watchlist-search-input').addEventListener('input', renderWatchlist);
+      const wlSearch = $('watchlist-search-input');
+      if (wlSearch) wlSearch.addEventListener('input', renderWatchlist);
 
       // ====== PAGE 4: PORTFOLIO ======
       let portfolioMarketFilter = 'ALL';
