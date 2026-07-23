@@ -1138,6 +1138,33 @@
     <!-- ===== JAVASCRIPT ===== -->
     <!-- ============================================================ -->
     <script>
+      // ====== GLOBAL ERROR BANNER FOR DIAGNOSTICS ======
+      window.onerror = function(message, source, lineno, colno, error) {
+        const errorBanner = document.createElement('div');
+        errorBanner.style.position = 'fixed';
+        errorBanner.style.top = '10px';
+        errorBanner.style.left = '10px';
+        errorBanner.style.right = '10px';
+        errorBanner.style.background = 'rgba(239, 68, 68, 0.95)';
+        errorBanner.style.color = '#fff';
+        errorBanner.style.padding = '15px';
+        errorBanner.style.borderRadius = '8px';
+        errorBanner.style.zIndex = '999999';
+        errorBanner.style.fontFamily = 'monospace';
+        errorBanner.style.fontSize = '12px';
+        errorBanner.style.boxShadow = '0 4px 12px rgba(0,0,0,0.5)';
+        errorBanner.style.lineHeight = '1.6';
+        errorBanner.innerHTML = `
+          <strong>❌ JavaScript Error Detected:</strong><br/>
+          Message: ${message}<br/>
+          Source: ${source}<br/>
+          Line: ${lineno}:${colno}<br/>
+          Stack: ${error ? error.stack : 'N/A'}
+        `;
+        document.body.appendChild(errorBanner);
+        return false;
+      };
+
       // ====== CDN & THIRD-PARTY SAFETY FALLBACKS ======
       if (typeof window.lucide === 'undefined') {
         window.lucide = { createIcons: () => console.warn('Lucide fallback activated') };
@@ -1852,6 +1879,326 @@
         "whyInterest":  "🚀 **ปัจจัยหลักระยะยาว (Core Drivers):**\n- การมีพันธมิตรร่วมผลิตเชิงอุตสาหกรรมรายใหญ่อย่าง Stellantis และดีลสั่งซื้อเครื่องบินล่วงหน้ามูลค่ามหาศาลจากสายการบิน United Airlines สำหรับเปิดบริการแท็กซี่บินได้ระดับพรีเมียม\n\n🎯 **ดีลเด่น \u0026 ตัวเร่งช่วงนี้ (Catalysts \u0026 Deals):**\n**United Airlines Purchase Order:** สัญญาสั่งจองซื้อล่วงหน้าแล้ว **$1,000 ล้านเหรียญ** และได้รับเงินมัดจำล่วงหน้าก้อนแรก $10 ล้าน จากสายการบินยักษ์ใหญ่ **United Airlines** โครงการนี้เป้าหมายคือการนำเครื่องบินไฟฟ้ารุ่น Midnight ไปขนผู้โดยสารจากจุดจอดกลางเมืองไปส่งรันเวย์สนามบินในนิวยอร์กและชิคาโก, **US Air Force** (สัญญามูลค่า $110 ล้าน)",
         "financialsSnapshot":  "🛡️ **จุดแข็ง / Moat**:\nมีสัญญาสั่งจองซื้อล่วงหน้าค้ำประกันความเสี่ยง และมี Stellantis สนับสนุนโรงงาน\nดีลความสัมพันธ์เชิงพันธมิตรร่วมกับสายการบินรายใหญ่และการได้สิทธิ์จอดรับผู้โดยสาร ณ ลานบินหลัก (Airport Access Moat)\n\n⚠️ **จุดอ่อน / ความเสี่ยง**:\n**จุดอ่อน:** บริษัทยังไม่มีรายได้จริงและอยู่ในขั้นขอรับใบอนุญาตการบินพาณิชย์เหมือนคู่แข่ง\n**ความเสี่ยง:** ความล่าช้าในการสร้างสถานีขึ้นลง (Vertiports) และการรับรองความมั่นใจการบินจากรัฐบาล",
         "summary":  "หุ้น ACHR (Archer Aviation)\nเป็นหุ้นสไตล์ Defensive (ปลอดภัย) ในกลุ่มอุตสาหกรรม 🛸 กลุ่มที่ 5: Defense Tech \u0026 Autonomous Flight (ความมั่นคงและการบินไร้คนขับ)\nเหมาะสำหรับนักลงทุนระยะยาวที่ศึกษาพื้นฐานธุรกิจแล้วยอมรับความเสี่ยงได้ครับ"
+    },
+    {
+        "ticker": "BE",
+        "name": "Bloom Energy",
+        "logoUrl": "https://logo.clearbit.com/bloomenergy.com",
+        "group": "🔌 กลุ่มที่ 1: AI Infrastructure (Power, Cooling & Data Center)",
+        "style": "เติบโต (Growth)",
+        "market": "US",
+        "targetPrice": "",
+        "whatItDoes": "ผลิตและติดตั้งกล่องพลังงาน Solid Oxide Fuel Cells เพื่อผลิตกระแสไฟฟ้าใช้งานบนไซต์งาน (On-site Power / Behind-the-meter) โดยแปรรูปก๊าซธรรมชาติหรือไฮโดรเจนเป็นไฟฟ้าโดยตรง",
+        "howItMakesMoney": "ขายชุดติดตั้งเครื่องกำเนิดพลังงานร่วมกับสัญญาบริการระยะยาวในการดูแลรักษาทางวิศวกรรมรายปี",
+        "deals": "**Oracle Power Agreement:** ดีลวางระบบจ่ายกระแสไฟฟ้ารวมระดับสูงสุดถึง 2.8 Gigawatts (GW) เพื่อรองรับแคมปัส AI คลาวด์ และวงเงินกู้สนับสนุนดีลขยายร่วมกับ **Brookfield Asset Management**",
+        "moat": "**Grid Independence (Islanded Mode):** ช่วยให้ดาต้าเซ็นเตอร์ข้ามขั้นตอนการขอยื่นเชื่อมไฟระบบหลวงที่ต้องต่อคิวนาน ทำให้สร้างและประมวลผล AI ได้เร็วกว่าคู่แข่งหลายปี",
+        "risks": "**จุดอ่อน:** โครงการขนาดใหญ่ล่าช้าจากการขอรับท่อส่งก๊าซธรรมชาติ\n**ความเสี่ยง:** ผลประกอบการบัญชียังติดลบสะสมและต้องพึ่งพาต้นทุนก๊าซธรรมชาติ",
+        "peg": "1.18",
+        "fiftyTwoWeek": "$24.04 – $351.28 | ปัจจุบัน ~$227.65",
+        "financials": [],
+        "imageUrl": "images/BE_infographic.png",
+        "whyInterest": "🚀 **ปัจจัยหลักระยะยาว (Core Drivers):**\n- การมีแหล่งจ่ายไฟที่เป็นอิสระจากโครงข่ายหลวงสำหรับการเร่งขยาย AI ดาต้าเซ็นเตอร์\n\n🎯 **ดีลเด่น & ตัวเร่งช่วงนี้ (Catalysts & Deals):**\n**Oracle Power Agreement:** ดีลระดับ 2.8 GW",
+        "summary": "หุ้น BE (Bloom Energy)\nเป็นหุ้นสไตล์ เติบโต (Growth) ในกลุ่มอุตสาหกรรม 🔌 กลุ่มที่ 1: AI Infrastructure\nเหมาะสำหรับนักลงทุนระยะยาวที่ศึกษาพื้นฐานธุรกิจแล้วยอมรับความเสี่ยงได้ครับ"
+    },
+    {
+        "ticker": "CEG",
+        "name": "Constellation Energy",
+        "logoUrl": "https://logo.clearbit.com/constellationenergy.com",
+        "group": "🔌 กลุ่มที่ 1: AI Infrastructure (Power, Cooling & Data Center)",
+        "style": "เติบโต (Growth)",
+        "market": "US",
+        "targetPrice": "",
+        "whatItDoes": "ผู้ผลิตพลังงานไฟฟ้าสะอาดที่ไร้คาร์บอนรายใหญ่ที่สุดในสหรัฐฯ โดยเน้นโรงไฟฟ้านิวเคลียร์เป็นแกนหลัก",
+        "howItMakesMoney": "สัญญาซื้อขายไฟฟ้าระยะยาว (PPA) กับบริษัทยักษ์ใหญ่และหน่วยงานสาธารณูปโภค โดยคิดราคาระดับพรีเมียมเนื่องจากปล่อยกระแสไฟฟ้าสะอาดได้คงที่ตลอด 24 ชั่วโมง (Baseload Clean Power)",
+        "deals": "**Microsoft Crane Clean Energy Center Deal:** สัญญากู้โรงไฟฟ้านิวเคลียร์ Three Mile Island จ่ายกระแสไฟฟ้าให้ Microsoft นาน 20 ปีเพียงเจ้าเดียว และการเข้าซื้อกิจการ **Calpine** ขยายกำลังการผลิตรวมเป็น 55-60 GW",
+        "moat": "**Nuclear Fleet Scarcity Moat:** การสร้างโรงไฟฟ้านิวเคลียร์ใหม่ติดปัญหาระเบียบกฎระเบียบอย่างรุนแรง ทำให้ CEG ผูกขาดความสะอาดกระแสไฟฟ้าที่ปล่อยได้คงที่ตลอดเวลา",
+        "risks": "**จุดอ่อน:** ราคาหุ้นสะท้อนความคาดหวังดาต้าเซ็นเตอร์ไปสูงมาก\n**ความเสี่ยง:** ความผันผวนของราคาพลังงานเสรีค้าส่ง และความเสี่ยงอุบัติเหตุนิวเคลียร์",
+        "peg": "1.17",
+        "fiftyTwoWeek": "$228.63 – $412.70 | ปัจจุบัน ~$262.22",
+        "financials": [],
+        "imageUrl": "images/CEG_infographic.png",
+        "whyInterest": "🚀 **ปัจจัยหลักระยะยาว (Core Drivers):**\n- แหล่งพลังงานนิวเคลียร์ปราศจากคาร์บอนที่จ่ายกระแสไฟแบบบาสโหลดได้ตลอดเวลา ซึ่งหายากและมีความต้องการสูงมากจาก Hyperscalers\n\n🎯 **ดีลเด่น & ตัวเร่งช่วงนี้ (Catalysts & Deals):**\n**Microsoft Three Mile Island Deal:** กู้โรงนิวเคลียร์จ่ายกระแสไฟให้ MSFT",
+        "summary": "หุ้น CEG (Constellation Energy)\nเป็นหุ้นสไตล์ เติบโต (Growth) ในกลุ่มอุตสาหกรรม 🔌 กลุ่มที่ 1: AI Infrastructure\nเหมาะสำหรับนักลงทุนระยะยาวที่ศึกษาพื้นฐานธุรกิจแล้วยอมรับความเสี่ยงได้ครับ"
+    },
+    {
+        "ticker": "PLPC",
+        "name": "Preformed Line Products",
+        "logoUrl": "https://logo.clearbit.com/preformed.com",
+        "group": "🔌 กลุ่มที่ 1: AI Infrastructure (Power, Cooling & Data Center)",
+        "style": "เติบโต (Growth)",
+        "market": "US",
+        "targetPrice": "",
+        "whatItDoes": "ออกแบบและผลิตอุปกรณ์กายภาพในการยึดจับสายส่งไฟแรงสูง ข้อต่อสายเคเบิลแรงสูง และแผงยึดโครงข่ายอุตสาหกรรมสายสื่อสารใยแก้ว",
+        "howItMakesMoney": "ขายอุปกรณ์สายส่งและแผงจับยึดแก่องค์กรสาธารณูปโภคและผู้รับเหมาโครงข่ายทั่วโลกแบบซื้อซ้ำต่อเนื่อง",
+        "deals": "**Global Electric Utilities & Telecoms:** ซื้อชิ้นส่วนเชื่อมเคเบิลเพื่อบำรุงรักษาและขยายโครงข่ายส่งไฟ และดีลขยายฐานพอร์ตอสังหารวมระบบไฟฟ้าในบราซิล",
+        "moat": "**High Switching Cost & Spec Lock-in:** อุปกรณ์จับสายไฟต้องป้องกันสายไฟฟ้าร่วงชำรุดเสียหาย ซึ่งเป็นสเปค Mission-Critical ที่วิศวกรผู้ควบคุมระบบไฟฟ้าเจาะจงใช้แต่แบรนด์เดิมที่เชื่อใจได้",
+        "risks": "**จุดอ่อน:** ต้นทุนวัตถุดิบโลหะผันผวน และความอ่อนไหวต่อกำแพงภาษีค้าระหว่างประเทศ\n**ความเสี่ยง:** การขยายตัวของอุตสาหกรรมชะลอตัวลงตามภาวะเศรษฐกิจมหาภาค",
+        "peg": "N/A",
+        "fiftyTwoWeek": "$139.04 – $414.35 | ปัจจุบัน ~$330.61",
+        "financials": [],
+        "imageUrl": "images/PLPC_infographic.png",
+        "whyInterest": "🚀 **ปัจจัยหลักระยะยาว (Core Drivers):**\n- โครงการปรับปรุงและขยายข่ายสายส่งพลังงานไฟฟ้าทั่วโลกที่ต้องใช้ชิ้นส่วนยึดจับที่มีความปลอดภัยสูง\n\n🎯 **ดีลเด่น & ตัวเร่งช่วงนี้ (Catalysts & Deals):**\n**Substation Grid Contracts:** ชัยชนะดีลระบบไฟส่งไฟฟ้าย่อยทั่วโลก",
+        "summary": "หุ้น PLPC (Preformed Line Products)\nเป็นหุ้นสไตล์ เติบโต (Growth) ในกลุ่มอุตสาหกรรม 🔌 กลุ่มที่ 1: AI Infrastructure\nเหมาะสำหรับนักลงทุนระยะยาวที่ศึกษาพื้นฐานธุรกิจแล้วยอมรับความเสี่ยงได้ครับ"
+    },
+    {
+        "ticker": "POWL",
+        "name": "Powell Industries",
+        "logoUrl": "https://logo.clearbit.com/powellind.com",
+        "group": "🔌 กลุ่มที่ 1: AI Infrastructure (Power, Cooling & Data Center)",
+        "style": "เติบโต (Growth)",
+        "market": "US",
+        "targetPrice": "",
+        "whatItDoes": "ออกแบบและผลิตแผงควบคุมสวิตช์ตัดต่อไฟแรงสูง (Switchgear) และสถานีควบคุมไฟสำเร็จรูป (E-Houses) เพื่อจัดการความปลอดภัยไฟในระบบอุตสาหกรรมขนาดใหญ่",
+        "howItMakesMoney": "ขายสินค้าวิศวกรรมเฉพาะโครงการร่วมกับงานบริการวิศวกรรมบำรุงรักษานอกสถานที่ (Field Services)",
+        "deals": "**AI Data Center Hyperscalers:** จัดซื้อตู้สวิตช์ตัดจ่ายไฟเพื่อกระจายพลังงานแรงสูงในดาต้าเซ็นเตอร์แคมปัส และมี Backlog สัญญาค้างสะสมหนาแน่นสูงกว่า **$1,600 ล้านเหรียญ**",
+        "moat": "**Buy America Legislative Moat:** โรงงานตั้งในเท็กซัสและโอไฮโอ ทำให้ผ่านข้อบังคับชิ้นส่วนภายในประเทศของโครงการรัฐ และมีแต้มต่อด้านการออกแบบตู้ควบคุมไฟฟ้าตามสั่งยากต่อการเปลี่ยนเจ้า",
+        "risks": "**จุดอ่อน:** ยอดขายกระจุกอยู่กับโครงการใหญ่ (Project Lumpiness)\n**ความเสี่ยง:** หาก Big Tech ชะลอสร้างดาต้าเซ็นเตอร์ ยอดสั่งซื้อจะดิ่งลงรวดเร็ว และสภาวะขาดแคลนวิศวกรเฉพาะทาง",
+        "peg": "N/A",
+        "fiftyTwoWeek": "$139.04 – $414.35 | ปัจจุบัน ~$330.61",
+        "financials": [],
+        "imageUrl": "images/POWL_infographic.png",
+        "whyInterest": "🚀 **ปัจจัยหลักระยะยาว (Core Drivers):**\n- โครงการวางระบบและบริหารแรงดันไฟฟ้าภายในขอบเขต Data Center และโรงงานไฟฟ้าอุตสาหกรรมขนาดใหญ่\n\n🎯 **ดีลเด่น & ตัวเร่งช่วงนี้ (Catalysts & Deals):**\n**Hyperscaler E-House Orders:** สัญญาประมูลวางแผง E-House ขนาดใหญ่เข้าดาต้าเซ็นเตอร์",
+        "summary": "หุ้น POWL (Powell Industries)\nเป็นหุ้นสไตล์ เติบโต (Growth) ในกลุ่มอุตสาหกรรม 🔌 กลุ่มที่ 1: AI Infrastructure\nเหมาะสำหรับนักลงทุนระยะยาวที่ศึกษาพื้นฐานธุรกิจแล้วยอมรับความเสี่ยงได้ครับ"
+    },
+    {
+        "ticker": "TEL",
+        "name": "TE Connectivity",
+        "logoUrl": "https://logo.clearbit.com/te.com",
+        "group": "🔌 กลุ่มที่ 1: AI Infrastructure (Power, Cooling & Data Center)",
+        "style": "เติบโต (Growth)",
+        "market": "US",
+        "targetPrice": "",
+        "whatItDoes": "ผลิตหัวต่อไฟฟ้าแรงสูง ขั้วต่อสายเซิร์ฟเวอร์ และสายเซนเซอร์ความร้อนแรงสูงป้อนให้ระบบ Blackwell และระบบคูลลิ่งดาต้าเซ็นเตอร์",
+        "howItMakesMoney": "ขายขั้วต่อเชื่อมต่อและเซนเซอร์ทางกายภาพจำนวนมหาศาลให้กับผู้ผลิตฮาร์ดแวร์เซิร์ฟเวอร์",
+        "deals": "**Nvidia Blackwell Power Connectors:** สัญญาจ่ายสายพานขั้วต่อและเซนเซอร์ตรวจจับอุณหภูมิในตู้แร็คเซิร์ฟเวอร์ Blackwell",
+        "moat": "**Patent and High Spec Design Moat:** การเป็นผู้นำด้านสายส่งเชื่อมต่อที่มีสัญญาณเสถียรและทนต่อระดับแรงดันสูงมาก ซึ่งการเปลี่ยนผู้ผลิตอาจเสี่ยงทำให้กระแสไฟฟ้าไม่เสถียร",
+        "risks": "**จุดอ่อน:** วงจรไอทีฝั่งคอมพิวเตอร์และรถยนต์ทั่วไปที่ชะลอตัวลงตามรอบ Capex\n**ความเสี่ยง:** การมีคู่แข่งชิ้นส่วนสายเชื่อมต่อพยายามตัดราคา",
+        "peg": "1.84",
+        "fiftyTwoWeek": "$120.00 – $175.00 | ปัจจุบัน ~$145.20",
+        "financials": [],
+        "imageUrl": "images/TEL_infographic.png",
+        "whyInterest": "🚀 **ปัจจัยหลักระยะยาว (Core Drivers):**\n- ความต้องการชิ้นส่วนอิเล็กทรอนิกส์และตัวนำไฟฟ้ากระแสสูงพิเศษภายในสถาปัตยกรรมชิป Blackwell รุ่นใหม่\n\n🎯 **ดีลเด่น & ตัวเร่งช่วงนี้ (Catalysts & Deals):**\n**Blackwell Supply Chain Entry:** การเป็นผู้ส่งมอบขั้วต่อแบรนด์ Nvidia โดยเฉพาะ",
+        "summary": "หุ้น TEL (TE Connectivity)\nเป็นหุ้นสไตล์ เติบโต (Growth) ในกลุ่มอุตสาหกรรม 🔌 กลุ่มที่ 1: AI Infrastructure\nเหมาะสำหรับนักลงทุนระยะยาวที่ศึกษาพื้นฐานธุรกิจแล้วยอมรับความเสี่ยงได้ครับ"
+    },
+    {
+        "ticker": "NVTS",
+        "name": "Navitas Semiconductor",
+        "logoUrl": "https://logo.clearbit.com/navitassemi.com",
+        "group": "🧠 กลุ่มที่ 2: AI Infrastructure (Chips, Hardware, Equipment & EDA)",
+        "style": "เติบโต (Growth)",
+        "market": "US",
+        "targetPrice": "",
+        "whatItDoes": "ออกแบบชิปเซมิคอนดักเตอร์กำลังยุคใหม่จากวัสดุ Gallium Nitride (GaN) และ Silicon Carbide (SiC) ซึ่งจัดการพลังงานไฟฟ้าแรงสูงได้ดีและสูญเสียความร้อนน้อยกว่าซิลิคอนดั้งเดิม",
+        "howItMakesMoney": "ขายชิปพาวเวอร์อิเล็กทรอนิกส์ให้กับผู้ผลิตบอร์ดจ่ายไฟ หัวชาร์จความเร็วสูง และสถานีชาร์จรถไฟฟ้า",
+        "deals": "**Samsung & Xiaomi Fast Chargers:** นำชิป GaN ไปเป็นแกนหลักเพื่อลดขนาดหัวชาร์จ และนำชิป GaNSafe ติดตั้งในระบบแหล่งจ่ายไฟเซิร์ฟเวอร์ AI ของแบรนด์เครื่องคอมพิวเตอร์ดาต้าเซ็นเตอร์ชั้นนำ",
+        "moat": "**GaN/SiC Intellectual Property Moat:** ถือครองสิทธิบัตรการออกแบบชิปพลังงานยุคใหม่ที่ประหยัดความร้อนได้ดีเยี่ยม ทำให้ระบบจ่ายไฟเซิร์ฟเวอร์ AI มีขนาดเล็กลงและกินไฟน้อยลง",
+        "risks": "**จุดอ่อน:** การพึ่งพิงตลาดคอมพิวเตอร์และมือถือแบบเก่าที่มีการแข่งขันด้านราคาสูง\n**ความเสี่ยง:** ผลประกอบการรวมยังขาดทุนสะสมและยังไม่ผ่านจุดคุ้มทุนเชิงพาณิชย์",
+        "peg": "N/A",
+        "fiftyTwoWeek": "$2.10 – $8.45 | ปัจจุบัน ~$3.12",
+        "financials": [],
+        "imageUrl": "images/NVTS_infographic.png",
+        "whyInterest": "🚀 **ปัจจัยหลักระยะยาว (Core Drivers):**\n- เทคโนโลยีวัสดุนิวเจนเซมิคอนดักเตอร์กำลัง (GaN/SiC) ที่กำลังเปลี่ยนมาแทน Silicon เดิมเพื่อเพิ่มขีดความสามารถการจ่ายไฟดาต้าเซ็นเตอร์ AI\n\n🎯 **ดีลเด่น & ตัวเร่งช่วงนี้ (Catalysts & Deals):**\n**GaNSafe Datacenter Entry:** ได้รับการรับรองสเปคแหล่งจ่ายไฟเซิร์ฟเวอร์หลัก",
+        "summary": "หุ้น NVTS (Navitas Semiconductor)\nเป็นหุ้นสไตล์ เติบโต (Growth) ในกลุ่มอุตสาหกรรม 🧠 กลุ่มที่ 2: AI Infrastructure\nเหมาะสำหรับนักลงทุนระยะยาวที่ศึกษาพื้นฐานธุรกิจแล้วยอมรับความเสี่ยงได้ครับ"
+    },
+    {
+        "ticker": "ONTO",
+        "name": "Onto Innovation",
+        "logoUrl": "https://logo.clearbit.com/ontoinnovation.com",
+        "group": "🧠 กลุ่มที่ 2: AI Infrastructure (Chips, Hardware, Equipment & EDA)",
+        "style": "เติบโต (Growth)",
+        "market": "US",
+        "targetPrice": "",
+        "whatItDoes": "ผลิตระบบเซนเซอร์แสง (Optical Metrology) และกล้องตรวจสอบ (Inspection) ความละเอียดสูงในกระบวนการประกอบชิป AI และการเชื่อมต่อแบบ Heterogeneous Packaging",
+        "howItMakesMoney": "ขายตู้ตรวจสอบชิปตระกูล Dragonfly G5 และ Atlas G6 ร่วมกับการขายสิทธิ์ซอฟต์แวร์วิเคราะห์ Yield ในโรงงานชิป",
+        "deals": "**TSMC, Intel, Samsung:** นำ Dragonfly G5 ตรวจจับรอยแยกใน Advanced Packaging (CoWoS) และดีลลงทุน Rigaku $710 ล้าน พัฒนาเทคโนโลยีการตรวจสอบ X-ray",
+        "moat": "**Inspection Duopoly Moat:** ในการประกอบชิป AI ซับซ้อน การควบคุม Yield เป็นคอขวดหลัก เครื่องตรวจ Dragonfly ถือเป็นมาตรฐานหลักของอุตสาหกรรมร่วมกับ KLA Corp",
+        "risks": "**จุดอ่อน:** อิงกับรอบ Capex ในอุตสาหกรรมเซมิคอนดักเตอร์\n**ความเสี่ยง:** การกระจุกตัวของลูกค้ารายใหญ่ไม่กี่ราย และปัญหาการพัฒนาฮาร์ดแวร์รุ่นใหม่ไม่ทันความเร็วชิป",
+        "peg": "1.01",
+        "fiftyTwoWeek": "$89.39 – $386.46 | ปัจจุบัน ~$295.36",
+        "financials": [],
+        "imageUrl": "images/ONTO_infographic.png",
+        "whyInterest": "🚀 **ปัจจัยหลักระยะยาว (Core Drivers):**\n- ด่านการตรวจสอบคุณภาพ (Inspection) ของ Heterogeneous Advanced Packaging ที่มีชิปต่อประสานจำนวนมาก จำเป็นต้องคัดทิ้งจุดเสียหายก่อนเชื่อมจริง\n\n🎯 **ดีลเด่น & ตัวเร่งช่วงนี้ (Catalysts & Deals):**\n**Dragonfly G5 Shipments:** สัญญาเร่งการส่งมอบเครื่องตรวจสอบให้โรงหล่อชั้นนำ",
+        "summary": "หุ้น ONTO (Onto Innovation)\nเป็นหุ้นสไตล์ เติบโต (Growth) ในกลุ่มอุตสาหกรรม 🧠 กลุ่มที่ 2: AI Infrastructure\nเหมาะสำหรับนักลงทุนระยะยาวที่ศึกษาพื้นฐานธุรกิจแล้วยอมรับความเสี่ยงได้ครับ"
+    },
+    {
+        "ticker": "TER",
+        "name": "Teradyne",
+        "logoUrl": "https://logo.clearbit.com/teradyne.com",
+        "group": "🧠 กลุ่มที่ 2: AI Infrastructure (Chips, Hardware, Equipment & EDA)",
+        "style": "เติบโต (Growth)",
+        "market": "US",
+        "targetPrice": "",
+        "whatItDoes": "ผลิตระบบทดสอบวงจรชิปอัตโนมัติ (ATE) เพื่อทดสอบฟังก์ชันการทำงานก่อนบรรจุลงแพ็คเกจ และแขนกลหุ่นยนต์อุตสาหกรรม",
+        "howItMakesMoney": "ขายเครื่องตรวจชิป + บริการหลังการขายและจำหน่ายอุปกรณ์ตรวจชิป + ขายหุ่นยนต์ Cobots แบรนด์ Universal Robots",
+        "deals": "**Apple & TSMC Testing Partner:** เป็นด่านทดสอบคุณภาพหลักของชิปเซมิคอนดักเตอร์ Apple A-Series/M-Series และดีลพัฒนาการเทสร่วมกับ **Tokyo Electron**",
+        "moat": "**System-Level Test Barrier:** มีความสัมพันธ์แนบแน่นกับกระบวนการผลิตของ TSMC และมีซอฟต์แวร์วิเคราะห์ทดสอบชิปความเร็วสูงยากที่คู่แข่งรายอื่นจะฝังตัวเข้าไปทดแทน",
+        "risks": "**จุดอ่อน:** อิงกับรอบวัฏจักรชิปเซมิคอนดักเตอร์โลกค่อนข้างสูง\n**ความเสี่ยง:** สัดส่วนธุรกิจหุ่นยนต์อุตสาหกรรมมีอัตรากำไรต่ำกว่าส่วนทดสอบชิป และการพึ่งพาคู่ค้าหลักรายเดียว",
+        "peg": "1.57",
+        "fiftyTwoWeek": "$89.18 – $487.91 | ปัจจุบัน ~$367.88",
+        "financials": [],
+        "imageUrl": "images/TER_infographic.png",
+        "whyInterest": "🚀 **ปัจจัยหลักระยะยาว (Core Drivers):**\n- อัตราความต้องการระบบตรวจสอบความสมบูรณ์และทดสอบการสั่งงาน (Automatic Test Equipment) ของชิป AI ความเร็วสูงก่อนป้อนเข้าตลาด\n\n🎯 **ดีลเด่น & ตัวเร่งช่วงนี้ (Catalysts & Deals):**\n**Tokyo Electron Collaboration:** สัญญาวิจัยพัฒนาโซลูชันทดสอบความละเอียดข้ามบอร์ด",
+        "summary": "หุ้น TER (Teradyne)\nเป็นหุ้นสไตล์ เติบโต (Growth) ในกลุ่มอุตสาหกรรม 🧠 กลุ่มที่ 2: AI Infrastructure\nเหมาะสำหรับนักลงทุนระยะยาวที่ศึกษาพื้นฐานธุรกิจแล้วยอมรับความเสี่ยงได้ครับ"
+    },
+    {
+        "ticker": "OUST",
+        "name": "Ouster",
+        "logoUrl": "https://logo.clearbit.com/ouster.com",
+        "group": "🛰️ กลุ่มที่ 3: Connectivity, Space Tech & Launch (ระบบเชื่อมต่อและอวกาศ)",
+        "style": "ม้ามืด (Dark Horse)",
+        "market": "US",
+        "targetPrice": "",
+        "whatItDoes": "ผลิตเซนเซอร์ตรวจจับระยะไกลด้วยแสงเลเซอร์ 3 มิติ (LiDAR) สำหรับระบบนำทางในหุ่นยนต์อัจฉริยะ รถยนต์ไร้คนขับ และระบบอัตโนมัติในคลังสินค้า",
+        "howItMakesMoney": "ขายฮาร์ดแวร์เซนเซอร์ LiDAR (ตระกูล REV7) + ซอฟต์แวร์ตรวจสอบพิกัดอัจฉริยะแบบสมัครสมาชิก",
+        "deals": "**Serve Robotics & Motional:** ซื้อเซนเซอร์ติดตั้งในหุ่นยนต์ส่งอาหารและยานยนต์ขับเคลื่อนอัตโนมัติ และสัญญากลุ่มรถตักสินค้าอัตโนมัติในโกดังของผู้ผลิตระดับโลก",
+        "moat": "**Digital LiDAR Patents:** การเปลี่ยนฮาร์ดแวร์อนาล็อกเดิมเป็นชิปดิจิทัลซิลิคอนชิ้นเดียว ช่วยให้ต้นทุนการผลิตลดลงและตรวจจับระยะความละเอียดภาพได้ชัดกว่าคู่แข่งที่ใช้ระบบกระจกหมุนแบบดั้งเดิม",
+        "risks": "**จุดอ่อน:** ตลาดรถยนต์ไร้คนขับขยายตัวช้ากว่าคาด\n**ความเสี่ยง:** ภาวะขาดทุนสะสมของเทคโนโลยี LiDAR และการดัมพ์ราคาจากเซนเซอร์ค่ายจีน",
+        "peg": "N/A",
+        "fiftyTwoWeek": "$3.10 – $14.20 | ปัจจุบัน ~$6.15",
+        "financials": [],
+        "imageUrl": "images/OUST_infographic.png",
+        "whyInterest": "🚀 **ปัจจัยหลักระยะยาว (Core Drivers):**\n- โครงการติดตั้งระบบนำทางหุ่นยนต์ขนส่งและยานยนต์อัตโนมัติที่ต้องใช้เทคโนโลยีเซนเซอร์ Digital LiDAR ประสิทธิภาพสูง\n\n🎯 **ดีลเด่น & ตัวเร่งช่วงนี้ (Catalysts & Deals):**\n**Serve Robotics Partnership:** สัญญาเซนเซอร์โดรนและบอทส่งของในเมืองใหญ่",
+        "summary": "หุ้น OUST (Ouster)\nเป็นหุ้นสไตล์ ม้ามืด (Dark Horse) ในกลุ่มอุตสาหกรรม 🛰️ กลุ่มที่ 3: Connectivity, Space Tech & Launch\nเหมาะสำหรับนักลงทุนระยะยาวที่ศึกษาพื้นฐานธุรกิจแล้วยอมรับความเสี่ยงได้ครับ"
+    },
+    {
+        "ticker": "CRWV",
+        "name": "CoreWeave",
+        "logoUrl": "https://logo.clearbit.com/coreweave.com",
+        "group": "💻 กลุ่มที่ 4: AI Software, Cloud Hyperscalers & Cybersecurity",
+        "style": "เติบโต (Growth)",
+        "market": "US",
+        "targetPrice": "",
+        "whatItDoes": "ให้บริการโครงสร้างพื้นฐานคลาวด์แบบ GPU-only ที่เชี่ยวชาญการประมวลผลโมเดลขนาดใหญ่โดยเฉพาะ",
+        "howItMakesMoney": "บริการเช่าใช้ระบบการ์ดจอ AI (IaaS) แบบเหมาจ่ายหรือจ่ายตามจริงเป็นรายชั่วโมง",
+        "deals": "**Inflection AI & Magnetis:** ดีลเป็นผู้จ่ายกระแสการประมวลผลหลัก และได้รับการสนับสนุนการจัดสรรชิปเป็นพิเศษพร้อมร่วมทุนจาก **Nvidia** เพื่อขยายแคมปัส",
+        "moat": "**First-mover GPU Cloud Allocation:** ได้สิทธิ์โควตาการเข้าซื้อการ์ดจอ Blackwell จาก Nvidia ก่อนใคร ทำให้มีกำลังประมวลผลป้อนให้ลูกค้ายุคเริ่มแรกได้เร็วกว่าคลาวด์ยักษ์ใหญ่",
+        "risks": "**จุดอ่อน:** ความพึ่งพิงโควตาชิปของ Nvidia เกือบทั้งหมด\n**ความเสี่ยง:** การรุกคืบตัดราคาจาก 3 ยักษ์คลาวด์ใหญ่ และการจัดสรร GPU ขาดแคลนในอนาคต",
+        "peg": "N/A",
+        "fiftyTwoWeek": "N/A | ปัจจุบัน ~N/A (Private/Pre-IPO)",
+        "financials": [],
+        "imageUrl": "images/CRWV_infographic.png",
+        "whyInterest": "🚀 **ปัจจัยหลักระยะยาว (Core Drivers):**\n- บริการ GPU คลาวด์เฉพาะทางที่มีโควตาการจัดสรรชิป Blackwell จาก Nvidia แน่นหนากว่าคลาวด์รายอื่น\n\n🎯 **ดีลเด่น & ตัวเร่งช่วงนี้ (Catalysts & Deals):**\n**Nvidia Backed Financing:** วงเงินกู้ขยายดาต้าเซ็นเตอร์พร้อมโควตา Blackwell พิเศษ",
+        "summary": "หุ้น CRWV (CoreWeave)\nเป็นหุ้นสไตล์ เติบโต (Growth) ในกลุ่มอุตสาหกรรม 💻 กลุ่มที่ 4: AI Software\nเหมาะสำหรับนักลงทุนระยะยาวที่ศึกษาพื้นฐานธุรกิจแล้วยอมรับความเสี่ยงได้ครับ"
+    },
+    {
+        "ticker": "AKAM",
+        "name": "Akamai Technologies",
+        "logoUrl": "https://logo.clearbit.com/akamai.com",
+        "group": "💻 กลุ่มที่ 4: AI Software, Cloud Hyperscalers & Cybersecurity",
+        "style": "เติบโต (Growth)",
+        "market": "US",
+        "targetPrice": "",
+        "whatItDoes": "ให้บริการระบบส่งถ่ายข้อมูลขอบเน็ตเวิร์ก (CDN), บริการรักษาความปลอดภัยของแอปพลิเคชัน/API และคลาวด์ประมวลผลแบบกระจายศูนย์ (Geographically Distributed Cloud)",
+        "howItMakesMoney": "ค่าบริการส่งผ่านข้อมูลรายเดือน (CDN traffic) + ซอฟต์แวร์ป้องกันความปลอดภัย API และ DDoS + ค่าเช่าคลาวด์ประมวลผล Linode",
+        "deals": "**Major Streaming Platforms & Banks:** ป้องกันภัยระบบชำระเงินออนไลน์และส่งข้อมูลภาพยนตร์ความละเอียดสูงเข้าหน้าจอ และสัญญารักษาสิทธิ์ API ให้แพลตฟอร์ม AI คอนเนคชัน",
+        "moat": "**Edge Server Footprint:** มีเครือข่ายกระจายเซิร์ฟเวอร์ดักสัญญาณอยู่ที่ขอบนอกเน็ตเวิร์กมากกว่า 4,000 จุดทั่วโลก ป้องกันการโจมตีทางไซเบอร์ได้เร็วกว่าการสกัดที่เซิร์ฟเวอร์หลักกลาง",
+        "risks": "**จุดอ่อน:** รายได้ฝั่ง CDN แบบเก่าหดตัวลงอย่างต่อเนื่อง\n**ความเสี่ยง:** การแข่งขันด้านราคาระบบคลาวด์ประมวลผล และการรุกคืบของบริษัทคลาวด์ Zero Trust อื่นๆ",
+        "peg": "1.34",
+        "fiftyTwoWeek": "$82.00 – $112.00 | ปัจจุบัน ~$95.50",
+        "financials": [],
+        "imageUrl": "images/AKAM_infographic.png",
+        "whyInterest": "🚀 **ปัจจัยหลักระยะยาว (Core Drivers):**\n- ภัยคุกคามจากการประมวลผล API ของ AI ที่เติบโตอย่างรวดเร็ว ต้องการด่านตรวจสิทธิ์รักษาความปลอดภัยที่ขอบเน็ตเวิร์ก\n\n🎯 **ดีลเด่น & ตัวเร่งช่วงนี้ (Catalysts & Deals):**\n**API Security Suit Launch:** เปิดพอร์ตป้องกันความปลอดภัยระบบสื่อสาร Bot AI",
+        "summary": "หุ้น AKAM (Akamai Technologies)\nเป็นหุ้นสไตล์ เติบโต (Growth) ในกลุ่มอุตสาหกรรม 💻 กลุ่มที่ 4: AI Software\nเหมาะสำหรับนักลงทุนระยะยาวที่ศึกษาพื้นฐานธุรกิจแล้วยอมรับความเสี่ยงได้ครับ"
+    },
+    {
+        "ticker": "NET",
+        "name": "Cloudflare",
+        "logoUrl": "https://logo.clearbit.com/cloudflare.com",
+        "group": "💻 กลุ่มที่ 4: AI Software, Cloud Hyperscalers & Cybersecurity",
+        "style": "เติบโต (Growth)",
+        "market": "US",
+        "targetPrice": "",
+        "whatItDoes": "แพลตฟอร์มคลาวด์ความปลอดภัย (Connectivity Cloud) ที่รวมเอาบริการเชื่อมต่อเครือข่าย, ความปลอดภัยของข้อมูล, ซอฟต์แวร์รันที่ขอบนอก (Workers) และ AI Gateway",
+        "howItMakesMoney": "ค่าบริการซอฟต์แวร์สมัครสมาชิกรายปี (SaaS) และการเก็บเงินตามการประมวลผลจริงของระบบประมวลผล Worker/AI",
+        "deals": "**AI Gateway Developer Agreements:** บริการคัดกรองทราฟฟิกและตรวจสอบความปลอดภัยของ API สำหรับค่ายพัฒนา AI และระบบความปลอดภัย Zero Trust ขององค์กรขนาดใหญ่",
+        "moat": "**Independent Massive Network Moat:** มีเครือข่ายอิสระกระจายตัวอยู่ทุกเมืองหลวงหลักทั่วโลก ทำหน้าที่เป็นจุดสกัดกั้นและจัดการข้อมูลที่รวดเร็วและเป็นกลางจากค่าย Hyperscalers",
+        "risks": "**จุดอ่อน:** มูลค่า P/E ที่พรีเมียมเกินปกติ\n**ความเสี่ยง:** ต้นทุนที่เพิ่มขึ้นจากการประมวลผล AI Workloads ที่ขอบนอก และการพัฒนาฟีเจอร์ความปลอดภัยของค่ายเซิร์ฟเวอร์หลัก",
+        "peg": "4.87",
+        "fiftyTwoWeek": "$158.83 – $291.00 | ปัจจุบัน ~$268.98",
+        "financials": [],
+        "imageUrl": "images/NET_infographic.png",
+        "whyInterest": "🚀 **ปัจจัยหลักระยะยาว (Core Drivers):**\n- ความต้องการคลาวด์ความปลอดภัยที่เป็นกลางเพื่อกระจายและกรองข้อมูลให้แอปพลิเคชัน AI\n\n🎯 **ดีลเด่น & ตัวเร่งช่วงนี้ (Catalysts & Deals):**\n**AI Gateway Launch:** แพลตฟอร์มบริหารรหัสความปลอดภัยและจูน API ของนักพัฒนา AI",
+        "summary": "หุ้น NET (Cloudflare)\nเป็นหุ้นสไตล์ เติบโต (Growth) ในกลุ่มอุตสาหกรรม 💻 กลุ่มที่ 4: AI Software\nเหมาะสำหรับนักลงทุนระยะยาวที่ศึกษาพื้นฐานธุรกิจแล้วยอมรับความเสี่ยงได้ครับ"
+    },
+    {
+        "ticker": "NOW",
+        "name": "ServiceNow",
+        "logoUrl": "https://logo.clearbit.com/servicenow.com",
+        "group": "💻 กลุ่มที่ 4: AI Software, Cloud Hyperscalers & Cybersecurity",
+        "style": "เติบโต (Growth)",
+        "market": "US",
+        "targetPrice": "",
+        "whatItDoes": "แพลตฟอร์มซอฟต์แวร์ระดับองค์กรสำหรับการจัดระบบเวิร์กโฟลว์ไอที (ITSM), ทรัพยากรบุคคล (HR) และความปลอดภัย โดยเน้นการใช้อัตโนมัติและ AI ทำงานแทนมนุษย์ (Agentic AI)",
+        "howItMakesMoney": "ค่าลิขสิทธิ์ซอฟต์แวร์ระบบงานองค์กรรายปี (SaaS Subscription) และค่าบริการฟังก์ชันเสริม AI ระดับพรีเมียม",
+        "deals": "**Nvidia AI Agents Co-development:** สัญญาร่วมพัฒนาระบบ AI ทำหน้าที่จัดการสัญญาระบบไอทีอัตโนมัติ และระบบเชื่อมโยงของ Microsoft Copilot",
+        "moat": "**Enterprise Workflow Lock-in:** เป็นระบบหลักที่ฝังเข้ากับกระบวนการทำงานและการเก็บสิทธิ์พนักงาน ทำให้มีค่าใช้จ่ายย้ายออก (Switching Cost) สูงมาก",
+        "risks": "**จุดอ่อน:** ความกดดันในการวัดผลความคุ้มค่าของการอัปเกรด AI เวอร์ชันราคาสูงของลูกค้าระดับองค์กร\n**ความเสี่ยง:** สัญญาจัดซื้อระยะสั้นอาจถูกเลื่อนหรือปฏิเสธหากงบประมาณไอทีองค์กรถูกกดดัน",
+        "peg": "0.86",
+        "fiftyTwoWeek": "$83.00 – $199.24 | ปัจจุบัน ~$94.69",
+        "financials": [],
+        "imageUrl": "images/NOW_infographic.png",
+        "whyInterest": "🚀 **ปัจจัยหลักระยะยาว (Core Drivers):**\n- โอกาสเพิ่มสัดส่วนรายได้จากการเพิ่มระบบบริการ AI อัตโนมัติ (Autonomous Workflows) ปฏิวัติการบริการไอทีองค์กร\n\n🎯 **ดีลเด่น & ตัวเร่งช่วงนี้ (Catalysts & Deals):**\n**AI Agentforce Integration:** ดีลพัฒนาบอทและสั่งงานข้ามระบบกับเครือข่าย Nvidia",
+        "summary": "หุ้น NOW (ServiceNow)\nเป็นหุ้นสไตล์ เติบโต (Growth) ในกลุ่มอุตสาหกรรม 💻 กลุ่มที่ 4: AI Software\nเหมาะสำหรับนักลงทุนระยะยาวที่ศึกษาพื้นฐานธุรกิจแล้วยอมรับความเสี่ยงได้ครับ"
+    },
+    {
+        "ticker": "CRM",
+        "name": "Salesforce",
+        "logoUrl": "https://logo.clearbit.com/salesforce.com",
+        "group": "💻 กลุ่มที่ 4: AI Software, Cloud Hyperscalers & Cybersecurity",
+        "style": "เติบโต (Growth)",
+        "market": "US",
+        "targetPrice": "",
+        "whatItDoes": "ระบบคลาวด์บริหารจัดการข้อมูลลูกค้าและการตลาด (CRM) และระบบขับเคลื่อนการวิเคราะห์ธุรกิจด้วยซอฟต์แวร์ AI อัตโนมัติ (Agentforce)",
+        "howItMakesMoney": "ค่าบริการซอฟต์แวร์รายปีแบบผู้ใช้ต่อเดือน + การคิดเงินตามจริงการใช้งานของ AI Agents (Consumption-based)",
+        "deals": "**Acquisition of Fin ($3.6B):** เพื่อผนึกเข้ากับแพลตฟอร์มบริการลูกค้าอัตโนมัติ และสัญญารวบฐานข้อมูลขนาดใหญ่เข้ากับ Informatica",
+        "moat": "**Customer Data Cloud Integration Moat:** ถือครองข้อมูลลูกค้าหลักเกือบครึ่งหนึ่งของบริษัทขนาดใหญ่ทั่วโลก การประมวลผล AI บนข้อมูลของตนเองจึงมีความปลอดภัยสูงและง่ายกว่าการย้ายระบบออกไป",
+        "risks": "**จุดอ่อน:** ความเสี่ยงในการเปลี่ยนผ่านระบบขายสิทธิ์รายบุคคลเดิมมาเป็นระบบตามการประมวลผลบอท AI ซึ่งอาจส่งผลให้รายได้ระยะสั้นแกว่งตัว\n**ความเสี่ยง:** การปรับเปลี่ยนทิศทางอุตสาหกรรม และการมีหนี้สิน/ความยุ่งยากในตัวระบบสะสมระยะยาว",
+        "peg": "0.76",
+        "fiftyTwoWeek": "$146.32 – $274.00 | ปัจจุบัน ~$164.11",
+        "financials": [],
+        "imageUrl": "images/CRM_infographic.png",
+        "whyInterest": "🚀 **ปัจจัยหลักระยะยาว (Core Drivers):**\n- การเพิ่มประสิทธิภาพการเจาะตลาดข้อมูลประมวลผล AI ด้วยการเชื่อมต่อ Cloud Data ของผู้ซื้อโดยไม่ต้องเคลื่อนย้ายระบบ\n\n🎯 **ดีลเด่น & ตัวเร่งช่วงนี้ (Catalysts & Deals):**\n**Agentforce Launch:** เปิดระบบเอเจนต์ทำงานด้านการตลาดและบริการอัตโนมัติ",
+        "summary": "หุ้น CRM (Salesforce)\nเป็นหุ้นสไตล์ เติบโต (Growth) ในกลุ่มอุตสาหกรรม 💻 กลุ่มที่ 4: AI Software\nเหมาะสำหรับนักลงทุนระยะยาวที่ศึกษาพื้นฐานธุรกิจแล้วยอมรับความเสี่ยงได้ครับ"
+    },
+    {
+        "ticker": "PANW",
+        "name": "Palo Alto Networks (CYBR)",
+        "logoUrl": "https://logo.clearbit.com/paloaltonetworks.com",
+        "group": "💻 กลุ่มที่ 4: AI Software, Cloud Hyperscalers & Cybersecurity",
+        "style": "เติบโต (Growth)",
+        "market": "US",
+        "targetPrice": "",
+        "whatItDoes": "ระบบรักษาความปลอดภัยไซเบอร์แบบครบวงจร (Platformization) ครอบคลุมความปลอดภัยเครือข่าย, ความปลอดภัยคลาวด์ และระบบจัดการระบุตัวตนสิทธิ์สูงสุด (Idira Identity Security)",
+        "howItMakesMoney": "สัญญาซอฟต์แวร์จัดการความปลอดภัยคลาวด์แบบบอกรับสมาชิกรายปี (SaaS)",
+        "deals": "**CyberArk Acquisition ($25B):** เพื่อผสานระบบจัดการความปลอดภัยสิทธิ์การเข้าถึง (PAM) และการเชื่อมต่อรหัสผ่านของระบบ AI บอทเข้าพอร์ตหลัก",
+        "moat": "**Unified Platformization Moat:** องค์กรต่างๆ พยายามลดความซับซ้อนของการใช้ซอฟต์แวร์ป้องกันแยกค่าย มารวมศูนย์การสแกนความปลอดภัยไว้ที่แพลตฟอร์มเดียวของ PANW เพื่อความคล่องตัวและประหยัด",
+        "risks": "**จุดอ่อน:** ความเสี่ยงความยุ่งยากในการรวมระบบ (Integration Overhead) หลังเข้าซื้อพอร์ต CyberArk\n**ความเสี่ยง:** คู่แข่งในกลุ่มไฟร์วอลล์พยายามสกัดกั้น และความเปลี่ยนแปลงของระเบียบความปลอดภัยภาครัฐ",
+        "peg": "5.63",
+        "fiftyTwoWeek": "$139.57 – $368.80 | ปัจจุบัน ~$335.28",
+        "financials": [],
+        "imageUrl": "images/PANW_infographic.png",
+        "whyInterest": "🚀 **ปัจจัยหลักระยะยาว (Core Drivers):**\n- แคมเปญเปลี่ยนผ่านซอฟต์แวร์ป้องกันไซเบอร์องค์กรให้รวมอยู่บนศูนย์ระบบจัดเก็บเดียว (Platformization)\n\n🎯 **ดีลเด่น & ตัวเร่งช่วงนี้ (Catalysts & Deals):**\n**CyberArk Integration (Idira Launch):** รวบเทคโนโลยีตรวจสอบสิทธิ์บอทไอที",
+        "summary": "หุ้น PANW (Palo Alto Networks)\nเป็นหุ้นสไตล์ เติบโต (Growth) ในกลุ่มอุตสาหกรรม 💻 กลุ่มที่ 4: AI Software\nเหมาะสำหรับนักลงทุนระยะยาวที่ศึกษาพื้นฐานธุรกิจแล้วยอมรับความเสี่ยงได้ครับ"
+    },
+    {
+        "ticker": "HIMS",
+        "name": "Hims & Hers Health",
+        "logoUrl": "https://logo.clearbit.com/forhims.com",
+        "group": "🏥 กลุ่มที่ 6: Consumer Health & Telehealth (ระบบดูแลสุขภาพทางไกล)",
+        "style": "เติบโต (Growth)",
+        "market": "US",
+        "targetPrice": "",
+        "whatItDoes": "แพลตฟอร์มการให้บริการด้านสุขภาพออนไลน์แบบครบวงจร (Telehealth) เชื่อมต่อคนไข้กับแพทย์ และจำหน่ายยาเฉพาะบุคคลส่งถึงบ้าน",
+        "howItMakesMoney": "ค่าบริการสมาชิกรายเดือนหรือรายไตรมาสในการส่งยารักษาอย่างต่อเนื่อง (DTC Subscription)",
+        "deals": "**Novo Nordisk Branded Partnerships:** เพื่อจัดจำหน่ายยาควบคุมน้ำหนัก FDA-approved อย่างเป็นทางการ แทนการพึ่งพิงการผลิตยาสูตรผสมชั่วคราว (Compounded GLP-1)",
+        "moat": "**Brand loyalty & Platform Convenience:** ความสะดวกสบายและรวดเร็วในการพบแพทย์ผ่านแอปและรับยาถึงที่บ้าน สร้างความภักดีต่อแบรนด์ได้ดี",
+        "risks": "**จุดอ่อน:** อัตรากำไรสุทธิเฉลี่ยจะลดลงจากการเปลี่ยนผ่านยาผสมเองไปขายยากลุ่มแบรเนม\n**ความเสี่ยง:** ความเข้มงวดตรวจสอบข้อบังคับของ FDA และการดัมพ์ราคาแพลตฟอร์มสุขภาพออนไลน์รายอื่น เช่น Amazon",
+        "peg": "N/A",
+        "fiftyTwoWeek": "$13.74 – $70.43 | ปัจจุบัน ~$31.50",
+        "financials": [],
+        "imageUrl": "images/HIMS_infographic.png",
+        "whyInterest": "🚀 **ปัจจัยหลักระยะยาว (Core Drivers):**\n- เทรนด์การพบแพทย์ออนไลน์และรับยาเฉพาะบุคคลส่งตรงถึงหน้าบ้านโดยไม่ต้องรอคิวที่โรงพยาบาล\n\n🎯 **ดีลเด่น & ตัวเร่งช่วงนี้ (Catalysts & Deals):**\n**GLP-1 Weight Loss Product Expansion:** เปิดผลิตภัณฑ์ยาทางเลือกสำหรับขจัดโรคอ้วน",
+        "summary": "หุ้น HIMS (Hims & Hers Health)\nเป็นหุ้นสไตล์ เติบโต (Growth) ในกลุ่มอุตสาหกรรม 🏥 กลุ่มที่ 6: Consumer Health & Telehealth\nเหมาะสำหรับนักลงทุนระยะยาวที่ศึกษาพื้นฐานธุรกิจแล้วยอมรับความเสี่ยงได้ครับ"
     }
 ];
 
@@ -1916,11 +2263,15 @@
               let expenses = "";
               let customers = "";
               let whyInterestClean = s.why_interest || "";
+              let peg = "";
+              let fiftyTwoWeek = "";
               if (whyInterestClean.trim().startsWith('{')) {
                 try {
                   const parsed = JSON.parse(whyInterestClean);
                   expenses = parsed.expenses || "";
                   customers = parsed.customers || "";
+                  peg = parsed.peg || "";
+                  fiftyTwoWeek = parsed.fiftyTwoWeek || "";
                   whyInterestClean = parsed.whyInterest || "";
                 } catch(e) {
                   // Fallback
@@ -1993,11 +2344,13 @@
         try {
           const records = STOCKS.map(s => {
             let whyInterestData = s.whyInterest || "";
-            if (s.expenses || s.customers) {
+            if (s.expenses || s.customers || s.peg || s.fiftyTwoWeek) {
               whyInterestData = JSON.stringify({
                 whyInterest: s.whyInterest || "",
                 expenses: s.expenses || "",
-                customers: s.customers || ""
+                customers: s.customers || "",
+                peg: s.peg || "",
+                fiftyTwoWeek: s.fiftyTwoWeek || ""
               });
             }
             return {
@@ -4589,6 +4942,8 @@ ${question}`;
             if (s.deals === undefined || s.deals === null) s.deals = "";
             if (s.risks === undefined || s.risks === null) s.risks = "";
             if (s.whatItDoes === undefined || s.whatItDoes === null) s.whatItDoes = "";
+            if (s.peg === undefined || s.peg === null) s.peg = "";
+            if (s.fiftyTwoWeek === undefined || s.fiftyTwoWeek === null) s.fiftyTwoWeek = "";
             if (s.revenueBreakdown === undefined || s.revenueBreakdown === null) s.revenueBreakdown = "";
             if (s.howItMakesMoney === undefined || s.howItMakesMoney === null) s.howItMakesMoney = "";
             if (s.targetCustomers === undefined || s.targetCustomers === null) s.targetCustomers = "";
@@ -5146,6 +5501,8 @@ ${question}`;
             <div class="detail-content">
               ${infographicHtml}
               ${renderField('1️⃣ ธุรกิจนี้ทำอะไรบ้าง? & สัดส่วนรายได้', s.whatItDoes + (s.revenueBreakdown ? '\n\n📊 **อัตราส่วนการทำเงินของรายได้:**\n' + s.revenueBreakdown : ''), 'info')}
+              ${renderField('📊 PEG Ratio (Valuation)', s.peg || '-', 'info')}
+              ${renderField('📈 กรอบ 52-Week & ราคาปัจจุบัน', s.fiftyTwoWeek || '-', 'info')}
               ${renderField('2️⃣ หาเงินจากอะไร?', s.howItMakesMoney, 'info')}
               ${renderField('👥 กลุ่มลูกค้าหลัก', s.customers || s.targetCustomers || '', 'info')}
               ${renderField('💸 ค่าใช้จ่ายหลัก', s.expenses || '', 'info')}
@@ -5254,6 +5611,8 @@ ${question}`;
                 <input type="text" class="edit-field" id="edit-group" value="${s.group || ''}" style="min-height: auto; height: 38px;" />
               </div>
               ${editField('1️⃣ ธุรกิจนี้ทำอะไรบ้าง?', 'edit-what', s.whatItDoes)}
+              ${editField('📊 PEG Ratio (เช่น 0.76)', 'edit-peg', s.peg || '')}
+              ${editField('📈 กรอบ 52-Week & ราคาปัจจุบัน (เช่น $146.32 – $274.00 | ปัจจุบัน ~$164.11)', 'edit-fifty-two-week', s.fiftyTwoWeek || '')}
               ${editField('📊 อัตราส่วนการทำเงินคิดเป็นกี่%ของรายได้', 'edit-revenue-breakdown', s.revenueBreakdown || '')}
               ${editField('2️⃣ หาเงินจากอะไร?', 'edit-how', s.howItMakesMoney)}
               ${editField('👥 กลุ่มลูกค้าหลัก เป็นใคร', 'edit-customers', s.customers || s.targetCustomers || '')}
@@ -5518,6 +5877,8 @@ ${question}`;
         selectedStock.moat = $('edit-moat').value;
         selectedStock.risks = $('edit-risks').value;
         selectedStock.imageUrl = $('edit-image-url').value.trim();
+        selectedStock.peg = $('edit-peg').value.trim();
+        selectedStock.fiftyTwoWeek = $('edit-fifty-two-week').value.trim();
 
         saveStocks();
         buildResearchGroupFilter();
